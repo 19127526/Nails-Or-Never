@@ -1,5 +1,6 @@
 const services = require('../models/service_parent.model');
 exports.getServicesParent = async (req, res) => {
+    console.log("test")
     try {
         const data = await services.getServicesParent();
         return res.status(200).json({"status": "success", "data": data});
