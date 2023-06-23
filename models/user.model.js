@@ -6,23 +6,36 @@ exports.findUserByUserName = (username) => {
 }
 
 exports.findUserById = (userId) => {
-    return db('users').where('id',userId).first()
+    return db('users').where('id', userId).first()
 }
 
 exports.createUser = async (data) => {
-    try{
+    try {
         let {username, password} = data;
         const isNewUser = await this.inThisEmailInUse(username);
         if (!isNewUser) throw new Error('User already registered');
-        password=await bcrypt.hash(password, 8);
-        return await db('users').insert({username, password});
-    }catch (e) {
+        password = await bcrypt.hash(password, 8);
+        return await db('users').insert({username, password, role: 'USER'});
+    } catch (e) {
         console.log(e)
         return null
     }
 }
 
-exports.comparePassword = async (password,passwordCheck) => {
+exports.createAdmin = async (data) => {
+    try {
+        let {username, password} = data;
+        const isNewUser = await this.inThisEmailInUse(username);
+        if (!isNewUser) throw new Error('User already registered');
+        password = await bcrypt.hash(password, 8);
+        return await db('users').insert({username, password, role: 'ADMIN'});
+    } catch (e) {
+        console.log(e)
+        return null
+    }
+}
+
+exports.comparePassword = async (password, passwordCheck) => {
     if (!password) throw new Error('Password is required');
     try {
         return await bcrypt.compare(password, passwordCheck);
@@ -32,12 +45,12 @@ exports.comparePassword = async (password,passwordCheck) => {
     }
 }
 
-exports.inThisEmailInUse= async function (username) {
-    if(!username) throw new Error('Username is required');
-    try{
+exports.inThisEmailInUse = async function (username) {
+    if (!username) throw new Error('Username is required');
+    try {
         const user = await this.findUserByUserName(username);
         return !user
-    }catch (e) {
+    } catch (e) {
         console.log(e);
         return false;
     }
@@ -49,6 +62,6 @@ exports.findByIdAndUpdate = (id, data) => {
 
 exports.findByIdAndUpdateToken = (id, data) => {
     return db('users').where('id', id).update({
-        tokens:data
+        tokens: data
     });
 }
