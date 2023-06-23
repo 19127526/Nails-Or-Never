@@ -1,7 +1,8 @@
 const db = require('../configs/mysql');
 
-exports.getServices = () => {
+exports.getServices = (limit=5, page=1) => {
     return db('services')
+        .join('services_parents', 'services_parents.id', '=', 'services.services_parents')
 }
 
 exports.updateServiceById = (id, data) => {

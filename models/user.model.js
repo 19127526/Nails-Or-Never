@@ -62,6 +62,12 @@ exports.findByIdAndUpdate = (id, data) => {
 
 exports.findByIdAndUpdateToken = (id, data) => {
     return db('users').where('id', id).update({
-        tokens: data
+        token: data
+    });
+}
+
+exports.findByUserNameAndUpdateToken = (username, data) => {
+    return db('users').where('username', username).update({
+        token: data
     });
 }

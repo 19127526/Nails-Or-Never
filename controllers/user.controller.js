@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
-
+const {userResponse} = require('../utils/mapper');
 exports.createUser = async (req, res) => {
     try {
         const {username, password} = req.body;
@@ -10,7 +10,7 @@ exports.createUser = async (req, res) => {
         const userAdd = await User.createUser({username, password});
         if (userAdd.length === 0) return res.status(400).send({'error': 'Error when create user'})
         const user = await User.findUserById(userAdd[0])
-        const newToken = jwt.sign({userId: user.id}, process.env.JWT_SECRET, {expiresIn: '10000000000y'});
+        const newToken = jwt.sign({username: user.username}, process.env.JWT_SECRET, {expiresIn: '10000000000y'});
         await User.findByIdAndUpdateToken(user.id, newToken);
         return res.json({success: true})
     } catch (e) {
@@ -28,7 +28,7 @@ exports.createAdmin = async (req, res) => {
         const userAdd = await User.createAdmin({username, password});
         if (userAdd.length === 0) return res.status(400).send({'error': 'Error when create user'})
         const user = await User.findUserById(userAdd[0])
-        const newToken = jwt.sign({userId: user.id}, process.env.JWT_SECRET, {expiresIn: '1d'});
+        const newToken = jwt.sign({username: user.username}, process.env.JWT_SECRET, {expiresIn: '1d'});
         await User.findByIdAndUpdateToken(user.id, newToken);
         return res.json({success: true})
     } catch (e) {
@@ -54,22 +54,22 @@ exports.userSignIn = async (req, res) => {
         } else if (user.role === 'USER') {
             expiredTime = '10000000000y'
         }
-        if (user.tokens) {
+        if (user.token) {
             try {
-                const decoded = jwt.verify(user.tokens, process.env.JWT_SECRET);
+                const decoded = jwt.verify(user.token, process.env.JWT_SECRET);
                 if (decoded.exp > Date.now() / 1000) {
-                    return res.json({'status': 'success', user});
+                    return res.json({'status': 'success', user:userResponse(user)});
                 }
             } catch (err) {
-                const newToken = jwt.sign({userId: user.id}, process.env.JWT_SECRET, {expiresIn: expiredTime});
+                const newToken = jwt.sign({username: user.username}, process.env.JWT_SECRET, {expiresIn: expiredTime});
                 await User.findByIdAndUpdateToken(user.id, newToken);
-                return res.json({'status': 'success', user, token: newToken});
+                return res.json({'status': 'success', user:userResponse(user), token: newToken});
             }
         }
 
-        const token = jwt.sign({userId: user.id}, process.env.JWT_SECRET, {expiresIn: expiredTime});
+        const token = jwt.sign({username: user.username}, process.env.JWT_SECRET, {expiresIn: expiredTime});
         await User.findByIdAndUpdateToken(user.id, token);
-        return res.json({'status': 'success', user, token});
+        return res.json({'status': 'success', user:userResponse(user), token});
     } catch (err) {
         return res.status(500).send({'error': 'Internal server error'});
     }
@@ -84,8 +84,7 @@ exports.signOut = async (req, res) => {
                     .status(401)
                     .json({"status": "fail", message: 'Authorization fail!'});
             }
-
-            await User.findByIdAndUpdateToken(req.user.id, null);
+            await User.findByUserNameAndUpdateToken(req.user.username, null);
             res.json({"status": "success", message: 'Sign out successfully!'});
         }
     } catch (e) {

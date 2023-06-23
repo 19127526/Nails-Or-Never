@@ -1,7 +1,8 @@
 const services = require('../models/service.model');
 exports.getServices = async (req, res) => {
     try {
-        const data = await services.getServices();
+        const { limit, page } = req.query;
+        const data = await services.getServices(limit, page);
         return res.status(200).json({"status": "success", "data": data});
     } catch (e) {
         return res.status(500).json({"status": "error", "message": e.message});
