@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 CREATE TABLE IF NOT EXISTS `services_parents` (
                                                   `id` integer PRIMARY KEY AUTO_INCREMENT,
                                                   `name` varchar(50),
-                                                  `image` varchar(255)
+                                                  `image` varchar(255),
+                                                    `description` varchar(255)
 );
 
 CREATE TABLE IF NOT EXISTS `services` (
@@ -30,25 +31,31 @@ CREATE TABLE IF NOT EXISTS `services` (
                                           `name` varchar(50),
                                           `price` float,
                                           `services_parents` integer,
-                                          `image` varchar(255)
-);
+                                          `image` varchar(255),
+                                          `description` varchar(255)
+
+    );
 
 CREATE TABLE IF NOT EXISTS `gallery_parents` (
                                                  `id` integer PRIMARY KEY AUTO_INCREMENT,
                                                  `image` varchar(255),
-                                                 `theme` varchar(50)
-);
+                                                 `theme` varchar(50),
+                                                 `description` varchar(255)
+    );
 
 CREATE TABLE IF NOT EXISTS `gallery` (
                                          `id` integer PRIMARY KEY AUTO_INCREMENT,
                                          `image` varchar(255),
-                                         `gallery_parents` integer
-);
+                                         `gallery_parents` integer,
+                                         `description` varchar(255)
+
+    );
 
 CREATE TABLE IF NOT EXISTS `gift_cards` (
                                             `id` integer PRIMARY KEY AUTO_INCREMENT,
                                             `image` varchar(255),
-                                            `theme` varchar(50)
+                                            `theme` varchar(50),
+    `description` varchar(255)
 );
 
 CREATE TABLE IF NOT EXISTS `gift_cards_checkout` (
