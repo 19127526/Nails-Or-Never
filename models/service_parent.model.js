@@ -10,16 +10,24 @@ exports.countServicesParent = () => {
     return db('services_parents').count('id as total').first()
 }
 
-exports.updateServiceParentById = (id, data) => {
-    return db('services_parents').where('id', id).update(data)
+exports.updateServiceParentById = (id, data,trx) => {
+    return db('services_parents')
+        .transacting(trx)
+        .where('id', id).update(data)
+}
+
+exports.transaction = () => {
+    return db.transaction()
 }
 
 exports.getServiceParentById = (id) => {
     return db('services_parents').where('id', id)
 }
 
-exports.createServiceParent = (data) => {
-    return db('services_parents').insert(data)
+exports.createServiceParent = (data,trx) => {
+    return db('services_parents')
+        .transacting(trx)
+        .insert(data)
 }
 
 exports.deleteServiceParentById = (id) => {

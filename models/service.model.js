@@ -18,8 +18,10 @@ exports.getServiceByServiceParentId = (id) => {
         .where('services_parents', id)
 }
 
-exports.createService = (data) => {
-    return db('services').insert(data)
+exports.createService = (data,trx) => {
+    return db('services')
+        .transacting(trx)
+        .insert(data)
 }
 
 exports.deleteServiceById = (id) => {
