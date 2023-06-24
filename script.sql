@@ -1,4 +1,4 @@
-USE `nails`;
+USE `sho62786_nails`;
 CREATE TABLE IF NOT EXISTS `employees`(
                                           `id` integer PRIMARY KEY AUTO_INCREMENT,
                                           `full_name` varchar(50),
@@ -11,10 +11,10 @@ CREATE TABLE IF NOT EXISTS `employees`(
 
 CREATE TABLE IF NOT EXISTS `users` (
                                        `id` integer PRIMARY KEY AUTO_INCREMENT,
-                                       `username` varchar(50),
+                                       `username` varchar(50) unique,
                                        `password` varchar(100),
                                        `email` varchar(50),
-                                       `tokens` varchar(255),
+                                       `token` varchar(255),
                                        `role` varchar(50),
                                        `employee_id` int
 );
