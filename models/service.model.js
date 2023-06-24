@@ -1,8 +1,7 @@
 const db = require('../configs/mysql');
 
-exports.getServices = (limit=5, page=1) => {
+exports.getServices = () => {
     return db('services')
-        .join('services_parents', 'services_parents.id', '=', 'services.services_parents')
 }
 
 exports.updateServiceById = (id, data) => {
@@ -11,6 +10,12 @@ exports.updateServiceById = (id, data) => {
 
 exports.getServiceById = (id) => {
     return db('services').where('id', id)
+}
+
+exports.getServiceByServiceParentId = (id) => {
+    return db('services')
+        .select('id', 'name', 'description','price','time')
+        .where('services_parents', id)
 }
 
 exports.createService = (data) => {

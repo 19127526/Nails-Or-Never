@@ -1,7 +1,13 @@
 const db = require('../configs/mysql');
 
-exports.getServicesParent = () => {
+exports.getServicesParent = (limit = 5, page = 1) => {
     return db('services_parents')
+        .limit(limit)
+        .offset((page - 1) * limit)
+}
+
+exports.countServicesParent = () => {
+    return db('services_parents').count('id as total').first()
 }
 
 exports.updateServiceParentById = (id, data) => {
