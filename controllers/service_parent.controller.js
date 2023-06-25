@@ -2,7 +2,8 @@ const services = require('../models/service_parent.model');
 exports.getServicesParent = async (req, res) => {
     console.log("test")
     try {
-        const data = await services.getServicesParent();
+        const {limit, page} = req.query;
+        const data = await services.getServicesParent(limit, page);
         return res.status(200).json({"status": "success", "data": data});
     } catch (e) {
         return res.status(500).json({"status": "error", "message": e.message});
