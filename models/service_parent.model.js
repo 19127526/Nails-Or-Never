@@ -6,6 +6,11 @@ exports.getServicesParent = (limit = 5, page = 1) => {
         .offset((page - 1) * limit)
 }
 
+
+exports.getServicesParentWithOutPagination = () => {
+    return db('services_parents')
+}
+
 exports.countServicesParent = () => {
     return db('services_parents').count('id as total').first()
 }
@@ -22,6 +27,10 @@ exports.transaction = () => {
 
 exports.getServiceParentById = (id) => {
     return db('services_parents').where('id', id)
+}
+
+exports.getServiceParentByName = (name) => {
+    return db('services_parents').where('name', name)
 }
 
 exports.createServiceParent = (data,trx) => {
