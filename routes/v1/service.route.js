@@ -20,7 +20,7 @@ const upload = multer({fileFilter});
 
 router.get('/', isAuth(ROLES), getServices);
 router.post('/', isAuth(ADMIN), upload.single('file'), createService);
-router.put('/:id', isAuth, updateServiceById);
+router.put('/:id', isAuth(ADMIN), updateServiceById);
 router.get('/:id', isAuth, getServiceById);
 router.delete('/:id', isAuth, deleteServiceById);
 module.exports = router;

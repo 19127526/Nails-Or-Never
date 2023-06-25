@@ -33,3 +33,4 @@ exports.createServiceParent = (data,trx) => {
 exports.deleteServiceParentById = (id) => {
     return db('services_parents').where('id', id).del()
 }
+
