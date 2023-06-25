@@ -7,7 +7,7 @@ const PAGE = 1;
 exports.getServices = async (req, res) => {
     try {
         let {limit, page} = req.query;
-        limit= parseLimit(limit);
+        limit = parseLimit(limit);
         page = parsePage(page);
         const data = await services_parent.getServicesParent(limit, page);
         for (let i = 0; i < data.length; i++) {
@@ -38,38 +38,10 @@ exports.getServiceById = async (req, res) => {
 
 
 exports.createService = async (req, res) => {
-    const trx = await services_parent.transaction();
+    const trx = await services.transaction();
     try {
         const body = req.body;
-        const serviceParent = {
-            name: body.name,
-            description: body.description,
-        }
-        let data = await services_parent.createServiceParent(serviceParent, trx);
-        if (data.length === 0) {
-            await trx.rollback();
-            return res.status(500).json({"status": "error", "message": "create service parent fail"});
-        }
-        data = data[0];
-        if (body.service){
-            const service = JSON.parse(body.service);
-            for (let i = 0; i < service.length; i++) {
-                service[i].services_parents = data;
-                await services.createService(service[i], trx);
-            }
-        }
-
-        const file = req.file;
-        if (file) {
-            const FOLDER = `./public/image/service/${data}`;
-            if (!fs.existsSync(FOLDER)) {
-                fs.mkdirSync(FOLDER, {recursive: true});
-            }
-            const fileName = `${FOLDER}/${file.originalname}`;
-            fs.writeFileSync(fileName, file.buffer);
-            const imageSavedName = `${process.env.HOST}/api/v1/images/service/${data}/${file.originalname}`
-            await services_parent.updateServiceParentById(data, {image: imageSavedName}, trx);
-        }
+        const data = await services.createService(body, trx);
         await trx.commit();
         return res.status(200).json({"status": "success"});
     } catch (e) {
@@ -79,43 +51,12 @@ exports.createService = async (req, res) => {
 }
 
 exports.updateServiceById = async (req, res) => {
-    const trx = await services_parent.transaction();
     try {
         const body = req.body;
-        const serviceParent = {
-            id:body.id,
-            name: body.name,
-            description: body.description,
-        }
-        let data = await services_parent.updateServiceParentById(serviceParent.id, serviceParent, trx);
-        if (data.length === 0) {
-            await trx.rollback();
-            return res.status(500).json({"status": "error", "message": "update service parent fail"});
-        }
-        data = data[0];
-        if (body.service){
-            const service = JSON.parse(body.service);
-            for (let i = 0; i < service.length; i++) {
-                service[i].services_parents = data;
-                await services.createService(service[i], trx);
-            }
-        }
-
-        const file = req.file;
-        if (file) {
-            const FOLDER = `./public/image/service/${data}`;
-            if (!fs.existsSync(FOLDER)) {
-                fs.mkdirSync(FOLDER, {recursive: true});
-            }
-            const fileName = `${FOLDER}/${file.originalname}`;
-            fs.writeFileSync(fileName, file.buffer);
-            const imageSavedName = `${process.env.HOST}/api/v1/images/service/${data}/${file.originalname}`
-            await services_parent.updateServiceParentById(data, {image: imageSavedName}, trx);
-        }
-        await trx.commit();
-        return res.status(200).json({"status": "success", "data": data});
+        console.log(body);
+        await services.updateServiceById(body.id, body);
+        return res.status(200).json({"status": "success"});
     } catch (e) {
-        await trx.rollback();
         return res.status(500).json({"status": "error", "message": e.message});
     }
 }

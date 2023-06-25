@@ -40,3 +40,7 @@ exports.createService = (data,trx) => {
 exports.deleteServiceById = (id) => {
     return db('services').where('id', id).del()
 }
+
+exports.transaction = () => {
+    return db.transaction()
+}
