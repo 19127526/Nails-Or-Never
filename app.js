@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 var cors = require('cors')
 app.use(cors({
-    origin: ["http://localhost:3000","http://localhost:3001"]
+    origin: ["http://localhost:3000"]
 }))
 
 app.use('/api/v1', routes);

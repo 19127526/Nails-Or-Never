@@ -14,14 +14,12 @@ exports.getServiceById = (id) => {
 
 exports.getServiceByServiceParentId = (id) => {
     return db('services')
-        .select('id', 'name', 'description','price','time')
+        .select('id', 'name', 'image', 'description','price','time')
         .where('services_parents', id)
 }
 
-exports.createService = (data,trx) => {
-    return db('services')
-        .transacting(trx)
-        .insert(data)
+exports.createService = (data) => {
+    return db('services').insert(data)
 }
 
 exports.deleteServiceById = (id) => {

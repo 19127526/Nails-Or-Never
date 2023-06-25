@@ -1,5 +1,6 @@
 const services = require('../models/service_parent.model');
 exports.getServicesParent = async (req, res) => {
+    console.log("test")
     try {
         const {limit, page} = req.query;
         const data = await services.getServicesParent(limit, page);
