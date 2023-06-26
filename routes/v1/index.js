@@ -11,9 +11,9 @@ const router = express.Router();
 router.use('/services', serviceRoutes);
 router.use('/services-parent', serviceParentRoutes);
 router.use('/users', userRoutes);
-router.use('/gallery', galleryRoutes);
-router.use('/gallery-parent', galleryParentRoutes);
-router.use('/contact', contactRoutes);
+router.use('/galleries', galleryRoutes);
+router.use('/galleries-parent', galleryParentRoutes);
+router.use('/contacts', contactRoutes);
 router.use('/about-us', aboutUsRoutes);
 router.use('/images',imageRoutes)
 module.exports = router;
