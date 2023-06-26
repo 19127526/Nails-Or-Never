@@ -23,7 +23,6 @@ exports.getGalleryParent = async (req, res) => {
 
 exports.getListGalleryChildByParentNameOrId = async (req, res) => {
   try {
-
     let {limit, page, theme, id} = req.query;
     limit = parseLimit(limit);
     page = parsePage(page);

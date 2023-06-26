@@ -22,7 +22,7 @@ exports.updateGalleryById = async (req, res) => {
     const body = req.body;
     const galleryBody = {
       id: body.id,
-      gallery_parents: body.gallery_parents
+      gallery_parents: body?.galleryParents
     }
     let imageSavedName = ""
     const file = req.file;
@@ -44,7 +44,7 @@ exports.updateGalleryById = async (req, res) => {
     }
     await gallery.updateGalleryById(galleryBody.id, galleryBody, trx);
     await trx.commit()
-    return res.status(200).json({"status": "success", "data": data});
+    return res.status(200).json({"status": "success", "data": "Update Gallery Success"});
   } catch (e) {
     return res.status(500).json({"status": "error", "message": e.message});
   }
@@ -64,7 +64,7 @@ exports.createGallery = async (req, res) => {
   try {
     const body = req.body;
     const galleryBody = {
-      gallery_parents: body.gallery_parents
+      gallery_parents: body.galleryParents
     }
     const files = req.files
     if(files) {
