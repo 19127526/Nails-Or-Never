@@ -9,6 +9,6 @@ const upload = require("../../utils/multer");
 router.get('/', isAuth(ROLES), getServices);
 router.post('/', isAuth(ADMIN), createService);
 router.put('/', isAuth(ADMIN), updateServiceById);
-router.get('/:id', isAuth, getServiceById);
-router.delete('/:id', isAuth, deleteServiceById);
+router.get('/:id', isAuth(ADMIN), getServiceById);
+router.delete('/:id', isAuth(ADMIN), deleteServiceById);
 module.exports = router;

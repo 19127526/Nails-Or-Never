@@ -116,6 +116,7 @@ exports.updateServiceParentById = async (req, res) => {
 exports.getDetailServiceParentByNameOrId = async (req, res) => {
     try {
         let {name, id} = req.query;
+        console.log(name, id)
         let data
         if(name != undefined && name != null) {
             data = await services_parent.getServiceParentByName(name);

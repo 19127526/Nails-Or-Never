@@ -29,6 +29,10 @@ exports.getGalleryParentById = (id) => {
   return db('gallery_parents').where('id', id)
 }
 
+exports.getGalleryParentByTheme = (theme) => {
+  return db('gallery_parents').where('theme', theme)
+}
+
 exports.createGalleryParent = (data, trx) => {
   return db('gallery_parents')
     .transacting(trx)
@@ -38,3 +42,4 @@ exports.createGalleryParent = (data, trx) => {
 exports.deleteGalleryParentById = (id) => {
   return db('gallery_parents').where('id', id).del()
 }
+

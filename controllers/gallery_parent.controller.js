@@ -3,6 +3,7 @@ const services_parent = require("../models/service_parent.model");
 const fs = require("fs");
 const services = require("../models/service.model");
 const gallery = require("../models/gallery.model");
+const {parseLimit, parsePage} = require("../utils/mapper");
 
 exports.getGalleryParent = async (req, res) => {
   try {
@@ -16,6 +17,35 @@ exports.getGalleryParent = async (req, res) => {
       return res.status(200).json({"status": "success", "data": data});
     }
   } catch (e) {
+    return res.status(500).json({"status": "error", "message": e.message});
+  }
+}
+
+exports.getListGalleryChildByParentNameOrId = async (req, res) => {
+  try {
+
+    let {limit, page, theme, id} = req.query;
+    limit = parseLimit(limit);
+    page = parsePage(page);
+    let detailGalleryParent
+    if(theme != undefined && theme != null) {
+      detailGalleryParent = await gallery_parent.getGalleryParentByTheme(theme);
+    }
+    else if(id != undefined && id != null) {
+      detailGalleryParent = await gallery_parent.getGalleryParentById(id);
+    }
+    const data = await gallery.getGalleryPaginationByParentId(limit, page, detailGalleryParent[0]?.id);
+    const count = await gallery.countGalleryByParentId(detailGalleryParent[0]?.id)
+    return res.status(200).json({
+      "status": "success",
+      "gallery": data,
+      total: count?.total,
+      pages: Math.ceil(count?.total / (limit || LIMIT)),
+      limit: limit || LIMIT,
+      page: page || PAGE
+    });
+  }
+  catch (e) {
     return res.status(500).json({"status": "error", "message": e.message});
   }
 }
@@ -78,7 +108,6 @@ exports.createGalleryParent = async (req, res) => {
       return res.status(500).json({"status": "error", "message": "create service parent fail"});
     }
     data = data[0];
-    console.log(data)
     const file = req.file;
     if (file) {
       const FOLDER = `./public/image/gallery/${data}/parent`;
@@ -106,7 +135,7 @@ exports.deleteGalleryParentById = async (req, res) => {
       const dataParent = await gallery_parent.deleteGalleryParentById(req.params.id);
       return res.status(200).json({
         "status": "success",
-        "message": "Folder  not found"
+        "message": "Delete Gallery Success"
       });
     }
     else{
