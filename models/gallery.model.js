@@ -25,3 +25,7 @@ exports.createGallery = (data) => {
 exports.deleteGalleryById = (id) => {
   return db('gallery').where('id', id).del()
 }
+
+exports.deleteGalleryByParentId = (parentId) => {
+  return db('gallery').where('gallery_parents', parentId).del()
+}

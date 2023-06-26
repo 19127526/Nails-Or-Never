@@ -44,3 +44,7 @@ exports.deleteServiceById = (id) => {
 exports.transaction = () => {
     return db.transaction()
 }
+
+exports.deleteServiceByParentId = (parentId) => {
+    return db('services').where('services_parents', parentId).del()
+}
