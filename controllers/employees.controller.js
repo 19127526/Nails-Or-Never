@@ -23,7 +23,6 @@ exports.updateEmployees = async (req, res) => {
       phone_number: body.phoneNumber,
       status: body.status
     }
-    console.log(employeesBody)
     let imageSavedName = ""
     const file = req.file;
     if (file) {
@@ -46,7 +45,6 @@ exports.updateEmployees = async (req, res) => {
     await trx.commit()
     return res.status(200).json({"status": "success", "data": "Update Employees Success"});
   } catch (e) {
-    console.log(e.message)
     return res.status(500).json({"status": "error", "message": e.message});
   }
 }

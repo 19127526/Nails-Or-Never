@@ -6,10 +6,6 @@ exports.getContact = (limit = 5, page = 1) => {
       .offset((page - 1) * limit)
 }
 
-exports.getAllContact = () =>{
-  return db('contact')
-}
-
 exports.countContact = () => {
   return db('contact').count('id as total').first()
 }
