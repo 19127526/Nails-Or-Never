@@ -8,11 +8,18 @@ exports.transaction = () => {
   return db.transaction()
 }
 
+exports.getGalleryByParentId = (limit = 5, page = 1, parentId) => {
+  return db('gallery')
+    .where('gallery_parents', parentId)
+    .limit(limit)
+    .offset((page - 1) * limit)
+}
+
 exports.updateGalleryById = (id, data, trx) => {
   return db('gallery')
-      .transacting(trx)
-      .where('id', id)
-      .update(data)
+    .transacting(trx)
+    .where('id', id)
+    .update(data)
 }
 
 exports.getGalleryById = (id) => {
@@ -21,14 +28,14 @@ exports.getGalleryById = (id) => {
 
 exports.getGalleryByGalleryParentId = (id) => {
   return db('gallery')
-      .select('id', 'image', 'gallery_parents')
-      .where('gallery_parents', id)
+    .select('id', 'image', 'gallery_parents')
+    .where('gallery_parents', id)
 }
 
 exports.createGallery = (data, trx) => {
   return db('gallery')
-      .transacting(trx)
-      .insert(data)
+    .transacting(trx)
+    .insert(data)
 }
 
 exports.deleteGalleryById = (id) => {
@@ -45,6 +52,6 @@ exports.countGalleryByParentId = (id) => {
 
 exports.getGalleryPaginationByParentId = (limit = 5, page = 1, id) => {
   return db('gallery').where('gallery_parents', id)
-      .limit(limit)
-      .offset((page - 1) * limit)
+    .limit(limit)
+    .offset((page - 1) * limit)
 }
