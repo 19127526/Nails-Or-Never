@@ -7,8 +7,9 @@ exports.getServicesParent = (limit = 5, page = 1) => {
 }
 
 
-exports.getServicesParentWithOutPagination = () => {
+exports.getAll = () => {
     return db('services_parents')
+        .select('id', 'name')
 }
 
 exports.countServicesParent = () => {
@@ -39,7 +40,9 @@ exports.createServiceParent = (data,trx) => {
         .insert(data)
 }
 
-exports.deleteServiceParentById = (id) => {
-    return db('services_parents').where('id', id).del()
+exports.deleteServiceParentById = (id,trx) => {
+    return db('services_parents')
+        .transacting(trx)
+        .where('id', id).del()
 }
 

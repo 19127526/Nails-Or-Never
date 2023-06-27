@@ -1,26 +1,18 @@
 const gallery_parent = require('../models/gallery_parent.model');
 const services_parent = require("../models/service_parent.model");
 const fs = require("fs");
+const services = require("../models/service.model");
 const gallery = require("../models/gallery.model");
 const {parseLimit, parsePage} = require("../utils/mapper");
-const LIMIT = 5;
-const PAGE = 1;
+
 exports.getGalleryParent = async (req, res) => {
   try {
     const {limit, page, pagination} = req.query;
-    if(pagination == 1) {
+    if(pagination == true) {
       const data = await gallery_parent.getGalleryParent(limit, page);
-      const count = await gallery_parent.countGalleryParent();
-      return res.status(200).json({
-        "status": "success",
-        "galleryParent": data,
-        total: count[0]?.total,
-        pages: Math.ceil(count[0]?.total / (limit || LIMIT)),
-        limit: limit || LIMIT,
-        page: Number(page) || PAGE
-      });
+      return res.status(200).json({"status": "success", "data": data});
     }
-    else if(pagination == 0) {
+    else {
       const data = await gallery_parent.getAllGalleryParent();
       return res.status(200).json({"status": "success", "data": data});
     }
@@ -95,7 +87,7 @@ exports.updateGalleryParentById = async (req, res) => {
 exports.getGalleryParentById = async (req, res) => {
   try {
     const data = await gallery_parent.getGalleryParentById(req.params.id);
-    return res.status(200).json({"status": "success", "data": data[0]});
+    return res.status(200).json({"status": "success", "data": data});
   } catch (e) {
     return res.status(500).json({"status": "error", "message": e.message});
   }

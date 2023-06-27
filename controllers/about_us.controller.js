@@ -2,7 +2,10 @@ const aboutUs = require('../models/about_us.model');
 exports.getAboutUs = async (req, res) => {
   try {
     const data = await aboutUs.getAboutUs();
-    return res.status(200).json({"status": "success", "aboutUs": data});
+    if (data.length === 0) {
+      return res.status(404).json({"status": "error", "message": "About Us not found"});
+    }
+    return res.status(200).json({"status": "success", "about_us": data[0]});
   } catch (e) {
     return res.status(500).json({"status": "error", "message": e.message});
   }
@@ -10,17 +13,8 @@ exports.getAboutUs = async (req, res) => {
 
 exports.updateAboutUsById = async (req, res) => {
   try {
-    const aboutUsBody = {
-      name: req.body?.name,
-      description: req.body?.description,
-      working_hour: req.body?.workingHour,
-      tel: req.body?.tel,
-      email: req.body?.email,
-      address: req.body?.address,
-      footage: req.body?.footage
-    }
-    const data = await aboutUs.updateAboutUsById(req.params.id, aboutUsBody);
-    return res.status(200).json({"status": "success", "data": data});
+    await aboutUs.updateAboutUsById(req.params.id, req.body);
+    return res.status(200).json({"status": "success"});
   } catch (e) {
     return res.status(500).json({"status": "error", "message": e.message});
   }
