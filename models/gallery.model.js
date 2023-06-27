@@ -8,6 +8,13 @@ exports.transaction = () => {
   return db.transaction()
 }
 
+exports.getGalleryByParentId = (limit = 5, page = 1, parentId) => {
+  return db('gallery')
+    .where('gallery_parents', parentId)
+    .limit(limit)
+    .offset((page - 1) * limit)
+}
+
 exports.updateGalleryById = (id, data, trx) => {
   return db('gallery')
     .transacting(trx)

@@ -13,13 +13,13 @@ exports.updateAboutUsById = async (req, res) => {
     const aboutUsBody = {
       name: req.body?.name,
       description: req.body?.description,
-      working_hour: req.body?.working_hour,
+      working_hour: req.body?.workingHour,
       tel: req.body?.tel,
       email: req.body?.email,
       address: req.body?.address,
       footage: req.body?.footage
     }
-    const data = await aboutUs.updateAboutUsById(req.body.id, aboutUsBody);
+    const data = await aboutUs.updateAboutUsById(req.params.id, aboutUsBody);
     return res.status(200).json({"status": "success", "data": data});
   } catch (e) {
     return res.status(500).json({"status": "error", "message": e.message});

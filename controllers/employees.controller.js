@@ -1,8 +1,6 @@
 const employees = require('../models/employees.model');
-const services_parent = require("../models/service_parent.model");
 const fs = require("fs");
 const gallery = require("../models/gallery.model");
-const gallery_parent = require("../models/gallery_parent.model");
 
 exports.getEmployees = async (req, res) => {
   try {
