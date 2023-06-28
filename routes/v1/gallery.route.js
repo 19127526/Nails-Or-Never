@@ -12,3 +12,4 @@ router.delete('/:parent_id/:id', isAuth(ADMIN), deleteGalleryById);
 
 module.exports = router;
 
+

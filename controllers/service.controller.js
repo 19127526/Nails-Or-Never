@@ -30,41 +30,12 @@ exports.getServices = async (req, res) => {
 exports.getServiceById = async (req, res) => {
     try {
         const data = await services.getServiceById(req.params.id);
-        if (data.length === 0) {
-            return res.status(404).json({"status": "error", "message": "Not found"});
-        }
-        console.log(data[0]);
-        return res.status(200).json({"status": "success", "data": data[0]});
+        return res.status(200).json({"status": "success", "data": data});
     } catch (e) {
         return res.status(500).json({"status": "error", "message": e.message});
     }
 }
 
-exports.getServiceByName= async (req, res) => {
-    try{
-        const name = req.params.name;
-        const data = await services.getServiceByName(name);
-        if (data.length === 0) {
-            return res.status(404).json({"status": "error", "message": "Not found"});
-        }
-        return res.status(200).json({"status": "success", "data": data[0]});
-    }catch (e) {
-        return res.status(500).json({"status": "error", "message": e.message});
-    }
-}
-
-exports.getServicesByServiceParentId = async (req, res) => {
-    try{
-        const id = req.params.id;
-        const data = await services.getServiceByServiceParentId(id);
-        if (data.length === 0) {
-            return res.status(404).json({"status": "error", "message": "Not found"});
-        }
-        return res.status(200).json({"status": "success", "data": data});
-    }catch (e) {
-        return res.status(500).json({"status": "error", "message": e.message});
-    }
-}
 
 exports.createService = async (req, res) => {
     const trx = await services.transaction();
@@ -81,9 +52,9 @@ exports.createService = async (req, res) => {
 
 exports.updateServiceById = async (req, res) => {
     try {
-        const id = req.params.id;
         const body = req.body;
-        await services.updateServiceById(id, body);
+        console.log(body);
+        await services.updateServiceById(body.id, body);
         return res.status(200).json({"status": "success"});
     } catch (e) {
         return res.status(500).json({"status": "error", "message": e.message});
@@ -92,8 +63,8 @@ exports.updateServiceById = async (req, res) => {
 
 exports.deleteServiceById = async (req, res) => {
     try {
-        await services.deleteServiceById(req.params.id);
-        return res.status(200).json({"status": "success"});
+        const data = await services.deleteServiceById(req.params.id);
+        return res.status(200).json({"status": "success", "data": data});
     } catch (e) {
         return res.status(500).json({"status": "error", "message": e.message});
     }
