@@ -1,25 +1,31 @@
 const db = require('../configs/mysql');
 
-exports.getEmployees = (limit = 5, page = 1) => {
+exports.getEmployees = () => {
   return db('employees')
-    .limit(limit)
-    .offset((page - 1) * limit)
+}
+exports.transaction = () => {
+  return db.transaction()
 }
 
 exports.countEmployees = () => {
   return db('employees').count('id as total')
 }
 
-exports.updateEmployeesById = (id, data) => {
-  return db('employees').where('id', id).update(data)
+exports.updateEmployeesById = (id, data, trx) => {
+  return db('employees')
+    .transacting(trx)
+    .where('id', id)
+    .update(data)
 }
 
 exports.getEmployeesById = (id) => {
   return db('employees').where('id', id)
 }
 
-exports.createEmployees = (data) => {
-  return db('employees').insert(data)
+exports.createEmployees = (data, trx) => {
+  return db('employees')
+    .transacting(trx)
+    .insert(data)
 }
 
 exports.deleteEmployeesById = (id) => {

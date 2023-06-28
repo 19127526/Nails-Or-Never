@@ -29,11 +29,7 @@ exports.getServiceByServiceParentId = (id) => {
         .where('services_parents', id)
 }
 
-exports.getServiceByName = (name) => {
-    return db('services')
-        .select('id', 'name', 'description','price','time')
-        .where('name', name)
-}
+
 
 exports.createService = (data,trx) => {
     return db('services')
@@ -45,12 +41,10 @@ exports.deleteServiceById = (id) => {
     return db('services').where('id', id).del()
 }
 
-exports.deleteServicesByParentId = (id,trx) => {
-    return db('services')
-        .transacting(trx)
-        .where('services_parents', id).del()
-}
-
 exports.transaction = () => {
     return db.transaction()
+}
+
+exports.deleteServiceByParentId = (parentId) => {
+    return db('services').where('services_parents', parentId).del()
 }
