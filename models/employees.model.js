@@ -1,8 +1,11 @@
 const db = require('../configs/mysql');
 
-exports.getEmployees = () => {
+exports.getEmployees = (limit = 5, page = 1) => {
   return db('employees')
+      .limit(limit)
+      .offset((page - 1) * limit)
 }
+
 exports.transaction = () => {
   return db.transaction()
 }
@@ -19,7 +22,7 @@ exports.updateEmployeesById = (id, data, trx) => {
 }
 
 exports.getEmployeesById = (id) => {
-  return db('employees').where('id', id)
+  return db('employees').where('id', id).first()
 }
 
 exports.createEmployees = (data, trx) => {
