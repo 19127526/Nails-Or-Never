@@ -6,6 +6,10 @@ exports.getEmployees = (limit = 5, page = 1) => {
       .offset((page - 1) * limit)
 }
 
+exports.getAllEmployees = () => {
+    return db('employees')
+}
+
 exports.transaction = () => {
   return db.transaction()
 }

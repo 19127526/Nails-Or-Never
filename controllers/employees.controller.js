@@ -119,7 +119,7 @@ exports.getEmployeesFreeTimeById = async (req, res) => {
     }
 }
 
-exports.getEmployeesFreeTime = async (req, res) => {
+exports.getEmployeesFreeTimeWithBooking = async (req, res) => {
     try {
         const time = req.params.time;
         const aboutUsData = await aboutUs.getAboutUs();
@@ -136,6 +136,59 @@ exports.getEmployeesFreeTime = async (req, res) => {
         return res.status(200).json({
             "status": "success",
             "data": bookingData
+        });
+    } catch (e) {
+        return res.status(500).json({"status": "error", "message": e.message});
+    }
+}
+
+exports.getEmployeesFreeTime = async (req, res) => {
+    try {
+        const time = req.params.time;
+        const data = await employees.getAllEmployees();
+        for (let i = 0; i < data.length; i++) {
+            const item = data[i];
+            const bookingData = await booking.getBookingByEmployeeIdDateFree(item.id, parseDate(time));
+            let busyTime = bookingData.map((item) => {
+                return {
+                    booking_time: item.booking_time,
+                    finished_time: item.finished_time
+                }
+            })
+
+            busyTime.sort((a, b) => {
+                const timeA = new Date(`2000-01-01T${a.booking_time}`);
+                const timeB = new Date(`2000-01-01T${b.booking_time}`);
+                return timeA - timeB;
+            })
+
+            const freeTime = [];
+            let startTime = item.start_time;
+            let endTime = item.end_time;
+            for (let i = 0; i < busyTime.length; i++) {
+                const item = busyTime[i];
+                if (startTime < item.booking_time) {
+                    freeTime.push({
+                        from: startTime,
+                        to: item.booking_time
+                    })
+                }
+                startTime = item.finished_time;
+            }
+
+            if (startTime < endTime) {
+                freeTime.push({
+                    from: startTime,
+                    to: endTime
+                })
+            }
+            item.freeTime = freeTime;
+            item.busyTime = busyTime;
+        }
+
+        return res.status(200).json({
+            "status": "success",
+            "data": data
         });
     } catch (e) {
         return res.status(500).json({"status": "error", "message": e.message});
