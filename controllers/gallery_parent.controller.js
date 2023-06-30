@@ -75,7 +75,7 @@ exports.updateGalleryParentById = async (req, res) => {
       }
       else{
         fs.rmSync(FOLDER, { recursive: true, force: true });
-        fs.mkdirSync(FOLDER, {recursive: true});
+        fs.mkdirSync(FOLDER, {recursive: true, force: true});
       }
       const fileName = `${FOLDER}/${file.originalname}`;
       fs.writeFileSync(fileName, file.buffer);
@@ -102,6 +102,7 @@ exports.getGalleryParentById = async (req, res) => {
 }
 
 exports.createGalleryParent = async (req, res) => {
+  console.log("DDDD")
   const trx = await services_parent.transaction();
   try {
     const body = req.body;
@@ -119,7 +120,7 @@ exports.createGalleryParent = async (req, res) => {
     if (file) {
       const FOLDER = `./public/image/gallery/${data}/parent`;
       if (!fs.existsSync(FOLDER)) {
-        fs.mkdirSync(FOLDER, {recursive: true});
+        fs.mkdirSync(FOLDER, {recursive: true, force: true});
       }
       const fileName = `${FOLDER}/${file.originalname}`;
       fs.writeFileSync(fileName, file.buffer);

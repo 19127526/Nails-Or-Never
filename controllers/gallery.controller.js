@@ -38,7 +38,7 @@ exports.updateGalleryById = async (req, res) => {
       }
       else{
         fs.rmSync(FOLDER, { recursive: true, force: true });
-        fs.mkdirSync(FOLDER, {recursive: true});
+        fs.mkdirSync(FOLDER, {recursive: true, force: true});
       }
       const fileName = `${FOLDER}/${file.originalname}`;
       fs.writeFileSync(fileName, file.buffer);
@@ -84,7 +84,7 @@ exports.createGallery = async (req, res) => {
         if (file) {
           const FOLDER = `./public/image/gallery/${galleryBody?.gallery_parents}/child/${data}`;
           if (!fs.existsSync(FOLDER)) {
-            fs.mkdirSync(FOLDER, {recursive: true});
+            fs.mkdirSync(FOLDER, {recursive: true, force: true});
           }
           const fileName = `${FOLDER}/${file.originalname}`;
           fs.writeFileSync(fileName, file.buffer);
