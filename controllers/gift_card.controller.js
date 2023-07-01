@@ -133,6 +133,7 @@ exports.checkoutGiftCard = async (req, res) => {
     const trx = await gift_card.transaction();
     try {
         const body = req.body;
+        console.log(body)
         const giftCardBody = {
             full_name: body.full_name,
             email: body.email,

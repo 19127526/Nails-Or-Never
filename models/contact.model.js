@@ -10,6 +10,16 @@ exports.getAllContact = () =>{
   return db('contact')
 }
 
+exports.transaction = () => {
+  return db.transaction()
+}
+
+exports.createContact = (data, trx) => {
+  return db('contact')
+    .transacting(trx)
+    .insert(data)
+}
+
 exports.countContact = () => {
   return db('contact').count('id as total')
 }

@@ -38,6 +38,7 @@ exports.createAdmin = async (req, res) => {
 }
 
 exports.userSignIn = async (req, res) => {
+    console.log(req.ip)
     const {username, password} = req.body;
     if (!username || !password) return res.status(400).send({'error': 'Missing username or password'});
 
