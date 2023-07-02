@@ -18,6 +18,7 @@ exports.isAuth = (permissions) => async (req, res, next) => {
                 } else if (e.name === 'JsonWebTokenError') {
                     return res.status(401).send({success: false, message: 'Invalid token'});
                 }
+                console.log(e)
                 return res.status(401).send({success: false, message: 'Unauthorized'});
             }
         } else {

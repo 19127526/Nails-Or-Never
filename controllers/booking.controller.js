@@ -206,6 +206,7 @@ exports.deleteBooking = async (req, res) => {
         if (!id) {
             return res.status(400).json({"status": "error", "message": "booking id is required"});
         }
+        await booking.deleteBookingServiceById(id);
         await booking.deleteBooking(id);
         return res.status(200).json({"status": "success"});
     } catch (e) {
