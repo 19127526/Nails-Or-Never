@@ -9,7 +9,7 @@ const {
 const randomString = require('randomstring');
 router.post('/', isAuth(ROLES), checkBeforeCreateBooking, createBooking);
 router.post('/confirm/:bookingId', isAuth(ADMIN), confirmBooking);
-router.get(`/confirmation/:check/:bookingId`, getConfirmation);
+router.get(`/confirmation/:check/:bookingId`, isAuth(ROLES), getConfirmation);
 router.get('/count', isAuth(ROLES), countBooking);
 router.get('/:id', isAuth(ADMIN), getBookingById);
 router.get('/', isAuth(ADMIN), getBookings);

@@ -34,10 +34,10 @@ exports.updateEmployees = async (req, res) => {
         if (file) {
             const FOLDER = `./public/image/employees/${employeesBody.id}`;
             if (!fs.existsSync(FOLDER)) {
-                fs.mkdirSync(FOLDER, {recursive: true});
+                fs.mkdirSync(FOLDER, {recursive: true, force: true});
             } else {
                 fs.rmSync(FOLDER, {recursive: true, force: true});
-                fs.mkdirSync(FOLDER, {recursive: true});
+                fs.mkdirSync(FOLDER, {recursive: true, force: true});
             }
             const fileName = `${FOLDER}/${file.originalname}`;
             fs.writeFileSync(fileName, file.buffer);
@@ -216,7 +216,7 @@ exports.createEmployees = async (req, res) => {
         if (file) {
             const FOLDER = `./public/image/employees/${data}`;
             if (!fs.existsSync(FOLDER)) {
-                fs.mkdirSync(FOLDER, {recursive: true});
+                fs.mkdirSync(FOLDER, {recursive: true, force: true});
             }
             const fileName = `${FOLDER}/${file.originalname}`;
             fs.writeFileSync(fileName, file.buffer);

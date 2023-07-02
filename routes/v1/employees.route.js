@@ -12,8 +12,8 @@ router.get('/:id', isAuth(ROLES), getEmployeesById);
 router.post('/', isAuth(ADMIN), upload.single('file'), createEmployees);
 router.delete('/:id', isAuth(ADMIN), deleteEmployeesById);
 router.get('/list/booking/:time', isAuth(ADMIN), getEmployeesFreeTimeWithBooking);
-router.get('/list/:time', isAuth(ADMIN), getEmployeesFreeTime);
-router.get('/:id/:time', isAuth(ADMIN), getEmployeesFreeTimeById);
+router.get('/list/:time', isAuth(ROLES), getEmployeesFreeTime);
+router.get('/:id/:time', isAuth(ROLES), getEmployeesFreeTimeById);
 
 module.exports = router;
 

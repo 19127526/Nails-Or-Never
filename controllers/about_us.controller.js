@@ -10,10 +10,11 @@ exports.getAboutUs = async (req, res) => {
 
 exports.updateAboutUsById = async (req, res) => {
   try {
+    console.log(req.body?.working_hour)
     const aboutUsBody = {
       name: req.body?.name,
       description: req.body?.description,
-      working_hour: req.body?.workingHour,
+      working_hour: req.body?.working_hour,
       tel: req.body?.tel,
       email: req.body?.email,
       address: req.body?.address,

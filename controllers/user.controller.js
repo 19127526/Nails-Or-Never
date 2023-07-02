@@ -41,6 +41,7 @@ exports.createAdmin = async (req, res) => {
 }
 
 exports.userSignIn = async (req, res) => {
+    console.log(req.ip)
     const {username, password} = req.body;
     try {
         const user = await User.findUserByUserName(username);

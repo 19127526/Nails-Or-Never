@@ -37,6 +37,10 @@ exports.deleteBooking = (id) => {
     return db('booking').where('id', id).del()
 }
 
+exports.deleteBookingServiceById = (id) => {
+    return db('booking_services').where('booking_id', id).del()
+}
+
 exports.getBookingByEmployeeIdDateFree = (employees_id,date) => {
     return db('booking').where('employees_id', employees_id)
         .where('status', 1)

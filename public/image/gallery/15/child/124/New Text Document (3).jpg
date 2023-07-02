@@ -1,0 +1,16 @@
+host : 'us-cdbr-east-05.cleardb.net',
+        user : 'b8e5dbe7be1f41',
+        password : 'bbb92f05',
+        database : 'heroku_59394531068dea2'
+
+
+
+
+
+
+ /*var des=$('#des').html().replace('contenteditable="true"',"contenteditable=false");
+            $.post("/admin/san-pham/du-an/sua-san-pham/{{list.proid}}",{title:$('#title').val(),des:des,ward:$("#ward option:selected").val(),check:true},function (data,status){
+                if(data){
+
+                }
+            });*/
