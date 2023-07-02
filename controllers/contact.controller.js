@@ -1,6 +1,6 @@
 const contact = require('../models/contact.model');
-const {parseDate} = require("../utils/mapper");
-const booking = require("../models/booking.model");
+const emailjs = require('@emailjs/nodejs');
+
 exports.getContact = async (req, res) => {
   try {
     const data = await contact.getAllContact();
@@ -26,17 +26,14 @@ exports.deleteContactById = async (req, res) => {
 exports.createContact = async (req, res) => {
   const trx = await contact.transaction();
   try {
-    const contactReq = {
+    const body = {
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
       message: req.body.message,
     }
-    let id = await contact.createContact(contactReq, trx);
+    let id = await contact.createContact(body, trx);
     id = id[0];
-    await trx.commit();
-
-
     let bodyMail = `Thank you very much for your attention to this matter. I look forward to hearing from you soon:
         Full Name: ${body.name}
         Email: ${body.email}
@@ -82,8 +79,11 @@ exports.createContact = async (req, res) => {
     }, function(error) {
       console.log('FAILED...', error);
     });
+    await trx.commit();
     return res.status(200).json({"status": "success", "data": id});
   } catch (e) {
+    await trx.rollback();
+    console.log(e.message)
     return res.status(500).json({"status": "error", "message": e.message});
   }
 }
