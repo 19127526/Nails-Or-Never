@@ -5,12 +5,28 @@ const logger = require('morgan');
 const app = express();
 const routes = require('./routes/v1/index');
 const db = require('./configs/mysql');
+
+/*
+const redisClient = require('./configs/redis');
+redisClient.connect().then(function () {
+    console.log('Redis connection is OK!');
+}).catch(function (err) {
+    console.log(err);
+    process.exit(1);
+})
+*/
+
+
 db.raw('select 1+1 as result').then(function () {
     console.log('Database connection is OK!');
 }).catch(function (err) {
     console.log(err);
     process.exit(1);
 })
+
+
+
+
 
 app.use(logger('dev'));
 app.use(express.json());

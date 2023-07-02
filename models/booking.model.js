@@ -48,3 +48,23 @@ exports.getBookingByDateFree = (date) => {
         .where('status', 1)
         .andWhere('booking_date', date)
 }
+
+exports.getBookingByBookingId = (bookingId) => {
+    return db('booking').where('booking_id', bookingId)
+}
+
+exports.getBookingFreeTimeByEmployeeId = (employees_id, from, finishedTime, bookingDate) => {
+    return db('booking')
+        .where('employees_id', employees_id)
+        .andWhere('status', 1)
+        .andWhere('booking_date', bookingDate)
+        .andWhere(function() {
+            this.where(function() {
+                this.where('booking_time', '<=', from)
+                    .andWhere('finished_time', '>=', from);
+            }).orWhere(function() {
+                this.where('booking_time', '<=', finishedTime)
+                    .andWhere('finished_time', '>=', finishedTime);
+            });
+        });
+}
