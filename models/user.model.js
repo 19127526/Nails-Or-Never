@@ -71,3 +71,9 @@ exports.findByUserNameAndUpdateToken = (username, data) => {
         token: data
     });
 }
+
+exports.findByIdAndUpdateOTP = (id, data) => {
+    return db('users').where('id', id).update({
+        otp: data
+    });
+}

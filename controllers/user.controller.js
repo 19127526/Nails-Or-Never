@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 const {userResponse} = require('../utils/mapper');
+const otpGenerator = require('otp-generator')
+const emailjs = require('@emailjs/nodejs');
+
 exports.createUser = async (req, res) => {
     try {
         const {username, password} = req.body;
@@ -40,12 +43,39 @@ exports.createAdmin = async (req, res) => {
 exports.userSignIn = async (req, res) => {
     console.log(req.ip)
     const {username, password} = req.body;
-    if (!username || !password) return res.status(400).send({'error': 'Missing username or password'});
-
     try {
         const user = await User.findUserByUserName(username);
         if (!user) return res.status(400).send({'error': 'User not found'});
 
+        const isPasswordMatch = await User.comparePassword(password, user.password);
+        if (!isPasswordMatch) return res.status(400).send({'error': 'Password is incorrect'});
+
+        const otp= otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
+        await User.findByIdAndUpdateOTP(user.id, otp);
+        const template = {
+            otp,
+            to_email: "hoangphuc552001@gmail.com",
+        }
+        emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_2_ID, template, {
+            publicKey: process.env.EMAILJS_PUBLIC_KEY,
+            privateKey: process.env.EMAILJS_PRIVATE_KEY,
+        }).then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+            console.log('FAILED...', error);
+        });
+        return res.json({success: true})
+    } catch (err) {
+        return res.status(500).send({'error': 'Internal server error'});
+    }
+}
+
+exports.userSignInCheckOTP = async (req, res) => {
+    try{
+        const {username, password, otp} = req.body;
+        const user = await User.findUserByUserName(username);
+        if (!user) return res.status(400).send({'error': 'User not found'});
+        if (user.otp !== otp) return res.status(400).send({'error': 'OTP is incorrect'});
         const isPasswordMatch = await User.comparePassword(password, user.password);
         if (!isPasswordMatch) return res.status(400).send({'error': 'Password is incorrect'});
 
@@ -71,7 +101,8 @@ exports.userSignIn = async (req, res) => {
         const token = jwt.sign({username: user.username}, process.env.JWT_SECRET, {expiresIn: expiredTime});
         await User.findByIdAndUpdateToken(user.id, token);
         return res.json({'status': 'success', user:userResponse(user), token});
-    } catch (err) {
+    }catch (e) {
+        console.log(e)
         return res.status(500).send({'error': 'Internal server error'});
     }
 }

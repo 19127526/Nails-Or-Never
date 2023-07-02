@@ -3,6 +3,36 @@ const employee = require("../models/employees.model");
 const services = require("../models/service.model");
 const emailjs = require('@emailjs/nodejs');
 const {parseDate, sumTime, parseLimit, parsePage} = require("../utils/mapper");
+const randomstring = require("randomstring");
+const path = require("path");
+exports.checkBeforeCreateBooking = async (req, res, next) => {
+    try {
+        const bookingReq = {
+            employees_id: req.body.employees_id,
+            booking_date: parseDate(req.body.booking_date),
+            booking_time: req.body.booking_time,
+            services: req.body.services
+        }
+        let finishedTime = 0
+        for (let i = 0; i < bookingReq.services.length; i++) {
+            const service = await services.getServiceById(bookingReq.services[i]);
+            if (service.length <= 0) {
+                throw new Error("Service not found");
+            } else {
+                finishedTime += service[0].time;
+            }
+        }
+        finishedTime = sumTime(bookingReq.booking_time, finishedTime);
+        const check = await booking.getBookingFreeTimeByEmployeeId(bookingReq.employees_id, bookingReq.booking_time, finishedTime, bookingReq.booking_date);
+        if (check.length > 0) {
+            return res.status(400).json({message: "Time is not available"});
+        }
+        next();
+    } catch (e) {
+        res.status(400).json({message: e.message});
+    }
+}
+
 exports.createBooking = async (req, res) => {
     const trx = await booking.transaction();
     try {
@@ -29,29 +59,28 @@ exports.createBooking = async (req, res) => {
         let finishedTime = 0
         for (let i = 0; i < listService.length; i++) {
             const service = await services.getServiceById(listService[i]);
-            if (service.length <= 0){
+            if (service.length <= 0) {
                 throw new Error("Service not found");
-            }else{
+            } else {
                 listServices.push(service[0].name);
                 finishedTime += service[0].time;
             }
         }
 
-        finishedTime=sumTime(bookingReq.booking_time,finishedTime);
+        finishedTime = sumTime(bookingReq.booking_time, finishedTime);
         await booking.updateBooking({finished_time: finishedTime}, {id: id}, trx);
         let employeeRequired = await employee.getEmployeesById(bookingReq.employees_id);
-
-        const template = {
-            ...bookingReq,
+        let servicesBody = listServices.join(", ");
+        let body = `Your service booking has been successfully placed on ${bookingReq.booking_date} at ${bookingReq.booking_time}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. Services include ${servicesBody} .We are going to confirm in the shortest time. Our store is pleased to close to you. Thank you for our purchase. 💖💖💖`;
+        const templateCustomer = {
+            full_name: bookingReq.full_name,
             to_email: bookingReq.email,
-            services: listServices,
-            employee: employeeRequired.full_name,
-            finished_time: finishedTime,
+            title: "Your booking is confirmed",
+            body: body,
         }
 
         //mail for customer
-        /*
-        emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID, template, {
+        emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_1_ID, templateCustomer, {
             publicKey: process.env.EMAILJS_PUBLIC_KEY,
             privateKey: process.env.EMAILJS_PRIVATE_KEY,
         }).then(function(response) {
@@ -59,22 +88,47 @@ exports.createBooking = async (req, res) => {
         }, function(error) {
             console.log('FAILED...', error);
         });
-        */
 
+        body= `You have a new booking on ${bookingReq.booking_date} at ${bookingReq.booking_time}. Services include ${servicesBody}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. Thank you. 💖💖💖`;
+        const templateAdmin = {
+            full_name: "ADMIN",
+            to_email: "19127059@student.hcmus.edu.vn",
+            title: "New booking",
+            body: body,
+        }
         //mail for admin
-        // emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID, template, {
-        //     publicKey: process.env.EMAILJS_PUBLIC_KEY,
-        //     privateKey: process.env.EMAILJS_PRIVATE_KEY,
-        // }).then(function(response) {
-        //     console.log('SUCCESS!', response.status, response.text);
-        // }, function(error) {
-        //     console.log('FAILED...', error);
-        // });
+         emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_1_ID, templateAdmin, {
+             publicKey: process.env.EMAILJS_PUBLIC_KEY,
+             privateKey: process.env.EMAILJS_PRIVATE_KEY,
+         }).then(function(response) {
+             console.log('SUCCESS!', response.status, response.text);
+         }, function(error) {
+             console.log('FAILED...', error);
+         });
+
+        body = `You have a new booking on ${bookingReq.booking_date} at ${bookingReq.booking_time}. Services include ${servicesBody}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. Thank you. 💖💖💖`;
+        const templateEmployee = {
+            full_name: employeeRequired.full_name,
+            to_email: employeeRequired.email,
+            title: "New booking",
+            body: body,
+        }
+
+        //mail for employee
+         emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_1_ID, templateEmployee, {
+             publicKey: process.env.EMAILJS_PUBLIC_KEY,
+             privateKey: process.env.EMAILJS_PRIVATE_KEY,
+         }).then(function(response) {
+             console.log('SUCCESS!', response.status, response.text);
+         }, function(error) {
+             console.log('FAILED...', error);
+         });
 
         await trx.commit();
-        return res.status(200).json({"status": "success","data":template});
+        return res.status(200).json({"status": "success"});
     } catch (e) {
         await trx.rollback();
+        console.log(e);
         return res.status(500).json({"status": "error", "message": e.message});
     }
 }
@@ -85,9 +139,9 @@ exports.confirmBooking = async (req, res) => {
         const id = req.params.bookingId;
         const reason = req.body.reason;
         if (!id) {
-            throw new Error("Booking id is required");
+            return res.status(400).json({"status": "error", "message": "booking id is required"});
         }
-        await booking.updateBooking({status: 1, reason: reason}, {id: id},trx);
+        await booking.updateBooking({status: 1, reason: reason}, {id: id}, trx);
 
         //mail for customer
         /*
@@ -150,11 +204,11 @@ exports.deleteBooking = async (req, res) => {
     try {
         const id = req.params.id;
         if (!id) {
-            throw new Error("Booking id is required");
+            return res.status(400).json({"status": "error", "message": "booking id is required"});
         }
         await booking.deleteBooking(id);
         return res.status(200).json({"status": "success"});
-    }catch (e) {
+    } catch (e) {
         return res.status(500).json({"status": "error", "message": e.message});
     }
 }
@@ -171,3 +225,28 @@ exports.countBooking = async (req, res) => {
     }
 }
 
+exports.getConfirmation = async (req, res) => {
+    const trx = await booking.transaction();
+    try {
+        const checkBookingId = req.params.check;
+        const check = await booking.getBookingByBookingId(checkBookingId);
+        if (check.length <= 0) {
+            return res.status(404).json({"status": "error", "message": "Booking not found"});
+        }
+
+        const id = req.params.bookingId;
+        if (!id) {
+            return res.status(400).json({"status": "error", "message": "booking id is required"});
+        }
+        const checkBooking = await booking.getBookingById(id);
+        if (checkBooking && checkBooking.status === 1) {
+            return res.status(400).json({"status": "error", "message": "booking has been confirmed"});
+        }
+        await booking.updateBooking({status: 1}, {id: id}, trx);
+        await trx.commit();
+        return res.sendFile(path.join(__dirname, '../public/confirmation.html'));
+    } catch (e) {
+        await trx.rollback();
+        return res.status(500).json({"status": "error", "message": e.message});
+    }
+}
