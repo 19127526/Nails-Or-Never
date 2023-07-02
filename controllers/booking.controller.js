@@ -74,12 +74,7 @@ exports.createBooking = async (req, res) => {
         let body = `Your service booking has been successfully placed on ${bookingReq.booking_date} at ${bookingReq.booking_time}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. Services include ${servicesBody} .We are going to confirm in the shortest time. Our store is pleased to close to you. Thank you for our purchase. 💖💖💖`;
         const templateCustomer = {
             full_name: bookingReq.full_name,
-            booking_time: bookingReq.booking_time,
-            booking_date: bookingReq.booking_date,
             to_email: bookingReq.email,
-            services: listServices,
-            employee: employeeRequired.full_name,
-            finished_time: finishedTime,
             title: "Your booking is confirmed",
             body: body,
         }
@@ -97,13 +92,8 @@ exports.createBooking = async (req, res) => {
         body= `You have a new booking on ${bookingReq.booking_date} at ${bookingReq.booking_time}. Services include ${servicesBody}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. Thank you. 💖💖💖`;
         const templateAdmin = {
             full_name: "ADMIN",
-            booking_time: bookingReq.booking_time,
-            booking_date: bookingReq.booking_date,
             to_email: "19127059@student.hcmus.edu.vn",
-            services: listServices,
-            employee: employeeRequired.full_name,
             title: "New booking",
-            finished_time: finishedTime,
             body: body,
         }
         //mail for admin
@@ -119,12 +109,7 @@ exports.createBooking = async (req, res) => {
         body = `You have a new booking on ${bookingReq.booking_date} at ${bookingReq.booking_time}. Services include ${servicesBody}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. Thank you. 💖💖💖`;
         const templateEmployee = {
             full_name: employeeRequired.full_name,
-            booking_time: bookingReq.booking_time,
-            booking_date: bookingReq.booking_date,
             to_email: employeeRequired.email,
-            services: listServices,
-            employee: employeeRequired.full_name,
-            finished_time: finishedTime,
             title: "New booking",
             body: body,
         }

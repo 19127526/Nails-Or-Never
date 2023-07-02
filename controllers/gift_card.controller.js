@@ -4,6 +4,7 @@ const LIMIT = 5;
 const PAGE = 1;
 const checkout = require('../models/checkout.model');
 const gift_card_checkout = require('../models/gift_card_checkout.model');
+const emailjs = require('@emailjs/nodejs');
 const method = require('../constants/method_checkout');
 exports.getAllGiftCard = async (req, res) => {
     try {
@@ -161,6 +162,58 @@ exports.checkoutGiftCard = async (req, res) => {
             }
             await gift_card_checkout.createGiftCardCheckout(checkoutGiftCardBody, trx);
         }
+
+        let giftcards=""
+        for (let i = 0; i < gift_cards.length; i++) {
+            const gift_card_each= await gift_card.getGiftCardById(gift_cards[i].gift_card)
+            if (gift_card_each.length === 0) {
+                await trx.rollback();
+                return res.status(500).json({"status": "error", "message": "Get gift card fail"});
+            }
+            giftcards+=`\n ${gift_card_each[0].theme} - ${gift_card_each[0].description} - ${gift_cards[i].quantity} - ${gift_cards[i].price} \n`
+        }
+        const bodyMail = `Your order has been received and is now being processed. Your order details are shown below for your reference:
+        Full Name: ${body.full_name}
+        Email: ${body.email}
+        Phone: ${body.phone}
+        Address: ${body.address}
+        Subtotal: ${body.subtotal}
+        Discount: ${body.discount}
+        Tax: ${body.tax}
+        Total: ${body.total}
+        Payment Method: ${body.method}
+        Gift Card: ${giftcards}
+        `
+        const templateCustomer = {
+            full_name: body.full_name,
+            to_email: body.email,
+            title: "Checkout Gift Card",
+            body: bodyMail,
+        }
+
+        emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_1_ID, templateCustomer, {
+            publicKey: process.env.EMAILJS_PUBLIC_KEY,
+            privateKey: process.env.EMAILJS_PRIVATE_KEY,
+        }).then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+            console.log('FAILED...', error);
+        });
+
+        const templateAdmin = {
+            full_name: "ADMIN",
+            to_email: "hoangphuc552001@gmail.com",
+            title: "Checkout Gift Card",
+            body: bodyMail,
+        }
+        emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_1_ID, templateAdmin, {
+            publicKey: process.env.EMAILJS_PUBLIC_KEY,
+            privateKey: process.env.EMAILJS_PRIVATE_KEY,
+        }).then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+            console.log('FAILED...', error);
+        });
         await trx.commit();
         return res.status(200).json({"status": "success"});
     } catch (e) {
