@@ -93,7 +93,7 @@ export async function getServerSideProps(context) {
     try {
         const page = context?.query?.page ?? "1";
         // `getStaticProps` is executed on the server side.
-        const gallery = await getGalleryPagination({page : page, limit : 6})
+        const gallery = await getGalleryPagination( page as number, 6 as number)
         const data = await gallery?.data
         return {
             props: {

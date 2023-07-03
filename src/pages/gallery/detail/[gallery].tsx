@@ -76,7 +76,7 @@ const DetailGalleryPage = ({gallerySub}) => {
 export async function getServerSideProps(context) {
     try {
         const {params} = context ?? "1"
-        const listSubGallery = await getAllSubGalleryByParentTheme({theme: params?.gallery});
+        const listSubGallery = await getAllSubGalleryByParentTheme( params?.gallery as string);
         const data = await listSubGallery?.data
         return {
             props: {

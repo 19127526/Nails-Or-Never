@@ -83,7 +83,7 @@ export async function getServerSideProps(context) {
         const {params} = context ?? "1"
         const page = context?.query?.page ?? "1";
         // `getStaticProps` is executed on the server side.
-        const services = await getSubServicePagination({page : page, limit : 5})
+        const services = await getSubServicePagination(page as number,  5)
         const data = await services?.data
         return {
             props: {

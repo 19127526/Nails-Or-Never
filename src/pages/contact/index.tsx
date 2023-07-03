@@ -44,7 +44,7 @@ const ContactPage = ({aboutUs}) => {
     }
 
     const handleSubmitContact = async (formData) => {
-        await postContact({formData : formData})
+        await postContact(formData)
             .then(res => {
                 setIsOpen({state: true, message: `Send Contact Success`});
                 setContact(emptyContact)

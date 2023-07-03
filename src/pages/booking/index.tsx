@@ -18,9 +18,7 @@ import {
     Stepper
 } from "@mui/material";
 import ContactsIcon from '@mui/icons-material/Contacts';
-import PersonIcon from '@mui/icons-material/Person';
-import SchoolIcon from '@mui/icons-material/School';
-import {Checkbox, Descriptions, Form, Input, List as ListAntd} from 'antd';
+import {Checkbox, Descriptions, Form, Input, List as ListAntd, Spin} from 'antd';
 import VirtualList from 'rc-virtual-list';
 import {getAllEmployee, getFreeTimeByDate, getFreeTimeByEmIdAndDate} from "@/api-client/employee/Employee.api";
 import {getSubServicePagination} from "@/api-client/service/Services.api";
@@ -48,6 +46,8 @@ import {useDispatch} from "react-redux";
 import {turnOffLoading, turnOnLoading} from "@/components/loading/index.actions";
 import {useRouter} from "next/router";
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import LoadingComponent from "@/components/loading";
+import "./loading.css"
 interface stepInterFace {
     label: string,
     icon: JSX.Element,
@@ -68,6 +68,17 @@ function disableRandomDates() {
     return Math.random() > 0.7;
 }
 
+const LoadingBooking = () => {
+    return (
+        <div className="loading-booking">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    )
+}
 
 const steps: stepInterFace[] = [
     {
@@ -84,7 +95,7 @@ const steps: stepInterFace[] = [
     }
 ];
 
-let busyTime = []
+let busyTime = [];
 const emptyInformation = {
     fullName: '',
     email: '',
@@ -92,6 +103,7 @@ const emptyInformation = {
     note: ''
 }
 const BookingPage = ({employee, service}) => {
+    const [isLoading,setIsLoading] = useState(false)
     const [selectedBooking, setSelectedBooking] = useState({
         employee: undefined as object,
         date: undefined as string,
@@ -193,6 +205,7 @@ const BookingPage = ({employee, service}) => {
     };
 
     const handleSelectEmploy = (index) => {
+        setIsLoading(true)
         if (selectedBooking?.employee != undefined) {
             if (index?.id == selectedBooking?.employee?.id) {
                 setSelectedBooking({...selectedBooking, employee: undefined as object})
@@ -220,32 +233,30 @@ const BookingPage = ({employee, service}) => {
         const dateTemp = e?.$d?.toString()?.split(" ")[0]
         setCurrentDate(convertDateStrToNumber(dateTemp) as number)
         const date = getFormatDate({day: e?.$D, month: Number(e?.$M) + 1, year: e?.$y});
-        setSelectedBooking({...selectedBooking, date: date as string})
+        setSelectedBooking({...selectedBooking, date: date as string});
+        setIsLoading(true)
         setCurrentTime(null)
     }
 
     useEffect(() => {
         const getTimeByEmployIdAndDate = async () => {
-            busyTime = []
             if (selectedBooking?.date != undefined) {
                 if (selectedBooking?.employee == undefined) {
-                    await getFreeTimeByDate({date: selectedBooking?.date})
+                    await getFreeTimeByDate(selectedBooking?.date as string)
                         .then(res => {
-                            employee = res?.data?.data
+                            setIsLoading(false)
+                            // employee = res?.data?.data
                         })
                 } else {
-                    await getFreeTimeByEmIdAndDate({
-                        employId: selectedBooking?.employee?.id,
-                        date: selectedBooking?.date
-                    })
+                    await getFreeTimeByEmIdAndDate(selectedBooking?.employee?.id as number, selectedBooking?.date as string)
                         .then(res => {
-                            console.log(res)
-                            setSelectedBooking({...selectedBooking, timeBusy: res?.data?.busyTime})
-                        })
-                        .catch(err => {
-
+                            setIsLoading(false)
+                            setSelectedBooking({...selectedBooking, timeBusy : res?.data?.busyTime})
                         })
                 }
+            }
+            else {
+                setIsLoading(false)
             }
         }
         getTimeByEmployIdAndDate()
@@ -273,7 +284,6 @@ const BookingPage = ({employee, service}) => {
     }
 
     const shouldDisableTime = (value: Dayjs, view: TimeView) => {
-        // if(selectedBooking?.timeBusy?.length !=0 ) {
         const hour = value.hour();
         const minute = value.minute();
         const isInto = convertWorkingHourToBookingArray(detailAboutUs?.working_hour)?.filter(index => [...index?.currentDate]?.includes(currentDate))
@@ -289,33 +299,31 @@ const BookingPage = ({employee, service}) => {
                 return true;
             }
         }
-
-
-        if (selectedBooking?.timeBusy?.length == 1) {
-            const start = convertHourToMinutes(selectedBooking?.timeBusy[0]?.booking_time)
-            const end = convertHourToMinutes(selectedBooking?.timeBusy[0]?.finished_time)
-            if (start <= valueTemp && end >= valueTemp) {
-                busyTime.push(convertMinuteToHour(valueTemp))
-                return true;
-            }
-        } else {
-            let condition = '';
-            const data = [...selectedBooking?.timeBusy]?.map((index, number) => {
-                const start = convertHourToMinutes(index?.booking_time)
-                const end = convertHourToMinutes(index?.finished_time);
-                if(number == 0) {
-                    condition += `((${start} <= ${valueTemp} && ${end} >= ${valueTemp})||`;
+        if(selectedBooking?.timeBusy?.length !=0 && selectedBooking?.timeBusy != undefined) {
+            if (selectedBooking?.timeBusy?.length == 1) {
+                const start = convertHourToMinutes(selectedBooking?.timeBusy[0]?.booking_time)
+                const end = convertHourToMinutes(selectedBooking?.timeBusy[0]?.finished_time)
+                if (start <= valueTemp && end >= valueTemp) {
+                    // busyTime.push(convertMinuteToHour(valueTemp))
+                    return true;
                 }
-                else if (number == [...selectedBooking?.timeBusy]?.length - 1) {
-                    condition += `(${start} <= ${valueTemp} && ${end} >= ${valueTemp}))`;
+            } else {
+                let condition = '';
+                const data = [...selectedBooking?.timeBusy]?.map((index, number) => {
+                    const start = convertHourToMinutes(index?.booking_time)
+                    const end = convertHourToMinutes(index?.finished_time);
+                    if (number == 0) {
+                        condition += `((${start} <= ${valueTemp} && ${end} >= ${valueTemp})||`;
+                    } else if (number == [...selectedBooking?.timeBusy]?.length - 1) {
+                        condition += `(${start} <= ${valueTemp} && ${end} >= ${valueTemp}))`;
+                    } else {
+                        condition += `(${start} <= ${valueTemp} && ${end} >= ${valueTemp})||`;
+                    }
+                })
+                if (eval(condition)) {
+                    // busyTime.push(convertMinuteToHour(valueTemp))
+                    return true;
                 }
-                else {
-                    condition += `(${start} <= ${valueTemp} && ${end} >= ${valueTemp})||`;
-                }
-            })
-            if(eval(condition)) {
-                busyTime.push(convertMinuteToHour(valueTemp))
-                return true;
             }
         }
         return false
@@ -394,7 +402,7 @@ const BookingPage = ({employee, service}) => {
 
     return (
         employee != null && service != null ?
-            <>
+            <Spin spinning={isLoading} >
                 <Head>
                     <meta charSet="utf-8"/>
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
@@ -424,6 +432,7 @@ const BookingPage = ({employee, service}) => {
 
 
                 </Head>
+
                 <div className="page-title"
                      style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/page-bg.jpg)"}}>
                     <div className="container-lg">
@@ -554,8 +563,8 @@ const BookingPage = ({employee, service}) => {
                                                                 >
                                                                     {(item, number) => (
                                                                         <ListAntd.Item
-                                                                            style={{background: selectedBooking?.employee?.id == item?.id ? "#f8beae" : "none"}}
-                                                                            key={item?.email} actions={[<button
+                                                                            style={{background: selectedBooking?.employee?.id == item?.id ? "#7fa681" : "none"}}
+                                                                            key={item?.id} actions={[<button
                                                                             className="button icon-button"
                                                                             onClick={() => handleSelectEmploy(item)}>
                                                                             <span>{selectedBooking?.employee?.id == item?.id ? "Cancel" : "Select"}</span>
@@ -824,7 +833,8 @@ const BookingPage = ({employee, service}) => {
                         </div>
                     </div>
                 </section>
-            </>
+
+            </Spin>
 
             :
             <></>
@@ -836,7 +846,7 @@ export async function getServerSideProps(context) {
     try {
         // `getStaticProps` is executed on the server side.
         const listEmployee = await getAllEmployee()
-        const listService = await getSubServicePagination({page: 1, limit: 999999})
+        const listService = await getSubServicePagination(1 as number, 999999 as number)
 
         const dataService = await listService?.data;
         const dataEmployee = await listEmployee?.data;

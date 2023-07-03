@@ -197,9 +197,9 @@ const HomePage = ({aboutUs, services, galleryParent}) => {
 export async function getServerSideProps(context) {
     try {
         const detailAboutUs = await getDetailAboutUs()
-        const services = await getSubServicePagination({page: 1, limit: 6});
+        const services = await getSubServicePagination( 1,  6);
 
-        const gallery = await getGalleryPagination({page : 1, limit : 6})
+        const gallery = await getGalleryPagination(  1, 6)
         const dataGallery = await gallery?.data
         const dataAboutUs = await detailAboutUs?.data;
         const dataService = await services?.data
