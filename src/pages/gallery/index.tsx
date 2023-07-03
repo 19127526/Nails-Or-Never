@@ -30,7 +30,30 @@ const GalleryPage = ({galleryParent}) => {
             <Head>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="generator" content="Nails Or Never"/>
-                <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} – List Gallery Nail</title>
+                <title>Gallery Nail-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
+                <meta charSet="utf-8"/>
+                <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
+                <meta name="viewport" content="initial-scale=1, width=device-width"/>
+                <meta name="robots" content="max-image-preview:large"/>
+                <meta name="canonical" href="https://nailsornever.com"/>
+                <meta name="description" content={`Located conveniently in Malta, NewYork, 12118,
+                        ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
+                        mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials.
+                        also, we provide some gallery such as ${[...galleryParent?.galleryParent]?.map(index => `${index?.theme}`)}. 
+                       Let's come to our nail salon to see how deluxe salon & the unique nail art only at our salon`}/>
+                <meta name="keywords"
+                      content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,Gallery extensions`}/>
+                <meta property="og:url" content="https://nailsornever.com/"/>
+                <meta property="og:type" content="Website"/>
+                <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp-Gallery; SPA`}/>
+                <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118,
+                        ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
+                        mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials.
+                        also, we provide some gallery such as ${[...galleryParent?.galleryParent]?.map(index => `${index?.theme}`)}. 
+                       Let's come to our nail salon to see how deluxe salon & the unique nail art only at our salon`}/>
+                <meta property="og:image"
+                      content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
             </Head>
             <div className="page-title"
                  style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/page-bg.jpg)"}}>

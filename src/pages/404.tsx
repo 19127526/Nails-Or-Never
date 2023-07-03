@@ -4,7 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EmptyLayout from "@/components/layout/empty";
 import Link from "next/link";
 import {useDispatch} from "react-redux";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {turnOffLoading} from "@/components/loading/index.actions";
 
 const NotFound = () => {
@@ -12,9 +12,29 @@ const NotFound = () => {
 
    return(<>
         <Head>
-            <title>
-                404
-            </title>
+            <meta charSet="utf-8"/>
+            <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
+            <meta name="viewport" content="initial-scale=1, width=device-width"/>
+            <meta name="robots" content="max-image-preview:large"/>
+            <meta name="canonical" href="https://nailsornever.com"/>
+            <title>Empty Page-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
+            <meta name="description" content={`We have many years of experience in the
+                                nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
+                                soothing atmosphere and more notable for its qualified and certified professionals. You
+                                will feel the difference the minute you walk through our door.`}/>
+            <meta name="keywords"
+                  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,Empty extensions`}/>
+            <meta property="og:url" content="https://nailsornever.com/"/>
+            <meta property="og:type" content="Website"/>
+            <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp-Empty; SPA`}/>
+            <meta property="og:description" content={`We have many years of experience in the
+                                nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
+                                soothing atmosphere and more notable for its qualified and certified professionals. You
+                                will feel the difference the minute you walk through our door.`}/>
+            <meta property="og:image"
+                  content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+            <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
+
         </Head>
         <Box
             component="main"

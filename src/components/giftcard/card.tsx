@@ -36,7 +36,7 @@ const CardGiftComponent = ({detail}) => {
                                 backgroundRepeat: "no-repeat"
                             }}
                             image={detail?.image}
-                            alt={detail?.image}
+                            alt={`${process.env.NEXT_PUBLIC_NAME_PRODUCT}-${detail?.theme}`}
                         />
                         <CardContent className="service-list">
                             <h2 className="service-list-name">{detail?.theme}</h2>
