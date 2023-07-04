@@ -3,8 +3,8 @@ version: "3"
 services:
   api-gateway:
     build: ./
-    image: dev-be
-    container_name: dev-be
+    image: devbe
+    container_name: devbe
     restart: always
     ports:
       - "3008:3008"
