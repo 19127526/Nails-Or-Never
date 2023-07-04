@@ -1,0 +1,60 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get update -y
+      - run: sudo apt-get install -y rsync
+
+      - uses: actions/checkout@v2
+      - name: Use Node.js 18
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18.x"
+      - name: Get Environment Variables
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_REPOSITORY: ${{github.repository}}
+        run: |
+          total_variables=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/variables" | \
+            jq -r '.total_count')
+          page_size=200
+          num_pages=$((($total_variables + $page_size - 1) / $page_size))
+          for ((i = 1; i <= 2; i++)); do
+            variables=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/variables?per_page=$page_size&page=$i" | \
+              jq -r '.variables[].name')
+            for variable in $variables; do
+              values=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/graduation-course/job-platform-api/actions/variables/$variable | jq -r '.value')
+              echo "$variable=$values" >> .env
+            done
+          done
+      - name: Cat .env value
+        run: cat .env
+      - name: Deploy to server
+        env:
+          SSHKEY: ${{ secrets.SSHKEY }}
+          HOST: ${{ secrets.HOST }}
+          PORT: ${{ secrets.PORT }}
+          USERNAME: ${{ secrets.USERNAME }}
+        run: |
+          mkdir -p /home/runner/.ssh
+          echo "$SSHKEY" | tr -d '\r' > /home/runner/.ssh/private_key.pem
+          chmod 600 /home/runner/.ssh/private_key.pem
+          ssh-keyscan -p $PORT -H $HOST >> /home/runner/.ssh/known_hosts
+
+          rsync -avz --delete -e "ssh -i /home/runner/.ssh/private_key.pem -p $PORT -o StrictHostKeyChecking=no" --exclude '.git' --exclude 'node_modules' . $USERNAME@$HOST:/Nails-Or-Never
+
+          ssh -i /home/runner/.ssh/private_key.pem -p $PORT -o StrictHostKeyChecking=no $USERNAME@$HOST "\
+            cd /Nails-Or-Never && \
+            docker compose -f docker-compose.yml down && \
+            docker compose -f docker-compose.yml up -d --build \
+          "
+          rm -f /home/runner/.ssh/private_key.pem

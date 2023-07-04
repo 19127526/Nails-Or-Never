@@ -1,4 +1,4 @@
-FROM bitnami/node:18.16.0-debian-11-r15
+FROM node:18-alpine
 
 WORKDIR /
 
