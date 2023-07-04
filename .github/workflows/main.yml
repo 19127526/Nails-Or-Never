@@ -19,23 +19,10 @@ jobs:
           node-version: "18.x"
       - name: Get Environment Variables
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          GITHUB_REPOSITORY: ${{github.repository}}
+            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+            GITHUB_REPOSITORY: ${{github.repository}}
         run: |
-          total_variables=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
-            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/variables" | \
-            jq -r '.total_count')
-          page_size=200
-          num_pages=$((($total_variables + $page_size - 1) / $page_size))
-          for ((i = 1; i <= 2; i++)); do
-            variables=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
-              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/variables?per_page=$page_size&page=$i" | \
-              jq -r '.variables[].name')
-            for variable in $variables; do
-              values=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/graduation-course/job-platform-api/actions/variables/$variable | jq -r '.value')
-              echo "$variable=$values" >> .env
-            done
-          done
+            curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/graduation-course/job-platform-admin/actions/variables | jq -r '.variables[] | "\(.name)=\(.value)"' > .env
       - name: Cat .env value
         run: cat .env
       - name: Deploy to server
