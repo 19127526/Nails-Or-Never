@@ -8,29 +8,20 @@ import { LayoutContext } from '../../../layout/context/layoutcontext';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import {message, Spin} from "antd";
-import * as types from './index.constraints';
 import {turnOffLoading, turnOnLoading} from "../../../components/loading/index.actions";
 import {connect, Provider, useDispatch, useSelector} from "react-redux";
 import {persistor, store} from "../../../app/store";
 import LoadingComponent from "../../../components/loading";
 import {PersistGate} from "redux-persist/integration/react";
-import {loginAccount} from "./index.thunk";
 import {Toast} from "primereact/toast";
-import {clearMessageAuthen, loginSuccess} from "./index.actions";
 import {CheckOutlined} from "@ant-design/icons";
 import { Dialog } from 'primereact/dialog';
-import {postOtpSignIn} from "../../../api-client/authen/Authentication.api";
+import {postOtpSignIn, postSignIn} from "../../../api-client/authen/Authentication.api";
 
 
-const mapStateToProps = (state) => ({});
-const mapDispatchToProps = {
-  loginAccount: loginAccount,
-};
-const connector = connect(mapStateToProps, mapDispatchToProps);
 
 
 const LoginPage = (props) => {
-  const { loginAccount } = props;
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('');
   const [checked, setChecked] = useState(false);
@@ -55,18 +46,13 @@ const LoginPage = (props) => {
       message.warning('Please fill username and password')
     }
     else {
-      const temp = await loginAccount({ username: userName, password: password });
-      if (temp.type === types.LOGIN_SUCCESS) {
-        showDialog()
-        // localStorage.setItem('token', temp?.payload?.token)
-        // setTimeout(() => {
-        //   dispatch(turnOffLoading());
-        //   router.push("/")
-        // }, 2000);
-        // dispatch(turnOnLoading());
-      } else if (temp.type === types.LOGIN_FAIL) {
-        message.error('Login invalid');
-      }
+      return postSignIn({username: userName, password: password})
+        .then((res) => {
+          showDialog();
+        })
+        .catch((err) => {
+          message.error('Login invalid');
+        })
     }
   }
 
@@ -78,9 +64,7 @@ const LoginPage = (props) => {
           dispatch(turnOffLoading());
           router.push("/")
         }, 2000);
-        dispatch(loginSuccess(res?.data?.user))
         dispatch(turnOnLoading());
-
       })
       .catch(err => {
         message.error('Otp incorrect');
@@ -104,8 +88,8 @@ const LoginPage = (props) => {
     <div className={containerClassName}>
       <Dialog visible={productDialog}  header="Confirm Login" modal className="p-fluid"  onHide={hideDialog}>
 
-        <div className="form-card">
-          <p className="form-card-title">We're send OTP your mail to confirm it</p>
+        <div className="form-card" style={{overflow : "hidden"}}>
+          <p className="form-card-title">We&apos;`re send OTP your mail to confirm it</p>
           <p className="form-card-prompt">Enter last 6 digits of the number we are calling you from</p>
           <div className="form-card-input-wrapper">
             <input type="tel" maxLength="6" placeholder="______" className="form-card-input" onChange={(e) => {
@@ -131,7 +115,7 @@ const LoginPage = (props) => {
               <label htmlFor="email1" className="block text-900 text-xl font-medium mb-2">
                 User Name
               </label>
-              <InputText inputid="email1" type="text" placeholder="enter user name" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} value={userName} onChange={(e) => setUserName(e.target.value)} />
+              <InputText inputid="email1" type="text" placeholder="Enter user name" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} value={userName} onChange={(e) => setUserName(e.target.value)} />
 
               <label htmlFor="password1" className="block text-900 font-medium text-xl mb-2">
                 Password
@@ -166,4 +150,6 @@ LoginPage.getLayout = function getLayout(page) {
       </Provider>
   );
 };
-export default connector(LoginPage);
+
+
+export default LoginPage;

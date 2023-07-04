@@ -5,7 +5,7 @@ import React, {useRef, useState} from "react";
 import {Form, Input, Modal, Upload} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {Button} from "primereact/button";
-import {getBase64} from "../../utilities/Utils";
+import {getBase64} from "../../../util/utils";
 import {postServiceParent} from "../../../api-client/services/Services.api";
 import {Toast} from "primereact/toast";
 import useSWR from "swr";

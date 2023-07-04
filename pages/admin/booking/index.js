@@ -16,7 +16,7 @@ import { ProductService } from '../../../demo/service/ProductService';
 import {Calendar} from "primereact/calendar";
 import {DatePicker, Form} from "antd";
 import {Avatar, Badge, Descriptions, List, message, Spin} from "antd"
-import {getFormatDate} from "../../utilities/Utils";
+import {getFormatDate} from "../../../util/utils";
 import useSWR from "swr";
 import {getALlEmployees} from "../../../api-client/employees/Employees.api";
 import {deleteBookingById, getBookingByDate} from "../../../api-client/booking/Booking.api";

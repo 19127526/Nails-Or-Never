@@ -22,7 +22,7 @@ import {PlusOutlined} from "@ant-design/icons";
 import {turnOffLoading, turnOnLoading} from "../../../components/loading/index.actions";
 import {useDispatch} from "react-redux";
 import {Form, Input, Upload} from "antd";
-import {getBase64, onImageEdit} from "../../utilities/Utils";
+import {getBase64, onImageEdit} from "../../../util/utils";
 
 const serviceMethod = {
   edit: "edit",

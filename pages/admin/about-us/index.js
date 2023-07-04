@@ -13,7 +13,7 @@ import {InputNumber} from "primereact/inputnumber";
 import {MultiSelect} from "primereact/multiselect";
 import {Button} from "primereact/button";
 import {Toast} from "primereact/toast";
-import {convertWorkingHourToArray, getTimeAndUnit} from "../../utilities/Utils";
+import {convertWorkingHourToArray, getTimeAndUnit} from "../../../util/utils";
 import {Accordion, AccordionTab} from "primereact/accordion";
 
 const AboutUsPage = () => {

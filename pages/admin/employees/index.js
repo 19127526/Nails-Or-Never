@@ -5,7 +5,7 @@ import {Form, Input, Switch, Upload, Radio} from "antd";
 import useSWR from "swr";
 
 import {turnOffLoading, turnOnLoading} from "../../../components/loading/index.actions";
-import {getBase64, onImageEdit} from "../../utilities/Utils";
+import {getBase64, onImageEdit} from "../../../util/utils";
 import {Button} from "primereact/button";
 import {InputText} from "primereact/inputtext";
 import {Toast} from "primereact/toast";
