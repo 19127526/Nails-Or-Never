@@ -22,7 +22,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
             GITHUB_REPOSITORY: ${{github.repository}}
         run: |
-            curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/graduation-course/job-platform-admin/actions/variables | jq -r '.variables[] | "\(.name)=\(.value)"' > .env
+            curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/19127526/Nails-Or-Never/actions/variables | jq -r '.variables[] | "\(.name)=\(.value)"' > .env
       - name: Cat .env value
         run: cat .env
       - name: Deploy to server
