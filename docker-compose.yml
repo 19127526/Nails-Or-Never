@@ -7,6 +7,6 @@ services:
     container_name: dev-be
     restart: always
     ports:
-      - "9999:3008"
+      - "3008:3008"
     env_file:
       - .env
