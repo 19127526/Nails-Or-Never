@@ -52,7 +52,7 @@ jobs:
           rsync -avz --delete -e "ssh -i /home/runner/.ssh/private_key.pem -p $PORT -o StrictHostKeyChecking=no" --exclude '.git' --exclude 'node_modules' . $USERNAME@$HOST:/Nails-Or-Never
           ssh -i /home/runner/.ssh/private_key.pem -p $PORT -o StrictHostKeyChecking=no $USERNAME@$HOST "\
             cd /Nails-Or-Never && \
-            docker compose -f docker-compose.yml down && \
+            docker compose -f docker-compose.yml stop && \
             docker compose -f docker-compose.yml up -d --build \
           "
           rm -f /home/runner/.ssh/private_key.pem
