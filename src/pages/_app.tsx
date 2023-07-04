@@ -21,7 +21,7 @@ import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 const clientSideEmotionCache = createEmotionCache()
 const queryClient = new QueryClient();
 
-export default function App({Component, pageProps, emotionCache = clientSideEmotionCache}: AppPropsWithLayout, props) {
+export default function App({Component, pageProps, emotionCache = clientSideEmotionCache}: AppPropsWithLayout) {
     const Layout = Component.Layout ?? EmptyLayout
     return (
         <>
@@ -43,17 +43,17 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
             <Script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js"/>
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/window.js"></Script>
             {/*<Script type="text/javascript" src="jquery-3.6.0.min.js" id="jquery-3.6.0-js" strategy="lazyOnload"></Script>*/}
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/bootstrap.bundle.min.js" id="bootstrap-js"strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="https://nails.shoedog.vn/public/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/aos.js" id="aos-js" strategy="lazyOnload"></Script>
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/flickity.pkgd.min.js" id="flickity-js" strategy="lazyOnload"></Script>
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/slick.min.js" id="slick-js" strategy="lazyOnload"></Script>
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>
             <Script type="text/javascript" id="main-js-extra" src="https://nails.shoedog.vn/public/main.js" strategy="lazyOnload" ></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="https://nails.shoedog.vn/public/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/main.min.js" id="main-js" strategy="lazyOnload"></Script>
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/style.js" id="stylejs-js"  strategy="lazyOnload"></Script>
             <Provider store={store}>
-                <PersistGate loading={LoadingComponent} persistor={persistor}>
+                <PersistGate loading={<LoadingComponent />} persistor={persistor}>
                     <Suspense fallback={<LoadingComponent />}>
                         <QueryClientProvider client={queryClient}>
                             <SWRConfig value={{fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false}}>

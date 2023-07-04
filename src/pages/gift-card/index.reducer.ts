@@ -1,17 +1,22 @@
 import * as types from "./index.constraints"
 import produce from "immer"
 
-const initialState= {
+interface initialStateInterface {
+  cartItem :  any[]
+}
+
+
+const initialState : initialStateInterface = {
   cartItem:[],
 }
 
 
-export const GiftCardPageReducer=(state=initialState, action)=>
+export const GiftCardPageReducer=(state=initialState, action : any)=>
     produce(state, draft => {
       switch (action.type) {
         case types.ADD_ITEM_INTO_CART:
           if(draft.cartItem.length===0) {
-            draft.cartItem.push(action.payload);
+            draft.cartItem.push(action.payload as any);
           }
           else{
             let isFlag=false
@@ -29,7 +34,7 @@ export const GiftCardPageReducer=(state=initialState, action)=>
               }
             })
             if(isFlag==false) {
-              draft.cartItem.push(action.payload);
+              draft.cartItem.push(action.payload as any);
             }
           }
           break;

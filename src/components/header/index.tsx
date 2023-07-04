@@ -13,7 +13,7 @@ const HeaderComponent = () => {
     const [activeLabel, setActiveLabel] = useState<labelHeaderInterFace>();
     const router = useRouter()
     const dispatch = useDispatch();
-    const giftCardPage = useSelector(state => state.GiftCardPage)
+    const giftCardPage = useSelector((state : any) => state.GiftCardPage)
 
     useEffect(() => {
         if (labelHeader?.filter(index => router?.pathname == index?.url)[0] == undefined) {
@@ -25,8 +25,11 @@ const HeaderComponent = () => {
     const handleClickLabel = (currentLabel: labelHeaderInterFace, status: boolean): void => {
         setActiveLabel(currentLabel);
         if (status == false) {
-            router.push(currentLabel?.url as string);
-            let button = document.getElementById('close').click();
+            router?.push(currentLabel?.url as string);
+            if (document.getElementById('close') != null && document.getElementById('close') != undefined) {
+                document.getElementById('close')!.click();
+            }
+
         }
     }
     return (
@@ -35,7 +38,7 @@ const HeaderComponent = () => {
                 <div className="container-lg">
                     <nav className="navbar navbar-expand-xxl" aria-label="Eighth navbar example">
                         <a className="navbar-brand">
-                            <Link href={process.env.NEXT_PUBLIC_HOME_ROUTER} replace>
+                            <Link href={process.env.NEXT_PUBLIC_HOME_ROUTER as string} replace>
                                 <img width="150px"
                                      src="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"
                                      alt={mainName}
@@ -53,7 +56,7 @@ const HeaderComponent = () => {
                         <div className="offcanvas offcanvas-end" id="navbarsMenu"
                              aria-modal="true" role="dialog">
                             <div className="offcanvas-header">
-                                <Link className="navbar-brand" href={process.env.NEXT_PUBLIC_HOME_ROUTER}>
+                                <Link className="navbar-brand" href={process.env.NEXT_PUBLIC_HOME_ROUTER as string}>
                                     <img width="150px"
                                          src="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"
                                          alt={mainName}
@@ -91,7 +94,7 @@ const HeaderComponent = () => {
                         </div>
 
                         <div className="button-group justify-content-center">
-                            <Link href={process.env.NEXT_PUBLIC_BOOKING_ROUTER}
+                            <Link href={process.env.NEXT_PUBLIC_BOOKING_ROUTER as string}
                                   replace
                                   onClick={() => handleClickLabel({label: "", url: ""} as labelHeaderInterFace, true)}>
                                 <button className="button icon-button ms-xl-4">
@@ -102,7 +105,7 @@ const HeaderComponent = () => {
                                 </button>
                             </Link>
                             <Badge badgeContent={giftCardPage?.cartItem?.length} color="error">
-                                <Link href={process.env.NEXT_PUBLIC_CART_ROUTER} replace onClick={() => handleClickLabel({
+                                <Link href={process.env.NEXT_PUBLIC_CART_ROUTER as string} replace onClick={() => handleClickLabel({
                                     label: "",
                                     url: ""
                                 } as labelHeaderInterFace, true)}>

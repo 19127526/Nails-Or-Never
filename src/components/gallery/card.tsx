@@ -4,7 +4,8 @@ import CollectionsIcon from '@mui/icons-material/Collections';
 import React from "react";
 import "./card.css"
 import {useRouter} from "next/router";
-const CardGalleryComponent = ({galleryDetail}) => {
+const CardGalleryComponent = (props : any) => {
+    const {galleryDetail} = props;
     const router = useRouter()
     const handleClickDetail = () => {
         router.push(process.env.NEXT_PUBLIC_DETAIL_GALLERY_ROUTER+`/${galleryDetail?.theme}`)

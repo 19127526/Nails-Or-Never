@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {turnOffLoading} from "@/components/loading/index.actions";
 import {mainName} from "@/constants/label";
 
-const SuccessBookPage = (props) => {
+const SuccessBookPage = (props : any) => {
     const dispatch = useDispatch()
 
     const router = useRouter();
@@ -20,7 +20,7 @@ const SuccessBookPage = (props) => {
                 <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="robots" content="max-image-preview:large"/>
-                <meta name="canonical" href="https://nailsornever.com"/>
+                  <link ref="canonical" href="https://nailsornever.com"/>
                 <title>Booking Success-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
                 <meta name="description" content={`We have many years of experience in the
                                 nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
@@ -67,7 +67,7 @@ const SuccessBookPage = (props) => {
                                 will feel the difference the minute you walk through our door. </p>
                             <p></p>
                             <div className="button-group" style={{display :"flex", justifyContent:"center"}}>
-                                <Link href={process.env.NEXT_PUBLIC_HOME_ROUTER} replace>
+                                <Link href={process.env.NEXT_PUBLIC_HOME_ROUTER as string} replace>
                                     <button className="button button-lg">Return Home Page</button>
                                 </Link>
                             </div>

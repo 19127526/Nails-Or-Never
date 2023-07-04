@@ -21,7 +21,7 @@ const CheckOutPage = () => {
         state : false,
         message : ''
     });
-    const handleChangePhoneNumber = (e) => {
+    const handleChangePhoneNumber = (e : any) => {
         let num = e.target.value;
         if(num.toString().length == 3 || num.toString().length == 7) {
             if(e.target.value.length > phoneNumber?.length) {
@@ -35,19 +35,19 @@ const CheckOutPage = () => {
             setPhoneNumber(num)
         }
     }
-    const giftCardPage = useSelector(state => state.GiftCardPage);
+    const giftCardPage = useSelector((state : any) => state.GiftCardPage);
     const [totalPrice, setTotalPrice]= useState(0);
     const giftCard = giftCardPage?.cartItem;
     useEffect(() => {
         if(giftCard?.length != 0) {
-        const temp = giftCard.map(index => {
+        const temp = giftCard.map((index : any) => {
             return index?.price * index?.quantity
         })
-        setTotalPrice(temp.reduce((previousScore, currentScore) => previousScore + currentScore, 0))
+        setTotalPrice(temp.reduce((previousScore : any, currentScore : any) => previousScore + currentScore, 0))
         }
     }, [giftCard])
 
-    const handleSubmitCheckoutGift = (form) => {
+    const handleSubmitCheckoutGift = (form : any) => {
         if([...giftCard].length == 0) {
             setIsOpen({state: true, message: `Cart Item Empty, Please Select Cart Item`})
         }
@@ -62,7 +62,7 @@ const CheckOutPage = () => {
                 tax : 0,
                 total : totalPrice,
                 method :"cash",
-                gift_cards : [...giftCard]?.map(index => {
+                gift_cards : [...giftCard]?.map((index : any) => {
                     return {
                         gift_card : index?.detailCart?.id,
                         price : index?.price,
@@ -102,7 +102,7 @@ const CheckOutPage = () => {
                 <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="robots" content="max-image-preview:large"/>
-                <meta name="canonical" href="https://nailsornever.com"/>
+                  <link ref="canonical" href="https://nailsornever.com"/>
                 <title>Checkout GiftCard-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
                 <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
                     ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -242,23 +242,14 @@ const CheckOutPage = () => {
 
                                                                     ({getFieldValue}) => ({
                                                                         validator(_, value) {
-                                                                            let isError = false;
-                                                                            [...value]?.map(index => {
+                                                                            [...value]?.map((index : any) => {
                                                                                 const reg = /^-?\d*(\.\d*)?$/;
                                                                                 if (reg.test(index) || index === '' || index === undefined) {
-
+                                                                                    return Promise.resolve();
                                                                                 } else {
-                                                                                    isError = true
+                                                                                    return Promise.reject(new Error('Please enter only number'));
                                                                                 }
                                                                             })
-                                                                            if(isError == true) {
-                                                                                return Promise.reject(new Error('Please enter only number'));
-                                                                            }
-                                                                            else {
-                                                                                return Promise.resolve();
-                                                                            }
-
-
                                                                         }
                                                                     }),
                                                                     ({getFieldValue}) => ({
@@ -327,10 +318,10 @@ const CheckOutPage = () => {
                                                     <div className="master-container">
                                                         <div className="card-check-out cart">
                                                             {
-                                                                [...giftCard]?.map((index, number) => (
+                                                                [...giftCard]?.map((index : any, number : any) => (
                                                                     <>
                                                                         {number != 0 ? <hr/> : <></>}
-                                                                        <CardCheckOutComponent index={index}/>
+                                                                        <CardCheckOutComponent index={index as any}/>
                                                                     </>
                                                                 ))
                                                             }

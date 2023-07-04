@@ -10,7 +10,7 @@ const initialState: LoadingInterFace = {
 }
 
 
-export const LoadingReducer = (state = initialState, action) =>
+export const LoadingReducer = (state = initialState, action : any) =>
   produce(state, (draft) => {
     switch (action.type) {
       case types.TURN_ON_LOADING:

@@ -11,7 +11,8 @@ import VirtualList from "rc-virtual-list";
 import {useDispatch, useSelector} from "react-redux";
 import {turnOffLoading} from "@/components/loading/index.actions";
 
-const GiftCardPage = ({giftCard}) => {
+const GiftCardPage = (props : any) => {
+    const {giftCard} = props
     const [pagination, setPagination] = useState<number>(1);
     const route = useRouter()
 
@@ -38,7 +39,7 @@ const GiftCardPage = ({giftCard}) => {
                 <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="robots" content="max-image-preview:large"/>
-                <meta name="canonical" href="https://nailsornever.com"/>
+                  <link ref="canonical" href="https://nailsornever.com"/>
 
                 <meta name="description" content={`Located conveniently in Malta, NewYork, 12118,
                         ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -77,8 +78,8 @@ const GiftCardPage = ({giftCard}) => {
                 <div className="container-lg">
                     <div className="row g-2">
                         {
-                            [...giftCard?.giftCard]?.map(index =>
-                                <CardGiftComponent detail={index}/>
+                            [...giftCard?.giftCard]?.map((index : any) =>
+                                <CardGiftComponent detail={index as any}/>
                             )
                         }
 
@@ -99,7 +100,7 @@ const GiftCardPage = ({giftCard}) => {
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context : any) {
     try {
         const {params} = context ?? "1"
         const page = context?.query?.page ?? "1";

@@ -109,7 +109,7 @@ const FooterComponent = () => {
                         <div className="col-xl-3 order-md-1">
                             <iframe
                                 src="https://www.google.com/maps/embed/v1/place?q=2374+US-9,+Mechanicville,+NY+12118,+Hoa+Kỳ&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
-                                width="100%" height="300" style={{border:"0"}} allowFullScreen="" loading="lazy"
+                                width="100%" height="300" style={{border:"0"}} loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>

@@ -8,8 +8,8 @@ import {getGalleryPagination} from "@/api-client/gallery/Gallery.api";
 import {turnOffLoading} from "@/components/loading/index.actions";
 import {useDispatch} from "react-redux";
 
-const GalleryPage = ({galleryParent}) => {
-
+const GalleryPage = (props : any) => {
+    const {galleryParent} = props
     const [pagination, setPagination] = useState<number>(1)
     const route = useRouter();
     const dispatch = useDispatch()
@@ -35,7 +35,7 @@ const GalleryPage = ({galleryParent}) => {
                 <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="robots" content="max-image-preview:large"/>
-                <meta name="canonical" href="https://nailsornever.com"/>
+                  <link ref="canonical" href="https://nailsornever.com"/>
                 <meta name="description" content={`Located conveniently in Malta, NewYork, 12118,
                         ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
                         mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials.
@@ -69,7 +69,7 @@ const GalleryPage = ({galleryParent}) => {
                 <div className="container-lg">
                     <div className="row g-2">
                         {
-                            [...galleryParent?.galleryParent]?.map(index => <CardGalleryComponent galleryDetail={index}/>)
+                            [...galleryParent?.galleryParent]?.map((index : any) => <CardGalleryComponent galleryDetail={index as any}/>)
                         }
                     </div>
 
@@ -89,7 +89,7 @@ const GalleryPage = ({galleryParent}) => {
 }
 
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context : any) {
     try {
         const page = context?.query?.page ?? "1";
         // `getStaticProps` is executed on the server side.

@@ -7,7 +7,8 @@ import {getAllSubGalleryByParentTheme} from "@/api-client/gallery/Gallery.api";
 import {useDispatch} from "react-redux";
 import {turnOffLoading} from "@/components/loading/index.actions";
 
-const DetailGalleryPage = ({gallerySub}) => {
+const DetailGalleryPage = (props : any) => {
+    const {gallerySub} = props
     const router = useRouter();
     const { gallery } = router.query
     const dispatch = useDispatch()
@@ -23,7 +24,7 @@ const DetailGalleryPage = ({gallerySub}) => {
                 <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="robots" content="max-image-preview:large"/>
-                <meta name="canonical" href="https://nailsornever.com"/>
+                  <link ref="canonical" href="https://nailsornever.com"/>
                 <meta name="description" content={`Located conveniently in Malta, NewYork, 12118,
                         ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
                         mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials.
@@ -58,8 +59,8 @@ const DetailGalleryPage = ({gallerySub}) => {
                     <div className="row g-2">
                         {
                             gallerySub != null ?
-                                [...gallerySub?.gallery]?.map(index =>
-                                    <CardGalleryDetailComponent detailGallery={index}/>
+                                [...gallerySub?.gallery]?.map((index : any) =>
+                                    <CardGalleryDetailComponent detailGallery={index as any}/>
                                 )
                                 :
                                 <></>
@@ -73,7 +74,7 @@ const DetailGalleryPage = ({gallerySub}) => {
 }
 
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context : any) {
     try {
         const {params} = context ?? "1"
         const listSubGallery = await getAllSubGalleryByParentTheme( params?.gallery as string);

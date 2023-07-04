@@ -48,6 +48,7 @@ import {useRouter} from "next/router";
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import LoadingComponent from "@/components/loading";
 import "./loading.css"
+import {isEmpty} from "@/utils/format-price";
 interface stepInterFace {
     label: string,
     icon: JSX.Element,
@@ -60,13 +61,7 @@ interface activeStepInterFace {
     label: string,
 }
 
-function disableWeekends(date) {
-    return date.getDay() === 0 || date.getDay() === 6;
-}
 
-function disableRandomDates() {
-    return Math.random() > 0.7;
-}
 
 const LoadingBooking = () => {
     return (
@@ -95,22 +90,32 @@ const steps: stepInterFace[] = [
     }
 ];
 
-let busyTime = [];
+let busyTime : any[] = [];
 const emptyInformation = {
     fullName: '',
     email: '',
     phoneNumber: '',
     note: ''
 }
-const BookingPage = ({employee, service}) => {
+interface employeeInter{
+    id : any,
+    full_name : any,
+    email : any,
+    address : any,
+    phone_number : any,
+    image : any,
+    status : any
+}
+const BookingPage = (props : any) => {
+    const {employee, service} = props
     const [isLoading,setIsLoading] = useState(false)
     const [selectedBooking, setSelectedBooking] = useState({
-        employee: undefined as object,
-        date: undefined as string,
-        time: undefined as string,
-        distanceTime: undefined as string,
-        timeBusy: [],
-        service: []
+        employee: {} as employeeInter,
+        date: '' as string,
+        time: '' as string,
+        distanceTime: '' as string,
+        timeBusy: [] as any[],
+        service: [] as any[]
     });
     const [detailAboutUs, setDetailAboutUs] = useState({
         id: undefined,
@@ -154,7 +159,7 @@ const BookingPage = ({employee, service}) => {
         getDetailAboutUsApi()
     }, [])
 
-    const handleClickBooking = (e) => {
+    const handleClickBooking = (e : any) => {
     }
     const handleNext = () => {
         if (activeStep?.number + 1 == 2) {
@@ -204,11 +209,11 @@ const BookingPage = ({employee, service}) => {
 
     };
 
-    const handleSelectEmploy = (index) => {
+    const handleSelectEmploy = (index : any) => {
         setIsLoading(true)
         if (selectedBooking?.employee != undefined) {
             if (index?.id == selectedBooking?.employee?.id) {
-                setSelectedBooking({...selectedBooking, employee: undefined as object})
+                setSelectedBooking({...selectedBooking, employee: {} as employeeInter})
             } else {
                 setSelectedBooking({...selectedBooking, employee: index})
             }
@@ -219,8 +224,8 @@ const BookingPage = ({employee, service}) => {
     }
 
 
-    const handleOpenCollapse = (number) => {
-        const data = listIsOpen?.map((index, numberTemp) => {
+    const handleOpenCollapse = (number : any) => {
+        const data = listIsOpen?.map((index : any, numberTemp : any) => {
             if (numberTemp == number) {
                 return !index;
             }
@@ -229,7 +234,7 @@ const BookingPage = ({employee, service}) => {
         setListIsOpen(data);
     }
 
-    const handleChangeDate = async (e) => {
+    const handleChangeDate = async (e : any) => {
         const dateTemp = e?.$d?.toString()?.split(" ")[0]
         setCurrentDate(convertDateStrToNumber(dateTemp) as number)
         const date = getFormatDate({day: e?.$D, month: Number(e?.$M) + 1, year: e?.$y});
@@ -241,7 +246,7 @@ const BookingPage = ({employee, service}) => {
     useEffect(() => {
         const getTimeByEmployIdAndDate = async () => {
             if (selectedBooking?.date != undefined) {
-                if (selectedBooking?.employee == undefined) {
+                if (isEmpty(selectedBooking?.employee) == true) {
                     await getFreeTimeByDate(selectedBooking?.date as string)
                         .then(res => {
                             setIsLoading(false)
@@ -251,7 +256,7 @@ const BookingPage = ({employee, service}) => {
                     await getFreeTimeByEmIdAndDate(selectedBooking?.employee?.id as number, selectedBooking?.date as string)
                         .then(res => {
                             setIsLoading(false)
-                            setSelectedBooking({...selectedBooking, timeBusy : res?.data?.busyTime})
+                            setSelectedBooking({...selectedBooking, timeBusy : res?.data?.busyTime as any[]})
                         })
                 }
             }
@@ -262,15 +267,15 @@ const BookingPage = ({employee, service}) => {
         getTimeByEmployIdAndDate()
     }, [selectedBooking?.employee, selectedBooking?.date])
 
-    const handleChangeTime = (e) => {
+    const handleChangeTime = (e : any) => {
         const formatTime = getTimeBooking({hour: e?.$H, minute: e?.$m});
         let numberHour = (convertHourToMinutes(formatTime));
         if (selectedBooking?.service?.length != 0) {
-            selectedBooking?.service?.map(index => {
+            selectedBooking?.service?.map((index : any) => {
                 numberHour += Number(index?.time)
             })
         }
-        const hourAfterService = convertMinuteToHour(numberHour)
+        const hourAfterService = convertMinuteToHour(numberHour);
         if (busyTime?.filter(index => index == hourAfterService)[0] != undefined) {
             setIsOpen({state: true, message: `You can\'t booking in this time ${formatTime} - ${hourAfterService}`})
         } else {
@@ -296,6 +301,7 @@ const BookingPage = ({employee, service}) => {
             const open = convertHourToMinutes(getTimeBooking({hour:hourOpenTime, minute: minuteOpenTime}));
             const close = convertHourToMinutes(getTimeBooking({hour:hourCloseTime, minute: minuteCloseTime}));
             if(open > valueTemp || close < valueTemp) {
+                busyTime.push(convertMinuteToHour(valueTemp))
                 return true;
             }
         }
@@ -304,12 +310,12 @@ const BookingPage = ({employee, service}) => {
                 const start = convertHourToMinutes(selectedBooking?.timeBusy[0]?.booking_time)
                 const end = convertHourToMinutes(selectedBooking?.timeBusy[0]?.finished_time)
                 if (start <= valueTemp && end >= valueTemp) {
-                    // busyTime.push(convertMinuteToHour(valueTemp))
+                    busyTime.push(convertMinuteToHour(valueTemp))
                     return true;
                 }
             } else {
                 let condition = '';
-                const data = [...selectedBooking?.timeBusy]?.map((index, number) => {
+                const data = [...selectedBooking?.timeBusy]?.map((index : any, number : any) => {
                     const start = convertHourToMinutes(index?.booking_time)
                     const end = convertHourToMinutes(index?.finished_time);
                     if (number == 0) {
@@ -321,7 +327,7 @@ const BookingPage = ({employee, service}) => {
                     }
                 })
                 if (eval(condition)) {
-                    // busyTime.push(convertMinuteToHour(valueTemp))
+                    busyTime.push(convertMinuteToHour(valueTemp))
                     return true;
                 }
             }
@@ -329,14 +335,14 @@ const BookingPage = ({employee, service}) => {
         return false
     };
 
-    const handleSelectService = (index) => {
+    const handleSelectService = (index : any) => {
         const data = [...selectedBooking?.service];
         if (selectedBooking?.service.length == 0 || data?.filter(indexTemp => indexTemp?.id == index?.id)[0] == undefined) {
             data?.push(index);
             setCurrentTime(null);
             setSelectedBooking({...selectedBooking, service: data})
         } else if (data?.filter(indexTemp => indexTemp?.id == index?.id)[0] != undefined) {
-            const dataTemp = data?.map(indexTemp => {
+            const dataTemp = data?.map((indexTemp : any) => {
                 if (indexTemp?.id == index?.id) {
                     return undefined
                 }
@@ -344,12 +350,12 @@ const BookingPage = ({employee, service}) => {
             }).filter(index => index != undefined);
             setCurrentTime(null);
             setCurrentTime(null);
-            setSelectedBooking({...selectedBooking, service: dataTemp})
+            setSelectedBooking({...selectedBooking, service: dataTemp as any[]})
         }
     }
 
 
-    const handleChangePhoneNumber = (e) => {
+    const handleChangePhoneNumber = (e : any) => {
         let num = e.target.value;
         if (num.toString().length == 3 || num.toString().length == 7) {
             if (e.target.value.length > information?.phoneNumber?.length) {
@@ -361,18 +367,18 @@ const BookingPage = ({employee, service}) => {
             setInformation({...information, phoneNumber: num})
         }
     }
-    const handeChangeInputText = (e, type) => {
+    const handeChangeInputText = (e : any, type : any) => {
         let data = e.target.value;
         setInformation({...information, [type]: data})
     }
 
-    const handleSubmitBooking = async (form) => {
+    const handleSubmitBooking = async (form : any) => {
         const formData = {
             full_name: form?.full_name,
             cellphone_number: form?.cellphone_number,
             email: form?.email,
             appointment_note: form?.appointment_note,
-            services: selectedBooking?.service?.map(index => {
+            services: selectedBooking?.service?.map((index : any) => {
                 return index?.id
             }),
             employees_id: selectedBooking?.employee?.id,
@@ -408,7 +414,7 @@ const BookingPage = ({employee, service}) => {
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="max-image-preview:large"/>
-                    <meta name="canonical" href="https://nailsornever.com"/>
+                      <link ref="canonical" href="https://nailsornever.com"/>
                     <title>Booking Service Nail-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
                     <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
                     ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -457,7 +463,7 @@ const BookingPage = ({employee, service}) => {
                             <div className="col-sm-9 col-md-12 col-lg-4">
                                 <Box sx={{maxWidth: 10000}}>
                                     <Stepper activeStep={activeStep?.number as number} nonLinear orientation="vertical">
-                                        {steps.map((index, number) => (
+                                        {steps.map((index : any, number : any) =>  (
                                             <Step key={index?.label}>
                                                 <StepButton icon={index?.icon}
                                                             color="inherit"
@@ -490,7 +496,7 @@ const BookingPage = ({employee, service}) => {
                                                         aria-labelledby="nested-list-subheader"
                                                     >
                                                         {
-                                                            service?.services?.map((index, number) => (
+                                                            service?.services?.map((index : any, number : any) => (
                                                                 <>
 
                                                                     <ListItemButton
@@ -503,7 +509,7 @@ const BookingPage = ({employee, service}) => {
                                                                               unmountOnExit>
                                                                         <ListMui component="div" disablePadding>
                                                                             {
-                                                                                index?.service?.map(index => (
+                                                                                index?.service?.map((index : any) => (
                                                                                     <ListItemButton sx={{pl: 4}}
                                                                                                     onClick={() => handleSelectService(index)}>
                                                                                         {
@@ -556,7 +562,7 @@ const BookingPage = ({employee, service}) => {
                                                             </div>
                                                             <ListAntd>
                                                                 <VirtualList
-                                                                    itemLayout="horizontal"
+                                                                    itemKey={"employee"}
                                                                     data={employee?.employees}
                                                                     height={300}
                                                                     itemHeight={employee?.employees?.length}
@@ -597,8 +603,6 @@ const BookingPage = ({employee, service}) => {
                                                                         <h4 className="card-title space"
                                                                             style={{textAlign: "center"}}>Date</h4>
                                                                         <DateCalendar disablePast
-                                                                                      style={{width: "100%"}}
-                                                                                      inputFormat="MM-dd-yyyy"
                                                                                       onChange={(e) => handleChangeDate(e)}/>
                                                                     </LocalizationProvider>
                                                                 </div>
@@ -608,15 +612,13 @@ const BookingPage = ({employee, service}) => {
                                                                             <h4 className="card-title space"
                                                                                 style={{textAlign: "center"}}>Time</h4>
                                                                             <LocalizationProvider
-                                                                                dateAdapter={AdapterDayjs}
-                                                                                style={{marginTop: "10px"}}>
-                                                                                <DigitalClock style={{
-                                                                                    textAlign: "center",
-                                                                                    maxHeight: "300px"
-                                                                                }}
+                                                                                dateAdapter={AdapterDayjs}>
+                                                                                <DigitalClock
+                                                                                             className={"digital-clock"}
                                                                                               onChange={(e) => handleChangeTime(e)}
                                                                                               shouldDisableTime={shouldDisableTime}
                                                                                               timeStep={15}
+
                                                                                               value={currentTime as any}
                                                                                               views={["hours"]}
                                                                                     // skipDisabled={true}
@@ -648,7 +650,7 @@ const BookingPage = ({employee, service}) => {
                                                                         label="Employee">{selectedBooking?.employee?.full_name}</Descriptions.Item>
                                                                     <Descriptions.Item label="List Service">
                                                                         {
-                                                                            selectedBooking?.service?.map(index => (
+                                                                            selectedBooking?.service?.map((index : any) => (
                                                                                 <>
                                                                                     {index?.name} ({index?.time} minute)
                                                                                     <br/>
@@ -727,22 +729,14 @@ const BookingPage = ({employee, service}) => {
 
                                                                                 ({getFieldValue}) => ({
                                                                                     validator(_, value) {
-                                                                                        let isError = false;
-                                                                                        [...value]?.map(index => {
+                                                                                        [...value]?.map((index : any) => {
                                                                                             const reg = /^-?\d*(\.\d*)?$/;
                                                                                             if (reg.test(index) || index === '' || index === undefined) {
-
                                                                                             } else {
-                                                                                                isError = true
+                                                                                                return Promise.reject(new Error('Please enter only number'));
                                                                                             }
                                                                                         })
-                                                                                        if (isError == true) {
-                                                                                            return Promise.reject(new Error('Please enter only number'));
-                                                                                        } else {
-                                                                                            return Promise.resolve();
-                                                                                        }
-
-
+                                                                                        return Promise.resolve();
                                                                                     }
                                                                                 }),
                                                                                 ({getFieldValue}) => ({
@@ -842,7 +836,7 @@ const BookingPage = ({employee, service}) => {
 }
 
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context : any) {
     try {
         // `getStaticProps` is executed on the server side.
         const listEmployee = await getAllEmployee()

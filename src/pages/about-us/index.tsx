@@ -6,7 +6,8 @@ import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 import Link from "next/link";
 import {mainName} from "@/constants/label";
 
-const AboutUsPage = ({aboutUs}) => {
+const AboutUsPage = (props : any) => {
+    const {aboutUs} = props
     const dispatch = useDispatch()
     return (
         aboutUs != null ?
@@ -16,7 +17,7 @@ const AboutUsPage = ({aboutUs}) => {
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="max-image-preview:large"/>
-                    <meta name="canonical" href="https://nailsornever.com"/>
+                      <link ref="canonical" href="https://nailsornever.com"/>
                     <title>About us-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
 
                     <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
@@ -89,10 +90,10 @@ const AboutUsPage = ({aboutUs}) => {
                                         upon
                                         your experience, please let us know so we can better care for your needs!</p>
                                     <div className="button-group">
-                                        <Link href={process.env.NEXT_PUBLIC_BOOKING_ROUTER}>
+                                        <Link href={process.env.NEXT_PUBLIC_BOOKING_ROUTER as string}>
                                             <button className="button button-lg">Book Appointment</button>
                                         </Link>
-                                        <Link href={process.env.NEXT_PUBLIC_GIFTCARDS_ROUTER}>
+                                        <Link href={process.env.NEXT_PUBLIC_GIFTCARDS_ROUTER as string}>
                                             <button className="button button-lg">Buy eGift Online</button>
                                         </Link>
                                     </div>
@@ -109,7 +110,7 @@ const AboutUsPage = ({aboutUs}) => {
 }
 
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context : any) {
     try {
         const detailAboutUs = await getDetailAboutUs()
         const dataAboutUs = await detailAboutUs?.data;

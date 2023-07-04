@@ -50,3 +50,13 @@
         transform: scaleY(1);
     }
 }
+
+.digital-clock{
+    text-align: center;
+    max-height: 300px
+}
+
+.row >.col-lg-4 > .MuiDigitalClock-root{
+    text-align: center;
+    max-height: 300px
+}

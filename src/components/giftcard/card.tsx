@@ -7,7 +7,8 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {addItem} from "@/pages/gift-card/index.actions";
 
-const CardGiftComponent = ({detail}) => {
+const CardGiftComponent = (props : any) => {
+    const {detail} = props
     const [count, setCount] = useState(1);
     const dispatch = useDispatch();
     const handleAddGiftIntoCart = () => {

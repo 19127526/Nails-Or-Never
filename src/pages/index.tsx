@@ -15,7 +15,8 @@ import {getGalleryPagination} from "@/api-client/gallery/Gallery.api";
 import Head from "next/head";
 import {mainName} from "@/constants/label";
 
-function Item({item}) {
+function Item(props : any) {
+    const {item} = props
     return (
         <Paper style={{
             backgroundImage: "url(https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png)",
@@ -41,7 +42,7 @@ function Item({item}) {
                             <h2 className="banner-title">{item?.name}</h2>
 
                             <Link className="banner-link"
-                               href={process.env.NEXT_PUBLIC_SERVICES_ROUTER} replace>View
+                               href={process.env.NEXT_PUBLIC_SERVICES_ROUTER as string} replace>View
                                 more<ArrowForwardIcon/></Link>
                         </div>
                         <div className="col-12 col-sm-8 col-md-6 col-lg-6 order-1 order-lg-2">
@@ -64,8 +65,8 @@ function Item({item}) {
 }
 
 
-const HomePage = ({aboutUs, services, galleryParent}) => {
-
+const HomePage = (props : any) => {
+    const {aboutUs, services, galleryParent} = props
     return (
         aboutUs != null && services != null && galleryParent != null ?
             <>
@@ -74,7 +75,7 @@ const HomePage = ({aboutUs, services, galleryParent}) => {
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="max-image-preview:large"/>
-                    <meta name="canonical" href="https://nailsornever.com"/>
+                      <link ref="canonical" href="https://nailsornever.com"/>
                     <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT}-SPA-professional nails care services in Malta,NY 12118</title>
                     <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
                     ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -120,7 +121,7 @@ const HomePage = ({aboutUs, services, galleryParent}) => {
                                 <h3 className="sub-title fs-80">About us</h3>
                                 <h2 className="title text-uppercase">Why Clients Choose Us</h2>
                                 <p className="mb-3">{aboutUs?.description}</p>
-                                <Link href={process.env.NEXT_PUBLIC_ABOUT_US_ROUTER} replace>
+                                <Link href={process.env.NEXT_PUBLIC_ABOUT_US_ROUTER as string} replace>
                                     <button className="button button-lg mt-5">Read more</button>
                                 </Link>
                             </div>
@@ -169,7 +170,7 @@ const HomePage = ({aboutUs, services, galleryParent}) => {
                                 [...galleryParent?.galleryParent]?.map(index =>
                                     <div className="col-6 col-md-4 col-lg-4 col-xl-3" key={index?.id}>
                                         <div className="service-item">
-                                            <Link className="service-img-link" href={process.env.NEXT_PUBLIC_GALLERY_ROUTER+`/detail/${index?.theme}`} replace>
+                                            <Link className="service-img-link" href={process.env.NEXT_PUBLIC_GALLERY_ROUTER+`/detail/${index?.theme}` as string} replace>
                                                 <div className="service-img-wrap">
                                                     <div className="service-img">
                                                         <img
@@ -194,7 +195,7 @@ const HomePage = ({aboutUs, services, galleryParent}) => {
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context : any) {
     try {
         const detailAboutUs = await getDetailAboutUs()
         const services = await getSubServicePagination( 1,  6);

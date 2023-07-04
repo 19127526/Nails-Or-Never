@@ -7,7 +7,8 @@ import {useDispatch} from "react-redux";
 import {addItem, addItemCheckout, removeItem} from "@/pages/gift-card/index.actions";
 import {mainName} from "@/constants/label";
 
-const CardCheckOutComponent = ({index}) => {
+const CardCheckOutComponent = (props:any) => {
+    const {index} = props
     const [quantity, setQuantity] = useState(index?.quantity);
     const [price, setPrice]= useState(index?.price);
 
@@ -25,12 +26,12 @@ const CardCheckOutComponent = ({index}) => {
             dispatch(removeItem({...index, price : price, quantity : 0}))
         }
     };
-    const handleChangePrice = (e) => {
+    const handleChangePrice = (e : any) => {
         const data = e.target.value;
         setPrice(data)
         dispatch(addItemCheckout({...index, price: data}))
     }
-    const handleBlurPrice = (e) => {
+    const handleBlurPrice = (e : any) => {
         const data = e.target.value
         if(data < 30 || data > 350) {
             setPrice(30)
@@ -65,8 +66,8 @@ const CardCheckOutComponent = ({index}) => {
                         value={price}
                         minRows={30}
                         maxRows={350}
-                        onChange={(e) => handleChangePrice(e)}
-                        onBlur={(e) => handleBlurPrice(e)}
+                        onChange={(e) => handleChangePrice(e as any)}
+                        onBlur={(e) => handleBlurPrice(e as any)}
                     />
                 </div>
             </div>

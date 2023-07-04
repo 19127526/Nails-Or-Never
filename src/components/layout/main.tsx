@@ -17,7 +17,7 @@ export const metadata = {
 }
 
 const MainLayout = ({children}: { children: ReactNode }) => {
-    const LoadingReducer = useSelector(state => state.LoadingPage);
+    const LoadingReducer = useSelector((state : any) => state.LoadingPage);
     const dispatch = useDispatch()
     const isLoading = LoadingReducer?.isLoading;
     return (

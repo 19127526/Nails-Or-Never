@@ -1,6 +1,6 @@
 import {DateInto} from "@/constants/label";
 
-export const checkAMAndPM = (time) => {
+export const checkAMAndPM = (time : any) => {
     if(time[1] == 'AM') {
         return time;
     }
@@ -11,7 +11,7 @@ export const checkAMAndPM = (time) => {
     }
 }
 
-export const convertWorkingHourToArray = (text) => {
+export const convertWorkingHourToArray = (text : any) => {
     const arrTemp = text.toString().split(', ');
     const arrResult = []
     for(let i = 0; i< arrTemp.length; i++) {
@@ -29,7 +29,7 @@ export const convertWorkingHourToArray = (text) => {
 }
 
 
-export const convertWorkingHourToBookingArray = (text) => {
+export const convertWorkingHourToBookingArray = (text : any) => {
     const arrTemp = text.toString().split(', ');
     const arrResult = []
     for(let i = 0; i< arrTemp.length; i++) {
@@ -37,7 +37,7 @@ export const convertWorkingHourToBookingArray = (text) => {
         const time = data[1].split(" - ")
         arrResult.push({
             date: data[0],
-            currentDate : DateInto[`${i}`],
+            currentDate : DateInto[`${i}`] as any,
             time : {
                 start: checkAMAndPM(time[0].split(" "))[0],
                 end: checkAMAndPM(time[1].split(" "))[0],
@@ -47,7 +47,7 @@ export const convertWorkingHourToBookingArray = (text) => {
     return arrResult
 }
 
-export const getTimeAndUnit = (value) => {
+export const getTimeAndUnit = (value : any) => {
     let [h, m] = value.split(":");
     const formatTime =  h >= 12 ? 'PM' : 'AM'
     const time = (h % 12 ? h % 12 : 12) + ":" + m;
@@ -62,7 +62,7 @@ export const getTimeAndUnit = (value) => {
 }
 
 
-export const getHourOrMinutesString = (index) => {
+export const getHourOrMinutesString = (index : any) => {
     if(index.toString().length == 1 ) {
         return `0${index}`
     }

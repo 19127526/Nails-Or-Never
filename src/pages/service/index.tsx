@@ -7,7 +7,8 @@ import Head from "next/head";
 import {getSubServicePagination} from "@/api-client/service/Services.api";
 import {useDispatch, useSelector} from "react-redux";
 import {turnOffLoading, turnOnLoading} from "@/components/loading/index.actions";
-const ServicesPage = ({services, giftCard}) => {
+const ServicesPage = (props: any) => {
+    const {services} = props
     const [pagination, setPagination] = useState<number>(1)
     const route = useRouter()
     const dispatch = useDispatch()
@@ -29,7 +30,7 @@ const ServicesPage = ({services, giftCard}) => {
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="max-image-preview:large"/>
-                    <meta name="canonical" href="https://nailsornever.com"/>
+                      <link ref="canonical" href="https://nailsornever.com"/>
                     <title>Services Nail-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
                     <meta name="description" content={` In ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, we provide some service such as 
                     ${[...services?.services]?.map(index => `${index?.name}`)}. You can booking service in my website`}/>
@@ -59,7 +60,7 @@ const ServicesPage = ({services, giftCard}) => {
                     <div className="container-lg">
                         <div className="row justify-content-center gy-5 gx-3 g-lg-5">
                             {
-                                [...services?.services]?.map(index => <CardServiceComponent   parentService={index} subService={index?.service}/>)
+                                [...services?.services]?.map((index : any) => <CardServiceComponent   parentService={index as any} subService={index?.service as any}/>)
                             }
                             <div className="col-lg-12">
                                 <nav className="text-center">
@@ -78,7 +79,7 @@ const ServicesPage = ({services, giftCard}) => {
 }
 
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context : any) {
     try {
         const {params} = context ?? "1"
         const page = context?.query?.page ?? "1";

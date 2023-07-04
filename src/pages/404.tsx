@@ -16,7 +16,7 @@ const NotFound = () => {
             <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
             <meta name="viewport" content="initial-scale=1, width=device-width"/>
             <meta name="robots" content="max-image-preview:large"/>
-            <meta name="canonical" href="https://nailsornever.com"/>
+              <link ref="canonical" href="https://nailsornever.com"/>
             <title>Empty Page-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
             <meta name="description" content={`We have many years of experience in the
                                 nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and

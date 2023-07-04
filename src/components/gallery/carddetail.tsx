@@ -3,7 +3,8 @@ import React from "react";
 import CenterFocusWeakIcon from '@mui/icons-material/CenterFocusWeak';
 import {mainName} from "@/constants/label";
 
-const CardGalleryDetailComponent = ({detailGallery}) => {
+const CardGalleryDetailComponent = (props : any) => {
+    const {detailGallery} = props;
     return (
         <div className="col-6 col-sm-4 col-md-3 col-item" style={{}} key={detailGallery?.id}>
             <a href={detailGallery?.image}

@@ -1,21 +1,21 @@
 import {getHourOrMinutesString} from "@/utils/format-working-hour";
 
-export const getFormatDate = ({day, month, year}) => {
+export const getFormatDate = ({day, month, year} : any) => {
     return `${getHourOrMinutesString(month)}-${getHourOrMinutesString(day)}-${year}`;
 }
 
-export const convertStringToTime = (value) => {
+export const convertStringToTime = (value : any) => {
     let [h, m] = value.split(":");
     return {hour: Number(h), minute : Number(m)}
 }
 
-export const getTimeBooking = ({hour,minute}) => {
+export const getTimeBooking = ({hour,minute} : any) => {
     return `${getHourOrMinutesString(hour)}:${getHourOrMinutesString(minute)}`
 }
 
 
 
-export const convertDateStrToNumber = (date) => {
+export const convertDateStrToNumber = (date : any) => {
     switch (date){
         case 'Mon':
             return 2;
@@ -36,12 +36,12 @@ export const convertDateStrToNumber = (date) => {
     }
 }
 
-export const convertHourToMinutes = (timeInHour) => {
+export const convertHourToMinutes = (timeInHour: any) => {
     let timeParts = timeInHour.split(":");
     return Number(timeParts[0]) * 60 + Number(timeParts[1]);
 }
 
-export const convertMinuteToHour = (mins) => {
+export const convertMinuteToHour = (mins : any) => {
     let h: string | number = Math.floor(mins / 60);
     let m: string | number = mins % 60;
     h = h < 10 ? '0' + h : h;

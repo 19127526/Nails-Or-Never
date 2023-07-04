@@ -5,7 +5,8 @@ import {useDispatch} from "react-redux";
 import {turnOffLoading, turnOnLoading} from "@/components/loading/index.actions";
 import {mainName} from "@/constants/label";
 
-const CardServiceComponent = ({parentService, subService}) => {
+const CardServiceComponent = (props : any) => {
+    const {parentService, subService} = props
     return (
         <div className="col-lg-12" key={parentService?.id}>
             <div className="service-list" id="nails-enhancement">

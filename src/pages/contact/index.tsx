@@ -11,13 +11,21 @@ import {Snackbar} from "@mui/material";
 
 const {TextArea} = Input;
 
-const emptyContact = {
+interface emptyContactInter{
+    name : any,
+    email : any,
+    phone : any,
+    message : any,
+}
+
+const emptyContact : emptyContactInter = {
     name: undefined,
     email: undefined,
     phone: undefined,
     message: undefined
 }
-const ContactPage = ({aboutUs}) => {
+const ContactPage = (props : any) => {
+    const {aboutUs} = props
     const dispatch = useDispatch();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [form] = Form.useForm();
@@ -26,7 +34,7 @@ const ContactPage = ({aboutUs}) => {
         state : false,
         message : ''
     });
-    const handleChangePhoneNumber = (e) => {
+    const handleChangePhoneNumber = (e : any) => {
         let num = e.target.value;
         if (num.toString().length == 3 || num.toString().length == 7) {
             if (e.target.value.length > contact?.phone?.length) {
@@ -39,11 +47,11 @@ const ContactPage = ({aboutUs}) => {
         }
     }
 
-    const handleChangeInputText = (e, type) => {
+    const handleChangeInputText = (e : any, type : any) => {
         setContact({...contact, [type] : e.target.value})
     }
 
-    const handleSubmitContact = async (formData) => {
+    const handleSubmitContact = async (formData : any) => {
         await postContact(formData)
             .then(res => {
                 setIsOpen({state: true, message: `Send Contact Success`});
@@ -67,7 +75,7 @@ const ContactPage = ({aboutUs}) => {
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="max-image-preview:large"/>
-                    <meta name="canonical" href="https://nailsornever.com"/>
+                      <link ref="canonical" href="https://nailsornever.com"/>
 
                     <meta name="description" content={` Located conveniently in Malta, NewYork, 12118,
                         ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -244,22 +252,15 @@ const ContactPage = ({aboutUs}) => {
 
                                                             ({getFieldValue}) => ({
                                                                 validator(_, value) {
-                                                                    let isError = false;
-                                                                    [...value]?.map(index => {
+                                                                    [...value]?.map((index : any) => {
                                                                         const reg = /^-?\d*(\.\d*)?$/;
                                                                         if (reg.test(index) || index === '' || index === undefined) {
-
+                                                                            return Promise.resolve();
                                                                         } else {
-                                                                            isError = true
+                                                                            return Promise.reject(new Error('Please enter only number'));
                                                                         }
                                                                     })
-                                                                    if (isError == true) {
-                                                                        return Promise.reject(new Error('Please enter only number'));
-                                                                    } else {
                                                                         return Promise.resolve();
-                                                                    }
-
-
                                                                 }
                                                             }),
                                                             ({getFieldValue}) => ({
@@ -323,7 +324,7 @@ const ContactPage = ({aboutUs}) => {
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context : any) {
     try {
         const detailAboutUs = await getDetailAboutUs()
         const dataAboutUs = await detailAboutUs?.data;
