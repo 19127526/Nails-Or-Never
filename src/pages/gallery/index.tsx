@@ -13,9 +13,6 @@ const GalleryPage = (props : any) => {
     const [pagination, setPagination] = useState<number>(1)
     const route = useRouter();
     const dispatch = useDispatch()
-    useEffect(() => {
-        console.log("all api here", route?.query?.page)
-    }, [route?.query?.page])
     const handleChangePagination = (event: ChangeEvent<unknown>, value: number) => {
         route.push({
             query : {

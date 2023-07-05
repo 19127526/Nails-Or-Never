@@ -28,6 +28,7 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
             <Head>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="generator" content="Nails Or Never"/>
+                <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
                 <title>Nails Or Never</title>
                 <link rel="canonical" href="https://nailsornever.com/"/>
                 <link rel="shortlink" href="https://nailsornever.com/"/>
@@ -40,7 +41,7 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
                 <Script src="https://www.google-analytics.com/analytics.js" />
             </Head>
-            <Script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js"/>
+            <Script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js"/>
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/window.js"></Script>
             {/*<Script type="text/javascript" src="jquery-3.6.0.min.js" id="jquery-3.6.0-js" strategy="lazyOnload"></Script>*/}
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>
