@@ -5,6 +5,6 @@ services:
     image: dev-fe-cus
     container_name: dev-fe-cus
     ports:
-      - 3000:3000
+      - 4000:4000
     env_file:
       - .env.local
