@@ -35,6 +35,7 @@ jobs:
           ssh -i /home/runner/.ssh/private_key.pem -p $PORT -o StrictHostKeyChecking=no $USERNAME@$HOST "\
             cd /Nails-Or-Never-fe-cus && \
             docker compose stop && \
+            docker build -t devfecus . && \
             docker compose up -d --build \
           "
           rm -f /home/runner/.ssh/private_key.pem
