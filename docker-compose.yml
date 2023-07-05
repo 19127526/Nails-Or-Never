@@ -2,9 +2,9 @@ version: "3"
 
 services:
   dev-fe-cus:
-    image: dev-fe-cus
-    container_name: dev-fe-cus
+    image: devfecus
+    container_name: devfecus
     ports:
-      - 3000:3000
+      - 4000:4000
     env_file:
       - .env.local
