@@ -41,7 +41,7 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
                 <Script src="https://www.google-analytics.com/analytics.js" />
             </Head>
-            <Script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js"/>
+            <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js"/>
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/window.js"></Script>
             {/*<Script type="text/javascript" src="jquery-3.6.0.min.js" id="jquery-3.6.0-js" strategy="lazyOnload"></Script>*/}
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>
