@@ -745,14 +745,18 @@ const BookingPage = (props : any) => {
 
                                                                                 ({getFieldValue}) => ({
                                                                                     validator(_, value) {
+                                                                                        let isError: boolean = false;
                                                                                         [...value]?.map((index : any) => {
                                                                                             const reg = /^-?\d*(\.\d*)?$/;
-                                                                                            if (reg.test(index) || index === '' || index === undefined) {
-                                                                                            } else {
-                                                                                                return Promise.reject(new Error('Please enter only number'));
+                                                                                            if (reg.test(index) == false && index !== '' && index !== undefined) {
+                                                                                                isError = true
                                                                                             }
                                                                                         })
-                                                                                        return Promise.resolve();
+                                                                                        if (isError) {
+                                                                                            return Promise.reject(new Error('Please enter only number'));
+                                                                                        } else {
+                                                                                            return Promise.resolve();
+                                                                                        }
                                                                                     }
                                                                                 }),
                                                                                 ({getFieldValue}) => ({
@@ -774,7 +778,7 @@ const BookingPage = (props : any) => {
                                                                                        placeholder="Please enter my phone number"
                                                                                        maxLength={12}
                                                                                        onChange={(e) => handleChangePhoneNumber(e)}
-                                                                                       value={information?.phoneNumber}/>
+                                                                                       value={information?.phoneNumber.toString()}/>
                                                                             </div>
                                                                         </Form.Item>
 

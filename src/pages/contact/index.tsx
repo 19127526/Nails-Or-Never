@@ -252,15 +252,18 @@ const ContactPage = (props : any) => {
 
                                                             ({getFieldValue}) => ({
                                                                 validator(_, value) {
+                                                                    let isError: boolean = false;
                                                                     [...value]?.map((index : any) => {
                                                                         const reg = /^-?\d*(\.\d*)?$/;
-                                                                        if (reg.test(index) || index === '' || index === undefined) {
-                                                                            return Promise.resolve();
-                                                                        } else {
-                                                                            return Promise.reject(new Error('Please enter only number'));
+                                                                        if (reg.test(index) == false && index !== '' && index !== undefined) {
+                                                                            isError = true
                                                                         }
                                                                     })
+                                                                    if (isError) {
+                                                                        return Promise.reject(new Error('Please enter only number'));
+                                                                    } else {
                                                                         return Promise.resolve();
+                                                                    }
                                                                 }
                                                             }),
                                                             ({getFieldValue}) => ({

@@ -46,7 +46,6 @@ const CheckOutPage = () => {
     }, [giftCard])
 
     const handleSubmitCheckoutGift = async (form: any) => {
-        console.log(form)
         if ([...giftCard].length == 0) {
             setIsOpen({state: true, message: `Cart Item Empty, Please Select Cart Item`})
         } else {
@@ -72,7 +71,6 @@ const CheckOutPage = () => {
             const postCheckoutApi = async () => {
                 await postCheckout(formData)
                     .then(res => {
-                        console.log(res)
                         dispatch(removeAllItem())
                         router.push({
                             pathname: process.env.NEXT_PUBLIC_CHECKOUT_SUCCESS_ROUTER as string,
@@ -94,8 +92,7 @@ const CheckOutPage = () => {
     }
 
 
-    const handleClickBooking = (e : any) => {
-    }
+
 
     return (
         <Spin spinning={isLoading}>
@@ -245,18 +242,23 @@ const CheckOutPage = () => {
 
                                                                     ({getFieldValue}) => ({
                                                                         validator(_, value) {
+                                                                            let isError: boolean = false;
                                                                             [...value]?.map((index: any) => {
                                                                                 const reg = /^-?\d*(\.\d*)?$/;
-                                                                                if (reg.test(index) || index === '' || index === undefined) {
-                                                                                    return Promise.resolve();
-                                                                                } else {
-                                                                                    return Promise.reject(new Error('Please enter only number'));
+                                                                                if (reg.test(index) == false && index !== '' && index !== undefined) {
+                                                                                    isError = true
                                                                                 }
                                                                             })
+                                                                            if (isError) {
+                                                                                return Promise.reject(new Error('Please enter only number'));
+                                                                            } else {
+                                                                                return Promise.resolve();
+                                                                            }
                                                                         }
                                                                     }),
                                                                     ({getFieldValue}) => ({
                                                                         validator(_, value) {
+                                                                            console.log(value?.length)
                                                                             if (value?.length != 12) {
                                                                                 return Promise.reject(new Error('Please enter full phone number'));
                                                                             } else {
@@ -274,7 +276,7 @@ const CheckOutPage = () => {
                                                                            placeholder="Please enter my phone number"
                                                                            maxLength={12}
                                                                            onChange={(e) => handleChangePhoneNumber(e)}
-                                                                           value={phoneNumber}/>
+                                                                           value={phoneNumber.toString()}/>
                                                                 </div>
                                                             </Form.Item>
                                                         </div>
@@ -294,7 +296,7 @@ const CheckOutPage = () => {
                                                                     paddingBottom: "3px",
                                                                     paddingRight: "2px"
                                                                 }}/>
-                                                                <span onClick={(e) => handleClickBooking(e)}>Checkout</span>
+                                                                <span>Checkout</span>
                                                             </button>
                                                         </div>
                                                     </Form>
