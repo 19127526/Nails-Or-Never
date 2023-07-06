@@ -2,71 +2,69 @@ import MainLayout from "@/components/layout/main";
 import Head from "next/head";
 import React, {useEffect, useState} from "react";
 import "./index.css"
-import {Form, Input} from "antd";
+import {Form, Input, Spin} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import CardCheckOutComponent from "@/components/checkout/card";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import {turnOffLoading} from "@/components/loading/index.actions";
 import {postCheckout} from "@/api-client/gift-card/GiftCard.api";
 import {Snackbar} from "@mui/material";
-import {postBooking} from "@/api-client/booking/Booking.api";
 import {useRouter} from "next/router";
 import {removeAllItem} from "@/pages/gift-card/index.actions";
 import image from "../../public/images/Untitled.jpeg"
+
 const CheckOutPage = () => {
     const router = useRouter()
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [isLoading, setIsLoading] = useState(false)
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState({
-        state : false,
-        message : ''
+        state: false,
+        message: ''
     });
-    const handleChangePhoneNumber = (e : any) => {
+    const handleChangePhoneNumber = (e: any) => {
         let num = e.target.value;
-        if(num.toString().length == 3 || num.toString().length == 7) {
-            if(e.target.value.length > phoneNumber?.length) {
+        if (num.toString().length == 3 || num.toString().length == 7) {
+            if (e.target.value.length > phoneNumber?.length) {
                 setPhoneNumber(num + '-')
-            }
-            else {
+            } else {
                 setPhoneNumber(num)
             }
-        }
-        else {
+        } else {
             setPhoneNumber(num)
         }
     }
-    const giftCardPage = useSelector((state : any) => state.GiftCardPage);
-    const [totalPrice, setTotalPrice]= useState(0);
+    const giftCardPage = useSelector((state: any) => state.GiftCardPage);
+    const [totalPrice, setTotalPrice] = useState(0);
     const giftCard = giftCardPage?.cartItem;
     useEffect(() => {
-        if(giftCard?.length != 0) {
-        const temp = giftCard.map((index : any) => {
-            return index?.price * index?.quantity
-        })
-        setTotalPrice(temp.reduce((previousScore : any, currentScore : any) => previousScore + currentScore, 0))
+        if (giftCard?.length != 0) {
+            const temp = giftCard.map((index: any) => {
+                return index?.price * index?.quantity
+            })
+            setTotalPrice(temp.reduce((previousScore: any, currentScore: any) => previousScore + currentScore, 0))
         }
     }, [giftCard])
 
-    const handleSubmitCheckoutGift = (form : any) => {
-        if([...giftCard].length == 0) {
+    const handleSubmitCheckoutGift = async (form: any) => {
+        console.log(form)
+        if ([...giftCard].length == 0) {
             setIsOpen({state: true, message: `Cart Item Empty, Please Select Cart Item`})
-        }
-        else {
+        } else {
             const formData = {
-                full_name : form?.fullName,
-                email : form?.email,
-                phone : form?.phoneNumber,
-                address : form?.address,
-                subtotal : totalPrice,
-                discount : 0,
-                tax : 0,
-                total : totalPrice,
-                method :"cash",
-                gift_cards : [...giftCard]?.map((index : any) => {
+                full_name: form?.fullName,
+                email: form?.email,
+                phone: form?.phoneNumber,
+                address: form?.address,
+                subtotal: totalPrice,
+                discount: 0,
+                tax: 0,
+                total: totalPrice,
+                method: "cash",
+                gift_cards: [...giftCard]?.map((index: any) => {
                     return {
-                        gift_card : index?.detailCart?.id,
-                        price : index?.price,
-                        quantity : index?.quantity
+                        gift_card: index?.detailCart?.id,
+                        price: index?.price,
+                        quantity: index?.quantity
 
                     }
                 })
@@ -74,15 +72,16 @@ const CheckOutPage = () => {
             const postCheckoutApi = async () => {
                 await postCheckout(formData)
                     .then(res => {
+                        console.log(res)
                         dispatch(removeAllItem())
                         router.push({
-                            pathname : process.env.NEXT_PUBLIC_CHECKOUT_SUCCESS_ROUTER as string,
-                            query : {
-                                name : form?.fullName
+                            pathname: process.env.NEXT_PUBLIC_CHECKOUT_SUCCESS_ROUTER as string,
+                            query: {
+                                name: form?.fullName
                             }
                         })
                         setIsOpen({
-                            state : true,
+                            state: true,
                             message: 'Check out success'
                         })
                     })
@@ -95,14 +94,18 @@ const CheckOutPage = () => {
     }
 
 
+    const handleClickBooking = (e : any) => {
+    }
+
     return (
-        <>
+        <Spin spinning={isLoading}>
+
             <Head>
                 <meta charSet="utf-8"/>
-                <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="robots" content="max-image-preview:large"/>
-                  <link ref="canonical" href="https://nailsornever.com"/>
+                <link ref="canonical" href="https://nailsornever.com"/>
                 <title>Checkout GiftCard - {process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
                 <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
                     ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -127,7 +130,7 @@ const CheckOutPage = () => {
                     `}/>
                 <meta property="og:image"
                       content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
-                <meta name="generator"  content={`Checkout GiftCard - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
+                <meta name="generator" content={`Checkout GiftCard - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
 
             </Head>
             <div className="page-title"
@@ -142,9 +145,9 @@ const CheckOutPage = () => {
             </div>
             <Snackbar
                 autoHideDuration={3000}
-                style={{marginTop :"50px"}}
+                style={{marginTop: "50px"}}
                 open={isOpen?.state as boolean}
-                anchorOrigin={{ vertical : "top", horizontal : "right" }}
+                anchorOrigin={{vertical: "top", horizontal: "right"}}
                 onClose={() => setIsOpen({...isOpen, state: false})}
                 message={`${isOpen?.message}`}
             />
@@ -157,7 +160,7 @@ const CheckOutPage = () => {
                                     <div className="row justify-content-around">
                                         <div className="col-md-6">
                                             <div className="card border-0">
-                                                <div className="card-header pb-0" style={{background:"white"}}>
+                                                <div className="card-header pb-0" style={{background: "white"}}>
                                                     <h2 className="card-title space ">Checkout</h2>
                                                     <p className="card-text text-muted mt-4 space">SHIPPING DETAIL</p>
                                                 </div>
@@ -242,7 +245,7 @@ const CheckOutPage = () => {
 
                                                                     ({getFieldValue}) => ({
                                                                         validator(_, value) {
-                                                                            [...value]?.map((index : any) => {
+                                                                            [...value]?.map((index: any) => {
                                                                                 const reg = /^-?\d*(\.\d*)?$/;
                                                                                 if (reg.test(index) || index === '' || index === undefined) {
                                                                                     return Promise.resolve();
@@ -269,18 +272,20 @@ const CheckOutPage = () => {
                                                                     <Input type="text" style={{height: "45px"}}
                                                                            className="form-control"
                                                                            placeholder="Please enter my phone number"
-                                                                           maxLength={12}  onChange={(e) => handleChangePhoneNumber(e)} value={phoneNumber}/>
+                                                                           maxLength={12}
+                                                                           onChange={(e) => handleChangePhoneNumber(e)}
+                                                                           value={phoneNumber}/>
                                                                 </div>
                                                             </Form.Item>
                                                         </div>
 
-                                                        <div
-                                                             style={{
-                                                                 display: "flex",
-                                                                 justifyContent: "center",
-                                                                 backgroundColor: "initial",
-                                                                 padding: "0px 0 5px 0"
-                                                             }}>
+                                                        <div  className=""
+                                                            style={{
+                                                                display: "flex",
+                                                                justifyContent: "center",
+                                                                backgroundColor: "initial",
+                                                                padding: "0px 0 5px 0"
+                                                            }}>
                                                             <button className="button icon-button" type="submit"
                                                                     value="Submit"
                                                                     style={{padding: " 0.375rem 1.0rem"}}>
@@ -289,7 +294,7 @@ const CheckOutPage = () => {
                                                                     paddingBottom: "3px",
                                                                     paddingRight: "2px"
                                                                 }}/>
-                                                                <span>Checkout</span>
+                                                                <span onClick={(e) => handleClickBooking(e)}>Checkout</span>
                                                             </button>
                                                         </div>
                                                     </Form>
@@ -318,7 +323,7 @@ const CheckOutPage = () => {
                                                     <div className="master-container">
                                                         <div className="card-check-out cart">
                                                             {
-                                                                [...giftCard]?.map((index : any, number : any) => (
+                                                                [...giftCard]?.map((index: any, number: any) => (
                                                                     <>
                                                                         {number != 0 ? <hr/> : <></>}
                                                                         <CardCheckOutComponent index={index as any}/>
@@ -358,7 +363,7 @@ const CheckOutPage = () => {
                 </div>
 
             </section>
-        </>
+        </Spin>
     )
 }
 

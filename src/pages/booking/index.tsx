@@ -64,6 +64,7 @@ interface activeStepInterFace {
 
 
 
+
 const LoadingBooking = () => {
     return (
         <div className="loading-booking">
@@ -162,11 +163,13 @@ const BookingPage = (props : any) => {
 
     const handleClickBooking = (e : any) => {
     }
+
     const handleNext = () => {
         if (activeStep?.number + 1 == 2) {
-            if (selectedBooking?.service?.length == 0 || selectedBooking?.date == undefined ||
-                selectedBooking?.employee == undefined || selectedBooking?.time == undefined
-                || selectedBooking?.distanceTime == undefined) {
+            if (selectedBooking?.service?.length == 0 || selectedBooking?.date == '' ||
+                isEmpty(selectedBooking?.employee) == true || selectedBooking?.time == ''
+                || currentTime == null
+                || selectedBooking?.distanceTime == '') {
                 setIsOpen({
                     state: true,
                     message: 'You need to choose full information'
@@ -194,9 +197,10 @@ const BookingPage = (props : any) => {
 
     const handleStep = (step: activeStepInterFace) => () => {
         if (step?.number == 2) {
-            if (selectedBooking?.service?.length == 0 || selectedBooking?.date == undefined ||
-                selectedBooking?.employee == undefined || selectedBooking?.time == undefined
-                || selectedBooking?.distanceTime == undefined) {
+            if (selectedBooking?.service?.length == 0 || selectedBooking?.date == '' ||
+                isEmpty(selectedBooking?.employee) == true || selectedBooking?.time == ''
+                || currentTime == null
+                || selectedBooking?.distanceTime == '') {
                 setIsOpen({
                     state: true,
                     message: 'You need to choose full information'
@@ -239,25 +243,36 @@ const BookingPage = (props : any) => {
         const dateTemp = e?.$d?.toString()?.split(" ")[0]
         setCurrentDate(convertDateStrToNumber(dateTemp) as number)
         const date = getFormatDate({day: e?.$D, month: Number(e?.$M) + 1, year: e?.$y});
-        setSelectedBooking({...selectedBooking, date: date as string});
-        setIsLoading(true)
-        setCurrentTime(null)
+
+        if(selectedBooking?.date == '' || selectedBooking?.date != date) {
+            setSelectedBooking({...selectedBooking, date: date as string});
+            setIsLoading(true)
+            setCurrentTime(null)
+        }
+        else {
+            setSelectedBooking({...selectedBooking, date: date as string});
+            setCurrentTime(null)
+        }
     }
 
     useEffect(() => {
         const getTimeByEmployIdAndDate = async () => {
-            if (selectedBooking?.date != undefined) {
+            if (selectedBooking?.date != '') {
                 if (isEmpty(selectedBooking?.employee) == true) {
                     await getFreeTimeByDate(selectedBooking?.date as string)
                         .then(res => {
                             setIsLoading(false)
                             // employee = res?.data?.data
                         })
+                        .catch(err => {
+                        })
                 } else {
                     await getFreeTimeByEmIdAndDate(selectedBooking?.employee?.id as number, selectedBooking?.date as string)
                         .then(res => {
                             setIsLoading(false)
                             setSelectedBooking({...selectedBooking, timeBusy : res?.data?.busyTime as any[]})
+                        })
+                        .catch(err => {
                         })
                 }
             }
@@ -277,7 +292,7 @@ const BookingPage = (props : any) => {
             })
         }
         const hourAfterService = convertMinuteToHour(numberHour);
-        if (busyTime?.filter(index => index == hourAfterService)[0] != undefined) {
+        if (busyTime?.filter(index => index == numberHour || index == Number(numberHour+5) || index == Number(numberHour-5))[0] != undefined) {
             setIsOpen({state: true, message: `You can\'t booking in this time ${formatTime} - ${hourAfterService}`})
         } else {
             setCurrentTime(e as Dayjs)
@@ -302,7 +317,7 @@ const BookingPage = (props : any) => {
             const open = convertHourToMinutes(getTimeBooking({hour:hourOpenTime, minute: minuteOpenTime}));
             const close = convertHourToMinutes(getTimeBooking({hour:hourCloseTime, minute: minuteCloseTime}));
             if(open > valueTemp || close < valueTemp) {
-                busyTime.push(convertMinuteToHour(valueTemp))
+                busyTime.push(valueTemp)
                 return true;
             }
         }
@@ -311,7 +326,7 @@ const BookingPage = (props : any) => {
                 const start = convertHourToMinutes(selectedBooking?.timeBusy[0]?.booking_time)
                 const end = convertHourToMinutes(selectedBooking?.timeBusy[0]?.finished_time)
                 if (start <= valueTemp && end >= valueTemp) {
-                    busyTime.push(convertMinuteToHour(valueTemp))
+                    busyTime.push(valueTemp)
                     return true;
                 }
             } else {
@@ -328,7 +343,7 @@ const BookingPage = (props : any) => {
                     }
                 })
                 if (eval(condition)) {
-                    busyTime.push(convertMinuteToHour(valueTemp))
+                    busyTime.push(valueTemp)
                     return true;
                 }
             }
@@ -386,8 +401,8 @@ const BookingPage = (props : any) => {
             booking_date: selectedBooking?.date,
             booking_time: selectedBooking?.time + ":00",
         }
-        dispatch(turnOnLoading());
         const postBookingApi = async () => {
+            setIsLoading(true)
             await postBooking(formData)
                 .then(res => {
                     setIsOpen({state: true, message: "Success"})
@@ -397,14 +412,14 @@ const BookingPage = (props : any) => {
                             name: form?.full_name
                         }
                     })
+                    setIsLoading(false)
                 })
                 .catch(err => {
+                    setIsLoading(false)
                     setIsOpen({state: true, message: "Your booking has been booked by someone else"})
                 })
         }
         postBookingApi()
-        dispatch(turnOffLoading())
-
     }
 
     return (
