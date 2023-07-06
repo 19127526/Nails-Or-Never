@@ -264,7 +264,6 @@ const CheckOutPage = () => {
                                                                     }),
                                                                     ({getFieldValue}) => ({
                                                                         validator(_, value) {
-                                                                            console.log(value?.length)
                                                                             if (value?.length != 12) {
                                                                                 return Promise.reject(new Error('Please enter full phone number'));
                                                                             } else {
@@ -284,6 +283,8 @@ const CheckOutPage = () => {
                                                                            className="form-control"
                                                                            placeholder="Please enter my phone number"
                                                                            maxLength={12}
+                                                                           max={12}
+                                                                           aria-valuemax={12}
                                                                            onChange={(e) => handleChangePhoneNumber(e)}
                                                                            value={phoneNumber.toString()}/>
                                                                 </div>

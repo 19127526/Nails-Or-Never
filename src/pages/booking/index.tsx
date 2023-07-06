@@ -786,6 +786,8 @@ const BookingPage = (props : any) => {
                                                                                        className="form-control"
                                                                                        placeholder="Please enter my phone number"
                                                                                        maxLength={12}
+                                                                                       max={12}
+                                                                                       aria-valuemax={12}
                                                                                        onChange={(e) => handleChangePhoneNumber(e)}
                                                                                        value={information?.phoneNumber.toString()}/>
                                                                             </div>
