@@ -15,6 +15,7 @@ import {getGalleryPagination} from "@/api-client/gallery/Gallery.api";
 import Head from "next/head";
 import {mainName} from "@/constants/label";
 
+
 function Item(props : any) {
     const {item} = props
     return (
@@ -39,7 +40,7 @@ function Item(props : any) {
                                     {/*</div>*/}
                                 </div>
                             </div>
-                            <h2 className="banner-title">{item?.name}</h2>
+                            <h2 className="banner-title"  style={{marginBottom : "0px"}}>{item?.name}</h2>
 
                             <Link className="banner-link"
                                href={process.env.NEXT_PUBLIC_SERVICES_ROUTER as string} replace>View

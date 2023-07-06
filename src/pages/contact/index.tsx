@@ -8,7 +8,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import {Form, Input} from "antd";
 import {postContact} from "@/api-client/contact/Contact.api";
 import {Snackbar} from "@mui/material";
-
+import image from "../../public/images/Untitled.jpeg"
 const {TextArea} = Input;
 
 interface emptyContactInter{
@@ -112,7 +112,7 @@ const ContactPage = (props : any) => {
                 />
 
                 <div className="page-title"
-                     style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/page-bg.jpg)"}}>
+                     style={{backgroundImage: `url(${image.src})`}}>
                     <div className="container-lg">
                         <div className="row">
                             <div className="col-lg-12">

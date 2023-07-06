@@ -6,7 +6,7 @@ import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
 import {turnOffLoading} from "@/components/loading/index.actions";
 import {mainName} from "@/constants/label";
-
+import image from "../../../public/images/Untitled.jpeg"
 const SuccessBookPage = (props : any) => {
     const dispatch = useDispatch()
 
@@ -41,7 +41,7 @@ const SuccessBookPage = (props : any) => {
             </Head>
 
             <div className="page-title"
-                 style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/page-bg.jpg)"}}>
+                 style={{backgroundImage: `url(${image.src})`}}>
                 <div className="container-lg">
                     <div className="row">
                         <div className="col-lg-12">

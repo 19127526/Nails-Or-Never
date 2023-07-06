@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 import Link from "next/link";
 import {mainName} from "@/constants/label";
-
+import image from "../../public/images/Untitled.jpeg"
 const AboutUsPage = (props : any) => {
     const {aboutUs} = props
     const dispatch = useDispatch()
@@ -44,7 +44,7 @@ const AboutUsPage = (props : any) => {
                 </Head>
 
                 <div className="page-title"
-                     style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/page-bg.jpg)"}}>
+                     style={{backgroundImage: `url(${image?.src})`}}>
                     <div className="container-lg">
                         <div className="row">
                             <div className="col-lg-12">

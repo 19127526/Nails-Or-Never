@@ -608,7 +608,7 @@ ol, ul {
 .footer {
     position: relative;
     background-color: #1a1a1a;
-    background-image: url("../images/banner-bg.jpg");
+    background-image: url("../../public/images/Untitled.jpeg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1300,7 +1300,7 @@ ol, ul {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url("../images/page-bg.jpg");
+    background-image: url("../../public/images/Untitled.jpeg");
 }
 
 #loading .loading-img {

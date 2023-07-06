@@ -7,6 +7,7 @@ import Head from "next/head";
 import {getSubServicePagination} from "@/api-client/service/Services.api";
 import {useDispatch, useSelector} from "react-redux";
 import {turnOffLoading, turnOnLoading} from "@/components/loading/index.actions";
+import image from "../../public/images/Untitled.jpeg"
 const ServicesPage = (props: any) => {
     const {services} = props
     const [pagination, setPagination] = useState<number>(1)
@@ -47,7 +48,7 @@ const ServicesPage = (props: any) => {
                 </Head>
 
                 <div className="page-title"
-                     style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/page-bg.jpg)"}}>
+                     style={{backgroundImage: `url(${image.src})`}}>
                     <div className="container-lg">
                         <div className="row">
                             <div className="col-lg-12">

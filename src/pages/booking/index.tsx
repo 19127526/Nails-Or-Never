@@ -49,6 +49,7 @@ import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import LoadingComponent from "@/components/loading";
 import "./loading.css"
 import {isEmpty} from "@/utils/format-price";
+import image from "../../public/images/Untitled.jpeg"
 interface stepInterFace {
     label: string,
     icon: JSX.Element,
@@ -440,7 +441,7 @@ const BookingPage = (props : any) => {
                 </Head>
 
                 <div className="page-title"
-                     style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/page-bg.jpg)"}}>
+                     style={{backgroundImage: `url(${image.src})`}}>
                     <div className="container-lg">
                         <div className="row">
                             <div className="col-lg-12">

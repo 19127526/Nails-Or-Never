@@ -124,7 +124,7 @@ const FooterComponent = () => {
                                 <span className="small d-block">Designed by
                                     <a target="_blank"
                                        href="">
-                                        <strong> NAIL OR NEVER &amp; WEB DESIGN</strong>
+                                        <strong> NAILS OR NEVER &amp; WEB DESIGN</strong>
                                     </a>
                                 </span>
                             </div>

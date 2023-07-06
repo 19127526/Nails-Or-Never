@@ -6,7 +6,7 @@ import {useRouter} from "next/router";
 import {getAllSubGalleryByParentTheme} from "@/api-client/gallery/Gallery.api";
 import {useDispatch} from "react-redux";
 import {turnOffLoading} from "@/components/loading/index.actions";
-
+import image from "../../../public/images/Untitled.jpeg"
 const DetailGalleryPage = (props : any) => {
     const {gallerySub} = props
     const router = useRouter();
@@ -45,7 +45,7 @@ const DetailGalleryPage = (props : any) => {
                 <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
             </Head>
             <div className="page-title"
-                 style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/page-bg.jpg)"}}>
+                 style={{backgroundImage: `url(${image.src})`}}>
                 <div className="container-lg">
                     <div className="row">
                         <div className="col-lg-12">

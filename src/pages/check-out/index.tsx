@@ -12,7 +12,7 @@ import {Snackbar} from "@mui/material";
 import {postBooking} from "@/api-client/booking/Booking.api";
 import {useRouter} from "next/router";
 import {removeAllItem} from "@/pages/gift-card/index.actions";
-
+import image from "../../public/images/Untitled.jpeg"
 const CheckOutPage = () => {
     const router = useRouter()
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -131,7 +131,7 @@ const CheckOutPage = () => {
 
             </Head>
             <div className="page-title"
-                 style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/page-bg.jpg)"}}>
+                 style={{backgroundImage: `url(${image.src})`}}>
                 <div className="container-lg">
                     <div className="row">
                         <div className="col-lg-12">
