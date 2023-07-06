@@ -9,32 +9,33 @@ import {Form, Input as InputAntd} from "antd";
 import {postContact} from "@/api-client/contact/Contact.api";
 import {Snackbar} from "@mui/material";
 import image from "../../public/images/Untitled.jpeg"
+
 const {TextArea} = InputAntd;
 
-interface emptyContactInter{
-    name : any,
-    email : any,
-    phone : any,
-    message : any,
+interface emptyContactInter {
+    name: any,
+    email: any,
+    phone: any,
+    message: any,
 }
 
-const emptyContact : emptyContactInter = {
+const emptyContact: emptyContactInter = {
     name: undefined,
     email: undefined,
     phone: undefined,
     message: undefined
 }
-const ContactPage = (props : any) => {
+const ContactPage = (props: any) => {
     const {aboutUs} = props
     const dispatch = useDispatch();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [form] = Form.useForm();
     const [contact, setContact] = useState(emptyContact)
     const [isOpen, setIsOpen] = useState({
-        state : false,
-        message : ''
+        state: false,
+        message: ''
     });
-    const handleChangePhoneNumber = (e : any) => {
+    const handleChangePhoneNumber = (e: any) => {
         let num = e.target.value;
         if (num.toString().length == 3 || num.toString().length == 7) {
             if (e.target.value.length > contact?.phone?.length) {
@@ -47,11 +48,11 @@ const ContactPage = (props : any) => {
         }
     }
 
-    const handleChangeInputText = (e : any, type : any) => {
-        setContact({...contact, [type] : e.target.value})
+    const handleChangeInputText = (e: any, type: any) => {
+        setContact({...contact, [type]: e.target.value})
     }
 
-    const handleSubmitContact = async (formData : any) => {
+    const handleSubmitContact = async (formData: any) => {
         await postContact(formData)
             .then(res => {
                 setIsOpen({state: true, message: `Send Contact Success`});
@@ -72,10 +73,10 @@ const ContactPage = (props : any) => {
                     <meta name="generator" content="Nails Or Never"/>
                     <title>Contact with me - {process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
                     <meta charSet="utf-8"/>
-                    <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
+                    <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="max-image-preview:large"/>
-                      <link ref="canonical" href="https://nailsornever.com"/>
+                    <link ref="canonical" href="https://nailsornever.com"/>
 
                     <meta name="description" content={` Located conveniently in Malta, NewYork, 12118,
                         ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -96,17 +97,16 @@ const ContactPage = (props : any) => {
                         You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
                     <meta property="og:image"
                           content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
-                    <meta name="generator"  content={`Contact with me - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
-
+                    <meta name="generator" content={`Contact with me - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
 
 
                 </Head>
 
                 <Snackbar
                     autoHideDuration={3000}
-                    style={{marginTop :"50px"}}
+                    style={{marginTop: "50px"}}
                     open={isOpen?.state as boolean}
-                    anchorOrigin={{ vertical : "top", horizontal : "right" }}
+                    anchorOrigin={{vertical: "top", horizontal: "right"}}
                     onClose={() => setIsOpen({...isOpen, state: false})}
                     message={`${isOpen?.message}`}
                 />
@@ -204,10 +204,10 @@ const ContactPage = (props : any) => {
 
                                                         <div className="input-group">
                                                             <InputAntd type="text" style={{height: "45px"}}
-                                                                   className="form-control"
-                                                                   value={contact?.name}
-                                                                   onChange={(e) => handleChangeInputText(e,'name')}
-                                                                   placeholder="Please enter full name"
+                                                                       className="form-control"
+                                                                       value={contact?.name}
+                                                                       onChange={(e) => handleChangeInputText(e, 'name')}
+                                                                       placeholder="Please enter full name"
                                                             />
                                                         </div>
                                                     </Form.Item>
@@ -230,10 +230,10 @@ const ContactPage = (props : any) => {
 
                                                         <div className="input-group">
                                                             <InputAntd type="text" style={{height: "45px"}}
-                                                                   className="form-control"
-                                                                   value={contact?.email}
-                                                                   onChange={(e) => handleChangeInputText(e,'email')}
-                                                                   placeholder="Please enter my email"
+                                                                       className="form-control"
+                                                                       value={contact?.email}
+                                                                       onChange={(e) => handleChangeInputText(e, 'email')}
+                                                                       placeholder="Please enter my email"
                                                             />
                                                         </div>
                                                     </Form.Item>
@@ -242,6 +242,12 @@ const ContactPage = (props : any) => {
 
                                                 <div className="col-md-6">
                                                     <Form.Item
+                                                        style={{
+                                                            WebkitUserSelect: "none",
+                                                            KhtmlUserSelect: "none",
+                                                            MozUserSelect: "none", msUserSelect: "none",
+                                                            userSelect: "none"
+                                                        }}
                                                         name="phone"
                                                         label="Phone Number"
                                                         rules={[
@@ -253,7 +259,7 @@ const ContactPage = (props : any) => {
                                                             ({getFieldValue}) => ({
                                                                 validator(_, value) {
                                                                     let isError: boolean = false;
-                                                                    [...value]?.map((index : any) => {
+                                                                    [...value]?.map((index: any) => {
                                                                         const reg = /^-?\d*(\.\d*)?$/;
                                                                         if (reg.test(index) == false && index !== '' && index !== undefined) {
                                                                             isError = true
@@ -279,12 +285,17 @@ const ContactPage = (props : any) => {
                                                         ]}
                                                     >
                                                         <div className="input-group">
-                                                            <InputAntd type="text" style={{height: "45px"}}
-                                                                   className="form-control"
-                                                                   placeholder="Please enter my phone number"
-                                                                   maxLength={12}
-                                                                   onChange={(e) => handleChangePhoneNumber(e)}
-                                                                   value={contact?.phone}/>
+                                                            <InputAntd type="text" style={{
+                                                                height: "45px", WebkitUserSelect: "none",
+                                                                KhtmlUserSelect: "none",
+                                                                MozUserSelect: "none", msUserSelect: "none",
+                                                                userSelect: "none"
+                                                            }}
+                                                                       className="form-control"
+                                                                       placeholder="Please enter my phone number"
+                                                                       maxLength={12}
+                                                                       onChange={(e) => handleChangePhoneNumber(e)}
+                                                                       value={contact?.phone}/>
                                                         </div>
                                                     </Form.Item>
                                                 </div>
@@ -301,7 +312,8 @@ const ContactPage = (props : any) => {
                                                         ]}
                                                     >
                                                         <div className="input-group">
-                                                            <TextArea rows={4}  value={contact?.message}   onChange={(e) => handleChangeInputText(e,'message')}/>
+                                                            <TextArea rows={4} value={contact?.message}
+                                                                      onChange={(e) => handleChangeInputText(e, 'message')}/>
                                                         </div>
                                                     </Form.Item>
                                                 </div>
@@ -327,7 +339,7 @@ const ContactPage = (props : any) => {
     )
 }
 
-export async function getServerSideProps(context : any) {
+export async function getServerSideProps(context: any) {
     try {
         const detailAboutUs = await getDetailAboutUs()
         const dataAboutUs = await detailAboutUs?.data;
