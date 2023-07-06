@@ -26,8 +26,7 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
     return (
         <>
             <Head>
-
-                <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - professional nails care services in Malta,NY 12118`}/>
+        
                 <link rel="canonical" href="https://nailsornever.com/"/>
                 <link rel="shortlink" href="https://nailsornever.com/"/>
                 <link rel="icon" href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" sizes="32x32"/>
