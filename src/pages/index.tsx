@@ -88,6 +88,8 @@ const HomePage = (props : any) => {
                           content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,${[...services?.services]?.map(index => `${index?.name}`)} extensions`}/>
                     <meta property="og:url" content="https://nailsornever.com/"/>
                     <meta property="og:type" content="Website"/>
+                    <meta property="og:image"
+                          content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
                     <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - professional nails care services in Malta,NY 12118`}/>
                     <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118, 
                     ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -95,8 +97,7 @@ const HomePage = (props : any) => {
                     You can find all nail-related services, from ${[...services?.services]?.map(index => `${index?.name}`)}. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, 
                     we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. 
                     You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
-                    <meta property="og:image"
-                          content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+
                     <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - professional nails care services in Malta,NY 12118`}/>
                 </Head>
                 <Carousel
