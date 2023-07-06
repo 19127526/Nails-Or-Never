@@ -16,7 +16,7 @@ import { ProductService } from '../../../demo/service/ProductService';
 import {Calendar} from "primereact/calendar";
 import {DatePicker, Form} from "antd";
 import {Avatar, Badge, Descriptions, List, message, Spin} from "antd"
-import {getFormatDate} from "../../../util/utils";
+import {convertDateInit, getFormatDate} from "../../../util/utils";
 import useSWR from "swr";
 import {getALlEmployees} from "../../../api-client/employees/Employees.api";
 import {deleteBookingById, getBookingByDate} from "../../../api-client/booking/Booking.api";
@@ -44,19 +44,17 @@ const BookingPage = () => {
   const [submitted, setSubmitted] = useState(false);
   const [globalFilter, setGlobalFilter] = useState(null);
   const toast = useRef(null);
-  const [calendarValue, setCalendarValue] = useState(null);
+  const [calendarValue, setCalendarValue] = useState(convertDateInit(new Date()));
   const [listBooking, setListBooking] = useState([]);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
+
 
   const dt = useRef(null);
   const {
     data: listBookingByDate,
     mutate: mutateBooking,
   } = useSWR(`list-booking-by-time`, () => getBookingByDate({date: calendarValue}));
-
-
-
   useEffect(() => {
     if (listBookingByDate === undefined) {
       dispatch(turnOnLoading());
@@ -232,7 +230,7 @@ const BookingPage = () => {
   const rightToolbarTemplate = () => {
     return (
       <React.Fragment>
-        <DatePicker size={"large"} onChange={(e) => {
+        <DatePicker size={"large"}  onChange={(e) => {
           const date = getFormatDate({day: e?.$D, month: Number(e?.$M) + 1, year: e?.$y});
           setCalendarValue(date)
         }} />

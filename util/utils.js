@@ -80,3 +80,9 @@ export const getTimeAndUnit = (value) => {
     return `${time} ${formatTime}`
   }
 }
+
+export const convertDateInit = (d) => {
+
+  let datestring = `${getHourOrMinutesString(d.getMonth()+1)}-${getHourOrMinutesString(d.getDate())}-${d.getFullYear()}`;
+  return datestring
+}
