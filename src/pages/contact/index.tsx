@@ -5,11 +5,11 @@ import {useDispatch} from "react-redux";
 import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import {Form, Input} from "antd";
+import {Form, Input as InputAntd} from "antd";
 import {postContact} from "@/api-client/contact/Contact.api";
 import {Snackbar} from "@mui/material";
 import image from "../../public/images/Untitled.jpeg"
-const {TextArea} = Input;
+const {TextArea} = InputAntd;
 
 interface emptyContactInter{
     name : any,
@@ -203,7 +203,7 @@ const ContactPage = (props : any) => {
                                                     >
 
                                                         <div className="input-group">
-                                                            <Input type="text" style={{height: "45px"}}
+                                                            <InputAntd type="text" style={{height: "45px"}}
                                                                    className="form-control"
                                                                    value={contact?.name}
                                                                    onChange={(e) => handleChangeInputText(e,'name')}
@@ -229,7 +229,7 @@ const ContactPage = (props : any) => {
                                                     >
 
                                                         <div className="input-group">
-                                                            <Input type="text" style={{height: "45px"}}
+                                                            <InputAntd type="text" style={{height: "45px"}}
                                                                    className="form-control"
                                                                    value={contact?.email}
                                                                    onChange={(e) => handleChangeInputText(e,'email')}
@@ -276,7 +276,7 @@ const ContactPage = (props : any) => {
                                                         ]}
                                                     >
                                                         <div className="input-group">
-                                                            <Input type="text" style={{height: "45px"}}
+                                                            <InputAntd type="text" style={{height: "45px"}}
                                                                    className="form-control"
                                                                    placeholder="Please enter my phone number"
                                                                    maxLength={12}

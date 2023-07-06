@@ -97,8 +97,8 @@ const HomePage = (props : any) => {
                     You can find all nail-related services, from ${[...services?.services]?.map(index => `${index?.name}`)}. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, 
                     we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. 
                     You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
-
                     <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - professional nails care services in Malta,NY 12118`}/>
+
                 </Head>
                 <Carousel
                     fullHeightHover={false}
