@@ -18,3 +18,11 @@
 @import "style2.min.css";
 @import "style3.min.css";
 @import "style4.min.css";
+
+* {
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
