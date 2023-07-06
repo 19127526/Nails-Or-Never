@@ -74,7 +74,7 @@ const AddParentServicePage = () => {
           <Form.Item
             name="description"
             label="Description">
-            <InputTextarea id="description" rows={3} cols={50}/>
+            <InputTextarea id="description" placeholder="Enter description"  rows={3} cols={25}/>
           </Form.Item>
           <Form.Item
             label="Image"
