@@ -17,7 +17,7 @@ const NotFound = () => {
             <meta name="viewport" content="initial-scale=1, width=device-width"/>
             <meta name="robots" content="max-image-preview:large"/>
               <link ref="canonical" href="https://nailsornever.com"/>
-            <title>Empty Page-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
+            <title>Empty Page - {process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
             <meta name="description" content={`We have many years of experience in the
                                 nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
                                 soothing atmosphere and more notable for its qualified and certified professionals. You
@@ -26,7 +26,7 @@ const NotFound = () => {
                   content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,Empty extensions`}/>
             <meta property="og:url" content="https://nailsornever.com/"/>
             <meta property="og:type" content="Website"/>
-            <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp-Empty; SPA`}/>
+            <meta property="og:title" content={`Empty Page - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
             <meta property="og:description" content={`We have many years of experience in the
                                 nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
                                 soothing atmosphere and more notable for its qualified and certified professionals. You

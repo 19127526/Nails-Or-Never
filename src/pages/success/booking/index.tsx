@@ -21,7 +21,7 @@ const SuccessBookPage = (props : any) => {
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="robots" content="max-image-preview:large"/>
                   <link ref="canonical" href="https://nailsornever.com"/>
-                <title>Booking Success-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
+                <title>Booking Success - {process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
                 <meta name="description" content={`We have many years of experience in the
                                 nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
                                 soothing atmosphere and more notable for its qualified and certified professionals. You
@@ -30,14 +30,14 @@ const SuccessBookPage = (props : any) => {
                       content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,Booking Success extensions`}/>
                 <meta property="og:url" content="https://nailsornever.com/"/>
                 <meta property="og:type" content="Website"/>
-                <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp-Booking Success; SPA`}/>
+                <meta property="og:title" content={`Booking Success - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                 <meta property="og:description" content={`We have many years of experience in the
                                 nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
                                 soothing atmosphere and more notable for its qualified and certified professionals. You
                                 will feel the difference the minute you walk through our door.`}/>
                 <meta property="og:image"
                       content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
-                <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
+                <meta name="generator"  content={`Booking Success - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
             </Head>
 
             <div className="page-title"

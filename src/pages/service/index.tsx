@@ -32,19 +32,19 @@ const ServicesPage = (props: any) => {
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="max-image-preview:large"/>
                       <link ref="canonical" href="https://nailsornever.com"/>
-                    <title>Services Nail-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
+                    <title>Services Nail - {process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
                     <meta name="description" content={` In ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, we provide some service such as 
                     ${[...services?.services]?.map(index => `${index?.name}`)}. You can booking service in my website`}/>
                     <meta name="keywords"
                           content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,${[...services?.services]?.map(index => `${index?.name}`)} extensions`}/>
                     <meta property="og:url" content="https://nailsornever.com/"/>
                     <meta property="og:type" content="Website"/>
-                    <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp-Service; SPA`}/>
+                    <meta property="og:title" content={`Services Nail - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                     <meta property="og:description" content={` In ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, we provide some service such as 
                     ${[...services?.services]?.map(index => `${index?.name}`)}. You can booking service in my website`}/>
                     <meta property="og:image"
                           content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
-                    <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
+                    <meta name="generator"  content={`Services Nail - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                 </Head>
 
                 <div className="page-title"

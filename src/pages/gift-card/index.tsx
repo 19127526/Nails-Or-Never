@@ -34,7 +34,7 @@ const GiftCardPage = (props : any) => {
             <Head>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="generator" content="Nails Or Never"/>
-                <title>Gift card-{process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
+                <title>Gift card - {process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
                 <meta charSet="utf-8"/>
                 <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
@@ -50,7 +50,7 @@ const GiftCardPage = (props : any) => {
                       content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,GiftCard extensions`}/>
                 <meta property="og:url" content="https://nailsornever.com/"/>
                 <meta property="og:type" content="Website"/>
-                <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp-GiftCard; SPA`}/>
+                <meta property="og:title" content={`Gift card - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                 <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118,
                         ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
                         mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials.
@@ -58,7 +58,7 @@ const GiftCardPage = (props : any) => {
                         Let your sweetheart know how much you love and care for him/her by sending our love cards! Buy our gift card for your loved one.`}/>
                 <meta property="og:image"
                       content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
-                <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
+                <meta name="generator"  content={`Gift card - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
             </Head>
             <div className="page-title"
                  style={{backgroundImage: `url(${image.src})`}}>
