@@ -15,14 +15,14 @@ const {TextArea} = InputAntd;
 interface emptyContactInter {
     name: any,
     email: any,
-    phone: any,
+    phone: string,
     message: any,
 }
 
 const emptyContact: emptyContactInter = {
     name: undefined,
     email: undefined,
-    phone: undefined,
+    phone: '',
     message: undefined
 }
 const ContactPage = (props: any) => {
@@ -39,7 +39,7 @@ const ContactPage = (props: any) => {
         let num = e.target.value;
         if (num.toString().length == 3 || num.toString().length == 7) {
             if (e.target.value.length > contact?.phone?.length) {
-                setContact({...contact, phone: num + '-'})
+                setContact({...contact, phone: `${num}-`})
             } else {
                 setContact({...contact, phone: num})
             }
@@ -297,7 +297,7 @@ const ContactPage = (props: any) => {
                                                                        max={12}
                                                                        aria-valuemax={12}
                                                                        onChange={(e) => handleChangePhoneNumber(e)}
-                                                                       value={contact?.phone.toString()}/>
+                                                                       value={contact?.phone}/>
                                                         </div>
                                                     </Form.Item>
                                                 </div>
