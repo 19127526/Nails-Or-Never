@@ -75,7 +75,7 @@ const ParentServicePage = () => {
     data: listServiceByParentName,
     mutate: mutateListService,
     error
-  } = useSWR(`list-sub-service-by-parent-id-${parentId}`, () => getListServicesById({id: parentId,}));
+  } = useSWR(`list-sub-service-by-parent-id-${parentId}`, () => getListServicesById({id: parentId, page : 1, limit : 9999999999}));
   useEffect(() => {
     dispatch(turnOnLoading());
     const getDetailParentService = async () => {
