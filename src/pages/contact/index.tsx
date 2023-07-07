@@ -3,14 +3,14 @@ import Head from "next/head";
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
+// import FacebookIcon from "@mui/icons-material/Facebook";
+// import InstagramIcon from "@mui/icons-material/Instagram";
+// import {Snackbar} from "@mui/material";
 import {Form, Input as InputAntd} from "antd";
 import {
     Input as InputMui
 } from "@mui/material";
 import {postContact} from "@/api-client/contact/Contact.api";
-import {Snackbar} from "@mui/material";
 import image from "../../public/images/Untitled.jpeg"
 import "./index.css"
 
@@ -177,14 +177,14 @@ const ContactPage = (props: any) => {
 
                 </Head>
 
-                <Snackbar
-                    autoHideDuration={3000}
-                    style={{marginTop: "50px"}}
-                    open={isOpen?.state as boolean}
-                    anchorOrigin={{vertical: "top", horizontal: "right"}}
-                    onClose={() => setIsOpen({...isOpen, state: false})}
-                    message={`${isOpen?.message}`}
-                />
+                {/*<Snackbar*/}
+                {/*    autoHideDuration={3000}*/}
+                {/*    style={{marginTop: "50px"}}*/}
+                {/*    open={isOpen?.state as boolean}*/}
+                {/*    anchorOrigin={{vertical: "top", horizontal: "right"}}*/}
+                {/*    onClose={() => setIsOpen({...isOpen, state: false})}*/}
+                {/*    message={`${isOpen?.message}`}*/}
+                {/*/>*/}
 
                 <div className="page-title"
                      style={{backgroundImage: `url(${image.src})`}}>
@@ -237,13 +237,13 @@ const ContactPage = (props: any) => {
                                             <h4>Social Media</h4>
                                             <ul className="list-social">
                                                 <li><a target="_blank" href="#">
-                                                    <FacebookIcon className="fa-solid fa-calendar-days"
-                                                                  sx={{fontSize: 20}}/>
+                                                    {/*<FacebookIcon className="fa-solid fa-calendar-days"*/}
+                                                    {/*              sx={{fontSize: 20}}/>*/}
                                                 </a></li>
 
                                                 <li><a target="_blank" href="#">
-                                                    <InstagramIcon className="fa-solid fa-calendar-days"
-                                                                   sx={{fontSize: 20}}/>
+                                                    {/*<InstagramIcon className="fa-solid fa-calendar-days"*/}
+                                                    {/*               sx={{fontSize: 20}}/>*/}
                                                 </a></li>
                                             </ul>
                                         </div>
@@ -267,6 +267,7 @@ const ContactPage = (props: any) => {
 
                                                 <div className="col-md-12">
                                                     <Form.Item
+                                                        className="ant-form-item css-dev-only-do-not-override-1wazalj ant-form-item-with-help ant-form-item-has-error"
                                                         name="name"
                                                         label="Full Name"
                                                         rules={[
@@ -290,6 +291,7 @@ const ContactPage = (props: any) => {
                                                 </div>
                                                 <div className="col-md-6">
                                                     <Form.Item
+                                                        className="ant-form-item css-dev-only-do-not-override-1wazalj ant-form-item-with-help ant-form-item-has-error"
                                                         name="email"
                                                         label="Email"
                                                         rules={[
@@ -318,6 +320,7 @@ const ContactPage = (props: any) => {
 
                                                 <div className="col-md-6">
                                                     <Form.Item
+                                                        className="ant-form-item css-dev-only-do-not-override-1wazalj ant-form-item-with-help ant-form-item-has-error"
                                                         style={{
                                                             WebkitUserSelect: "none",
                                                             KhtmlUserSelect: "none",
@@ -380,6 +383,7 @@ const ContactPage = (props: any) => {
 
                                                 <div className="col-lg-12">
                                                     <Form.Item
+                                                        className="ant-form-item css-dev-only-do-not-override-1wazalj ant-form-item-with-help ant-form-item-has-error"
                                                         name="message"
                                                         label="Message"
                                                         rules={[
