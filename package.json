@@ -29,6 +29,7 @@
     "nextjs-toploader": "^1.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-imask": "^7.1.0-alpha.0",
     "react-material-ui-carousel": "^3.4.2",
     "react-number-format": "^5.2.2",
     "react-query": "^3.39.3",

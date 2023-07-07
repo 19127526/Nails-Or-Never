@@ -1,13 +1,9 @@
 import { Inter } from 'next/font/google'
 import React, {ReactNode, useEffect} from "react";
-import {useRouter} from "next/navigation";
 import LoadingComponent from "@/components/loading";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
-import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
-import {turnOffLoading, turnOnLoading} from "@/components/loading/index.actions";
-import {useDispatch, useSelector} from "react-redux";
-import {Spin} from "antd";
+;
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,9 +13,6 @@ export const metadata = {
 }
 
 const MainLayout = ({children}: { children: ReactNode }) => {
-    const LoadingReducer = useSelector((state : any) => state.LoadingPage);
-    const dispatch = useDispatch()
-    const isLoading = LoadingReducer?.isLoading;
     return (
         <div data-rsssl="1" className="home page-template-default page page-id-64">
             <LoadingComponent/>

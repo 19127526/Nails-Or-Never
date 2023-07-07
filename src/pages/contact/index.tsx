@@ -6,23 +6,98 @@ import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import {Form, Input as InputAntd} from "antd";
+import {
+    Input as InputMui
+} from "@mui/material";
 import {postContact} from "@/api-client/contact/Contact.api";
 import {Snackbar} from "@mui/material";
 import image from "../../public/images/Untitled.jpeg"
+import "./index.css"
+
+
+import { IMaskInput } from 'react-imask';
+import { NumericFormat, NumericFormatProps } from 'react-number-format';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 const {TextArea} = InputAntd;
+
+
+//interface CustomProps {
+//    onChange: (event: { target: { name: string; value: string } }) => void;
+//    name: string;
+//}
+//
+// const TextMaskCustom = React.forwardRef<HTMLElement, CustomProps>(
+//     function TextMaskCustom(props, ref) {
+//         const { onChange, ...other } = props;
+//         return (
+//             <IMaskInput
+//                 {...other}
+//                 mask="(#00) 000-0000"
+//                 definitions={{
+//                     '#': /[1-9]/,
+//                 }}
+//                 inputRef={ref as any}
+//                 onAccept={(value: any) => onChange({ target: { name: props.name, value } })}
+//                 overwrite
+//             />
+//         );
+//     },
+// );
+//
+//
+// interface State {
+//     textmask: string;
+// }
+//
+// function FormattedInputs() {
+//     const [values, setValues] = React.useState<State>({
+//         textmask: ''
+//     });
+//
+//     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//         setValues({
+//             ...values,
+//             [event.target.name]: event.target.value,
+//         });
+//     };
+//
+//     return (
+//         <Box
+//             sx={{
+//                 '& > :not(style)': {
+//                     m: 1,
+//                 },
+//             }}
+//         >
+//             <FormControl variant="standard">
+//                 <InputLabel htmlFor="formatted-text-mask-input">react-imask</InputLabel>
+//                 <InputMui
+//                     value={values.textmask}
+//                     onChange={handleChange}
+//                     name="textmask"
+//                     id="formatted-text-mask-input"
+//                     inputComponent={TextMaskCustom as any}
+//                 />
+//             </FormControl>
+//         </Box>
+//     );
+// }
+
 
 interface emptyContactInter {
     name: any,
     email: any,
-    phone: string,
+    phone: any,
     message: any,
 }
 
 const emptyContact: emptyContactInter = {
     name: undefined,
     email: undefined,
-    phone: '',
+    phone: undefined,
     message: undefined
 }
 const ContactPage = (props: any) => {
@@ -39,7 +114,7 @@ const ContactPage = (props: any) => {
         let num = e.target.value;
         if (num.toString().length == 3 || num.toString().length == 7) {
             if (e.target.value.length > contact?.phone?.length) {
-                setContact({...contact, phone: `${num}-`})
+                setContact({...contact, phone: num + '-'})
             } else {
                 setContact({...contact, phone: num})
             }
@@ -182,7 +257,7 @@ const ContactPage = (props: any) => {
                                             <h2 className="title mb-0">Get in touch</h2>
                                             <p>Questions regarding our? Fill out the form below.</p>
                                         </div>
-
+                                        {/*<FormattedInputs/>*/}
                                         <div className="col-md-12" style={{marginTop: "10px"}}>
                                             <Form className="row g-3"
                                                   size={"middle"}
@@ -206,6 +281,7 @@ const ContactPage = (props: any) => {
                                                             <InputAntd type="text" style={{height: "45px"}}
                                                                        className="form-control"
                                                                        value={contact?.name}
+
                                                                        onChange={(e) => handleChangeInputText(e, 'name')}
                                                                        placeholder="Please enter full name"
                                                             />

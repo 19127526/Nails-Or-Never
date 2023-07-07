@@ -14,7 +14,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import {persistor} from "@/app/store";
 import {store} from "@/app/store";
-import "./_app.css"
 import {getGalleryPagination} from "@/api-client/gallery/Gallery.api";
 import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -54,6 +53,8 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                 {/*<meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - professional nails care services in Malta,NY 12118`}/>*/}
                 <link rel="canonical" href="https://nailsornever.com/"/>
                 <link rel="shortlink" href="https://nailsornever.com/"/>
+                <meta name="google-site-verification" content="TBcO22xEWNnvWsFFwo9V15xyceUknZVvQmk4Z9O36H0" />
+                <link rel="icon"  href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" />
                 <link rel="icon" href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" sizes="32x32"/>
                 <link rel="icon" href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" sizes="192x192"/>
                 <link rel="apple-touch-icon" href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>

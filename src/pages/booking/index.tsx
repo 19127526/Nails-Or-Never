@@ -15,7 +15,7 @@ import {
     Snackbar,
     Step,
     StepButton,
-    Stepper
+    Stepper,
 } from "@mui/material";
 import ContactsIcon from '@mui/icons-material/Contacts';
 import {Checkbox, Descriptions, Form, Input, List as ListAntd, Spin} from 'antd';
@@ -786,8 +786,6 @@ const BookingPage = (props : any) => {
                                                                                        className="form-control"
                                                                                        placeholder="Please enter my phone number"
                                                                                        maxLength={12}
-                                                                                       max={12}
-                                                                                       aria-valuemax={12}
                                                                                        onChange={(e) => handleChangePhoneNumber(e)}
                                                                                        value={information?.phoneNumber.toString()}/>
                                                                             </div>
