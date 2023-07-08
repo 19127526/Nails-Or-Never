@@ -48,3 +48,10 @@ export const convertMinuteToHour = (mins : any) => {
     m = m < 10 ? '0' + m : m;
     return `${h}:${m}`;
 }
+
+export const isInputEmpty = (index : any) => {
+    if(index == undefined || index == '') {
+        return true;
+    }
+    return false
+}

@@ -12,7 +12,7 @@ export const DateInto : any = {
     2 : [8]
 }
 
-export const mainName = 'Nail Or Never'
+export const mainName = 'Nails Or Never'
 
 export const labelHeader : labelHeaderInterFace [] = [
     {
