@@ -9,6 +9,9 @@ import {Snackbar} from "@mui/material";
 import image from "../../public/images/Untitled.jpeg"
 import {isInputEmpty} from "@/utils/fotmar-date-time";
 import {postContact} from "@/api-client/contact/Contact.api";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import EmailIcon from "@mui/icons-material/Email";
 
 
 interface emptyContactInter {
@@ -188,8 +191,8 @@ const ContactPage = (props: any) => {
                                         <div className="col-sm-6">
                                             <div className="contact-info-box">
                                                 <h4>Address</h4>
-                                                <p><i
-                                                    className="fa-solid fa-location-dot d-sm-none me-2"></i>{aboutUs?.address}
+                                                <p><LocationOnIcon className="fa-solid fa-location-dot me-2"/>
+                                                    {aboutUs?.address}
                                                 </p>
                                             </div>
                                         </div>
@@ -198,8 +201,8 @@ const ContactPage = (props: any) => {
                                                 <h4>Email</h4>
                                                 <a className="text-decoration-underline"
                                                    href={`mailto:${aboutUs?.email}`}>
-                                                    <p><i
-                                                        className="fa-solid fa-envelope d-sm-none me-2"></i>{aboutUs?.email}
+                                                    <p><EmailIcon className="fa-solid fa-envelope me-2"/>
+                                                        {aboutUs?.email}
                                                     </p>
                                                 </a>
                                             </div>
@@ -208,8 +211,8 @@ const ContactPage = (props: any) => {
                                             <div className="contact-info-box">
                                                 <h4>Phone</h4>
                                                 <a className="text-decoration-underline" href={`tel:${aboutUs?.tel}`}>
-                                                    <p><i
-                                                        className="fa-solid fa-phone d-sm-none me-2"></i>{aboutUs?.tel}
+                                                    <p> <LocalPhoneIcon className="fa-solid fa-phone me-2"/>
+                                                        {aboutUs?.tel}
                                                     </p>
                                                 </a>
                                             </div>
