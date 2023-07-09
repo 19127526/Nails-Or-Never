@@ -24,7 +24,7 @@ const SuccessBookPage = (props : any) => {
                 <title>Booking Success - {process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
                 <meta name="description" content={`We have many years of experience in the
                                 nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
-                                soothing atmosphere and more notable for its qualified and certified professionals. You
+                                soothing atmosphere and more notable for its qualified and certified Professionals. You
                                 will feel the difference the minute you walk through our door.`}/>
                 <meta name="keywords"
                       content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,Booking Success extensions`}/>
