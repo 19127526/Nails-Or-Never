@@ -17,9 +17,9 @@ const GiftCardSuccessPage = () => {
                 <meta charSet="utf-8"/>
                 <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
-                <meta name="robots" content="max-image-preview:large"/>
+                <meta name="robots" content="index,follow"/>
                   <link ref="canonical" href="https://nailsornever.com"/>
-                <title>Checkout Success - {process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
+                <title>Checkout Success - {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Malta</title>
                 <meta name="description" content={`We have many years of experience in the
                                 nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
                                 soothing atmosphere and more notable for its qualified and certified professionals. You

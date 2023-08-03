@@ -75,9 +75,9 @@ const HomePage = (props : any) => {
                     <meta charSet="utf-8"/>
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
-                    <meta name="robots" content="max-image-preview:large"/>
+                    <meta name="robots" content="index,follow"/>
                       <link ref="canonical" href="https://nailsornever.com"/>
-                    <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118</title>
+                    <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY</title>
                     <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
                     ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
                     mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials. 

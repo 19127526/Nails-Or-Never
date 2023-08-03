@@ -34,11 +34,11 @@ const GiftCardPage = (props : any) => {
             <Head>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="generator" content="Nails Or Never"/>
-                <title>Gift card - {process.env.NEXT_PUBLIC_NAME_PRODUCT}</title>
+                <title>Gift card - {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Malta</title>
                 <meta charSet="utf-8"/>
                 <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
-                <meta name="robots" content="max-image-preview:large"/>
+                <meta name="robots" content="index,follow"/>
                   <link ref="canonical" href="https://nailsornever.com"/>
 
                 <meta name="description" content={`Located conveniently in Malta, NewYork, 12118,
