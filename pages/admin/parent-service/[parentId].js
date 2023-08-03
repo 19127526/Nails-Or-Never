@@ -348,7 +348,7 @@ const ParentServicePage = () => {
     return (
       <>
         <span className="p-column-title">Name</span>
-        {rowData?.description == undefined ? "Empty" : rowData?.description}
+        {rowData?.description == undefined || rowData?.description == null || rowData?.description == '' ? "" : rowData?.description}
       </>
     );
   };
@@ -549,7 +549,7 @@ const ParentServicePage = () => {
             </div>
             <div className="field">
               <label htmlFor="description">Description</label>
-              <InputTextarea id="description" value={product.description}
+              <InputTextarea id="description" value={product.description == null || product.description == '' ? '' : product.description}
                              onChange={(e) => onInputSubServiceChange(e, 'description')} required rows={3} cols={20}/>
             </div>
 
