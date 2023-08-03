@@ -28,26 +28,26 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="generator" content="Nails Or Never"/>
                 <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
-                <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY</title>
+                <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118</title>
 
                 <meta name="keywords"
                       content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,extensions`}/>
                 <meta property="og:url" content="https://nailsornever.com/"/>
                 <meta property="og:type" content="Website"/>
                 <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
-                {/*<meta name="description" content={`Located conveniently in Malta, NewYork, 12118, */}
-                {/*    ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.*/}
-                {/*    mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials. */}
-                {/*    You can find all nail-related services. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, */}
-                {/*    we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. */}
-                {/*    You always feel friendly and welcome from our passionate staff who understand what you want.`}/>*/}
+                <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
+                    ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
+                    mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials. 
+                    You can find all nail-related services. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, 
+                    we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. 
+                    You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
 
-                {/*<meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118, */}
-                {/*    ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.*/}
-                {/*    mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials. */}
-                {/*    You can find all nail-related services. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, */}
-                {/*    we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. */}
-                {/*    You always feel friendly and welcome from our passionate staff who understand what you want.`}/>*/}
+                <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118, 
+                    ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
+                    mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials. 
+                    You can find all nail-related services. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, 
+                    we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. 
+                    You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
                 <meta property="og:image"
                       content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
                 <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
@@ -63,18 +63,6 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
                 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
                 <Script src="https://www.google-analytics.com/analytics.js" />
-
-
-
-                <!-- Google tag (gtag.js) -->
-                {/*<script async src="https://www.googletagmanager.com/gtag/js?id=G-RV9JGF4W8K"/>*/}
-                {/*<script>*/}
-                {/*    window.dataLayer = window.dataLayer || [];*/}
-                {/*    function gtag(){dataLayer.push(arguments);}*/}
-                {/*    gtag('js', new Date());*/}
-
-                {/*    gtag('config', 'G-RV9JGF4W8K');*/}
-                {/*</script>*/}
             </Head>
             <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js"/>
             <Script type="text/javascript" src="https://nails.shoedog.vn/public/window.js"></Script>
@@ -93,10 +81,10 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                     <Suspense fallback={<LoadingComponent />}>
                         <QueryClientProvider client={queryClient}>
                             <SWRConfig value={{fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false}}>
-                                    <Layout>
-                                        <NextTopLoader showSpinner={false} />
-                                        <Component {...pageProps} />
-                                    </Layout>
+                                <Layout>
+                                    <NextTopLoader showSpinner={false} />
+                                    <Component {...pageProps} />
+                                </Layout>
                             </SWRConfig>
                         </QueryClientProvider>
                     </Suspense>
