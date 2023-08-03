@@ -181,10 +181,14 @@ const ParentServicePage = () => {
                                       description: product?.description, time : product?.time,
                                       services_parents : parentId})
           .then(res => {
+            setProduct(emptyProduct);
+            dispatch(turnOffLoading());
+            setSubServiceDialog(false);
             mutateListService()
             toast.current.show({severity: 'success', summary: 'Successful', detail: `Add Service Success`, life: 3000});
           })
           .catch(err => {
+            dispatch(turnOffLoading())
             toast.current.show({severity: 'info', summary: 'Fail', detail: `Add Service Fail`, life: 3000});
 
           })
@@ -194,17 +198,20 @@ const ParentServicePage = () => {
                                         description: product?.description, time : product?.time,
                                         services_parents : product?.services_parents})
           .then(res => {
-            mutateListService()
+            setProduct(emptyProduct);
+            dispatch(turnOffLoading())
+            setSubServiceDialog(false)
+            mutateListService();
+
             toast.current.show({severity: 'success', summary: 'Successful', detail: `Save Service Success`, life: 3000});
 
           })
           .catch(err => {
+            dispatch(turnOffLoading())
             toast.current.show({severity: 'info', summary: 'Fail', detail: `Save Service Fail`, life: 3000});
           })
       }
-      setSubServiceDialog(false)
-      setProduct(emptyProduct);
-      dispatch(turnOffLoading())
+
     }
 
 
@@ -397,19 +404,22 @@ const ParentServicePage = () => {
       dispatch(turnOnLoading());
       await putServiceParent(formData)
         .then(res => {
-          mutateLabelParent()
+          dispatch(turnOffLoading());
+          mutateLabelParent();
+          setFileImageMainList([])
           setParentServiceDialog(false)
           setIsLoadingDetail(prevState => !prevState)
           toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Parent Service Updated', life: 3000 });
         })
         .catch(err => {
+          dispatch(turnOffLoading());
           toast.current.show({ severity: 'info', summary: 'Fail', detail: `${err?.toString()}`, life: 3000 });
           console.log(err)
         })
     }
 
     putServiceParentFunc();
-    dispatch(turnOffLoading());
+
   }
 
   const priceBodyTemplate = (rowData) => {

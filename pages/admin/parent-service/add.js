@@ -44,14 +44,14 @@ const AddParentServicePage = () => {
 
     await postServiceParent(formData)
       .then(res => {
+        dispatch(turnOffLoading())
         mutate()
         toast.current.show({severity: 'success', summary: 'Successful', detail: `Add Service Success`, life: 3000});
-
       })
       .catch(err => {
+        dispatch(turnOffLoading())
         toast.current.show({severity: 'info', summary: 'Fail', detail: `Add service fail (parent service do not same name)`, life: 3000});
       })
-    dispatch(turnOffLoading())
   }
   return ( <div className="col-12">
     <div className="card">

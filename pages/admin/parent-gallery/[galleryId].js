@@ -226,18 +226,19 @@ const ParentGalleryPage = () => {
       const postGalleryParentFnc = async () => {
         await postGallerySub(formData)
           .then(res =>{
+            dispatch(turnOffLoading());
+            setFileImageNewList([]);
+            setSubGalleryAddDialog(false);
             mutateListSubGallery()
             toast.current.show({severity: 'success', summary: 'Successful', detail: `Add Gallery Success`, life: 3000});
           })
           .catch(err => {
-            console.log(err)
+            dispatch(turnOffLoading());
             toast.current.show({severity: 'info', summary: 'Information', detail: `Add Gallery Fail`, life: 3000});
           })
       }
       postGalleryParentFnc();
-      dispatch(turnOffLoading());
-      setFileImageNewList([]);
-      setSubGalleryAddDialog(false);
+
     }
   }
   const editSubGallery = () => {
@@ -257,19 +258,21 @@ const ParentGalleryPage = () => {
       const putGallerySubFnc = async () => {
         await putGallerySub(formData)
           .then(res => {
+            dispatch(turnOffLoading());
+            setFileImageEditList([])
+            setSubGalleryEditDialog(false)
+            setProduct(emptyProduct);
+            setPreviewImageEdit('')
             mutateListSubGallery()
             toast.current.show({severity: 'success', summary: 'Successful', detail: `Edit Gallery Success`, life: 3000});
           })
           .catch(err => {
+            dispatch(turnOffLoading());
             toast.current.show({severity: 'info', summary: 'Information', detail: `Edit Gallery Fail`, life: 3000});
           })
       }
       putGallerySubFnc();
-      dispatch(turnOffLoading());
-      setFileImageEditList([])
-      setSubGalleryEditDialog(false)
-      setProduct(emptyProduct);
-      setPreviewImageEdit('')
+
     }
   };
 

@@ -263,18 +263,20 @@ const GiftCardPage = () => {
     const putGiftCardFnc = async () => {
       await putGiftCard(formData)
         .then(res =>{
+          dispatch(turnOffLoading());
+          setProduct(emptyProduct);
+          hideDialogEditGift();
           mutateListSubGallery()
           toast.current.show({severity: 'success', summary: 'Successful', detail: `Edit Gift Card ${product?.theme} Success`, life: 3000});
         })
         .catch(err => {
-          console.log(err)
+          dispatch(turnOffLoading());
           toast.current.show({severity: 'info', summary: 'Information', detail: `Edit Gift Card ${product?.theme} Fail`, life: 3000});
         })
     }
     putGiftCardFnc();
-    dispatch(turnOffLoading());
-    setProduct(emptyProduct);
-    hideDialogEditGift()
+
+
   }
   const addNewGiftCard = (form) => {
     const formData = new FormData();
@@ -286,17 +288,18 @@ const GiftCardPage = () => {
     const postGiftCardFnc = async () => {
       await postGiftCard(formData)
         .then(res =>{
-          mutateListSubGallery()
+          mutateListSubGallery();
+          dispatch(turnOffLoading());
+          hideDialogAddGift()
           toast.current.show({severity: 'success', summary: 'Successful', detail: `Add Gift Card Success`, life: 3000});
         })
         .catch(err => {
-          console.log(err)
+          dispatch(turnOffLoading());
           toast.current.show({severity: 'info', summary: 'Information', detail: `Add Gift Card Fail`, life: 3000});
         })
     }
     postGiftCardFnc();
-    dispatch(turnOffLoading());
-    hideDialogAddGift()
+
   }
 
 

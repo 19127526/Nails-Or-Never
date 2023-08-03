@@ -329,19 +329,18 @@ const EmployeesPage = () => {
     const putEmployeesFnc = async () => {
       await putEmployees(formData)
         .then(res =>{
-          console.log(res, "err")
-          mutateEmployees()
+          dispatch(turnOffLoading());
+          mutateEmployees();
+          setProduct(emptyProduct);
+          hideDialogEditGift();
           toast.current.show({severity: 'success', summary: 'Successful', detail: `Edit Employees ${product?.theme} Success`, life: 3000});
         })
         .catch(err => {
-          console.log(err)
+          dispatch(turnOffLoading());
           toast.current.show({severity: 'info', summary: 'Information', detail: `Edit Employees ${product?.theme} Fail`, life: 3000});
         })
     }
     putEmployeesFnc();
-    dispatch(turnOffLoading());
-    setProduct(emptyProduct);
-    hideDialogEditGift()
   }
   const addNewGiftCard = (form) => {
     const formData = new FormData();
@@ -357,17 +356,19 @@ const EmployeesPage = () => {
     const postEmployeesFnc = async () => {
       await postEmployees(formData)
         .then(res =>{
+          dispatch(turnOffLoading());
+          hideDialogAddGift()
           mutateEmployees()
           toast.current.show({severity: 'success', summary: 'Successful', detail: `Add Employees Success`, life: 3000});
         })
         .catch(err => {
+          dispatch(turnOffLoading());
           console.log(err)
           toast.current.show({severity: 'info', summary: 'Information', detail: `Add Employees Fail`, life: 3000});
         })
     }
     postEmployeesFnc();
-    dispatch(turnOffLoading());
-    hideDialogAddGift()
+
   }
 
 
