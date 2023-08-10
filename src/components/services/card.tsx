@@ -22,13 +22,18 @@ const CardServiceComponent = (props : any) => {
                     </div>
                     <div className="col-md-8 col-lg-6">
                         <h2 className="service-list-name">{parentService?.name}</h2>
+                        {parentService?.description == null || parentService?.description == '' || parentService?.description == 'null' ?
+                            <></>
+                            :
+                            <h2 className="service-list-description">{parentService?.description}</h2>
+                        }
                         <ul className="service-item-list">
                             {
                                 [...subService]?.map(index =>
                                     <li className="service-item" key={index?.id}>
                                         <div className="box-wrap">
                                             <div className="box-left">
-                                                <div className="service-item-name">{index?.name} ({index?.time} minutes)</div>
+                                                <div className="service-item-name">{index?.name}</div>
                                                     {index?.description == null || index?.description == '' ?
                                                         <></>
                                                         :

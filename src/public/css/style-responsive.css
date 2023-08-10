@@ -144,6 +144,9 @@
     .service-list .service-list-name {
         text-align: center;
     }
+    .service-list .service-list-description {
+        text-align: center;
+    }
 }
 
 @media (max-width: 575.99px) {

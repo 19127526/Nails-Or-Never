@@ -1116,6 +1116,18 @@ ol, ul {
     color: #5e8360;
 }
 
+.service-list .service-list-description {
+    position: relative;
+    margin: 0px 0px 0px 0px;
+    /* padding: 8px 24px; */
+    /* background-color: #fff; */
+    font-family: 'Mollie Glaston', sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: bold;
+    color: #5e8360;
+}
+
 .service-list .service-description {
     font-family: 'Jost', sans-serif;
     font-size: 20px;
