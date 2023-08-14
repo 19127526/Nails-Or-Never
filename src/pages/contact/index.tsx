@@ -192,7 +192,9 @@ const ContactPage = (props: any) => {
                                             <div className="contact-info-box">
                                                 <h4>Address</h4>
                                                 <p><LocationOnIcon className="fa-solid fa-location-dot me-2"/>
-                                                    {aboutUs?.address}
+                                                    <a className="text-decoration-underline" target="_blank" href={`https://goo.gl/maps/2Wa838Gd6xxbD75h7`}>
+                                                        {aboutUs?.address}
+                                                    </a>
                                                 </p>
                                             </div>
                                         </div>

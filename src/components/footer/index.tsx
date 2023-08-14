@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 import {convertWorkingHourToArray, getTimeAndUnit} from "@/utils/format-working-hour";
@@ -21,7 +21,7 @@ const FooterComponent = () => {
         address : undefined,
         footage : undefined
     })
-    useEffect(() => {
+    useLayoutEffect(() => {
         const getDetailAboutUsApi = async () => {
             await getDetailAboutUs()
                 .then(res => {
@@ -84,7 +84,9 @@ const FooterComponent = () => {
                             <div className="footer-col-content">
                                 <p>
                                     <LocationOnIcon className="fa-solid fa-location-dot me-2"/>
-                                    {detailAboutUs?.address} </p>
+                                    <a target="_blank" href={`https://goo.gl/maps/2Wa838Gd6xxbD75h7`}>
+                                    {detailAboutUs?.address} </a>
+                                </p>
                                 <p>
                                     <LocalPhoneIcon className="fa-solid fa-phone me-2"/>
                                     <a href={`tel:${detailAboutUs?.tel}`}>

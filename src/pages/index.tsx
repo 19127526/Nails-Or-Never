@@ -1,5 +1,4 @@
 import MainLayout from "@/components/layout/main";
-import {useDispatch} from "react-redux";
 import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 import {getSubServicePagination} from "@/api-client/service/Services.api";
 import React from "react";
@@ -9,8 +8,6 @@ import {Paper} from '@mui/material'
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Logo from '../images/Logo.png';
-import { Image } from 'antd';
 import {getGalleryPagination} from "@/api-client/gallery/Gallery.api";
 import Head from "next/head";
 import {mainName} from "@/constants/label";

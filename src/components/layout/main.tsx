@@ -3,6 +3,7 @@ import React, {ReactNode, useEffect} from "react";
 import LoadingComponent from "@/components/loading";
 import HeaderComponent from "@/components/header";
 import FooterComponent from "@/components/footer";
+import {usePathname} from "next/navigation";
 ;
 
 const inter = Inter({ subsets: ['latin'] })
@@ -13,9 +14,14 @@ export const metadata = {
 }
 
 const MainLayout = ({children}: { children: ReactNode }) => {
+    const pathname = usePathname();
     return (
         <div data-rsssl="1" className="home page-template-default page page-id-64">
-            <LoadingComponent/>
+            {/*{pathname && pathname.toString() == process.env.NEXT_PUBLIC_HOME_ROUTER ?*/}
+            {/*    <></>*/}
+            {/*    :*/}
+            {/*    <LoadingComponent/>*/}
+            {/*}*/}
             <HeaderComponent/>
                 {children}
             <FooterComponent/>
