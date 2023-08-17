@@ -92,7 +92,7 @@ exports.createBooking = async (req, res) => {
         body= `You have a new booking on ${bookingReq.booking_date} at ${bookingReq.booking_time}. Services include ${servicesBody}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. Thank you. 💖💖💖`;
         const templateAdmin = {
             full_name: "ADMIN",
-            to_email: "19127059@student.hcmus.edu.vn",
+            to_email: "nailsorneverllc@gmail.com",
             title: "New booking",
             body: body,
         }
