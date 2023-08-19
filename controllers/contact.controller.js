@@ -65,7 +65,7 @@ exports.createContact = async (req, res) => {
 `
     const templateAdmin = {
       full_name: body.name,
-      to_email: body.email,
+      to_email: 'nailsorneverllc@gmail.com',
       title: "Contacting Web Page",
       body: bodyMail,
     }
