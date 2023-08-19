@@ -533,7 +533,7 @@ const EmployeesPage = () => {
                     }),
                     ({getFieldValue}) => ({
                       validator(_, value) {
-                        if (value?.length != 12) {
+                        if (value?.length != 10) {
                           return Promise.reject(new Error('Please enter full phone number'));
                         } else {
                           return Promise.resolve();
