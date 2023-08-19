@@ -71,7 +71,9 @@ exports.createBooking = async (req, res) => {
         await booking.updateBooking({finished_time: finishedTime}, {id: id}, trx);
         let employeeRequired = await employee.getEmployeesById(bookingReq.employees_id);
         let servicesBody = listServices.join(", ");
-        let body = `Your service booking has been successfully placed on ${bookingReq.booking_date} at ${bookingReq.booking_time}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. Services include ${servicesBody} .We are going to confirm in the shortest time. Our store is pleased to close to you. Thank you for our purchase. 💖💖💖`;
+        let body = `Your service booking has been successfully placed on ${bookingReq.booking_date}
+         at ${bookingReq.booking_time}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}.
+         Services include ${servicesBody} .We are going to confirm in the shortest time. Our store is pleased to close to you. Thank you for our purchase. 💖💖💖`;
         const templateCustomer = {
             full_name: bookingReq.full_name,
             to_email: bookingReq.email,
@@ -89,7 +91,13 @@ exports.createBooking = async (req, res) => {
             console.log('FAILED...', error);
         });
 
-        body= `You have a new booking on ${bookingReq.booking_date} at ${bookingReq.booking_time}. Services include ${servicesBody}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. Thank you. 💖💖💖`;
+        body= `You have a new booking on ${bookingReq.booking_date} 
+        at ${bookingReq.booking_time}. Services include ${servicesBody}. The customer's name is 
+        ${bookingReq.full_name}. Customer's email and phone number are ${bookingReq.email} and 
+        ${bookingReq.cellphone_number}.  ${bookingReq.appointment_note == undefined || bookingReq.appointment_note == null ? 
+          `the customer's note is ${bookingReq.appointment_note}` : ``}. 
+          Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. 
+        Thank you. 💖💖💖`;
         const templateAdmin = {
             full_name: "ADMIN",
             to_email: "nailsorneverllc@gmail.com",
