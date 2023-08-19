@@ -95,7 +95,7 @@ exports.createBooking = async (req, res) => {
         at ${bookingReq.booking_time}. Services include ${servicesBody}. The customer's name is 
         ${bookingReq.full_name}. Customer's email and phone number are ${bookingReq.email} and 
         ${bookingReq.cellphone_number}.  ${bookingReq.appointment_note != undefined && bookingReq.appointment_note != null ? 
-          `the customer's note is ${bookingReq.appointment_note}` : ``}. 
+          `The customer's note is ${bookingReq.appointment_note}` : ``}. 
           Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. 
         Thank you. 💖💖💖`;
         const templateAdmin = {
