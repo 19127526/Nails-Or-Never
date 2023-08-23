@@ -791,7 +791,7 @@ const BookingPage = (props : any) => {
                                                                                        className="form-control"
                                                                                        placeholder="Please enter my phone number"
                                                                                        maxLength={12}
-                                                                                       inputmode="numeric"
+                                                                                       inputMode="numeric"
                                                                                        pattern="[0-9]*"
                                                                                        onChange={(e) => handleChangePhoneNumber(e)}
                                                                                        value={information?.phoneNumber.toString()}/>
