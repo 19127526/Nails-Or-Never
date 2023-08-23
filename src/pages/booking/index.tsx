@@ -18,7 +18,7 @@ import {
     Stepper,
 } from "@mui/material";
 import ContactsIcon from '@mui/icons-material/Contacts';
-import {Checkbox, Descriptions, Form, Input, List as ListAntd, Spin} from 'antd';
+import {Checkbox, Descriptions, Form, Input, InputNumber, List as ListAntd, Spin} from 'antd';
 import VirtualList from 'rc-virtual-list';
 import {getAllEmployee, getFreeTimeByDate, getFreeTimeByEmIdAndDate} from "@/api-client/employee/Employee.api";
 import {getSubServicePagination} from "@/api-client/service/Services.api";
@@ -738,7 +738,8 @@ const BookingPage = (props : any) => {
                                                                             style={{
                                                                                 WebkitUserSelect :"none",
                                                                                 KhtmlUserSelect : "none",
-                                                                                MozUserSelect : "none", msUserSelect : "none",
+                                                                                MozUserSelect : "none",
+                                                                                msUserSelect : "none",
                                                                                 userSelect : "none"
                                                                             }}
                                                                             name="cellphone_number"
@@ -779,18 +780,23 @@ const BookingPage = (props : any) => {
                                                                         >
                                                                             <div className="input-group">
                                                                                 <Input type="text"
-                                                                                       style={{height: "45px", WebkitUserSelect :"none",
+                                                                                       style={{
+                                                                                           height: "45px",
+                                                                                           WebkitUserSelect :"none",
                                                                                            KhtmlUserSelect : "none",
-                                                                                           MozUserSelect : "none", msUserSelect : "none",
-                                                                                           userSelect : "none"}}
+                                                                                           MozUserSelect : "none",
+                                                                                           msUserSelect : "none",
+                                                                                           userSelect : "none"
+                                                                                       }}
                                                                                        className="form-control"
                                                                                        placeholder="Please enter my phone number"
                                                                                        maxLength={12}
+                                                                                       inputmode="numeric"
+                                                                                       pattern="[0-9]*"
                                                                                        onChange={(e) => handleChangePhoneNumber(e)}
                                                                                        value={information?.phoneNumber.toString()}/>
                                                                             </div>
                                                                         </Form.Item>
-
 
                                                                         <Form.Item
                                                                             name="appointment_note"
