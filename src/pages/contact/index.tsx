@@ -277,6 +277,8 @@ const ContactPage = (props: any) => {
                                                                    id="phone"
                                                                    maxLength={12} placeholder="Enter your phone number"
                                                                    value={contact?.phone as any}
+                                                                   inputMode="numeric"
+                                                                   pattern="[0-9]*"
                                                                    onChange={(e) => handleChangePhoneNumber(e as any)}/>
                                                         </div>
                                                         {
