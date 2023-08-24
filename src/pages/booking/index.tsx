@@ -730,14 +730,11 @@ const BookingPage = (props : any) => {
                                                                             ]}
                                                                         >
 
-                                                                            <div
-                                                                                // className="input-group"
-                                                                            >
+                                                                            <div className="input-group">
                                                                                 <Input type="text"
                                                                                        style={{height: "45px"}}
-                                                                                       // className="form-control"
+                                                                                       className="form-control"
                                                                                        placeholder="Please enter my email"
-
                                                                                        value={information?.email}
                                                                                        onChange={(e) => handeChangeInputText(e, 'email')}
                                                                                 />

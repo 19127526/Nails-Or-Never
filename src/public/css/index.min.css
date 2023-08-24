@@ -27,3 +27,7 @@
     -ms-user-select:none;
     user-select:none;
 }
+
+input {
+    touch-action: none !important;
+}
