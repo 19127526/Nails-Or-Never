@@ -284,7 +284,6 @@ const CheckOutPage = () => {
                                                                            maxLength={12}
                                                                            max={12}
                                                                            inputMode="numeric"
-                                                                           pattern="[0-9]*"
                                                                            aria-valuemax={12}
                                                                            onChange={(e) => handleChangePhoneNumber(e)}
                                                                            value={phoneNumber.toString()}/>

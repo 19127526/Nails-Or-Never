@@ -784,7 +784,6 @@ const BookingPage = (props : any) => {
                                                                                        placeholder="Please enter my phone number"
                                                                                        maxLength={12}
                                                                                        inputMode="numeric"
-                                                                                       pattern="[0-9]*"
                                                                                        onChange={(e) => handleChangePhoneNumber(e)}
                                                                                        value={information?.phoneNumber.toString()}/>
                                                                             </div>
