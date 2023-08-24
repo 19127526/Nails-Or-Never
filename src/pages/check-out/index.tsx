@@ -21,7 +21,6 @@ const CheckOutPage = () => {
         state: false,
         message: ''
     });
-    console.log("phoneNumber", phoneNumber)
     const handleChangePhoneNumber = (e: any) => {
         let num = e.target.value;
         if (num.toString().length == 4 || num.toString().length == 8) {

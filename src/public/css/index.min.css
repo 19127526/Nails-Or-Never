@@ -20,14 +20,10 @@
 @import "style4.min.css";
 
 @import "~antd/dist/reset.css";
-* {
-    -webkit-user-select:none;
-    -khtml-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-}
-
-input {
-    touch-action: none !important;
-}
+/** {*/
+/*    -webkit-user-select:none;*/
+/*    -khtml-user-select:none;*/
+/*    -moz-user-select:none;*/
+/*    -ms-user-select:none;*/
+/*    user-select:none;*/
+/*}*/
