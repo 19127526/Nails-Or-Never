@@ -373,7 +373,14 @@ const BookingPage = (props : any) => {
 
     const handleChangePhoneNumber = (e : any) => {
         let num = e.target.value;
-        if (num.toString().length == 3 || num.toString().length == 7) {
+        if (num.toString().length == 4 || num.toString().length == 8) {
+            if (e.target.value.length > information?.phoneNumber?.length) {
+                setInformation({...information, phoneNumber: information?.phoneNumber+'-' +   num.slice(-1)})
+            } else {
+                setInformation({...information, phoneNumber: num})
+            }
+        }
+        else if (num.toString().length == 3 || num.toString().length == 7) {
             if (e.target.value.length > information?.phoneNumber?.length) {
                 setInformation({...information, phoneNumber: num + '-'})
             } else {

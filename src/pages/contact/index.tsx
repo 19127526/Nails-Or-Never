@@ -42,7 +42,14 @@ const ContactPage = (props: any) => {
     const handleChangePhoneNumber = (e: any) => {
         let num = e.target.value;
         if (isNaN(num) == false || num =='-' ) {
-            if (num.toString().length == 3 || num.toString().length == 7) {
+            if (num.toString().length == 4 || num.toString().length == 8) {
+                if (e.target.value.length >  contact?.phone?.length) {
+                    setContact({...contact, phone:  contact?.phone+'-' +   num.slice(-1)})
+                } else {
+                    setContact({...contact, phone: num})
+                }
+            }
+            else if (num.toString().length == 3 || num.toString().length == 7) {
                 if (e.target.value.length > contact?.phone?.length) {
                     setContact({...contact, phone: num + '-'})
                 } else {

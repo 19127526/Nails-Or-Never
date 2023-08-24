@@ -21,15 +21,24 @@ const CheckOutPage = () => {
         state: false,
         message: ''
     });
+    console.log("phoneNumber", phoneNumber)
     const handleChangePhoneNumber = (e: any) => {
         let num = e.target.value;
-        if (num.toString().length == 3 || num.toString().length == 7) {
+        if (num.toString().length == 4 || num.toString().length == 8) {
+            if (e.target.value.length > phoneNumber?.length) {
+                setPhoneNumber(  phoneNumber+'-' +   num.slice(-1))
+            } else {
+                setPhoneNumber(num)
+            }
+        }
+        else if (num.toString().length == 3 || num.toString().length == 7) {
             if (e.target.value.length > phoneNumber?.length) {
                 setPhoneNumber(num + '-')
             } else {
                 setPhoneNumber(num)
             }
-        } else {
+        }
+        else {
             setPhoneNumber(num)
         }
     }
