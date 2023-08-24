@@ -742,13 +742,6 @@ const BookingPage = (props : any) => {
                                                                         </Form.Item>
 
                                                                         <Form.Item
-                                                                            style={{
-                                                                                WebkitUserSelect :"none",
-                                                                                KhtmlUserSelect : "none",
-                                                                                MozUserSelect : "none",
-                                                                                msUserSelect : "none",
-                                                                                userSelect : "none"
-                                                                            }}
                                                                             name="cellphone_number"
                                                                             label="Phone Number"
                                                                             rules={[
@@ -787,14 +780,6 @@ const BookingPage = (props : any) => {
                                                                         >
                                                                             <div className="input-group">
                                                                                 <Input type="text"
-                                                                                       style={{
-                                                                                           height: "45px",
-                                                                                           WebkitUserSelect :"none",
-                                                                                           KhtmlUserSelect : "none",
-                                                                                           MozUserSelect : "none",
-                                                                                           msUserSelect : "none",
-                                                                                           userSelect : "none"
-                                                                                       }}
                                                                                        className="form-control"
                                                                                        placeholder="Please enter my phone number"
                                                                                        maxLength={12}

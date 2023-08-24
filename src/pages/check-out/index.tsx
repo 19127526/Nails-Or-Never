@@ -242,12 +242,6 @@ const CheckOutPage = () => {
                                                             <Form.Item
                                                                 name="phoneNumber"
                                                                 label="Phone Number"
-                                                                style={{
-                                                                    WebkitUserSelect :"none",
-                                                                    KhtmlUserSelect : "none",
-                                                                    MozUserSelect : "none", msUserSelect : "none",
-                                                                    userSelect : "none"
-                                                                }}
                                                                 rules={[
                                                                     {
                                                                         required: true,
@@ -284,10 +278,7 @@ const CheckOutPage = () => {
                                                             >
 
                                                                 <div className="input-group">
-                                                                    <Input type="text" style={{height: "45px", WebkitUserSelect :"none",
-                                                                        KhtmlUserSelect : "none",
-                                                                        MozUserSelect : "none", msUserSelect : "none",
-                                                                        userSelect : "none"}}
+                                                                    <Input type="text" style={{height: "45px"}}
                                                                            className="form-control"
                                                                            placeholder="Please enter my phone number"
                                                                            maxLength={12}
