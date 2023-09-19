@@ -30,9 +30,9 @@ export const convertWorkingHourToArray = (text : any) => {
 
 
 export const convertWorkingHourToBookingArray = (text : any) => {
-    const arrTemp = text.toString().split(', ');
+    const arrTemp = text?.toString().split(', ');
     const arrResult = []
-    for(let i = 0; i< arrTemp.length; i++) {
+    for(let i = 0; i< arrTemp?.length; i++) {
         const data = arrTemp[i].toString().split(": ")
         const time = data[1].split(" - ")
         arrResult.push({

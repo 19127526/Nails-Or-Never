@@ -599,11 +599,10 @@ const BookingPage = (props : any) => {
                                                                             <span>{selectedBooking?.employee?.id == item?.id ? "Cancel" : "Select"}</span>
                                                                         </button>]}>
                                                                             <ListAntd.Item.Meta
-                                                                                avatar={<AvatarMui style={{
+                                                                                avatar={<AvatarMui src={item?.image} style={{
                                                                                     marginLeft: "5px",
                                                                                     backgroundRepeat: "no-repeat",
                                                                                     backgroundPosition: "center",
-                                                                                    backgroundImage: `url(${item?.image})`,
                                                                                     backgroundSize: "contain"
                                                                                 }}/>}
                                                                                 // src={item?.image}
