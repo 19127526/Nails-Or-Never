@@ -5,6 +5,11 @@ exports.createBooking = (data,trx) => {
         .insert(data)
 }
 
+exports.statistic = (date) => {
+    return db('booking')
+        .where('booking_date', date)
+}
+
 exports.insertBookingService = (data, trx) => {
     return db('booking_services')
         .transacting(trx)

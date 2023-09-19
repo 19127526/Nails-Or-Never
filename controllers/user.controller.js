@@ -41,7 +41,6 @@ exports.createAdmin = async (req, res) => {
 }
 
 exports.userSignIn = async (req, res) => {
-    console.log(req.ip)
     const {username, password} = req.body;
     try {
         const user = await User.findUserByUserName(username);
@@ -50,7 +49,7 @@ exports.userSignIn = async (req, res) => {
         const isPasswordMatch = await User.comparePassword(password, user.password);
         if (!isPasswordMatch) return res.status(400).send({'error': 'Password is incorrect'});
 
-        const otp= otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
+        const otp = otpGenerator.generate(6, {upperCaseAlphabets: false, specialChars: false});
         await User.findByIdAndUpdateOTP(user.id, otp);
         const template = {
             otp,
@@ -59,9 +58,9 @@ exports.userSignIn = async (req, res) => {
         emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_2_ID, template, {
             publicKey: process.env.EMAILJS_PUBLIC_KEY,
             privateKey: process.env.EMAILJS_PRIVATE_KEY,
-        }).then(function(response) {
+        }).then(function (response) {
             console.log('SUCCESS!', response.status, response.text);
-        }, function(error) {
+        }, function (error) {
             console.log('FAILED...', error);
         });
         return res.json({success: true})
@@ -71,7 +70,7 @@ exports.userSignIn = async (req, res) => {
 }
 
 exports.userSignInCheckOTP = async (req, res) => {
-    try{
+    try {
         const {username, password, otp} = req.body;
         const user = await User.findUserByUserName(username);
         if (!user) return res.status(400).send({'error': 'User not found'});
@@ -89,19 +88,19 @@ exports.userSignInCheckOTP = async (req, res) => {
             try {
                 const decoded = jwt.verify(user.token, process.env.JWT_SECRET);
                 if (decoded.exp > Date.now() / 1000) {
-                    return res.json({'status': 'success', user:userResponse(user)});
+                    return res.json({'status': 'success', user: userResponse(user)});
                 }
             } catch (err) {
                 const newToken = jwt.sign({username: user.username}, process.env.JWT_SECRET, {expiresIn: expiredTime});
                 await User.findByIdAndUpdateToken(user.id, newToken);
-                return res.json({'status': 'success', user:userResponse(user), token: newToken});
+                return res.json({'status': 'success', user: userResponse(user), token: newToken});
             }
         }
 
         const token = jwt.sign({username: user.username}, process.env.JWT_SECRET, {expiresIn: expiredTime});
         await User.findByIdAndUpdateToken(user.id, token);
-        return res.json({'status': 'success', user:userResponse(user), token});
-    }catch (e) {
+        return res.json({'status': 'success', user: userResponse(user), token});
+    } catch (e) {
         console.log(e)
         return res.status(500).send({'error': 'Internal server error'});
     }

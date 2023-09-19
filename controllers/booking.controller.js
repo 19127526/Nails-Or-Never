@@ -85,17 +85,17 @@ exports.createBooking = async (req, res) => {
         emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_1_ID, templateCustomer, {
             publicKey: process.env.EMAILJS_PUBLIC_KEY,
             privateKey: process.env.EMAILJS_PRIVATE_KEY,
-        }).then(function(response) {
+        }).then(function (response) {
             console.log('SUCCESS!', response.status, response.text);
-        }, function(error) {
+        }, function (error) {
             console.log('FAILED...', error);
         });
 
-        body= `You have a new booking on ${bookingReq.booking_date} 
+        body = `You have a new booking on ${bookingReq.booking_date} 
         at ${bookingReq.booking_time}. Services include ${servicesBody}. The customer's name is 
         ${bookingReq.full_name}. Customer's email and phone number are ${bookingReq.email} and 
-        ${bookingReq.cellphone_number}.  ${bookingReq.appointment_note != undefined && bookingReq.appointment_note != null ? 
-          `The customer's note is ${bookingReq.appointment_note}` : ``}. 
+        ${bookingReq.cellphone_number}.  ${bookingReq.appointment_note != undefined && bookingReq.appointment_note != null ?
+            `The customer's note is ${bookingReq.appointment_note}` : ``}. 
           Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. 
         Thank you. 💖💖💖`;
         const templateAdmin = {
@@ -105,14 +105,14 @@ exports.createBooking = async (req, res) => {
             body: body,
         }
         //mail for admin
-         emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_1_ID, templateAdmin, {
-             publicKey: process.env.EMAILJS_PUBLIC_KEY,
-             privateKey: process.env.EMAILJS_PRIVATE_KEY,
-         }).then(function(response) {
-             console.log('SUCCESS!', response.status, response.text);
-         }, function(error) {
-             console.log('FAILED...', error);
-         });
+        emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_1_ID, templateAdmin, {
+            publicKey: process.env.EMAILJS_PUBLIC_KEY,
+            privateKey: process.env.EMAILJS_PRIVATE_KEY,
+        }).then(function (response) {
+            console.log('SUCCESS!', response.status, response.text);
+        }, function (error) {
+            console.log('FAILED...', error);
+        });
 
         body = `You have a new booking on ${bookingReq.booking_date} at ${bookingReq.booking_time}. Services include ${servicesBody}. Customers will be served by our staff is ${employeeRequired.full_name}-${employeeRequired.id}. Thank you. 💖💖💖`;
         const templateEmployee = {
@@ -123,14 +123,14 @@ exports.createBooking = async (req, res) => {
         }
 
         //mail for employee
-         emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_1_ID, templateEmployee, {
-             publicKey: process.env.EMAILJS_PUBLIC_KEY,
-             privateKey: process.env.EMAILJS_PRIVATE_KEY,
-         }).then(function(response) {
-             console.log('SUCCESS!', response.status, response.text);
-         }, function(error) {
-             console.log('FAILED...', error);
-         });
+        emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_1_ID, templateEmployee, {
+            publicKey: process.env.EMAILJS_PUBLIC_KEY,
+            privateKey: process.env.EMAILJS_PRIVATE_KEY,
+        }).then(function (response) {
+            console.log('SUCCESS!', response.status, response.text);
+        }, function (error) {
+            console.log('FAILED...', error);
+        });
 
         await trx.commit();
         return res.status(200).json({"status": "success"});
@@ -191,6 +191,21 @@ exports.getBookings = async (req, res) => {
             "status": "success",
             "booking": data,
         });
+    } catch (e) {
+        return res.status(500).json({"status": "error", "message": e.message});
+    }
+}
+
+exports.statistic = async (req, res) => {
+    try {
+        let {date} = req.query;
+        date = new Date(date);
+        date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        const data = await booking.statistic(date);
+        return res.status(200).json({
+            "status": "success",
+            "booking": data,
+        })
     } catch (e) {
         return res.status(500).json({"status": "error", "message": e.message});
     }
