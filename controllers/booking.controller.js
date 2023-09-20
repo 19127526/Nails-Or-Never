@@ -1,5 +1,6 @@
 const booking = require("../models/booking.model");
 const employee = require("../models/employees.model");
+const dayoff = require("../models/dayoff.model");
 const services = require("../models/service.model");
 const emailjs = require('@emailjs/nodejs');
 const {parseDate, sumTime, parseLimit, parsePage} = require("../utils/mapper");
@@ -271,6 +272,32 @@ exports.getConfirmation = async (req, res) => {
         return res.sendFile(path.join(__dirname, '../public/confirmation.html'));
     } catch (e) {
         await trx.rollback();
+        return res.status(500).json({"status": "error", "message": e.message});
+    }
+}
+
+exports.handleDayOff = async (req, res) => {
+    try {
+        const date = req.query.date;
+        const from = req.query.from;
+        const to = req.query.to;
+        const body = req.body;
+        await dayoff.createDayOff({
+            date: date,
+            start_time: from,
+            end_time: to,
+            reason: body.reason,
+        })
+        const listBooking = body.bookings;
+        const trx = await booking.transaction();
+        for (let i = 0; i < listBooking.length; i++) {
+            await booking.updateBooking({status: 0}, {id: listBooking[i]}, trx);
+        }
+        await trx.commit();
+        return res.status(200).json({
+            "status": "success",
+        })
+    } catch (e) {
         return res.status(500).json({"status": "error", "message": e.message});
     }
 }
