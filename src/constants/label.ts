@@ -27,10 +27,10 @@ export const labelHeader : labelHeaderInterFace [] = [
         label : "Gallery",
         url : process.env.NEXT_PUBLIC_GALLERY_ROUTER as string
     },
-    {
-        label : "Gift Cards",
-        url : process.env.NEXT_PUBLIC_GIFTCARDS_ROUTER as string
-    },
+    // {
+    //     label : "Gift Cards",
+    //     url : process.env.NEXT_PUBLIC_GIFTCARDS_ROUTER as string
+    // },
     {
         label : "About Us",
         url : process.env.NEXT_PUBLIC_ABOUT_US_ROUTER as string

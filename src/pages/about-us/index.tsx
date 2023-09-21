@@ -90,7 +90,7 @@ const AboutUsPage = (props : any) => {
                                         upon
                                         your experience, please let us know so we can better care for your needs!</p>
                                     <div className="button-group">
-                                        <Link href={process.env.NEXT_PUBLIC_BOOKING_ROUTER as string}>
+                                        <Link target="_blank" href={process.env.NEXT_PUBLIC_BOOKING_URL as string}>
                                             <button className="button button-lg">Book Appointment</button>
                                         </Link>
                                         <Link href={process.env.NEXT_PUBLIC_GIFTCARDS_ROUTER as string}>

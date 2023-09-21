@@ -69,7 +69,12 @@ const GiftCardPage = (props : any) => {
                                 <h3 className="sub-title fs-80">GiftCards</h3>
                                 <h2 className="title text-uppercase text-black">NAILS OR NEVER</h2>
                                 <p className="text-black mb-5">Let your sweetheart know how much you love and care for him/her by sending our love cards! Buy our gift card for your loved one.</p>
-                            </div>
+                             </div>
+                            <h1
+                                className=" title-gift-cards text-uppercase text-black text-center"
+                            >Physical Gift Card - PICK UP ONLY
+                            </h1>
+
                         </div>
                     </div>
                 </div>
