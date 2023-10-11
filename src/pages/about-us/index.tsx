@@ -17,7 +17,7 @@ const AboutUsPage = (props : any) => {
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="index,follow"/>
-                      <link ref="canonical" href="https://nailsornever.com"/>
+                      <link ref="canonical" href="http://nailsornever.com"/>
                     <title>About Us - {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Malta</title>
 
                     <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
@@ -28,7 +28,7 @@ const AboutUsPage = (props : any) => {
                     You always feel friendly and welcome from our passionate staff who understand what you want.${aboutUs?.description}`}/>
                     <meta name="keywords"
                           content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,About Us extensions`}/>
-                    <meta property="og:url" content="https://nailsornever.com/"/>
+                    <meta property="og:url" content="http://nailsornever.com/"/>
                     <meta property="og:type" content="Website"/>
                     <meta property="og:title" content={`About us - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                     <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118, 

@@ -32,7 +32,7 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
 
                 <meta name="keywords"
                       content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,extensions`}/>
-                <meta property="og:url" content="https://nailsornever.com/"/>
+                <meta property="og:url" content="http://nailsornever.com/"/>
                 <meta property="og:type" content="Website"/>
                 <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
                 <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
@@ -51,8 +51,8 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                 <meta property="og:image"
                       content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
                 <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
-                <link rel="canonical" href="https://nailsornever.com/"/>
-                <link rel="shortlink" href="https://nailsornever.com/"/>
+                <link rel="canonical" href="http://nailsornever.com/"/>
+                <link rel="shortlink" href="http://nailsornever.com/"/>
                 <meta name="google-site-verification" content="TBcO22xEWNnvWsFFwo9V15xyceUknZVvQmk4Z9O36H0" />
                 <link rel="icon"  href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" />
                 <link rel="icon" href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" sizes="32x32"/>
