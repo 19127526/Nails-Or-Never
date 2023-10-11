@@ -32,7 +32,7 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
 
                 <meta name="keywords"
                       content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,extensions`}/>
-                <meta property="og:url" content="https://nailsornever.com/"/>
+                <meta property="og:url" content="http://nailsornever.com/"/>
                 <meta property="og:type" content="Website"/>
                 <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
                 <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
@@ -49,33 +49,33 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                     we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. 
                     You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
                 <meta property="og:image"
-                      content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                      content="http://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
                 <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
-                <link rel="canonical" href="https://nailsornever.com/"/>
-                <link rel="shortlink" href="https://nailsornever.com/"/>
+                <link rel="canonical" href="http://nailsornever.com/"/>
+                <link rel="shortlink" href="http://nailsornever.com/"/>
                 <meta name="google-site-verification" content="TBcO22xEWNnvWsFFwo9V15xyceUknZVvQmk4Z9O36H0" />
-                <link rel="icon"  href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" />
-                <link rel="icon" href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" sizes="32x32"/>
-                <link rel="icon" href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" sizes="192x192"/>
-                <link rel="apple-touch-icon" href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
-                <meta name="msapplication-TileImage" content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin=""/>
-                <link rel="preconnect" href="https://fonts.googleapis.com"/>
-                <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
-                <Script src="https://www.google-analytics.com/analytics.js" />
+                <link rel="icon"  href="http://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" />
+                <link rel="icon" href="http://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" sizes="32x32"/>
+                <link rel="icon" href="http://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" sizes="192x192"/>
+                <link rel="apple-touch-icon" href="http://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                <meta name="msapplication-TileImage" content="http://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                <link rel="preconnect" href="http://fonts.gstatic.com" crossOrigin=""/>
+                <link rel="preconnect" href="http://fonts.googleapis.com"/>
+                <link href="http://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+                <Script src="http://www.google-analytics.com/analytics.js" />
             </Head>
-            <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js"/>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/window.js"></Script>
+            <Script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js"/>
+            <Script type="text/javascript" src="http://nails.shoedog.vn/public/window.js"></Script>
             {/*<Script type="text/javascript" src="jquery-3.6.0.min.js" id="jquery-3.6.0-js" strategy="lazyOnload"></Script>*/}
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/aos.js" id="aos-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/flickity.pkgd.min.js" id="flickity-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/slick.min.js" id="slick-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" id="main-js-extra" src="https://nails.shoedog.vn/public/main.js" strategy="lazyOnload" ></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/main.min.js" id="main-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/style.js" id="stylejs-js"  strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="http://nails.shoedog.vn/public/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="http://nails.shoedog.vn/public/aos.js" id="aos-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="http://nails.shoedog.vn/public/flickity.pkgd.min.js" id="flickity-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="http://nails.shoedog.vn/public/slick.min.js" id="slick-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="http://nails.shoedog.vn/public/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" id="main-js-extra" src="http://nails.shoedog.vn/public/main.js" strategy="lazyOnload" ></Script>
+            <Script type="text/javascript" src="http://nails.shoedog.vn/public/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="http://nails.shoedog.vn/public/main.min.js" id="main-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="http://nails.shoedog.vn/public/style.js" id="stylejs-js"  strategy="lazyOnload"></Script>
             <Provider store={store}>
                 <PersistGate loading={<LoadingComponent />} persistor={persistor}>
                     <Suspense fallback={<LoadingComponent />}>

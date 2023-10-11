@@ -31,13 +31,13 @@ const ServicesPage = (props: any) => {
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="index,follow"/>
-                      <link ref="canonical" href="https://nailsornever.com"/>
+                      <link ref="canonical" href="http://nailsornever.com"/>
                     <title>Services - {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Malta</title>
                     <meta name="description" content={` In ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, we provide some service such as 
                     ${[...services?.services]?.map(index => ` ${index?.name}`)}. You can booking service in my website`}/>
                     <meta name="keywords"
                           content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,${[...services?.services]?.map(index => ` ${index?.name}`)} extensions`}/>
-                    <meta property="og:url" content="https://nailsornever.com/"/>
+                    <meta property="og:url" content="http://nailsornever.com/"/>
                     <meta property="og:type" content="Website"/>
                     <meta property="og:title" content={`Services Nail - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                     <meta property="og:description" content={` In ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, we provide some service such as 
@@ -61,7 +61,7 @@ const ServicesPage = (props: any) => {
                     <div className="container-lg">
                         <div className="row justify-content-center gy-5 gx-3 g-lg-5">
                             {
-                                [...services?.services]?.map((index : any) => <CardServiceComponent key={index?.id as any} parentService={index as any} subService={index?.service as any}/>)
+                                [...services?.services]?.map((index : any) => <CardServiceComponent   parentService={index as any} subService={index?.service as any}/>)
                             }
                             <div className="col-lg-12">
                                 <nav className="text-center">

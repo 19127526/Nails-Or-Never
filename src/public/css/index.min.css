@@ -1,23 +1,30 @@
-@import "classic-themes.min.css";
-@import "global.min.css";
-@import "img.min.css";
-@import "style.min.css";
-@import "bootstrap.min.css";
-@import "lightbox.min.css";
-@import "aos.min.css";
-@import "sweetalert2.min.css";
-@import "flickity.min.css";
-@import "slick.min.css";
-@import "slick-theme.css";
-@import "fontawesome.min.css";
-@import "all.min.css";
-@import "style.css";
-@import "style-responsive.css";
-@import "fonts.css";
-@import "style1.min.css";
-@import "style2.min.css";
-@import "style3.min.css";
-@import "style4.min.css";
+/*default*/
+@import "default/classic-themes.min.css";
+@import "default/global.min.css";
+@import "default/img.min.css";
+@import "default/style.min.css";
+@import "default/bootstrap.min.css";
+@import "default/lightbox.min.css";
+@import "default/aos.min.css";
+@import "default/sweetalert2.min.css";
+@import "default/flickity.min.css";
+@import "default/slick.min.css";
+@import "default/slick-theme.css";
+@import "default/fontawesome.min.css";
+@import "default/all.min.css";
+@import "default/style-responsive.css";
+@import "default/style1.min.css";
+@import "default/style2.min.css";
+@import "default/style3.min.css";
+@import "default/style4.min.css";
+@import "default/style.css";
+@import "default/fonts.css";
+
+
+/*Helloween*/
+/*@import "helloween/fonts.css";
+@import "helloween/style.css";*/
+
 
 @import "~antd/dist/reset.css";
 /** {*/

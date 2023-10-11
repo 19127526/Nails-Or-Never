@@ -437,7 +437,7 @@ const BookingPage = (props : any) => {
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="index,follow"/>
-                      <link ref="canonical" href="https://nailsornever.com"/>
+                      <link ref="canonical" href="http://nailsornever.com"/>
                     <title>Booking Service - {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Malta</title>
                     <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
                     ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -446,7 +446,7 @@ const BookingPage = (props : any) => {
                     `}/>
                     <meta name="keywords"
                           content={`AMERICA NAILS &amp; SPA,MALTA,Booking Nail Service extensions`}/>
-                    <meta property="og:url" content="https://nailsornever.com/"/>
+                    <meta property="og:url" content="http://nailsornever.com/"/>
                     <meta property="og:type" content="Website"/>
                     <meta property="og:title" content={`Booking Service Nail - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                     <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118, 

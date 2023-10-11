@@ -1,4 +1,5 @@
-/** @type {import('next').NextConfig} */
+/*
+/!** @type {import('next').NextConfig} *!/
 const nextConfig = {
   pageExtensions: ['actions.ts', 'constraints.ts', 'reducer.ts', 'pages/gift-card', 'tsx', 'ts', 'index.actions.ts'],
 }
@@ -9,3 +10,4 @@ module.exports = {
   },
 }
 module.exports = nextConfig
+*/
