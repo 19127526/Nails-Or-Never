@@ -17,7 +17,7 @@ function Item(props : any) {
     const {item} = props
     return (
         <Paper style={{
-            backgroundImage: "url(https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png)",
+            backgroundImage: "url(http://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png)",
             transition: "background .3s,border .3s,border-radius .3s,box-shadow .3s"}}>
             <div className="banner-content">
                 <div className="container-lg" style={{paddingTop :"20px"}}>
@@ -29,7 +29,7 @@ function Item(props : any) {
                                     {/*    <div className="ratio ratio-16x9">*/}
                                     {/*        <div>*/}
                                     {/*            <img*/}
-                                    {/*                src='https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png'*/}
+                                    {/*                src='http://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png'*/}
                                     {/*                alt={`${mainName}-${item?.name}`}*/}
                                     {/*                loading="lazy"/>*/}
                                     {/*        </div>*/}
@@ -86,7 +86,7 @@ const HomePage = (props : any) => {
                     <meta property="og:url" content="http://nailsornever.com/"/>
                     <meta property="og:type" content="Website"/>
                     <meta property="og:image"
-                          content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                          content="http://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
                     <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
                     <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118, 
                     ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -112,7 +112,7 @@ const HomePage = (props : any) => {
                         <div className="row justify-content-center align-items-center gy-5 gx-3 g-lg-5">
                             <div className="col-sm-9 col-md-8 col-lg-6">
                                 <img className="img-fluid"
-                                     src="https://nails.shoedog.vn/public/images/model-1.png"
+                                     src="http://nails.shoedog.vn/public/images/model-1.png"
                                      alt={mainName}
                                      loading="lazy"/>
                             </div>
