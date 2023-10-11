@@ -5,7 +5,6 @@ import {labelHeader, mainName} from "@/constants/label";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Link from "next/link";
 import {Badge} from "@mui/material";
@@ -95,43 +94,30 @@ const HeaderComponent = () => {
                         </div>
 
                         <div className="button-group justify-content-center">
-                            <Link href={process.env.NEXT_PUBLIC_BOOKING_URL as string}
-                                  target="_blank"
+                            <Link href={process.env.NEXT_PUBLIC_BOOKING_ROUTER as string}
                                   replace
                                   onClick={() => handleClickLabel({label: "", url: ""} as labelHeaderInterFace, true)}>
                                 <button className="button icon-button ms-xl-4">
                                     <CalendarMonthIcon className="fa-solid fa-calendar-days" sx={{fontSize: 18}}
                                                        style={{paddingBottom: "3px", paddingRight: "2px"}}/>
-                                    <span>Book Now</span>
-                                    <span className="sticky">Book Now</span>
+                                    <span>Book Online</span>
+                                    <span className="sticky">Book App</span>
                                 </button>
                             </Link>
+                            <Badge badgeContent={giftCardPage?.cartItem?.length} color="error">
+                                <Link href={process.env.NEXT_PUBLIC_CART_ROUTER as string} replace onClick={() => handleClickLabel({
+                                    label: "",
+                                    url: ""
+                                } as labelHeaderInterFace, true)}>
+                                    <button className="button icon-button">
 
-                            <Link href={process.env.NEXT_PUBLIC_GIFTCARDS_ROUTER as string}
-                                  replace
-                                  onClick={() => handleClickLabel({label: "", url: ""} as labelHeaderInterFace, true)}>
-                                <button className="button icon-button ms-xl-4">
-                                    <CardGiftcardIcon className="fa-solid fa-calendar-days" sx={{fontSize: 18}}
-                                                       style={{paddingBottom: "3px", paddingRight: "2px"}}/>
-                                    <span>Gift Cards</span>
-                                    <span className="sticky">Gift Cards</span>
-                                </button>
-                            </Link>
-                            {/*Check out*/}
-                            {/*<Badge badgeContent={giftCardPage?.cartItem?.length} color="error">*/}
-                            {/*    <Link href={process.env.NEXT_PUBLIC_CART_ROUTER as string} replace onClick={() => handleClickLabel({*/}
-                            {/*        label: "",*/}
-                            {/*        url: ""*/}
-                            {/*    } as labelHeaderInterFace, true)}>*/}
-                            {/*        <button className="button icon-button">*/}
-
-                            {/*            <ShoppingCartIcon className="fa-solid fa-calendar-days" sx={{fontSize: 18}}*/}
-                            {/*                              style={{paddingBottom: "3px", paddingRight: "2px"}}/>*/}
-                            {/*            <span>Checkout</span>*/}
-                            {/*            <span className="sticky">Checkout</span>*/}
-                            {/*        </button>*/}
-                            {/*    </Link>*/}
-                            {/*</Badge>*/}
+                                        <ShoppingCartIcon className="fa-solid fa-calendar-days" sx={{fontSize: 18}}
+                                                          style={{paddingBottom: "3px", paddingRight: "2px"}}/>
+                                        <span>Checkout</span>
+                                        <span className="sticky">Checkout</span>
+                                    </button>
+                                </Link>
+                            </Badge>
                         </div>
                     </nav>
                 </div>
