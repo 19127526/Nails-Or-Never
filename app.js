@@ -34,7 +34,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 var cors = require('cors')
 app.use(cors({
-    origin: ["http://82.180.162.210:3000", "http://82.180.162.210:3001", "http://admin.nailsornever.com", "http://nailsornever.com:3000", "http://nailsornever.com","http://localhost:3000","http://localhost:3001"]
+    origin: ["http://82.180.162.210:3000", "http://82.180.162.210:3001", "http://admin.nailsornever.com", "https://admin.nailsornever.com", "http://nailsornever.com:3000", "https://nailsornever.com","http://nailsornever.com","http://localhost:3000","http://localhost:3001"]
 }))
 
 app.use('/api/v1', routes);
