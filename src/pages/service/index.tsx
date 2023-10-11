@@ -13,7 +13,7 @@ const ServicesPage = (props: any) => {
     const [pagination, setPagination] = useState<number>(1)
     const route = useRouter()
     const dispatch = useDispatch()
-    console.log(props)
+
     const handleChangePagination = (event: ChangeEvent<unknown>, value: number) => {
         route.push({
             query : {
@@ -31,13 +31,13 @@ const ServicesPage = (props: any) => {
                     <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="index,follow"/>
-                      <link ref="canonical" href="http://nailsornever.com"/>
+                      <link ref="canonical" href="https://nailsornever.com"/>
                     <title>Services - {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Malta</title>
                     <meta name="description" content={` In ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, we provide some service such as 
                     ${[...services?.services]?.map(index => ` ${index?.name}`)}. You can booking service in my website`}/>
                     <meta name="keywords"
                           content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,${[...services?.services]?.map(index => ` ${index?.name}`)} extensions`}/>
-                    <meta property="og:url" content="http://nailsornever.com/"/>
+                    <meta property="og:url" content="https://nailsornever.com/"/>
                     <meta property="og:type" content="Website"/>
                     <meta property="og:title" content={`Services Nail - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                     <meta property="og:description" content={` In ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, we provide some service such as 
