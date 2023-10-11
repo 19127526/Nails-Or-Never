@@ -8,4 +8,5 @@ module.exports = {
     nextScriptWorkers: true,
   },
 }
+// check
 module.exports = nextConfig
