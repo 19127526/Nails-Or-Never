@@ -69,7 +69,7 @@ const GiftCardPage = (props : any) => {
                             <div className="col-lg-8">
                                 <h3 className="sub-title fs-80">GiftCards</h3>
                                 <h2 className="title text-uppercase text-black">NAILS OR NEVER</h2>
-                                <p className="text-black mb-5">Let your sweetheart know how much you love and care for him/her by sending our love cards! Buy our gift card for your loved one.</p>
+                                <p className="text-white mb-5">Let your sweetheart know how much you love and care for him/her by sending our love cards! Buy our gift card for your loved one.</p>
                              </div>
                             <h1
                                 className=" title-gift-cards text-uppercase text-black text-center"
