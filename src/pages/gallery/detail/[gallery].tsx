@@ -6,7 +6,7 @@ import {useRouter} from "next/router";
 import {getAllSubGalleryByParentTheme} from "@/api-client/gallery/Gallery.api";
 import {useDispatch} from "react-redux";
 import {turnOffLoading} from "@/components/loading/index.actions";
-import image from "../../public/images/banner-helloween.jpg"
+import image from "@/public/images/banner-helloween.jpg";
 
 const DetailGalleryPage = (props : any) => {
     const {gallerySub} = props

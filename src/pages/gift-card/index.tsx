@@ -10,7 +10,7 @@ import {getGiftCardPagination} from "@/api-client/gift-card/GiftCard.api";
 import VirtualList from "rc-virtual-list";
 import {useDispatch, useSelector} from "react-redux";
 import {turnOffLoading} from "@/components/loading/index.actions";
-import image from "../../public/images/banner-helloween.jpg"
+import image from "@/public/images/banner-helloween.jpg"
 
 const GiftCardPage = (props : any) => {
     const {giftCard} = props

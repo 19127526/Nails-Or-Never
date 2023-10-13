@@ -7,7 +7,8 @@ import Head from "next/head";
 import {getSubServicePagination} from "@/api-client/service/Services.api";
 import {useDispatch, useSelector} from "react-redux";
 import {turnOffLoading, turnOnLoading} from "@/components/loading/index.actions";
-import image from "../../public/images/banner-helloween.jpg"
+import image from "@/public/images/banner-helloween.jpg"
+
 const ServicesPage = (props: any) => {
     const {services} = props
     const [pagination, setPagination] = useState<number>(1)
