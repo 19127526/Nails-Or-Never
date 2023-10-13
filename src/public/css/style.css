@@ -7,6 +7,10 @@ p {
     color: #1a1a1a;
 }
 
+.footer-helloween {
+    color: #ffffff;
+}
+
 .title-gift-cards {
     font-family: 'Mollie Glaston', sans-serif;
 }
@@ -370,7 +374,7 @@ ol, ul {
 }
 
 .section-parallax {
-    /*background-image: url(../images/parallax-1.jpg);*/
+    /*background-image: url(../images/parallax-banner-helloween.jpg);*/
     padding: 120px 0;
 }
 

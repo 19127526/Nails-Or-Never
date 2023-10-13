@@ -6,7 +6,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import {Spin} from "antd";
 import {Snackbar} from "@mui/material";
-import image from "../../public/images/Untitled.jpeg"
+import image from "../../public/images/banner-helloween.jpg"
 import {isInputEmpty} from "@/utils/fotmar-date-time";
 import {postContact} from "@/api-client/contact/Contact.api";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -41,15 +41,14 @@ const ContactPage = (props: any) => {
     const [isLoading, setIsLoading] = useState(false);
     const handleChangePhoneNumber = (e: any) => {
         let num = e.target.value;
-        if (isNaN(num) == false || num =='-' ) {
+        if (isNaN(num) == false || num == '-') {
             if (num.toString().length == 4 || num.toString().length == 8) {
-                if (e.target.value.length >  contact?.phone?.length) {
-                    setContact({...contact, phone:  contact?.phone+'-' +   num.slice(-1)})
+                if (e.target.value.length > contact?.phone?.length) {
+                    setContact({...contact, phone: contact?.phone + '-' + num.slice(-1)})
                 } else {
                     setContact({...contact, phone: num})
                 }
-            }
-            else if (num.toString().length == 3 || num.toString().length == 7) {
+            } else if (num.toString().length == 3 || num.toString().length == 7) {
                 if (e.target.value.length > contact?.phone?.length) {
                     setContact({...contact, phone: num + '-'})
                 } else {
@@ -62,17 +61,15 @@ const ContactPage = (props: any) => {
                 status: false,
                 message: 'Please Enter Only Number'
             })
-        }
-        else {
-            if ( num.toString().includes("-")) {
+        } else {
+            if (num.toString().includes("-")) {
                 if (num.toString().length == 4 || num.toString().length == 8) {
-                    if (e.target.value.length >  contact?.phone?.length) {
-                        setContact({...contact, phone:  contact?.phone+'-' +   num.slice(-1)})
+                    if (e.target.value.length > contact?.phone?.length) {
+                        setContact({...contact, phone: contact?.phone + '-' + num.slice(-1)})
                     } else {
                         setContact({...contact, phone: num})
                     }
-                }
-                else if (num.toString().length == 3 || num.toString().length == 7) {
+                } else if (num.toString().length == 3 || num.toString().length == 7) {
                     if (e.target.value.length > contact?.phone?.length) {
                         setContact({...contact, phone: num + '-'})
                     } else {
@@ -85,8 +82,7 @@ const ContactPage = (props: any) => {
                     status: false,
                     message: 'Please Enter Only Number'
                 })
-            }
-            else {
+            } else {
                 setIsErrorPhoneNumber({
                     status: true,
                     message: 'Please Enter Only Number'
@@ -105,10 +101,9 @@ const ContactPage = (props: any) => {
         if (isInputEmpty(contact.name) == false && isInputEmpty(contact.email) == false
             && isInputEmpty(contact.phone) == false && isInputEmpty(contact.message) == false) {
             const phoneTmpArr = contact.phone.toString().split("-");
-            if(phoneTmpArr.length != 3) {
+            if (phoneTmpArr.length != 3) {
                 setIsOpen({state: true, message: `Format Phone Number Invalid`});
-            }
-            else {
+            } else {
                 const formData: emptyContactInter = {
                     name: contact?.name,
                     message: contact?.message,
@@ -205,11 +200,12 @@ const ContactPage = (props: any) => {
                                         <div className="col-sm-6">
                                             <div className="contact-info-box">
                                                 <h4>Address</h4>
-                                                <p><LocationOnIcon className="fa-solid fa-location-dot me-2"/>
-                                                    <a className="text-decoration-underline" target="_blank" href={`https://goo.gl/maps/2Wa838Gd6xxbD75h7`}>
+                                                <a className="text-decoration-underline" target="_blank"
+                                                   href={`https://goo.gl/maps/2Wa838Gd6xxbD75h7`}>
+                                                    <p><LocationOnIcon className="fa-solid fa-location-dot me-2"/>
                                                         {aboutUs?.address}
-                                                    </a>
-                                                </p>
+                                                    </p>
+                                                </a>
                                             </div>
                                         </div>
                                         <div className="col-sm-6">
@@ -227,7 +223,7 @@ const ContactPage = (props: any) => {
                                             <div className="contact-info-box">
                                                 <h4>Phone</h4>
                                                 <a className="text-decoration-underline" href={`tel:${aboutUs?.tel}`}>
-                                                    <p> <LocalPhoneIcon className="fa-solid fa-phone me-2"/>
+                                                    <p><LocalPhoneIcon className="fa-solid fa-phone me-2"/>
                                                         {aboutUs?.tel}
                                                     </p>
                                                 </a>
@@ -268,7 +264,7 @@ const ContactPage = (props: any) => {
                                                             <input autoComplete="off" type="text" name="Fullname"
                                                                    value={contact?.name}
                                                                    id="fullname" placeholder="Enter your full name"
-                                                                   
+
                                                                    onChange={(e) => handleChangeInputText(e as any, 'name')}/>
                                                         </div>
                                                     </div>
@@ -278,7 +274,7 @@ const ContactPage = (props: any) => {
                                                         <div className="text-field">
                                                             <input autoComplete="off" type="email" name="fEmail"
                                                                    id="email"
-                                                                   placeholder="Enter your email address" 
+                                                                   placeholder="Enter your email address"
                                                                    value={contact?.email}
                                                                    onChange={(e) => handleChangeInputText(e as any, 'email')}/>
                                                         </div>
@@ -296,7 +292,8 @@ const ContactPage = (props: any) => {
                                                         </div>
                                                         {
                                                             isErrorPhoneNumber?.status == true ?
-                                                                <span style={{color: "red"}}>{isErrorPhoneNumber?.message}</span>
+                                                                <span
+                                                                    style={{color: "red"}}>{isErrorPhoneNumber?.message}</span>
                                                                 :
                                                                 <></>
                                                         }
@@ -307,7 +304,7 @@ const ContactPage = (props: any) => {
                                                             <textarea autoComplete="off" rows={5}
                                                                       name="fMessage" id="message"
                                                                       placeholder="Enter your message"
-                                                                       value={contact?.message}
+                                                                      value={contact?.message}
                                                                       onChange={(e) => handleChangeInputText(e as any, 'message')}></textarea>
                                                         </div>
                                                     </div>

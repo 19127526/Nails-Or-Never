@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 import Link from "next/link";
 import {mainName} from "@/constants/label";
-import image from "../../public/images/Untitled.jpeg"
+import image from "../../public/images/banner-helloween.jpg"
 const AboutUsPage = (props : any) => {
     const {aboutUs} = props
     const dispatch = useDispatch()
@@ -73,7 +73,7 @@ const AboutUsPage = (props : any) => {
                 </section>
 
                 <section className="section-wrap section-parallax"
-                         style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/parallax-1.jpg)"}}>
+                         style={{backgroundImage: "url(https://w20.wocmarketing.com/wp-content/themes/woctheme/assets/images/parallax-1.jpg)", margin: "100px 0px"}}>
                     <div className="parallax-wrap">
                         <div className="container-lg">
                             <div className="row justify-content-center text-center gy-5 gx-3 g-lg-5">

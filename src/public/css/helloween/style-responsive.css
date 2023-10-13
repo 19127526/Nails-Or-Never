@@ -1,0 +1,337 @@
+.banner-content {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://themesfamily.com/tm/waliyy/assets/images/banner/2.jpg");
+    background-position: right;
+    background-color: black;
+    color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.banner-content .banner-title {
+    color: #ffaa01;
+    font-size: 150px;
+    font-weight: 400;
+    margin: 0;
+    font-family: 'Caramello', sans-serif;
+    line-height: 1;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+    color: #ffaa01;
+}
+
+.banner-content .banner-link {
+    color: #ffffff;
+}
+
+@media (max-width: 1399.99px) {
+
+    .banner-content .banner-title {
+        font-size: 85px;
+    }
+
+    .banner-item .banner-content {
+        margin-top: 0;
+    }
+
+    .section-services .service-item .service-img::before,
+    .service-list .service-list-thumb::before {
+        padding-top: 350px;
+    }
+
+    .navbar .navbar-brand {
+        order: 1;
+    }
+
+    .navbar .button-group {
+        order: 2;
+        flex: 1;
+        text-align: right;
+        margin-right: 1rem;
+    }
+
+    .navbar .navbar-toggler {
+        order: 3;
+    }
+
+    .navbar #navbarsMenu {
+        order: 4;
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("https://themesfamily.com/tm/waliyy/assets/images/banner/2.jpg");
+        background-position: right;
+        background-color: black;
+        color: black;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #navbarsMenu .nav-link.active {
+        background-image: url(../../images/helloween-button.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 200px ;
+    }
+
+    #navbarsMenu .nav-link {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 1199.99px) {
+
+
+    .banner-slider,
+    .footer {
+        background-position: right;
+    }
+
+    .banner-content .banner-title {
+        font-size: 70px;
+    }
+
+    .banner-content .banner-img-wrap {
+        padding-left: 4.5rem;
+    }
+
+    .banner-item .banner-content {
+        padding: 0 48px;
+    }
+
+    .section-parallax {
+        padding: 100px 0;
+    }
+}
+
+@media (max-width: 991.99px) {
+    .banner-content .banner-title {
+        font-size: 55px;
+        text-align: center;
+        margin-top: 16px;
+    }
+
+    .banner-content .banner-img-wrap {
+        padding: 0 40px;
+    }
+
+    .banner-item .banner-content {
+        padding: 0 48px;
+    }
+
+    .banner-item .banner-content {
+        margin-top: 30px;
+    }
+
+    .banner-content .banner-img-border {
+        padding: 1rem;
+    }
+
+    .heading-flex {
+        flex-direction: column-reverse;
+    }
+
+    .heading-flex .sub-title {
+        width: auto;
+        margin: 0;
+    }
+
+    .sub-title.fs-80,
+    .heading-flex .sub-title {
+        font-size: 55px;
+    }
+
+    .section-page-wrap.contact .heading-flex {
+        flex-direction: column;
+    }
+
+    .section-services .heading-flex .sub-title,
+    .section-gallery .heading-flex .sub-title,
+    .section-page-wrap.contact .heading-flex .sub-title {
+        margin: 0;
+    }
+
+    .section-testimonial .heading-flex {
+        align-items: flex-start;
+    }
+
+    .page-title {
+        padding: 140px 0 90px 0;
+    }
+
+    .passport-group-01 {
+        position: relative;
+        top: unset;
+        left: unset;
+    }
+
+    .passport-01,
+    .passport-02 {
+        display: none;
+    }
+}
+
+@media (max-width: 767.99px) {
+    .banner-content .banner-title {
+        font-size: 48px;
+    }
+
+    .service-list .service-list-thumb::before {
+        padding-top: 400px;
+    }
+
+    .service-list .service-list-name {
+        text-align: center;
+    }
+    .service-list .service-list-description {
+        text-align: center;
+    }
+}
+
+@media (max-width: 575.99px) {
+    #header:not(.sticky) .header-main .navbar .button-group {
+        order: 3;
+        flex: auto;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 8px;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    #header:not(.sticky) .header-main .navbar .navbar-toggler {
+        order: 2;
+    }
+
+    .banner-content .banner-title {
+        font-size: 24px;
+    }
+
+    .banner-content .banner-img-wrap {
+        padding: 0 48px;
+    }
+
+    #navbarsMenu {
+        width: 100%;
+    }
+
+    #header.sticky .header-main .navbar .button-group {
+        order: 2;
+        margin-right: 0;
+    }
+
+    #header.sticky .header-main .navbar .navbar-toggler {
+        order: 3;
+    }
+
+    /* #header.sticky .header-main .navbar .button-group .icon-button {
+        font-size: 14px;
+    } */
+
+    #header.sticky .header-main .navbar .button-group .icon-button span.sticky {
+        display: inline-block;
+        font-size: 14px;
+    }
+
+    #header.sticky .header-main .navbar .button-group .icon-button span:not(.sticky) {
+        display: none;
+    }
+
+    #header.sticky .navbar > .navbar-brand img {
+        width: 110px;
+    }
+
+    .banner-slider,
+    .banner-slider .banner-item {
+        height: 745px;
+    }
+
+    .banner-item .banner-content {
+        margin-top: 85px;
+        padding: 24px;
+    }
+
+    .banner-content .banner-link {
+        font-size: 18px;
+    }
+
+    .title,
+    .page-title h2 {
+        font-size: 36px;
+    }
+
+    .section-page-wrap {
+        padding: 80px 0;
+    }
+
+    .section-wrap {
+        padding: 40px 0;
+    }
+
+    /* .section-about {
+        padding-bottom: 60px;
+    } */
+
+    .section-services {
+        /* padding: 60px 0; */
+        padding-bottom: 80px;
+    }
+
+    .section-gallery {
+        padding-bottom: 80px;
+    }
+
+    .section-testimonial {
+        padding-top: 80px;
+    }
+
+    .sub-title.fs-80,
+    .heading-flex .sub-title {
+        font-size: 44px;
+    }
+
+    .section-parallax {
+        padding: 80px 0;
+    }
+
+    .section-parallax .button-group {
+        flex-direction: column;
+    }
+
+    .section-services .service-item .service-img::before {
+        padding-top: 250px;
+    }
+
+    .section-services .service-item .service-title {
+        font-weight: 400;
+        font-size: 24px;
+    }
+
+    .page-title {
+        padding: 210px 0 90px 0;
+        background-position: right;
+    }
+
+    .contact-info-box h4 {
+        display: none;
+    }
+
+    .contact-info-box i {
+        width: 20px;
+        text-align: right;
+    }
+
+    .navbar-brand {
+        margin-right: 0.5rem;
+    }
+
+    #header.sticky .header-main .navbar .button-group a:last-child button {
+        margin-top: 0px;
+        margin-left: 1px;
+    }
+}
+
+@media (max-width: 400px) {
+    #header.sticky .navbar > .navbar-brand img {
+        width: 85px;
+    }
+}
+
+

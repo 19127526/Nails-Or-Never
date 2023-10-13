@@ -121,12 +121,12 @@ const FooterComponent = () => {
                 <div className="container-lg">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="text-center py-2 fs-6">
+                            <div className="text-center py-2 fs-6 text-white">
                                 <span className="d-block">© 2023 <strong>Nails or Never</strong></span>
-                                <span className="small d-block">Designed by
+                                <span className="small d-block ">Designed by
                                     <a target="_blank"
-                                       href="">
-                                        <strong> NAILS OR NEVER &amp; WEB DESIGN</strong>
+                                       href="#" >
+                                        <strong className={"text-white"}> NAILS OR NEVER &amp; WEB DESIGN</strong>
                                     </a>
                                 </span>
                             </div>

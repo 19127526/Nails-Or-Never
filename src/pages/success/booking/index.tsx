@@ -6,7 +6,8 @@ import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
 import {turnOffLoading} from "@/components/loading/index.actions";
 import {mainName} from "@/constants/label";
-import image from "../../../public/images/Untitled.jpeg"
+import image from "../../public/images/banner-helloween.jpg"
+
 const SuccessBookPage = (props : any) => {
     const dispatch = useDispatch()
 

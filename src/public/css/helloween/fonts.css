@@ -1,31 +1,15 @@
 @font-face {
+    font-family: 'Mollie Glaston';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../../fonts/MollieGlaston/Mollie-Glaston.ttf) format('woff2');
+}
+
+@font-face {
     font-family: 'Caramello';
     font-style: normal;
     font-weight: 400;
-    font-display: swap;
-    src: url(../../fonts/Creppster/Creepster-Regular.ttf) format('woff2');
-}
-
-@font-face {
-    font-family: 'Creepster';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(../../fonts/Creppster/Creepster-Regular.ttf) format('woff2');
-}
-
-@font-face {
-    font-family: 'Jost';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(../../fonts/Jost/Jost-Regular.ttf) format('woff2');
-}
-
-@font-face {
-    font-family: 'Creepster';
-    font-style: normal;
-    font-weight: 300;
     font-display: swap;
     src: url(../../fonts/Creppster/Creepster-Regular.ttf) format('woff2');
 }
@@ -39,10 +23,16 @@
     src: url(../../fonts/Jost/Jost-Light.ttf) format('woff2');
 }
 
-
+@font-face {
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../../fonts/Jost/Jost-Regular.ttf) format('woff2');
+}
 
 @font-face {
-    font-family: 'Creepster';
+    font-family: 'Jost';
     font-style: normal;
     font-weight: 500;
     font-display: swap;
@@ -58,10 +48,3 @@
     src: url(../../fonts/Jost/Jost-Bold.ttf) format('woff2');
 }
 
-@font-face {
-    font-family: 'Creepster';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url(../../fonts/Creppster/Creepster-Regular.ttf) format('woff2');
-}

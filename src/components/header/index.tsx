@@ -41,6 +41,9 @@ const HeaderComponent = () => {
                         <a className="navbar-brand">
                             <Link href={process.env.NEXT_PUBLIC_HOME_ROUTER as string} replace>
                                 <img width="150px"
+                                     style={{
+                                         filter: "brightness(120%)"
+                                     }}
                                      src="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"
                                      alt={mainName}
                                      className="img-fluid"/>

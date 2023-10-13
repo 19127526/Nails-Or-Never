@@ -37,7 +37,7 @@ function Item(props : any) {
                                     {/*</div>*/}
                                 </div>
                             </div>
-                            <h2 className="banner-title"  style={{marginBottom : "0px"}}>{item?.name}</h2>
+                            <h2 className="banner-title "  style={{marginBottom : "0px"}}>{item?.name}</h2>
 
                             <Link className="banner-link"
                                href={process.env.NEXT_PUBLIC_SERVICES_ROUTER as string} replace>View
