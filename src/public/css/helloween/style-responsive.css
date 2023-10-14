@@ -1,5 +1,5 @@
 .banner-content {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://themesfamily.com/tm/waliyy/assets/images/banner/2.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/background-helloween.jpg");
     background-position: right;
     background-color: black;
     color: black;
@@ -55,7 +55,7 @@
 
     .navbar #navbarsMenu {
         order: 4;
-        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("https://themesfamily.com/tm/waliyy/assets/images/banner/2.jpg");
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../../images/background-helloween.jpg");
         background-position: right;
         background-color: black;
         color: black;

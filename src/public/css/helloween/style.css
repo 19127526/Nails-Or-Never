@@ -64,6 +64,10 @@ ol, ul {
     -o-transition: all 0.3s linear;
 }
 
+#header .header-main button.navbar-toggler span {
+    background: white;
+}
+
 #header .header-main .nav-item a {
     color: #ffffff;
 }
@@ -641,7 +645,7 @@ ol, ul {
 .footer {
     position: relative;
     background-color: #1a1a1a;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://themesfamily.com/tm/waliyy/assets/images/banner/2.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/background-helloween.jpg");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

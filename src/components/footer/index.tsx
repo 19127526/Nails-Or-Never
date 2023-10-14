@@ -125,7 +125,7 @@ const FooterComponent = () => {
                                 <span className="d-block">© 2023 <strong>Nails or Never</strong></span>
                                 <span className="small d-block ">Designed by
                                     <a target="_blank"
-                                       href="#" >
+                                       href='mailto:phamtienquan2001@gmail.com'>
                                         <strong className={"text-white"}> NAILS OR NEVER &amp; WEB DESIGN</strong>
                                     </a>
                                 </span>
