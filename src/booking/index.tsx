@@ -1,3 +1,4 @@
+/*
 import MainLayout from "@/components/layout/main";
 import Head from "next/head";
 import React, {useEffect, useState} from "react";
@@ -49,7 +50,7 @@ import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import LoadingComponent from "@/components/loading";
 import "./loading.css"
 import {isEmpty} from "@/utils/format-price";
-import image from "../../public/images/Untitled.jpeg"
+import image from "../public/images/Untitled.jpeg"
 interface stepInterFace {
     label: string,
     icon: JSX.Element,
@@ -887,4 +888,4 @@ export async function getServerSideProps(context : any) {
 
 
 BookingPage.Layout = MainLayout
-export default BookingPage
+export default BookingPage*/
