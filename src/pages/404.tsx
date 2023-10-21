@@ -17,7 +17,7 @@ const NotFound = () => {
             <meta name="viewport" content="initial-scale=1, width=device-width"/>
             <meta name="robots" content="index,follow"/>
               <link ref="canonical" href="https://nailsornever.com"/>
-            <title>Empty Page - {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Malta</title>
+            <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Not Found</title>
             <meta name="description" content={`We have many years of experience in the
                                 nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
                                 soothing atmosphere and more notable for its qualified and certified professionals. You
@@ -86,7 +86,7 @@ const NotFound = () => {
                             sx={{mt: 3}}
                             variant="contained"
                         >
-                            Go back to dashboard
+                            Go back to home page
                         </Button>
                     </Link>
                 </Box>
