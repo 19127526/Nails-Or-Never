@@ -22,7 +22,7 @@
 @import "style4.min.css";
 */
 
-/*Helloween*/
+/*Helloween
 @import "classic-themes.min.css";
 @import "global.min.css";
 @import "img.min.css";
@@ -39,6 +39,32 @@
 @import "./helloween/style.css";
 @import "./helloween/style-responsive.css";
 @import "./helloween/fonts.css";
+@import "style1.min.css";
+@import "style2.min.css";
+@import "style3.min.css";
+@import "style4.min.css";
+ */
+
+
+
+
+/*Christmas*/
+@import "classic-themes.min.css";
+@import "global.min.css";
+@import "img.min.css";
+@import "style.min.css";
+@import "bootstrap.min.css";
+@import "lightbox.min.css";
+@import "aos.min.css";
+@import "sweetalert2.min.css";
+@import "flickity.min.css";
+@import "slick.min.css";
+@import "slick-theme.css";
+@import "fontawesome.min.css";
+@import "all.min.css";
+@import "./christmas/style.css";
+@import "./christmas/style-responsive.css";
+@import "./christmas/fonts.css";
 @import "style1.min.css";
 @import "style2.min.css";
 @import "style3.min.css";

@@ -10,7 +10,7 @@ import {postCheckout} from "@/api-client/gift-card/GiftCard.api";
 import {Snackbar} from "@mui/material";
 import {useRouter} from "next/router";
 import {removeAllItem} from "@/pages/gift-card/index.actions";
-import image from "@/public/images/banner-helloween.jpg"
+import image from "@/public/images/christmas/chirstmas-banner.jpg"
 
 const CheckOutPage = () => {
     const router = useRouter()
