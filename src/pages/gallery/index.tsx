@@ -7,7 +7,8 @@ import Head from "next/head";
 import {getGalleryPagination} from "@/api-client/gallery/Gallery.api";
 import {turnOffLoading} from "@/components/loading/index.actions";
 import {useDispatch} from "react-redux";
-import image from "@/public/images/christmas/chirstmas-banner.jpg"
+// import image from "@/public/images/christmas/chirstmas-banner.jpg"
+import image from "@/public/images/Untitled.jpeg"
 
 const GalleryPage = (props : any) => {
     const {galleryParent} = props

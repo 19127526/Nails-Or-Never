@@ -1,5 +1,4 @@
 /*Default*/
-/*
 @import "classic-themes.min.css";
 @import "global.min.css";
 @import "img.min.css";
@@ -20,7 +19,6 @@
 @import "style2.min.css";
 @import "style3.min.css";
 @import "style4.min.css";
-*/
 
 /*Helloween
 @import "classic-themes.min.css";
@@ -49,7 +47,7 @@
 
 
 /*Christmas*/
-@import "classic-themes.min.css";
+/*@import "classic-themes.min.css";
 @import "global.min.css";
 @import "img.min.css";
 @import "style.min.css";
@@ -68,7 +66,7 @@
 @import "style1.min.css";
 @import "style2.min.css";
 @import "style3.min.css";
-@import "style4.min.css";
+@import "style4.min.css";*/
 
 @import "~antd/dist/reset.css";
 /** {*/

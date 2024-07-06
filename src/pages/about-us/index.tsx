@@ -5,7 +5,8 @@ import {useDispatch} from "react-redux";
 import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 import Link from "next/link";
 import {mainName} from "@/constants/label";
-import image from "@/public/images/christmas/chirstmas-banner.jpg"
+// import image from "@/public/images/christmas/chirstmas-banner.jpg"
+import image from "@/public/images/Untitled.jpeg"
 
 const AboutUsPage = (props : any) => {
     const {aboutUs} = props

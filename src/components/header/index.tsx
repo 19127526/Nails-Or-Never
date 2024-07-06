@@ -59,7 +59,7 @@ const HeaderComponent = () => {
                             <div className="offcanvas-header">
                                 <Link className="navbar-brand" href={process.env.NEXT_PUBLIC_HOME_ROUTER as string}>
                                     <img width="150px"
-                                         style={{filter: "brightness(500%)"}}
+                                         // style={{filter: "brightness(500%)"}}
                                          src="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"
                                          alt={mainName}
                                          className="img-fluid"/>
@@ -77,6 +77,9 @@ const HeaderComponent = () => {
                                         labelHeader?.map((index, number) =>
                                             activeLabel?.label == index?.label ?
                                                 <li key={number} className="nav-item"
+                                                    style={{
+                                                        cursor: 'pointer'
+                                                    }}
                                                     onClick={() => handleClickLabel(index, false)}>
                                                     <a className="nav-link active">
                                                         {index?.label}
@@ -84,6 +87,9 @@ const HeaderComponent = () => {
                                                 </li>
                                                 :
                                                 <li key={number} className="nav-item"
+                                                    style={{
+                                                        cursor: 'pointer'
+                                                    }}
                                                     onClick={() => handleClickLabel(index, false)}>
                                                     <a className="nav-link ">
                                                         {index?.label}

@@ -6,7 +6,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import {Spin} from "antd";
 import {Snackbar} from "@mui/material";
-import image from "@/public/images/christmas/chirstmas-banner.jpg"
+// import image from "@/public/images/christmas/chirstmas-banner.jpg"
+import image from "@/public/images/Untitled.jpeg"
 import {isInputEmpty} from "@/utils/fotmar-date-time";
 import {postContact} from "@/api-client/contact/Contact.api";
 import LocationOnIcon from "@mui/icons-material/LocationOn";

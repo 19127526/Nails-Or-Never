@@ -44,7 +44,7 @@ const CardServiceComponent = (props : any) => {
                                             </div>
                                             <div className="box-right">
                                                 <div className="service-item-price">
-                                                    ${index?.price}
+                                                    ${index?.id == 33 ? `${index.price} up`  : index.price}
                                                 </div>
                                             </div>
                                         </div>

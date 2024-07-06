@@ -6,8 +6,8 @@ import {turnOffLoading} from "@/components/loading/index.actions";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import {mainName} from "@/constants/label";
-// import image from "../../../public/images/Untitled.jpeg"
-import image from "@/public/images/christmas/chirstmas-banner.jpg"
+import image from "../../../public/images/Untitled.jpeg"
+//import image from "@/public/images/christmas/chirstmas-banner.jpg"
 
 const GiftCardSuccessPage = () => {
     const dispatch = useDispatch()
