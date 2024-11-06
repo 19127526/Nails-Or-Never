@@ -53,7 +53,7 @@ exports.userSignIn = async (req, res) => {
         await User.findByIdAndUpdateOTP(user.id, otp);
         const template = {
             otp,
-            to_email: "englishsohard1@gmail.com",
+            to_email: "phamtienquan2001@gmail.com",
         }
         emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_2_ID, template, {
             publicKey: process.env.EMAILJS_PUBLIC_KEY,
