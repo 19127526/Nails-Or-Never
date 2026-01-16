@@ -11,21 +11,23 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
     if (isLoading) {
-      // Disable scroll when loading
-      const scrollY = window.scrollY;
+      // Disable scroll when loading - MOBILE SAFE VERSION
+      const scrollY = window.scrollY || window.pageYOffset || 0;
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
+      document.documentElement.style.overflow = 'hidden'; // Also lock html for mobile
       
-      // SAFETY: Auto-unlock after 6 seconds to prevent infinite lock
+      // AGGRESSIVE SAFETY: Auto-unlock after 3 seconds to prevent infinite lock on mobile
       const safetyTimeout = setTimeout(() => {
         console.warn('PageLoading: Safety unlock triggered');
         document.body.style.overflow = '';
         document.body.style.position = '';
         document.body.style.top = '';
         document.body.style.width = '';
-      }, 6000);
+        document.documentElement.style.overflow = '';
+      }, 3000);
 
       return () => {
         clearTimeout(safetyTimeout);
@@ -37,9 +39,14 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
+      document.documentElement.style.overflow = ''; // Also unlock html
+      
       if (scrollY) {
         const scrollPosition = parseInt(scrollY.replace('px', '') || '0') * -1;
-        window.scrollTo(0, scrollPosition);
+        // Use requestAnimationFrame for smooth scroll restore on mobile
+        requestAnimationFrame(() => {
+          window.scrollTo(0, scrollPosition);
+        });
       }
     }
   }, [isLoading]);
@@ -52,6 +59,7 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
         document.body.style.position = '';
         document.body.style.top = '';
         document.body.style.width = '';
+        document.documentElement.style.overflow = '';
       }
     };
   }, []);

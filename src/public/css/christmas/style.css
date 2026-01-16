@@ -1363,6 +1363,7 @@ ol, ul {
     background-position: center;
     background-repeat: no-repeat;
     background-image: url("../../../public/images/christmas/loading-christmas.jpg");
+    display: none; /* Disabled - using PageLoading component instead */
 }
 
 #loading .loading-img {

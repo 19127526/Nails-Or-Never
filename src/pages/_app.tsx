@@ -31,74 +31,53 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
     const Layout = Component.Layout ?? EmptyLayout
     useActiveNavLink();
 
-    // Handle initial page load - SIMPLIFIED with safety timeout
+    // Handle initial page load - ULTRA SIMPLIFIED with aggressive safety timeout
     useEffect(() => {
         if (!isInitialLoad) return;
 
-        let timeoutId: NodeJS.Timeout;
-        let safetyTimeout: NodeJS.Timeout;
-
-        // SAFETY: Always hide loading after max 3 seconds to prevent infinite loading on mobile
-        safetyTimeout = setTimeout(() => {
+        // AGGRESSIVE SAFETY: Always hide loading after max 2 seconds to prevent infinite loading on mobile
+        const safetyTimeout = setTimeout(() => {
             console.warn('PageLoading: Safety timeout triggered - forcing hide');
             setIsPageLoading(false);
             setIsInitialLoad(false);
-        }, 3000);
+        }, 2000);
 
         const handleInitialLoad = () => {
-            // Clear safety timeout
-            if (safetyTimeout) {
-                clearTimeout(safetyTimeout);
-            }
-            // Wait a bit to ensure page is fully rendered
-            timeoutId = setTimeout(() => {
+            clearTimeout(safetyTimeout);
+            // Very short delay
+            setTimeout(() => {
                 setIsPageLoading(false);
                 setIsInitialLoad(false);
-            }, 600); // Short delay
+            }, 400);
         };
 
-        // Simple approach: wait for router ready, then hide
+        // Ultra simple: just wait a bit then hide, don't depend on router events
         if (typeof window !== 'undefined') {
-            if (router.isReady) {
-                // Router ready, hide loading
+            // Wait for DOM to be ready
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
                 handleInitialLoad();
             } else {
-                // Wait for router to be ready (max 1.5s)
-                const routerCheck = setInterval(() => {
-                    if (router.isReady) {
-                        clearInterval(routerCheck);
-                        handleInitialLoad();
-                    }
-                }, 100);
-
-                const routerTimeout = setTimeout(() => {
-                    clearInterval(routerCheck);
-                    // Force hide even if router not ready
+                // Wait for DOMContentLoaded
+                const domReady = () => {
                     handleInitialLoad();
-                }, 1500);
+                };
+                document.addEventListener('DOMContentLoaded', domReady, { once: true });
+                
+                // Also try window load as backup
+                window.addEventListener('load', handleInitialLoad, { once: true });
 
                 return () => {
-                    clearInterval(routerCheck);
-                    clearTimeout(routerTimeout);
-                    if (timeoutId) {
-                        clearTimeout(timeoutId);
-                    }
-                    if (safetyTimeout) {
-                        clearTimeout(safetyTimeout);
-                    }
+                    document.removeEventListener('DOMContentLoaded', domReady);
+                    window.removeEventListener('load', handleInitialLoad);
+                    clearTimeout(safetyTimeout);
                 };
             }
         }
 
         return () => {
-            if (timeoutId) {
-                clearTimeout(timeoutId);
-            }
-            if (safetyTimeout) {
-                clearTimeout(safetyTimeout);
-            }
+            clearTimeout(safetyTimeout);
         };
-    }, [router.isReady, isInitialLoad]);
+    }, [isInitialLoad]);
 
     // Handle route changes
     useEffect(() => {
@@ -127,7 +106,8 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
 
     return (
         <>
-            <InitialLoading />
+            {/* InitialLoading disabled - using PageLoading instead */}
+            {/* <InitialLoading /> */}
             <Head>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="generator" content="Nails Or Never"/>
