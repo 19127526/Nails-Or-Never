@@ -1,8 +1,8 @@
-FROM node:16-alpine
+FROM node:20-alpine
 
 WORKDIR /
 
-COPY package.json /
+COPY package.json ./
 
 RUN npm install
 
@@ -12,4 +12,4 @@ RUN npm run build
 
 EXPOSE 4000
 
-CMD [ "npm", "run", "start" ]
+CMD ["npm", "run", "start"]
