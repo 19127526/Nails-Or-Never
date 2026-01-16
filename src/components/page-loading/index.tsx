@@ -23,8 +23,8 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
         // Use touch-action to prevent scroll on iOS
         document.body.style.touchAction = 'none';
         document.documentElement.style.touchAction = 'none';
-        // Prevent elastic scrolling on iOS
-        document.body.style.webkitOverflowScrolling = 'touch';
+        // Prevent elastic scrolling on iOS (use type assertion for webkit property)
+        (document.body.style as any).webkitOverflowScrolling = 'touch';
       }
       
       document.body.style.overflow = 'hidden';

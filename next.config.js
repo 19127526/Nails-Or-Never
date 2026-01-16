@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['tsx', 'jsx'],
-  compiler: {
-    removeConsole: true
-  },
+  // Temporarily disable console removal to avoid build issues
+  // compiler: {
+  //   removeConsole: true
+  // },
   images: {
     remotePatterns: [
       {
