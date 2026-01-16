@@ -8,14 +8,28 @@ interface PageLoadingProps {
 
 const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
     if (isLoading) {
       // Disable scroll when loading
-      document.body.style.overflow = 'hidden';
-      // Save current scroll position
       const scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
+      
+      // SAFETY: Auto-unlock after 6 seconds to prevent infinite lock
+      const safetyTimeout = setTimeout(() => {
+        console.warn('PageLoading: Safety unlock triggered');
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+      }, 6000);
+
+      return () => {
+        clearTimeout(safetyTimeout);
+      };
     } else {
       // Enable scroll when not loading
       const scrollY = document.body.style.top;
@@ -24,18 +38,23 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
       document.body.style.top = '';
       document.body.style.width = '';
       if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        const scrollPosition = parseInt(scrollY.replace('px', '') || '0') * -1;
+        window.scrollTo(0, scrollPosition);
       }
     }
-
-    return () => {
-      // Cleanup on unmount
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-    };
   }, [isLoading]);
+
+  // Cleanup on unmount - ensure body is never locked
+  useEffect(() => {
+    return () => {
+      if (typeof document !== 'undefined') {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+      }
+    };
+  }, []);
 
   return (
     <AnimatePresence>

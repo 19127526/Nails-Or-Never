@@ -31,88 +31,71 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
     const Layout = Component.Layout ?? EmptyLayout
     useActiveNavLink();
 
-    // Handle initial page load
+    // Handle initial page load - SIMPLIFIED with safety timeout
     useEffect(() => {
         if (!isInitialLoad) return;
 
         let timeoutId: NodeJS.Timeout;
-        let loadHandler: (() => void) | null = null;
+        let safetyTimeout: NodeJS.Timeout;
+
+        // SAFETY: Always hide loading after max 3 seconds to prevent infinite loading on mobile
+        safetyTimeout = setTimeout(() => {
+            console.warn('PageLoading: Safety timeout triggered - forcing hide');
+            setIsPageLoading(false);
+            setIsInitialLoad(false);
+        }, 3000);
 
         const handleInitialLoad = () => {
+            // Clear safety timeout
+            if (safetyTimeout) {
+                clearTimeout(safetyTimeout);
+            }
             // Wait a bit to ensure page is fully rendered
             timeoutId = setTimeout(() => {
                 setIsPageLoading(false);
                 setIsInitialLoad(false);
-            }, 1200); // Delay to ensure smooth transition
+            }, 600); // Short delay
         };
 
-        // Check if page is already loaded
+        // Simple approach: wait for router ready, then hide
         if (typeof window !== 'undefined') {
-            // Wait for router to be ready first
             if (router.isReady) {
-                // Check if DOM is ready
-                if (document.readyState === 'complete') {
-                    // Page already loaded
-                    handleInitialLoad();
-                } else {
-                    // Wait for window load event
-                    loadHandler = () => {
-                        handleInitialLoad();
-                    };
-                    window.addEventListener('load', loadHandler, { once: true });
-
-                    // Fallback timeout in case load event doesn't fire
-                    const fallbackTimer = setTimeout(() => {
-                        if (loadHandler) {
-                            window.removeEventListener('load', loadHandler);
-                        }
-                        handleInitialLoad();
-                    }, 3000);
-
-                    return () => {
-                        if (loadHandler) {
-                            window.removeEventListener('load', loadHandler);
-                        }
-                        clearTimeout(fallbackTimer);
-                        if (timeoutId) {
-                            clearTimeout(timeoutId);
-                        }
-                    };
-                }
+                // Router ready, hide loading
+                handleInitialLoad();
             } else {
-                // Router not ready yet, wait for it
-                const checkRouterReady = setInterval(() => {
+                // Wait for router to be ready (max 1.5s)
+                const routerCheck = setInterval(() => {
                     if (router.isReady) {
-                        clearInterval(checkRouterReady);
-                        if (document.readyState === 'complete') {
-                            handleInitialLoad();
-                        } else {
-                            loadHandler = () => {
-                                handleInitialLoad();
-                            };
-                            window.addEventListener('load', loadHandler, { once: true });
-                        }
+                        clearInterval(routerCheck);
+                        handleInitialLoad();
                     }
                 }, 100);
 
+                const routerTimeout = setTimeout(() => {
+                    clearInterval(routerCheck);
+                    // Force hide even if router not ready
+                    handleInitialLoad();
+                }, 1500);
+
                 return () => {
-                    clearInterval(checkRouterReady);
-                    if (loadHandler) {
-                        window.removeEventListener('load', loadHandler);
-                    }
+                    clearInterval(routerCheck);
+                    clearTimeout(routerTimeout);
                     if (timeoutId) {
                         clearTimeout(timeoutId);
+                    }
+                    if (safetyTimeout) {
+                        clearTimeout(safetyTimeout);
                     }
                 };
             }
         }
 
         return () => {
-            if (loadHandler) {
-                window.removeEventListener('load', loadHandler);
-            }
             if (timeoutId) {
                 clearTimeout(timeoutId);
+            }
+            if (safetyTimeout) {
+                clearTimeout(safetyTimeout);
             }
         };
     }, [router.isReady, isInitialLoad]);
