@@ -616,19 +616,27 @@ const ContactPage = (props: any) => {
                                                                     fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
                                                                     fontFamily: "'Jost', sans-serif",
                                                                     border: 'none',
+                                                                    borderWidth: 0,
                                                                     borderRadius: '8px',
                                                                     outline: 'none',
                                                                     transition: 'all 0.3s ease',
-                                                                    backgroundColor: '#f8f9fa',
-                                                                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                                                                    backgroundColor: '#ffffff',
+                                                                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+                                                                    color: '#1a1a1a'
                                                                 }}
                                                                 onFocus={(e) => {
                                                                     e.target.style.backgroundColor = '#fff';
-                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1)';
+                                                                    e.target.style.border = 'none';
+                                                                    e.target.style.borderWidth = '0';
+                                                                    e.target.style.outline = 'none';
+                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15)';
                                                                 }}
                                                                 onBlur={(e) => {
-                                                                    e.target.style.backgroundColor = '#f8f9fa';
-                                                                    e.target.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
+                                                                    e.target.style.backgroundColor = '#ffffff';
+                                                                    e.target.style.border = 'none';
+                                                                    e.target.style.borderWidth = '0';
+                                                                    e.target.style.outline = 'none';
+                                                                    e.target.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.08)';
                                                                 }}
                                                             />
                                                         </motion.div>
@@ -674,19 +682,27 @@ const ContactPage = (props: any) => {
                                                                     fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
                                                                     fontFamily: "'Jost', sans-serif",
                                                                     border: 'none',
+                                                                    borderWidth: 0,
                                                                     borderRadius: '8px',
                                                                     outline: 'none',
                                                                     transition: 'all 0.3s ease',
-                                                                    backgroundColor: '#f8f9fa',
-                                                                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                                                                    backgroundColor: '#ffffff',
+                                                                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+                                                                    color: '#1a1a1a'
                                                                 }}
                                                                 onFocus={(e) => {
                                                                     e.target.style.backgroundColor = '#fff';
-                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1)';
+                                                                    e.target.style.border = 'none';
+                                                                    e.target.style.borderWidth = '0';
+                                                                    e.target.style.outline = 'none';
+                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15)';
                                                                 }}
                                                                 onBlur={(e) => {
-                                                                    e.target.style.backgroundColor = '#f8f9fa';
-                                                                    e.target.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
+                                                                    e.target.style.backgroundColor = '#ffffff';
+                                                                    e.target.style.border = 'none';
+                                                                    e.target.style.borderWidth = '0';
+                                                                    e.target.style.outline = 'none';
+                                                                    e.target.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.08)';
                                                                 }}
                                                             />
                                                         </motion.div>
@@ -734,19 +750,27 @@ const ContactPage = (props: any) => {
                                                                     fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
                                                                     fontFamily: "'Jost', sans-serif",
                                                                     border: 'none',
+                                                                    borderWidth: 0,
                                                                     borderRadius: '8px',
                                                                     outline: 'none',
                                                                     transition: 'all 0.3s ease',
-                                                                    backgroundColor: '#f8f9fa',
-                                                                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                                                                    backgroundColor: '#ffffff',
+                                                                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+                                                                    color: '#1a1a1a'
                                                                 }}
                                                                 onFocus={(e) => {
                                                                     e.target.style.backgroundColor = '#fff';
-                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1)';
+                                                                    e.target.style.border = 'none';
+                                                                    e.target.style.borderWidth = '0';
+                                                                    e.target.style.outline = 'none';
+                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15)';
                                                                 }}
                                                                 onBlur={(e) => {
-                                                                    e.target.style.backgroundColor = '#f8f9fa';
-                                                                    e.target.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
+                                                                    e.target.style.backgroundColor = '#ffffff';
+                                                                    e.target.style.border = 'none';
+                                                                    e.target.style.borderWidth = '0';
+                                                                    e.target.style.outline = 'none';
+                                                                    e.target.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.08)';
                                                                 }}
                                                             />
                                                         </motion.div>
@@ -810,21 +834,29 @@ const ContactPage = (props: any) => {
                                                                     fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
                                                                     fontFamily: "'Jost', sans-serif",
                                                                     border: 'none',
+                                                                    borderWidth: 0,
                                                                     borderRadius: '8px',
                                                                     outline: 'none',
                                                                     transition: 'all 0.3s ease',
-                                                                    backgroundColor: '#f8f9fa',
+                                                                    backgroundColor: '#ffffff',
                                                                     resize: 'vertical',
                                                                     minHeight: '120px',
-                                                                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                                                                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+                                                                    color: '#1a1a1a'
                                                                 }}
                                                                 onFocus={(e) => {
                                                                     e.target.style.backgroundColor = '#fff';
-                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1)';
+                                                                    e.target.style.border = 'none';
+                                                                    e.target.style.borderWidth = '0';
+                                                                    e.target.style.outline = 'none';
+                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15)';
                                                                 }}
                                                                 onBlur={(e) => {
-                                                                    e.target.style.backgroundColor = '#f8f9fa';
-                                                                    e.target.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
+                                                                    e.target.style.backgroundColor = '#ffffff';
+                                                                    e.target.style.border = 'none';
+                                                                    e.target.style.borderWidth = '0';
+                                                                    e.target.style.outline = 'none';
+                                                                    e.target.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.08)';
                                                                 }}
                                                             />
                                                         </motion.div>

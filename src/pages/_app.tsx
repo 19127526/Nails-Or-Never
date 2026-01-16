@@ -26,32 +26,122 @@ const queryClient = new QueryClient();
 
 function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache}: AppPropsWithLayout) {
     const router = useRouter();
-    const [isPageLoading, setIsPageLoading] = useState(false);
+    const [isPageLoading, setIsPageLoading] = useState(true); // Start with true for initial load
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
     const Layout = Component.Layout ?? EmptyLayout
     useActiveNavLink();
 
+    // Handle initial page load
     useEffect(() => {
-        const handleStart = () => {
-            setIsPageLoading(true);
-        };
-        
-        const handleComplete = () => {
-            setTimeout(() => {
+        if (!isInitialLoad) return;
+
+        let timeoutId: NodeJS.Timeout;
+        let loadHandler: (() => void) | null = null;
+
+        const handleInitialLoad = () => {
+            // Wait a bit to ensure page is fully rendered
+            timeoutId = setTimeout(() => {
                 setIsPageLoading(false);
-            }, 300); // Small delay for smooth transition
+                setIsInitialLoad(false);
+            }, 1200); // Delay to ensure smooth transition
         };
 
-        router.events.on('routeChangeStart', handleStart);
-        router.events.on('routeChangeComplete', handleComplete);
-        router.events.on('routeChangeError', handleComplete);
+        // Check if page is already loaded
+        if (typeof window !== 'undefined') {
+            // Wait for router to be ready first
+            if (router.isReady) {
+                // Check if DOM is ready
+                if (document.readyState === 'complete') {
+                    // Page already loaded
+                    handleInitialLoad();
+                } else {
+                    // Wait for window load event
+                    loadHandler = () => {
+                        handleInitialLoad();
+                    };
+                    window.addEventListener('load', loadHandler, { once: true });
+
+                    // Fallback timeout in case load event doesn't fire
+                    const fallbackTimer = setTimeout(() => {
+                        if (loadHandler) {
+                            window.removeEventListener('load', loadHandler);
+                        }
+                        handleInitialLoad();
+                    }, 3000);
+
+                    return () => {
+                        if (loadHandler) {
+                            window.removeEventListener('load', loadHandler);
+                        }
+                        clearTimeout(fallbackTimer);
+                        if (timeoutId) {
+                            clearTimeout(timeoutId);
+                        }
+                    };
+                }
+            } else {
+                // Router not ready yet, wait for it
+                const checkRouterReady = setInterval(() => {
+                    if (router.isReady) {
+                        clearInterval(checkRouterReady);
+                        if (document.readyState === 'complete') {
+                            handleInitialLoad();
+                        } else {
+                            loadHandler = () => {
+                                handleInitialLoad();
+                            };
+                            window.addEventListener('load', loadHandler, { once: true });
+                        }
+                    }
+                }, 100);
+
+                return () => {
+                    clearInterval(checkRouterReady);
+                    if (loadHandler) {
+                        window.removeEventListener('load', loadHandler);
+                    }
+                    if (timeoutId) {
+                        clearTimeout(timeoutId);
+                    }
+                };
+            }
+        }
 
         return () => {
-            router.events.off('routeChangeStart', handleStart);
-            router.events.off('routeChangeComplete', handleComplete);
-            router.events.off('routeChangeError', handleComplete);
+            if (loadHandler) {
+                window.removeEventListener('load', loadHandler);
+            }
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
         };
-    }, [router]);
-    
+    }, [router.isReady, isInitialLoad]);
+
+    // Handle route changes
+    useEffect(() => {
+        if (!isInitialLoad) {
+            const handleStart = () => {
+                setIsPageLoading(true);
+            };
+
+            const handleComplete = () => {
+                setTimeout(() => {
+                    setIsPageLoading(false);
+                }, 300); // Small delay for smooth transition
+            };
+
+            router.events.on('routeChangeStart', handleStart);
+            router.events.on('routeChangeComplete', handleComplete);
+            router.events.on('routeChangeError', handleComplete);
+
+            return () => {
+                router.events.off('routeChangeStart', handleStart);
+                router.events.off('routeChangeComplete', handleComplete);
+                router.events.off('routeChangeError', handleComplete);
+            };
+        }
+    }, [router, isInitialLoad]);
+
     return (
         <>
             <InitialLoading />
