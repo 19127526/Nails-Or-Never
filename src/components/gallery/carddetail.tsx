@@ -1,5 +1,6 @@
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import React from "react";
+import Image from "next/image";
 import CenterFocusWeakIcon from '@mui/icons-material/CenterFocusWeak';
 import {mainName} from "@/constants/label";
 
@@ -11,10 +12,18 @@ const CardGalleryDetailComponent = (props : any) => {
                data-lightbox="our-photos">
                 <div className="gallery-item">
                     <div className="ratio ratio-1x1">
-                        <div className="ratio-body">
-                            <img
+                        <div className="ratio-body" style={{ position: 'relative' }}>
+                            <Image
                                 src={detailGallery?.image}
-                                alt={`${mainName}`} loading="lazy"/>
+                                alt={`${mainName} - Nail art gallery image`}
+                                fill
+                                quality={85}
+                                loading="lazy"
+                                style={{
+                                    objectFit: 'cover',
+                                    objectPosition: 'center'
+                                }}
+                            />
                         </div>
                         <div className="icon-zoom">
                             <CenterFocusWeakIcon className="fa-solid fa-calendar-days" sx={{fontSize: 40}}

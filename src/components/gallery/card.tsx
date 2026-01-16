@@ -20,11 +20,13 @@ const CardGalleryComponent = (props : any) => {
                             height ={200}
                             style={{
                                 backgroundPosition: "center",
-                                backgroundSize : "unset",
-                                backgroundRepeat : "no-repeat"
+                                backgroundSize : "cover",
+                                backgroundRepeat : "no-repeat",
+                                objectFit: "cover"
                             }}
                             image={galleryDetail?.image}
-                            alt={galleryDetail?.theme}
+                            alt={`${galleryDetail?.theme} nail art gallery - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}
+                            loading="lazy"
                         />
                         <CardContent className="service-list">
                             <h2 className="service-list-name">{galleryDetail?.theme}</h2>

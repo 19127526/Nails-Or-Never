@@ -1,21 +1,30 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import React from "react";
-import {mainName} from "@/constants/label";
+const LoadingComponent: React.FC = () => {
+  const isLoading = useSelector((state: any) => state?.LoadingPage?.isLoading);
 
-const LoadingComponent = () => {
-
+  if (isLoading) {
     return (
-        <div id="loading" >
-            <div className="loading-img">
-                <img
-                    style={{filter: "brightness(150%)"}}
-                    src="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"
-                    alt={`${mainName}`}/>
+      <div style={{ 
+        position: 'fixed', 
+        top: 0, 
+        left: 0, 
+        width: '100%', 
+        height: '100%', 
+        zIndex: 9999, 
+        backgroundColor: '#fff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div>Loading...</div>
             </div>
-        </div>
-    )
+    );
 }
 
+  return null;
+};
 
-
-export default LoadingComponent
+export default LoadingComponent;
+

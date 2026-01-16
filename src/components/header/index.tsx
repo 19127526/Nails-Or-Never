@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from "next/image";
 import Logo from '../../images/Logo.png'
 import {labelHeaderInterFace} from "@/model/header";
 import {labelHeader, mainName} from "@/constants/label";
@@ -12,9 +14,20 @@ import {Badge} from "@mui/material";
 
 const HeaderComponent = () => {
     const [activeLabel, setActiveLabel] = useState<labelHeaderInterFace>();
+    const [isSticky, setIsSticky] = useState(false);
     const router = useRouter()
     const dispatch = useDispatch();
     const giftCardPage = useSelector((state : any) => state.GiftCardPage)
+    const { scrollY } = useScroll();
+    const headerBackground = useTransform(
+      scrollY,
+      [0, 100],
+      ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.98)']
+    );
+    
+    // Logo scale animation based on scroll
+    const logoScale = useTransform(scrollY, [0, 100], [1, 0.67]); // 150px -> 100px (150 * 0.67 ≈ 100)
+    const logoWidth = useTransform(scrollY, [0, 100], [150, 100]);
 
     useEffect(() => {
         if (labelHeader?.filter(index => router?.pathname == index?.url)[0] == undefined) {
@@ -22,7 +35,24 @@ const HeaderComponent = () => {
         } else {
             setActiveLabel(labelHeader?.filter(index => router?.pathname == index?.url)[0])
         }
-    }, [])
+    }, [router.pathname])
+
+    useEffect(() => {
+        const unsubscribe = scrollY.on('change', (latest) => {
+            setIsSticky(latest > 0);
+            // Add/remove sticky class for CSS compatibility
+            const header = document.getElementById('header');
+            if (header) {
+                if (latest > 0) {
+                    header.classList.add('sticky');
+                } else {
+                    header.classList.remove('sticky');
+                }
+            }
+        });
+
+        return () => unsubscribe();
+    }, [scrollY]);
     const handleClickLabel = (currentLabel: labelHeaderInterFace, status: boolean): void => {
         setActiveLabel(currentLabel);
         if (status == false) {
@@ -34,16 +64,43 @@ const HeaderComponent = () => {
         }
     }
     return (
-        <header id="header" className="header">
+        <motion.header 
+            id="header" 
+            className={`header ${isSticky ? 'sticky' : ''}`}
+            style={{ 
+                backgroundColor: headerBackground,
+            }}
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+        >
             <div className="header-main">
                 <div className="container-lg">
                     <nav className="navbar navbar-expand-xxl" aria-label="Eighth navbar example">
                         <a className="navbar-brand">
                             <Link href={process.env.NEXT_PUBLIC_HOME_ROUTER as string} replace>
-                                <img width="150px"
-                                     src="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"
-                                     alt={mainName}
-                                     className="img-fluid"/>
+                                <motion.div
+                                    style={{
+                                        width: logoWidth,
+                                        height: 'auto',
+                                        display: 'inline-block'
+                                    }}
+                                >
+                                    <Image
+                                        width={150}
+                                        height={60}
+                                        src="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"
+                                        alt={`${mainName} - Professional Nail Salon Logo`}
+                                        className="img-fluid"
+                                        priority={true}
+                                        quality={90}
+                                        style={{
+                                            width: '100%',
+                                            height: 'auto',
+                                            transition: 'width 0.3s ease'
+                                        }}
+                                    />
+                                </motion.div>
                             </Link>
                         </a>
                         <button className="navbar-toggler collapsed pe-0" type="button" data-bs-toggle="offcanvas"
@@ -58,11 +115,19 @@ const HeaderComponent = () => {
                              aria-modal="true" role="dialog">
                             <div className="offcanvas-header">
                                 <Link className="navbar-brand" href={process.env.NEXT_PUBLIC_HOME_ROUTER as string}>
-                                    <img width="150px"
-                                         // style={{filter: "brightness(500%)"}}
-                                         src="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"
-                                         alt={mainName}
-                                         className="img-fluid"/>
+                                    <Image
+                                        width={150}
+                                        height={60}
+                                        src="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"
+                                        alt={`${mainName} - Professional Nail Salon Logo`}
+                                        className="img-fluid"
+                                        priority={true}
+                                        quality={90}
+                                        style={{
+                                            width: '150px',
+                                            height: 'auto'
+                                        }}
+                                    />
                                 </Link>
                                 <button type="button" className="navbar-toggler px-0" data-bs-dismiss="offcanvas" id={"close"}
                                         aria-label="Close">
@@ -143,7 +208,7 @@ const HeaderComponent = () => {
                     </nav>
                 </div>
             </div>
-        </header>
+        </motion.header>
     )
 }
 

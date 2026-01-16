@@ -9,21 +9,52 @@ import React, {Suspense} from "react";
 import LoadingComponent from "@/components/loading";
 import NextTopLoader from 'nextjs-toploader';
 import Script from "next/script";
+import "antd/dist/reset.css";
 import "@/public/css/index.min.css"
 import { PersistGate } from 'redux-persist/integration/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {persistor} from "@/app/store";
 import {store} from "@/app/store";
-import {getGalleryPagination} from "@/api-client/gallery/Gallery.api";
-import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
+import { useActiveNavLink } from '@/hooks/useActiveNavLink';
+import InitialLoading from '@/components/initial-loading';
+import PageLoading from '@/components/page-loading';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
 const queryClient = new QueryClient();
 
-export default function App({Component, pageProps, emotionCache = clientSideEmotionCache}: AppPropsWithLayout) {
+function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache}: AppPropsWithLayout) {
+    const router = useRouter();
+    const [isPageLoading, setIsPageLoading] = useState(false);
     const Layout = Component.Layout ?? EmptyLayout
+    useActiveNavLink();
+
+    useEffect(() => {
+        const handleStart = () => {
+            setIsPageLoading(true);
+        };
+        
+        const handleComplete = () => {
+            setTimeout(() => {
+                setIsPageLoading(false);
+            }, 300); // Small delay for smooth transition
+        };
+
+        router.events.on('routeChangeStart', handleStart);
+        router.events.on('routeChangeComplete', handleComplete);
+        router.events.on('routeChangeError', handleComplete);
+
+        return () => {
+            router.events.off('routeChangeStart', handleStart);
+            router.events.off('routeChangeComplete', handleComplete);
+            router.events.off('routeChangeError', handleComplete);
+        };
+    }, [router]);
+    
     return (
         <>
+            <InitialLoading />
             <Head>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="generator" content="Nails Or Never"/>
@@ -51,8 +82,8 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                 <meta property="og:image"
                       content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
                 <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
-                <link rel="canonical" href="https://nailsornever.com/"/>
-                <link rel="shortlink" href="https://nailsornever.com/"/>
+                <link rel="canonical" href="https://nailsornever.com"/>
+                <link rel="shortlink" href="https://nailsornever.com"/>
                 <meta name="google-site-verification" content="TBcO22xEWNnvWsFFwo9V15xyceUknZVvQmk4Z9O36H0" />
                 <link rel="icon"  href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" />
                 <link rel="icon" href="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png" sizes="32x32"/>
@@ -64,18 +95,14 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
                 <Script src="https://www.google-analytics.com/analytics.js" />
             </Head>
-            <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js"/>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/window.js"></Script>
-            {/*<Script type="text/javascript" src="jquery-3.6.0.min.js" id="jquery-3.6.0-js" strategy="lazyOnload"></Script>*/}
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/aos.js" id="aos-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/flickity.pkgd.min.js" id="flickity-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/slick.min.js" id="slick-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" id="main-js-extra" src="https://nails.shoedog.vn/public/main.js" strategy="lazyOnload" ></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/main.min.js" id="main-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="https://nails.shoedog.vn/public/style.js" id="stylejs-js"  strategy="lazyOnload"></Script>
+            {/* Load external libraries that are still needed */}
+            <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js" strategy="lazyOnload"/>
+            <Script type="text/javascript" src="/external/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="/external/aos.js" id="aos-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="/external/flickity.pkgd.min.js" id="flickity-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="/external/slick.min.js" id="slick-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="/external/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="/external/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>
             <Provider store={store}>
                 <PersistGate loading={<LoadingComponent />} persistor={persistor}>
                     <Suspense fallback={<LoadingComponent />}>
@@ -83,6 +110,7 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                             <SWRConfig value={{fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false}}>
                                 <Layout>
                                     <NextTopLoader showSpinner={false} />
+                                <PageLoading isLoading={isPageLoading} />
                                     <Component {...pageProps} />
                                 </Layout>
                             </SWRConfig>
@@ -90,16 +118,10 @@ export default function App({Component, pageProps, emotionCache = clientSideEmot
                     </Suspense>
                 </PersistGate>
             </Provider>
-            {/*<Script type="text/javascript" src="../public/js/jquery-3.6.0.min.js" id="jquery-3.6.0-js"></Script>*/}
-            {/*<Script type="text/javascript" src="../public/js/bootstrap.bundle.min.js" id="bootstrap-js"></Script>*/}
-            {/*<Script type="text/javascript" src="../public/js/lightbox.min.js" id="lightbox-js"></Script>*/}
-            {/*<Script type="text/javascript" src="../public/js/aos.js" id="aos-js"></Script>*/}
-            {/*<Script type="text/javascript" src="../public/js/flickity.pkgd.min.js" id="flickity-js"></Script>*/}
-            {/*<Script type="text/javascript" src="../public/js/slick.min.js" id="slick-js"></Script>*/}
-            {/*<Script type="text/javascript" src="../public/js/sweetalert2.all.min.js" id="sweetalert2-js"></Script>*/}
-            {/*<Script type="text/javascript" id="main-js-extra" src="../public/js/main.js"></Script>*/}
-            {/*<Script type="text/javascript" src="../public/js/main.min.js" id="main-js"></Script>*/}
-            {/*<Script type="text/javascript" src="../public/js/style.js" id="stylejs-js"></Script>*/}
         </>
     )
+}
+
+export default function App(props: AppPropsWithLayout) {
+    return <AppContent {...props} />;
 }

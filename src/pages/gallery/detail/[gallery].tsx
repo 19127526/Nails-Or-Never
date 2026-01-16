@@ -6,8 +6,9 @@ import {useRouter} from "next/router";
 import {getAllSubGalleryByParentTheme} from "@/api-client/gallery/Gallery.api";
 import {useDispatch} from "react-redux";
 import {turnOffLoading} from "@/components/loading/index.actions";
-// import image from "@/public/images/christmas/chirstmas-banner.jpg"
-import image from "@/public/images/Untitled.jpeg"
+import HeaderTitle from "@/components/header-title";
+import { motion } from "framer-motion";
+import ImageIcon from '@mui/icons-material/Image';
 const DetailGalleryPage = (props : any) => {
     const {gallerySub} = props
     const router = useRouter();
@@ -25,7 +26,7 @@ const DetailGalleryPage = (props : any) => {
                 <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="robots" content="index,follow"/>
-                  <link ref="canonical" href="https://nailsornever.com"/>
+                <link rel="canonical" href={`https://nailsornever.com/gallery/detail/${gallery}`}/>
                 <meta name="description" content={`Located conveniently in Malta, NewYork, 12118,
                         ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
                         mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials.
@@ -44,30 +45,88 @@ const DetailGalleryPage = (props : any) => {
                 <meta property="og:image"
                       content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
                 <meta name="generator"  content={`List Theme Gallery ${gallery} - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "ImageGallery",
+                            "name": `${gallery} Gallery - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`,
+                            "description": `View ${gallery} nail art gallery collection at ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`,
+                            "url": `https://nailsornever.com/gallery/detail/${gallery}`,
+                            "image": gallerySub?.gallery?.map((item: any) => item?.image) || []
+                        })
+                    }}
+                />
             </Head>
-            <div className="page-title"
-                 style={{backgroundImage: `url(${image.src})`}}>
-                <div className="container-lg">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <h1 className="text-center mb-0">Detail {gallery} Gallery  </h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <HeaderTitle title={`Detail ${gallery} Gallery`} />
             <section id="gallery" className="section-page-wrap section-gallery" style={{paddingTop: "30px", paddingBottom : "30px"}}  >
                 <div className="container-lg">
-                    <div className="row g-2">
-                        {
-                            gallerySub != null ?
+                    {gallerySub?.gallery && gallerySub.gallery.length > 0 ? (
+                        <div className="row g-2">
+                            {
                                 [...gallerySub?.gallery]?.map((index : any) =>
                                     <CardGalleryDetailComponent detailGallery={index as any}/>
                                 )
-                                :
-                                <></>
-                        }
-                    </div>
-
+                            }
+                        </div>
+                    ) : (
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            style={{
+                                textAlign: 'center',
+                                padding: '80px 20px',
+                                minHeight: '400px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <motion.div
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                            >
+                                <ImageIcon 
+                                    sx={{ 
+                                        fontSize: 80, 
+                                        color: '#7fa681',
+                                        marginBottom: '20px'
+                                    }} 
+                                />
+                            </motion.div>
+                            <motion.h2
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.3 }}
+                                style={{
+                                    fontFamily: "'Mollie Glaston', sans-serif",
+                                    fontSize: '2.5rem',
+                                    fontWeight: 500,
+                                    color: '#1a1a1a',
+                                    marginBottom: '15px'
+                                }}
+                            >
+                                No Images Available
+                            </motion.h2>
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                                style={{
+                                    fontSize: '1.1rem',
+                                    color: '#666',
+                                    maxWidth: '500px',
+                                    lineHeight: 1.6
+                                }}
+                            >
+                                {gallery ? `The "${gallery}" gallery collection is currently empty. Please check back soon for updates!` : 'This gallery collection is currently empty. Please check back soon for updates!'}
+                            </motion.p>
+                        </motion.div>
+                    )}
                 </div>
             </section>
         </>

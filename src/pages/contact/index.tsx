@@ -6,13 +6,15 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import {Spin} from "antd";
 import {Snackbar} from "@mui/material";
-// import image from "@/public/images/christmas/chirstmas-banner.jpg"
-import image from "@/public/images/Untitled.jpeg"
+import HeaderTitle from "@/components/header-title";
 import {isInputEmpty} from "@/utils/fotmar-date-time";
 import {postContact} from "@/api-client/contact/Contact.api";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import EmailIcon from "@mui/icons-material/Email";
+import { motion } from "framer-motion";
+import AnimatedSection from "@/components/animated-section";
+import SendIcon from "@mui/icons-material/Send";
 
 
 interface emptyContactInter {
@@ -143,7 +145,7 @@ const ContactPage = (props: any) => {
                         <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
                         <meta name="viewport" content="initial-scale=1, width=device-width"/>
                         <meta name="robots" content="index,follow"/>
-                        <link ref="canonical" href="https://nailsornever.com"/>
+                        <link rel="canonical" href="https://nailsornever.com/contact"/>
 
                         <meta name="description" content={` Located conveniently in Malta, NewYork, 12118,
                         ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -166,8 +168,32 @@ const ContactPage = (props: any) => {
                         <meta property="og:image"
                               content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
                         <meta name="generator" content={`Contact with me - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
-
-
+                        <script
+                            type="application/ld+json"
+                            dangerouslySetInnerHTML={{
+                                __html: JSON.stringify({
+                                    "@context": "https://schema.org",
+                                    "@type": "ContactPage",
+                                    "name": `Contact - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`,
+                                    "description": `Contact ${process.env.NEXT_PUBLIC_NAME_PRODUCT} for nail care services in Malta, NY`,
+                                    "url": "https://nailsornever.com/contact",
+                                    "mainEntity": {
+                                        "@type": "BeautySalon",
+                                        "name": process.env.NEXT_PUBLIC_NAME_PRODUCT,
+                                        "address": {
+                                            "@type": "PostalAddress",
+                                            "addressLocality": "Malta",
+                                            "addressRegion": "NY",
+                                            "postalCode": "12118",
+                                            "addressCountry": "US",
+                                            "streetAddress": aboutUs?.address || ""
+                                        },
+                                        "telephone": aboutUs?.tel || "",
+                                        "email": aboutUs?.email || ""
+                                    }
+                                })
+                            }}
+                        />
                     </Head>
 
                     <Snackbar
@@ -179,296 +205,671 @@ const ContactPage = (props: any) => {
                         message={`${isOpen?.message}`}
                     />
 
-                    <div className="page-title"
-                         style={{backgroundImage: `url(${image.src})`}}>
-                        <div className="container-lg">
-                            <div className="row">
-                                <div className="col-lg-12">
-                                    <h1 className="text-center mb-0">Contact Us</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <section className="section-page-wrap contact">
+                    <HeaderTitle title="Contact Us" />
+                    <section className="section-page-wrap contact" style={{ paddingTop: '100px', paddingBottom: '100px' }}>
                         <div className="container-lg">
                             <div className="row gy-5 gx-3 g-lg-5">
+                                {/* Contact Information Section */}
                                 <div className="col-lg-6 order-1 order-lg-0">
+                                    <AnimatedSection delay={0.1}>
+                                        <motion.div
+                                            initial={{ opacity: 0, x: -50 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true, margin: "-50px" }}
+                                            transition={{ duration: 0.6 }}
+                                        >
                                     <div className="heading-flex mb-4">
-                                        <h2 className="title text-uppercase">Contact</h2>
-                                        <h3 className="sub-title">Information</h3>
+                                                <motion.h2
+                                                    initial={{ opacity: 0, y: 20 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ duration: 0.6, delay: 0.2 }}
+                                                    className="title text-uppercase"
+                                                    style={{
+                                                        fontFamily: "'Mollie Glaston', sans-serif",
+                                                        fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                                                        fontWeight: 400,
+                                                        color: '#1a1a1a',
+                                                        marginBottom: '10px',
+                                                        lineHeight: 1.2,
+                                                        letterSpacing: '2px'
+                                                    }}
+                                                >
+                                                    Contact
+                                                </motion.h2>
+                                                <motion.h3
+                                                    initial={{ opacity: 0, y: 20 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ duration: 0.6, delay: 0.3 }}
+                                                    className="sub-title"
+                                                    style={{
+                                                        fontFamily: "'Caramello', sans-serif",
+                                                        fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+                                                        fontWeight: 400,
+                                                        color: '#7fa681',
+                                                        lineHeight: 1.1
+                                                    }}
+                                                >
+                                                    Information
+                                                </motion.h3>
                                     </div>
-                                    <div className="row g-2 g-sm-4 gx-md-5">
-                                        <div className="col-sm-6">
-                                            <div className="contact-info-box">
-                                                <h4>Address</h4>
-                                                <a className="text-decoration-underline" target="_blank"
-                                                   href={`https://goo.gl/maps/2Wa838Gd6xxbD75h7`}>
-                                                    <p><LocationOnIcon className="fa-solid fa-location-dot me-2"/>
-                                                        {aboutUs?.address}
+                                            <div className="row g-3 g-sm-4 gx-md-5">
+                                                <div className="col-sm-6 col-md-6">
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 30 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true }}
+                                                        transition={{ duration: 0.5, delay: 0.4 }}
+                                                        whileHover={{ scale: 1.02, y: -5 }}
+                                                        className="contact-info-box"
+                                                        style={{
+                                                            padding: '25px 20px',
+                                                            borderRadius: '12px',
+                                                            backgroundColor: '#fff',
+                                                            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.08)',
+                                                            transition: 'all 0.3s ease',
+                                                            height: '100%',
+                                                            border: '1px solid rgba(127, 166, 129, 0.1)'
+                                                        }}
+                                                    >
+                                                        <motion.h4
+                                                            style={{
+                                                                fontFamily: "'Mollie Glaston', sans-serif",
+                                                                fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+                                                                fontWeight: 500,
+                                                                color: '#1a1a1a',
+                                                                marginBottom: '15px',
+                                                                letterSpacing: '1px'
+                                                            }}
+                                                        >
+                                                            Address
+                                                        </motion.h4>
+                                                        <a 
+                                                            className="text-decoration-underline" 
+                                                            target="_blank"
+                                                            href={`https://goo.gl/maps/2Wa838Gd6xxbD75h7`}
+                                                            style={{
+                                                                color: '#666',
+                                                                textDecoration: 'none',
+                                                                transition: 'color 0.3s ease',
+                                                                display: 'block'
+                                                            }}
+                                                            onMouseEnter={(e) => {
+                                                                if (e.currentTarget) e.currentTarget.style.color = '#7fa681';
+                                                            }}
+                                                            onMouseLeave={(e) => {
+                                                                if (e.currentTarget) e.currentTarget.style.color = '#666';
+                                                            }}
+                                                        >
+                                                            <p style={{
+                                                                margin: 0,
+                                                                fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
+                                                                lineHeight: 1.6,
+                                                                fontFamily: "'Jost', sans-serif",
+                                                                display: 'flex',
+                                                                alignItems: 'flex-start',
+                                                                gap: '10px'
+                                                            }}>
+                                                                <LocationOnIcon sx={{ fontSize: 22, color: '#7fa681', flexShrink: 0, marginTop: '2px' }} />
+                                                                <span>{aboutUs?.address}</span>
                                                     </p>
                                                 </a>
+                                                    </motion.div>
                                             </div>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <div className="contact-info-box">
-                                                <h4>Email</h4>
-                                                <a className="text-decoration-underline"
-                                                   href={`mailto:${aboutUs?.email}`}>
-                                                    <p><EmailIcon className="fa-solid fa-envelope me-2"/>
-                                                        {aboutUs?.email}
+                                                <div className="col-sm-6 col-md-6">
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 30 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true }}
+                                                        transition={{ duration: 0.5, delay: 0.5 }}
+                                                        whileHover={{ scale: 1.02, y: -5 }}
+                                                        className="contact-info-box"
+                                                        style={{
+                                                            padding: '25px 20px',
+                                                            borderRadius: '12px',
+                                                            backgroundColor: '#fff',
+                                                            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.08)',
+                                                            transition: 'all 0.3s ease',
+                                                            height: '100%',
+                                                            border: '1px solid rgba(127, 166, 129, 0.1)'
+                                                        }}
+                                                    >
+                                                        <motion.h4
+                                                            style={{
+                                                                fontFamily: "'Mollie Glaston', sans-serif",
+                                                                fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+                                                                fontWeight: 500,
+                                                                color: '#1a1a1a',
+                                                                marginBottom: '15px',
+                                                                letterSpacing: '1px'
+                                                            }}
+                                                        >
+                                                            Email
+                                                        </motion.h4>
+                                                        <a 
+                                                            className="text-decoration-underline"
+                                                            href={`mailto:${aboutUs?.email}`}
+                                                            style={{
+                                                                color: '#666',
+                                                                textDecoration: 'none',
+                                                                transition: 'color 0.3s ease',
+                                                                display: 'block'
+                                                            }}
+                                                            onMouseEnter={(e) => {
+                                                                if (e.currentTarget) e.currentTarget.style.color = '#7fa681';
+                                                            }}
+                                                            onMouseLeave={(e) => {
+                                                                if (e.currentTarget) e.currentTarget.style.color = '#666';
+                                                            }}
+                                                        >
+                                                            <p style={{
+                                                                margin: 0,
+                                                                fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
+                                                                lineHeight: 1.6,
+                                                                fontFamily: "'Jost', sans-serif",
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                gap: '10px',
+                                                                wordBreak: 'break-word'
+                                                            }}>
+                                                                <EmailIcon sx={{ fontSize: 22, color: '#7fa681', flexShrink: 0 }} />
+                                                                <span>{aboutUs?.email}</span>
                                                     </p>
                                                 </a>
+                                                    </motion.div>
                                             </div>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <div className="contact-info-box">
-                                                <h4>Phone</h4>
-                                                <a className="text-decoration-underline" href={`tel:${aboutUs?.tel}`}>
-                                                    <p><LocalPhoneIcon className="fa-solid fa-phone me-2"/>
-                                                        {aboutUs?.tel}
+                                                <div className="col-sm-6 col-md-6">
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 30 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true }}
+                                                        transition={{ duration: 0.5, delay: 0.6 }}
+                                                        whileHover={{ scale: 1.02, y: -5 }}
+                                                        className="contact-info-box"
+                                                        style={{
+                                                            padding: '25px 20px',
+                                                            borderRadius: '12px',
+                                                            backgroundColor: '#fff',
+                                                            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.08)',
+                                                            transition: 'all 0.3s ease',
+                                                            height: '100%',
+                                                            border: '1px solid rgba(127, 166, 129, 0.1)'
+                                                        }}
+                                                    >
+                                                        <motion.h4
+                                                            style={{
+                                                                fontFamily: "'Mollie Glaston', sans-serif",
+                                                                fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+                                                                fontWeight: 500,
+                                                                color: '#1a1a1a',
+                                                                marginBottom: '15px',
+                                                                letterSpacing: '1px'
+                                                            }}
+                                                        >
+                                                            Phone
+                                                        </motion.h4>
+                                                        <a 
+                                                            className="text-decoration-underline" 
+                                                            href={`tel:${aboutUs?.tel}`}
+                                                            style={{
+                                                                color: '#666',
+                                                                textDecoration: 'none',
+                                                                transition: 'color 0.3s ease',
+                                                                display: 'block'
+                                                            }}
+                                                            onMouseEnter={(e) => {
+                                                                if (e.currentTarget) e.currentTarget.style.color = '#7fa681';
+                                                            }}
+                                                            onMouseLeave={(e) => {
+                                                                if (e.currentTarget) e.currentTarget.style.color = '#666';
+                                                            }}
+                                                        >
+                                                            <p style={{
+                                                                margin: 0,
+                                                                fontSize: 'clamp(0.95rem, 1.5vw, 1.05rem)',
+                                                                lineHeight: 1.6,
+                                                                fontFamily: "'Jost', sans-serif",
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                gap: '10px'
+                                                            }}>
+                                                                <LocalPhoneIcon sx={{ fontSize: 22, color: '#7fa681', flexShrink: 0 }} />
+                                                                <span>{aboutUs?.tel}</span>
                                                     </p>
                                                 </a>
+                                                    </motion.div>
                                             </div>
-                                        </div>
-                                        <div className="col-sm-6">
-                                            <div className="contact-info-box">
-                                                <h4>Social Media</h4>
-                                                <ul className="list-social">
-                                                    <li><a target="_blank" href="#">
-                                                        <FacebookIcon className="fa-solid fa-calendar-days"
-                                                                      sx={{fontSize: 20}}/>
-                                                    </a></li>
-
-                                                    <li><a target="_blank" href="#">
-                                                        <InstagramIcon className="fa-solid fa-calendar-days"
-                                                                       sx={{fontSize: 20}}/>
-                                                    </a></li>
+                                                <div className="col-sm-6 col-md-6">
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 30 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true }}
+                                                        transition={{ duration: 0.5, delay: 0.7 }}
+                                                        whileHover={{ scale: 1.02, y: -5 }}
+                                                        className="contact-info-box"
+                                                        style={{
+                                                            padding: '25px 20px',
+                                                            borderRadius: '12px',
+                                                            backgroundColor: '#fff',
+                                                            boxShadow: '0 4px 15px rgba(0, 0, 0, 0.08)',
+                                                            transition: 'all 0.3s ease',
+                                                            height: '100%',
+                                                            border: '1px solid rgba(127, 166, 129, 0.1)'
+                                                        }}
+                                                    >
+                                                        <motion.h4
+                                                            style={{
+                                                                fontFamily: "'Mollie Glaston', sans-serif",
+                                                                fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
+                                                                fontWeight: 500,
+                                                                color: '#1a1a1a',
+                                                                marginBottom: '15px',
+                                                                letterSpacing: '1px'
+                                                            }}
+                                                        >
+                                                            Social Media
+                                                        </motion.h4>
+                                                        <ul className="list-social" style={{ 
+                                                            listStyle: 'none', 
+                                                            padding: 0, 
+                                                            margin: 0,
+                                                            display: 'flex',
+                                                            gap: '15px',
+                                                            alignItems: 'center'
+                                                        }}>
+                                                            <li>
+                                                                <motion.a 
+                                                                    target="_blank" 
+                                                                    href="#"
+                                                                    whileHover={{ scale: 1.2, y: -3 }}
+                                                                    whileTap={{ scale: 0.95 }}
+                                                                    style={{
+                                                                        display: 'inline-flex',
+                                                                        alignItems: 'center',
+                                                                        justifyContent: 'center',
+                                                                        width: '40px',
+                                                                        height: '40px',
+                                                                        borderRadius: '50%',
+                                                                        backgroundColor: '#7fa681',
+                                                                        color: '#fff',
+                                                                        textDecoration: 'none',
+                                                                        transition: 'all 0.3s ease'
+                                                                    }}
+                                                                >
+                                                                    <FacebookIcon sx={{ fontSize: 20 }} />
+                                                                </motion.a>
+                                                            </li>
+                                                            <li>
+                                                                <motion.a 
+                                                                    target="_blank" 
+                                                                    href="#"
+                                                                    whileHover={{ scale: 1.2, y: -3 }}
+                                                                    whileTap={{ scale: 0.95 }}
+                                                                    style={{
+                                                                        display: 'inline-flex',
+                                                                        alignItems: 'center',
+                                                                        justifyContent: 'center',
+                                                                        width: '40px',
+                                                                        height: '40px',
+                                                                        borderRadius: '50%',
+                                                                        backgroundColor: '#7fa681',
+                                                                        color: '#fff',
+                                                                        textDecoration: 'none',
+                                                                        transition: 'all 0.3s ease'
+                                                                    }}
+                                                                >
+                                                                    <InstagramIcon sx={{ fontSize: 20 }} />
+                                                                </motion.a>
+                                                            </li>
                                                 </ul>
+                                                    </motion.div>
                                             </div>
                                         </div>
+                                        </motion.div>
+                                    </AnimatedSection>
                                     </div>
-                                </div>
+                                {/* Contact Form Section */}
                                 <div className="col-lg-6 order-0 order-lg-1">
-                                    <div className="contact-form ps-lg-5">
-                                        <div className="row gy-1">
-                                            <div className="col-md-12">
-                                                <h2 className="title mb-0">Get in touch</h2>
-                                                <p>Questions regarding our? Fill out the form below.</p>
-                                            </div>
+                                    <AnimatedSection delay={0.2}>
+                                        <motion.div
+                                            initial={{ opacity: 0, x: 50 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true, margin: "-50px" }}
+                                            transition={{ duration: 0.6 }}
+                                            className="contact-form"
+                                            style={{
+                                                paddingLeft: '0',
+                                                paddingTop: '40px'
+                                            }}
+                                        >
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 20 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                viewport={{ once: true }}
+                                                transition={{ duration: 0.6, delay: 0.3 }}
+                                                className="mb-4"
+                                            >
+                                                <h2 
+                                                    className="title mb-2"
+                                                    style={{
+                                                        fontFamily: "'Mollie Glaston', sans-serif",
+                                                        fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                                                        fontWeight: 400,
+                                                        color: '#1a1a1a',
+                                                        lineHeight: 1.2,
+                                                        letterSpacing: '2px'
+                                                    }}
+                                                >
+                                                    Get in touch
+                                                </h2>
+                                                <p style={{
+                                                    fontSize: 'clamp(1rem, 1.5vw, 1.1rem)',
+                                                    color: '#666',
+                                                    lineHeight: 1.6,
+                                                    fontFamily: "'Jost', sans-serif",
+                                                    marginBottom: 0
+                                                }}>
+                                                    Questions regarding our services? Fill out the form below.
+                                                </p>
+                                            </motion.div>
 
-                                            <form className="col-md-12" onSubmit={handleSubmitContact}>
-                                                <div className="row g-3">
-                                                    <div className="col-md-12">
-                                                        <label className="label-field" htmlFor="fullname">Full
-                                                            name</label>
-                                                        <div className="text-field">
-                                                            <input autoComplete="off" type="text" name="Fullname"
-                                                                   value={contact?.name}
-                                                                   id="fullname" placeholder="Enter your full name"
-
-                                                                   onChange={(e) => handleChangeInputText(e as any, 'name')}/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6">
-                                                        <label className="label-field" htmlFor="email">Email
-                                                            address</label>
-                                                        <div className="text-field">
-                                                            <input autoComplete="off" type="email" name="fEmail"
+                                            <form onSubmit={handleSubmitContact}>
+                                                <div className="row g-4">
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 20 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true }}
+                                                        transition={{ duration: 0.5, delay: 0.4 }}
+                                                        className="col-md-12"
+                                                    >
+                                                        <label 
+                                                            className="label-field" 
+                                                            htmlFor="fullname"
+                                                            style={{
+                                                                fontFamily: "'Jost', sans-serif",
+                                                                fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+                                                                fontWeight: 500,
+                                                                color: '#1a1a1a',
+                                                                marginBottom: '8px',
+                                                                display: 'block'
+                                                            }}
+                                                        >
+                                                            Full name
+                                                        </label>
+                                                        <motion.div 
+                                                            className="text-field"
+                                                            whileFocus={{ scale: 1.01 }}
+                                                            transition={{ duration: 0.2 }}
+                                                        >
+                                                            <input 
+                                                                autoComplete="off" 
+                                                                type="text" 
+                                                                name="Fullname"
+                                                                value={contact?.name || ''}
+                                                                id="fullname" 
+                                                                placeholder="Enter your full name"
+                                                                onChange={(e) => handleChangeInputText(e as any, 'name')}
+                                                                style={{
+                                                                    width: '100%',
+                                                                    padding: '14px 18px',
+                                                                    fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+                                                                    fontFamily: "'Jost', sans-serif",
+                                                                    border: 'none',
+                                                                    borderRadius: '8px',
+                                                                    outline: 'none',
+                                                                    transition: 'all 0.3s ease',
+                                                                    backgroundColor: '#f8f9fa',
+                                                                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                                                                }}
+                                                                onFocus={(e) => {
+                                                                    e.target.style.backgroundColor = '#fff';
+                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1)';
+                                                                }}
+                                                                onBlur={(e) => {
+                                                                    e.target.style.backgroundColor = '#f8f9fa';
+                                                                    e.target.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
+                                                                }}
+                                                            />
+                                                        </motion.div>
+                                                    </motion.div>
+                                                    
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 20 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true }}
+                                                        transition={{ duration: 0.5, delay: 0.5 }}
+                                                        className="col-md-6"
+                                                    >
+                                                        <label 
+                                                            className="label-field" 
+                                                            htmlFor="email"
+                                                            style={{
+                                                                fontFamily: "'Jost', sans-serif",
+                                                                fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+                                                                fontWeight: 500,
+                                                                color: '#1a1a1a',
+                                                                marginBottom: '8px',
+                                                                display: 'block'
+                                                            }}
+                                                        >
+                                                            Email address
+                                                        </label>
+                                                        <motion.div 
+                                                            className="text-field"
+                                                            whileFocus={{ scale: 1.01 }}
+                                                            transition={{ duration: 0.2 }}
+                                                        >
+                                                            <input 
+                                                                autoComplete="off" 
+                                                                type="email" 
+                                                                name="fEmail"
                                                                    id="email"
                                                                    placeholder="Enter your email address"
-                                                                   value={contact?.email}
-                                                                   onChange={(e) => handleChangeInputText(e as any, 'email')}/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-md-6">
-                                                        <label className="label-field" htmlFor="phone">Phone
-                                                            number</label>
-                                                        <div className="text-field">
-                                                            <input autoComplete="off" type="text" name="fPhone"
+                                                                value={contact?.email || ''}
+                                                                onChange={(e) => handleChangeInputText(e as any, 'email')}
+                                                                style={{
+                                                                    width: '100%',
+                                                                    padding: '14px 18px',
+                                                                    fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+                                                                    fontFamily: "'Jost', sans-serif",
+                                                                    border: 'none',
+                                                                    borderRadius: '8px',
+                                                                    outline: 'none',
+                                                                    transition: 'all 0.3s ease',
+                                                                    backgroundColor: '#f8f9fa',
+                                                                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                                                                }}
+                                                                onFocus={(e) => {
+                                                                    e.target.style.backgroundColor = '#fff';
+                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1)';
+                                                                }}
+                                                                onBlur={(e) => {
+                                                                    e.target.style.backgroundColor = '#f8f9fa';
+                                                                    e.target.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
+                                                                }}
+                                                            />
+                                                        </motion.div>
+                                                    </motion.div>
+                                                    
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 20 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true }}
+                                                        transition={{ duration: 0.5, delay: 0.6 }}
+                                                        className="col-md-6"
+                                                    >
+                                                        <label 
+                                                            className="label-field" 
+                                                            htmlFor="phone"
+                                                            style={{
+                                                                fontFamily: "'Jost', sans-serif",
+                                                                fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+                                                                fontWeight: 500,
+                                                                color: '#1a1a1a',
+                                                                marginBottom: '8px',
+                                                                display: 'block'
+                                                            }}
+                                                        >
+                                                            Phone number
+                                                        </label>
+                                                        <motion.div 
+                                                            className="text-field"
+                                                            whileFocus={{ scale: 1.01 }}
+                                                            transition={{ duration: 0.2 }}
+                                                        >
+                                                            <input 
+                                                                autoComplete="off" 
+                                                                type="text" 
+                                                                name="fPhone"
                                                                    id="phone"
-                                                                   maxLength={12} placeholder="Enter your phone number"
-                                                                   value={contact?.phone as any}
+                                                                maxLength={12} 
+                                                                placeholder="Enter your phone number"
+                                                                value={contact?.phone as any || ''}
                                                                    inputMode="numeric"
-                                                                   onChange={(e) => handleChangePhoneNumber(e as any)}/>
-                                                        </div>
+                                                                onChange={(e) => handleChangePhoneNumber(e as any)}
+                                                                style={{
+                                                                    width: '100%',
+                                                                    padding: '14px 18px',
+                                                                    fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+                                                                    fontFamily: "'Jost', sans-serif",
+                                                                    border: 'none',
+                                                                    borderRadius: '8px',
+                                                                    outline: 'none',
+                                                                    transition: 'all 0.3s ease',
+                                                                    backgroundColor: '#f8f9fa',
+                                                                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                                                                }}
+                                                                onFocus={(e) => {
+                                                                    e.target.style.backgroundColor = '#fff';
+                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1)';
+                                                                }}
+                                                                onBlur={(e) => {
+                                                                    e.target.style.backgroundColor = '#f8f9fa';
+                                                                    e.target.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
+                                                                }}
+                                                            />
+                                                        </motion.div>
                                                         {
                                                             isErrorPhoneNumber?.status == true ?
-                                                                <span
-                                                                    style={{color: "red"}}>{isErrorPhoneNumber?.message}</span>
+                                                                <motion.span
+                                                                    initial={{ opacity: 0, y: -10 }}
+                                                                    animate={{ opacity: 1, y: 0 }}
+                                                                    style={{
+                                                                        color: "#e74c3c",
+                                                                        fontSize: '0.9rem',
+                                                                        fontFamily: "'Jost', sans-serif",
+                                                                        marginTop: '5px',
+                                                                        display: 'block'
+                                                                    }}
+                                                                >
+                                                                    {isErrorPhoneNumber?.message}
+                                                                </motion.span>
                                                                 :
                                                                 <></>
                                                         }
-                                                    </div>
-                                                    <div className="col-lg-12">
-                                                        <label className="label-field" htmlFor="message">Message</label>
-                                                        <div className="text-field">
-                                                            <textarea autoComplete="off" rows={5}
-                                                                      name="fMessage" id="message"
+                                                    </motion.div>
+                                                    
+                                                    <motion.div
+                                                        initial={{ opacity: 0, y: 20 }}
+                                                        whileInView={{ opacity: 1, y: 0 }}
+                                                        viewport={{ once: true }}
+                                                        transition={{ duration: 0.5, delay: 0.7 }}
+                                                        className="col-lg-12"
+                                                    >
+                                                        <label 
+                                                            className="label-field" 
+                                                            htmlFor="message"
+                                                            style={{
+                                                                fontFamily: "'Jost', sans-serif",
+                                                                fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+                                                                fontWeight: 500,
+                                                                color: '#1a1a1a',
+                                                                marginBottom: '8px',
+                                                                display: 'block'
+                                                            }}
+                                                        >
+                                                            Message
+                                                        </label>
+                                                        <motion.div 
+                                                            className="text-field"
+                                                            whileFocus={{ scale: 1.01 }}
+                                                            transition={{ duration: 0.2 }}
+                                                        >
+                                                            <textarea 
+                                                                autoComplete="off" 
+                                                                rows={5}
+                                                                name="fMessage" 
+                                                                id="message"
                                                                       placeholder="Enter your message"
-                                                                      value={contact?.message}
-                                                                      onChange={(e) => handleChangeInputText(e as any, 'message')}></textarea>
-                                                        </div>
-                                                    </div>
+                                                                value={contact?.message || ''}
+                                                                onChange={(e) => handleChangeInputText(e as any, 'message')}
+                                                                style={{
+                                                                    width: '100%',
+                                                                    padding: '14px 18px',
+                                                                    fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)',
+                                                                    fontFamily: "'Jost', sans-serif",
+                                                                    border: 'none',
+                                                                    borderRadius: '8px',
+                                                                    outline: 'none',
+                                                                    transition: 'all 0.3s ease',
+                                                                    backgroundColor: '#f8f9fa',
+                                                                    resize: 'vertical',
+                                                                    minHeight: '120px',
+                                                                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                                                                }}
+                                                                onFocus={(e) => {
+                                                                    e.target.style.backgroundColor = '#fff';
+                                                                    e.target.style.boxShadow = '0 0 0 3px rgba(127, 166, 129, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1)';
+                                                                }}
+                                                                onBlur={(e) => {
+                                                                    e.target.style.backgroundColor = '#f8f9fa';
+                                                                    e.target.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
+                                                                }}
+                                                            />
+                                                        </motion.div>
+                                                    </motion.div>
                                                 </div>
 
-                                                <div className="col-md-12 text-center" style={{paddingTop: "14px"}}>
-                                                    <button type="submit"
-                                                            value="Submit" className="button button-lg">Send Message
-                                                    </button>
-                                                </div>
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 20 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ duration: 0.5, delay: 0.8 }}
+                                                    className="col-md-12 text-center"
+                                                    style={{ paddingTop: "24px" }}
+                                                >
+                                                    <motion.button
+                                                        type="submit"
+                                                        value="Submit"
+                                                        whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(127, 166, 129, 0.4)' }}
+                                                        whileTap={{ scale: 0.95 }}
+                                                        className="button button-lg"
+                                                        style={{
+                                                            backgroundColor: '#7fa681',
+                                                            color: '#fff',
+                                                            border: 'none',
+                                                            padding: '16px 40px',
+                                                            borderRadius: '8px',
+                                                            fontSize: 'clamp(1rem, 1.5vw, 1.1rem)',
+                                                            fontWeight: 500,
+                                                            cursor: 'pointer',
+                                                            fontFamily: "'Jost', sans-serif",
+                                                            display: 'inline-flex',
+                                                            alignItems: 'center',
+                                                            gap: '10px',
+                                                            transition: 'all 0.3s ease',
+                                                            minWidth: '180px',
+                                                            justifyContent: 'center'
+                                                        }}
+                                                    >
+                                                        <SendIcon sx={{ fontSize: 20 }} />
+                                                        <span>Send Message</span>
+                                                    </motion.button>
+                                                </motion.div>
                                             </form>
-
-
-                                            {/*<FormattedInputs/>*/}
-                                            {/*<div className="col-md-12" style={{marginTop: "10px"}}>*/}
-                                            {/*    <Form className="row g-3"*/}
-                                            {/*          size={"middle"}*/}
-                                            {/*          layout="vertical"*/}
-                                            {/*          autoComplete="on"*/}
-                                            {/*          onFinish={handleSubmitContact} form={form}>*/}
-
-                                            {/*        <div className="col-md-12">*/}
-                                            {/*            <Form.Item*/}
-                                            {/*                name="name"*/}
-                                            {/*                label="Full Name"*/}
-                                            {/*                rules={[*/}
-                                            {/*                    {*/}
-                                            {/*                        required: true,*/}
-                                            {/*                        message: "Please enter full name"*/}
-                                            {/*                    },*/}
-                                            {/*                ]}*/}
-                                            {/*            >*/}
-
-                                            {/*                <div className="input-group">*/}
-                                            {/*                    <InputAntd type="text" style={{height: "45px"}}*/}
-                                            {/*                               className="form-control"*/}
-                                            {/*                               value={contact?.name}*/}
-
-                                            {/*                               onChange={(e) => handleChangeInputText(e, 'name')}*/}
-                                            {/*                               placeholder="Please enter full name"*/}
-                                            {/*                    />*/}
-                                            {/*                </div>*/}
-                                            {/*            </Form.Item>*/}
-                                            {/*        </div>*/}
-                                            {/*        <div className="col-md-6">*/}
-                                            {/*            <Form.Item*/}
-                                            {/*                name="email"*/}
-                                            {/*                label="Email"*/}
-                                            {/*                rules={[*/}
-                                            {/*                    {*/}
-                                            {/*                        required: true,*/}
-                                            {/*                        message: "Please enter email"*/}
-                                            {/*                    },*/}
-                                            {/*                    {*/}
-                                            {/*                        type: 'email',*/}
-                                            {/*                        message: "Email invalid"*/}
-                                            {/*                    },*/}
-                                            {/*                ]}*/}
-                                            {/*            >*/}
-
-                                            {/*                <div className="input-group">*/}
-                                            {/*                    <InputAntd type="text" style={{height: "45px"}}*/}
-                                            {/*                               className="form-control"*/}
-                                            {/*                               value={contact?.email}*/}
-                                            {/*                               onChange={(e) => handleChangeInputText(e, 'email')}*/}
-                                            {/*                               placeholder="Please enter my email"*/}
-                                            {/*                    />*/}
-                                            {/*                </div>*/}
-                                            {/*            </Form.Item>*/}
-
-                                            {/*        </div>*/}
-
-                                            {/*        <div className="col-md-6">*/}
-                                            {/*            <Form.Item*/}
-                                            {/*                style={{*/}
-                                            {/*                    WebkitUserSelect: "none",*/}
-                                            {/*                    KhtmlUserSelect: "none",*/}
-                                            {/*                    MozUserSelect: "none", msUserSelect: "none",*/}
-                                            {/*                    userSelect: "none"*/}
-                                            {/*                }}*/}
-                                            {/*                name="phone"*/}
-                                            {/*                label="Phone Number"*/}
-                                            {/*                rules={[*/}
-                                            {/*                    {*/}
-                                            {/*                        required: true,*/}
-                                            {/*                        message: "Please enter my phone number"*/}
-                                            {/*                    },*/}
-
-                                            {/*                    ({getFieldValue}) => ({*/}
-                                            {/*                        validator(_, value) {*/}
-                                            {/*                            let isError: boolean = false;*/}
-                                            {/*                            [...value]?.map((index: any) => {*/}
-                                            {/*                                const reg = /^-?\d*(\.\d*)?$/;*/}
-                                            {/*                                if (reg.test(index) == false && index !== '' && index !== undefined) {*/}
-                                            {/*                                    isError = true*/}
-                                            {/*                                }*/}
-                                            {/*                            })*/}
-                                            {/*                            if (isError) {*/}
-                                            {/*                                return Promise.reject(new Error('Please enter only number'));*/}
-                                            {/*                            } else {*/}
-                                            {/*                                return Promise.resolve();*/}
-                                            {/*                            }*/}
-                                            {/*                        }*/}
-                                            {/*                    }),*/}
-                                            {/*                    ({getFieldValue}) => ({*/}
-                                            {/*                        validator(_, value) {*/}
-                                            {/*                            if (value?.length != 12) {*/}
-                                            {/*                                return Promise.reject(new Error('Please enter full phone number'));*/}
-                                            {/*                            } else {*/}
-                                            {/*                                return Promise.resolve();*/}
-                                            {/*                            }*/}
-                                            {/*                        }*/}
-                                            {/*                    }),*/}
-
-                                            {/*                ]}*/}
-                                            {/*            >*/}
-                                            {/*                <div className="input-group">*/}
-                                            {/*                    <InputAntd type="text" style={{*/}
-                                            {/*                        height: "45px", WebkitUserSelect: "none",*/}
-                                            {/*                        KhtmlUserSelect: "none",*/}
-                                            {/*                        MozUserSelect: "none", msUserSelect: "none",*/}
-                                            {/*                        userSelect: "none"*/}
-                                            {/*                    }}*/}
-                                            {/*                               className="form-control"*/}
-                                            {/*                               placeholder="Please enter my phone number"*/}
-                                            {/*                               maxLength={12}*/}
-                                            {/*                               max={12}*/}
-                                            {/*                               aria-valuemax={12}*/}
-                                            {/*                               onChange={(e) => handleChangePhoneNumber(e)}*/}
-                                            {/*                               value={contact?.phone}/>*/}
-                                            {/*                </div>*/}
-                                            {/*            </Form.Item>*/}
-                                            {/*        </div>*/}
-
-                                            {/*        <div className="col-lg-12">*/}
-                                            {/*            <Form.Item*/}
-                                            {/*                name="message"*/}
-                                            {/*                label="Message"*/}
-                                            {/*                rules={[*/}
-                                            {/*                    {*/}
-                                            {/*                        required: true,*/}
-                                            {/*                        message: "Please enter message"*/}
-                                            {/*                    },*/}
-                                            {/*                ]}*/}
-                                            {/*            >*/}
-                                            {/*                <div className="input-group">*/}
-                                            {/*                    <TextArea rows={4} value={contact?.message}*/}
-                                            {/*                              onChange={(e) => handleChangeInputText(e, 'message')}/>*/}
-                                            {/*                </div>*/}
-                                            {/*            </Form.Item>*/}
-                                            {/*        </div>*/}
-
-                                            {/*        <div className="col-md-12 text-center">*/}
-                                            {/*            <button type="submit"*/}
-                                            {/*                    value="Submit" className="button button-lg">Send Message*/}
-                                            {/*            </button>*/}
-                                            {/*        </div>*/}
-                                            {/*    </Form>*/}
-
-
-                                            {/*</div>*/}
-                                        </div>
-                                    </div>
+                                        </motion.div>
+                                    </AnimatedSection>
                                 </div>
                             </div>
                         </div>
@@ -476,7 +877,45 @@ const ContactPage = (props: any) => {
                 </Spin>
             </>
             :
-            <></>
+            <AnimatedSection>
+                <section className="section-page-wrap" style={{ paddingTop: '150px', paddingBottom: '150px' }}>
+                    <div className="container-lg">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            style={{
+                                textAlign: 'center',
+                                padding: '60px 20px'
+                            }}
+                        >
+                            <h2
+                                style={{
+                                    fontFamily: "'Mollie Glaston', sans-serif",
+                                    fontSize: 'clamp(2rem, 4vw, 3rem)',
+                                    fontWeight: 500,
+                                    color: '#1a1a1a',
+                                    marginBottom: '20px'
+                                }}
+                            >
+                                Contact Information Coming Soon
+                            </h2>
+                            <p
+                                style={{
+                                    fontSize: '1.15rem',
+                                    color: '#666',
+                                    maxWidth: '600px',
+                                    margin: '0 auto',
+                                    lineHeight: 1.7,
+                                    fontFamily: "'Jost', sans-serif"
+                                }}
+                            >
+                                We're currently updating our contact information. Please check back soon!
+                            </p>
+                        </motion.div>
+                    </div>
+                </section>
+            </AnimatedSection>
     )
 }
 

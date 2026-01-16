@@ -1,5 +1,5 @@
 import * as types from "./index.constraints"
-import produce from "immer"
+import { produce } from "immer"
 
 interface initialStateInterface {
   cartItem :  any[]

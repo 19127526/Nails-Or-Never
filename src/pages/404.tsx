@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import {Box, Button, Container, Typography} from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import EmptyLayout from "@/components/layout/empty";
@@ -15,8 +16,8 @@ const NotFound = () => {
             <meta charSet="utf-8"/>
             <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
             <meta name="viewport" content="initial-scale=1, width=device-width"/>
-            <meta name="robots" content="index,follow"/>
-              <link ref="canonical" href="https://nailsornever.com"/>
+            <meta name="robots" content="noindex,nofollow"/>
+            <link rel="canonical" href="https://nailsornever.com/404"/>
             <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Not Found</title>
             <meta name="description" content={`We have many years of experience in the
                                 nail industry. Renowned for its friendly, unpretentious staff, esthetically pleasing and
@@ -61,14 +62,17 @@ const NotFound = () => {
                         Not Found
                     </Typography>
                     <Box sx={{textAlign: 'center'}}>
-                        <img
-                            alt="Under development"
-                            src="../images/not_found.svg"
+                        <Image
+                            alt="Page not found - 404 error"
+                            src="/images/not_found.svg"
+                            width={560}
+                            height={400}
+                            quality={85}
                             style={{
                                 marginTop: 50,
                                 display: 'inline-block',
                                 maxWidth: '100%',
-                                width: 560
+                                height: 'auto'
                             }}
                         />
                     </Box>
