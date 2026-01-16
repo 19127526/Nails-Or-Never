@@ -10,27 +10,46 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
   useEffect(() => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
-    // Detect mobile
+    // Detect iOS specifically
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isLoading) {
-      // Disable scroll when loading - MOBILE SAFE VERSION
+      // Disable scroll when loading - iOS SAFE VERSION
       const scrollY = window.scrollY || window.pageYOffset || 0;
+      
+      // iOS-specific fixes
+      if (isIOS) {
+        // Use touch-action to prevent scroll on iOS
+        document.body.style.touchAction = 'none';
+        document.documentElement.style.touchAction = 'none';
+        // Prevent elastic scrolling on iOS
+        document.body.style.webkitOverflowScrolling = 'touch';
+      }
+      
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
-      document.documentElement.style.overflow = 'hidden'; // Also lock html for mobile
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.documentElement.style.overflow = 'hidden';
+      document.documentElement.style.height = '100%';
       
-      // AGGRESSIVE SAFETY: Auto-unlock after shorter time on mobile
+      // AGGRESSIVE SAFETY: Auto-unlock after shorter time on mobile/iOS
       const safetyTimeout = setTimeout(() => {
         console.warn('PageLoading: Safety unlock triggered');
         document.body.style.overflow = '';
         document.body.style.position = '';
         document.body.style.top = '';
         document.body.style.width = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.touchAction = '';
         document.documentElement.style.overflow = '';
-      }, isMobile ? 1500 : 3000); // Shorter timeout on mobile
+        document.documentElement.style.height = '';
+        document.documentElement.style.touchAction = '';
+      }, isIOS ? 1000 : (isMobile ? 1500 : 3000)); // Very short timeout on iOS
 
       return () => {
         clearTimeout(safetyTimeout);
@@ -42,7 +61,12 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
       document.body.style.position = '';
       document.body.style.top = '';
       document.body.style.width = '';
-      document.documentElement.style.overflow = ''; // Also unlock html
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.touchAction = '';
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.height = '';
+      document.documentElement.style.touchAction = '';
       
       if (scrollY) {
         const scrollPosition = parseInt(scrollY.replace('px', '') || '0') * -1;
@@ -81,14 +105,20 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
             left: 0,
             width: '100%',
             height: '100%',
-            zIndex: 9998, // Reduced to allow content to show if needed
-            backgroundColor: 'rgba(255, 255, 255, 0.98)', // Slightly transparent to see if content is behind
+            minHeight: '100vh', // iOS Safari fix for viewport height
+            zIndex: 9998,
+            backgroundColor: '#ffffff', // Solid white for iOS compatibility
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            pointerEvents: isLoading ? 'auto' : 'none', // Allow clicks through when not loading
-            backdropFilter: isLoading ? 'blur(2px)' : 'none'
+            pointerEvents: isLoading ? 'auto' : 'none',
+            WebkitTransform: 'translateZ(0)', // Force hardware acceleration on iOS
+            transform: 'translateZ(0)',
+            WebkitBackfaceVisibility: 'hidden', // Prevent flickering on iOS
+            backfaceVisibility: 'hidden',
+            touchAction: 'none', // Prevent touch events on iOS
+            WebkitOverflowScrolling: 'touch' // Smooth scrolling on iOS
           }}
         >
           <motion.div

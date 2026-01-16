@@ -31,37 +31,42 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
     const Layout = Component.Layout ?? EmptyLayout
     useActiveNavLink();
 
-    // Handle initial page load - ULTRA SIMPLIFIED for mobile
+    // Handle initial page load - iOS OPTIMIZED
     useEffect(() => {
         if (!isInitialLoad) return;
 
-        // Detect mobile
+        // Detect iOS specifically
+        const isIOS = typeof window !== 'undefined' && /iPhone|iPad|iPod/i.test(navigator.userAgent);
         const isMobile = typeof window !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         
-        // AGGRESSIVE SAFETY: Always hide loading after max 1 second on mobile, 1.5s on desktop
+        // AGGRESSIVE SAFETY: Very short timeout on iOS to prevent white screen
         const safetyTimeout = setTimeout(() => {
             console.warn('PageLoading: Safety timeout triggered - forcing hide');
             setIsPageLoading(false);
             setIsInitialLoad(false);
-        }, isMobile ? 1000 : 1500);
+        }, isIOS ? 800 : (isMobile ? 1000 : 1500)); // Very short on iOS
 
         const handleInitialLoad = () => {
             clearTimeout(safetyTimeout);
-            // Hide immediately on mobile, short delay on desktop
-            const delay = isMobile ? 50 : 300;
+            // Hide almost immediately on iOS
+            const delay = isIOS ? 100 : (isMobile ? 150 : 300);
             setTimeout(() => {
                 setIsPageLoading(false);
                 setIsInitialLoad(false);
             }, delay);
         };
 
-        // Ultra simple: hide immediately on mobile
+        // iOS-specific handling
         if (typeof window !== 'undefined') {
-            if (isMobile) {
-                // On mobile, hide almost immediately
+            if (isIOS) {
+                // On iOS, hide very quickly to prevent white screen
+                // Don't wait for DOM events, just hide after short delay
+                handleInitialLoad();
+            } else if (isMobile) {
+                // On Android, hide quickly
                 handleInitialLoad();
             } else {
-                // On desktop, wait a bit
+                // On desktop, wait for DOM
                 if (document.readyState === 'complete' || document.readyState === 'interactive') {
                     handleInitialLoad();
                 } else {
@@ -112,7 +117,7 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
             {/* InitialLoading disabled - using PageLoading instead */}
             {/* <InitialLoading /> */}
             <Head>
-                <meta name="viewport" content="initial-scale=1, width=device-width"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
                 <meta name="generator" content="Nails Or Never"/>
                 <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
                 <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118</title>
