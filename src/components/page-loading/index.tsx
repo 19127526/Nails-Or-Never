@@ -65,25 +65,27 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
   }, []);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isLoading && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
           style={{
             position: 'fixed',
             top: 0,
             left: 0,
             width: '100%',
             height: '100%',
-            zIndex: 9999,
-            backgroundColor: '#fff',
+            zIndex: 9998, // Reduced to allow content to show if needed
+            backgroundColor: 'rgba(255, 255, 255, 0.98)', // Slightly transparent to see if content is behind
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
+            pointerEvents: isLoading ? 'auto' : 'none', // Allow clicks through when not loading
+            backdropFilter: isLoading ? 'blur(2px)' : 'none'
           }}
         >
           <motion.div

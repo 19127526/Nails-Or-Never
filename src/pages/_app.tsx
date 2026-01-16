@@ -35,40 +35,50 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
     useEffect(() => {
         if (!isInitialLoad) return;
 
-        // AGGRESSIVE SAFETY: Always hide loading after max 2 seconds to prevent infinite loading on mobile
+        // AGGRESSIVE SAFETY: Always hide loading after max 1.5 seconds to prevent infinite loading on mobile
         const safetyTimeout = setTimeout(() => {
             console.warn('PageLoading: Safety timeout triggered - forcing hide');
             setIsPageLoading(false);
             setIsInitialLoad(false);
-        }, 2000);
+        }, 1500);
 
         const handleInitialLoad = () => {
             clearTimeout(safetyTimeout);
-            // Very short delay
+            // Very short delay - hide immediately on mobile
             setTimeout(() => {
                 setIsPageLoading(false);
                 setIsInitialLoad(false);
-            }, 400);
+            }, 300);
         };
 
-        // Ultra simple: just wait a bit then hide, don't depend on router events
+        // Ultra simple: just wait a bit then hide immediately
         if (typeof window !== 'undefined') {
-            // Wait for DOM to be ready
+            // On mobile, hide much faster to prevent white screen
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const delay = isMobile ? 100 : 300; // Very short delay on mobile
+            
+            // Also check if DOM is ready
             if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                handleInitialLoad();
-            } else {
-                // Wait for DOMContentLoaded
-                const domReady = () => {
+                setTimeout(() => {
                     handleInitialLoad();
+                }, delay);
+            } else {
+                // Wait for DOMContentLoaded, but with shorter timeout
+                const domReady = () => {
+                    setTimeout(() => {
+                        handleInitialLoad();
+                    }, delay);
                 };
                 document.addEventListener('DOMContentLoaded', domReady, { once: true });
                 
-                // Also try window load as backup
-                window.addEventListener('load', handleInitialLoad, { once: true });
+                // Fallback: hide after delay anyway
+                setTimeout(() => {
+                    document.removeEventListener('DOMContentLoaded', domReady);
+                    handleInitialLoad();
+                }, delay + 200);
 
                 return () => {
                     document.removeEventListener('DOMContentLoaded', domReady);
-                    window.removeEventListener('load', handleInitialLoad);
                     clearTimeout(safetyTimeout);
                 };
             }
@@ -163,8 +173,14 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
                             <SWRConfig value={{fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false}}>
                                 <Layout>
                                     <NextTopLoader showSpinner={false} />
-                                <PageLoading isLoading={isPageLoading} />
-                                    <Component {...pageProps} />
+                                    <PageLoading isLoading={isPageLoading} />
+                                    <div style={{ 
+                                        position: 'relative', 
+                                        zIndex: isPageLoading ? 0 : 1,
+                                        minHeight: '100vh'
+                                    }}>
+                                        <Component {...pageProps} />
+                                    </div>
                                 </Layout>
                             </SWRConfig>
                         </QueryClientProvider>
