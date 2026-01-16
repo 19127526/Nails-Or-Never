@@ -186,13 +186,13 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
                 <Script src="https://www.google-analytics.com/analytics.js" />
             </Head>
             {/* Load external libraries that are still needed */}
-            <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js" strategy="lazyOnload"/>
-            <Script type="text/javascript" src="/external/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="/external/aos.js" id="aos-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="/external/flickity.pkgd.min.js" id="flickity-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="/external/slick.min.js" id="slick-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="/external/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="/external/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>
+            {/*<Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js" strategy="lazyOnload"/>*/}
+            {/*<Script type="text/javascript" src="/external/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>*/}
+            {/*<Script type="text/javascript" src="/external/aos.js" id="aos-js" strategy="lazyOnload"></Script>*/}
+            {/*<Script type="text/javascript" src="/external/flickity.pkgd.min.js" id="flickity-js" strategy="lazyOnload"></Script>*/}
+            {/*<Script type="text/javascript" src="/external/slick.min.js" id="slick-js" strategy="lazyOnload"></Script>*/}
+            {/*<Script type="text/javascript" src="/external/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>*/}
+            {/*<Script type="text/javascript" src="/external/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>*/}
             <Provider store={store}>
                 <PersistGate loading={<LoadingComponent />} persistor={persistor}>
                     <Suspense fallback={<LoadingComponent />}>
