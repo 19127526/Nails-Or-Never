@@ -10,6 +10,9 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
   useEffect(() => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
+    // Detect mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
     if (isLoading) {
       // Disable scroll when loading - MOBILE SAFE VERSION
       const scrollY = window.scrollY || window.pageYOffset || 0;
@@ -19,7 +22,7 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
       document.body.style.width = '100%';
       document.documentElement.style.overflow = 'hidden'; // Also lock html for mobile
       
-      // AGGRESSIVE SAFETY: Auto-unlock after 3 seconds to prevent infinite lock on mobile
+      // AGGRESSIVE SAFETY: Auto-unlock after shorter time on mobile
       const safetyTimeout = setTimeout(() => {
         console.warn('PageLoading: Safety unlock triggered');
         document.body.style.overflow = '';
@@ -27,7 +30,7 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
         document.body.style.top = '';
         document.body.style.width = '';
         document.documentElement.style.overflow = '';
-      }, 3000);
+      }, isMobile ? 1500 : 3000); // Shorter timeout on mobile
 
       return () => {
         clearTimeout(safetyTimeout);

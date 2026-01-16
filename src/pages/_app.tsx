@@ -31,56 +31,49 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
     const Layout = Component.Layout ?? EmptyLayout
     useActiveNavLink();
 
-    // Handle initial page load - ULTRA SIMPLIFIED with aggressive safety timeout
+    // Handle initial page load - ULTRA SIMPLIFIED for mobile
     useEffect(() => {
         if (!isInitialLoad) return;
 
-        // AGGRESSIVE SAFETY: Always hide loading after max 1.5 seconds to prevent infinite loading on mobile
+        // Detect mobile
+        const isMobile = typeof window !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        
+        // AGGRESSIVE SAFETY: Always hide loading after max 1 second on mobile, 1.5s on desktop
         const safetyTimeout = setTimeout(() => {
             console.warn('PageLoading: Safety timeout triggered - forcing hide');
             setIsPageLoading(false);
             setIsInitialLoad(false);
-        }, 1500);
+        }, isMobile ? 1000 : 1500);
 
         const handleInitialLoad = () => {
             clearTimeout(safetyTimeout);
-            // Very short delay - hide immediately on mobile
+            // Hide immediately on mobile, short delay on desktop
+            const delay = isMobile ? 50 : 300;
             setTimeout(() => {
                 setIsPageLoading(false);
                 setIsInitialLoad(false);
-            }, 300);
+            }, delay);
         };
 
-        // Ultra simple: just wait a bit then hide immediately
+        // Ultra simple: hide immediately on mobile
         if (typeof window !== 'undefined') {
-            // On mobile, hide much faster to prevent white screen
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            const delay = isMobile ? 100 : 300; // Very short delay on mobile
-            
-            // Also check if DOM is ready
-            if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                setTimeout(() => {
-                    handleInitialLoad();
-                }, delay);
+            if (isMobile) {
+                // On mobile, hide almost immediately
+                handleInitialLoad();
             } else {
-                // Wait for DOMContentLoaded, but with shorter timeout
-                const domReady = () => {
-                    setTimeout(() => {
-                        handleInitialLoad();
-                    }, delay);
-                };
-                document.addEventListener('DOMContentLoaded', domReady, { once: true });
-                
-                // Fallback: hide after delay anyway
-                setTimeout(() => {
-                    document.removeEventListener('DOMContentLoaded', domReady);
+                // On desktop, wait a bit
+                if (document.readyState === 'complete' || document.readyState === 'interactive') {
                     handleInitialLoad();
-                }, delay + 200);
-
-                return () => {
-                    document.removeEventListener('DOMContentLoaded', domReady);
-                    clearTimeout(safetyTimeout);
-                };
+                } else {
+                    document.addEventListener('DOMContentLoaded', handleInitialLoad, { once: true });
+                    window.addEventListener('load', handleInitialLoad, { once: true });
+                    
+                    return () => {
+                        document.removeEventListener('DOMContentLoaded', handleInitialLoad);
+                        window.removeEventListener('load', handleInitialLoad);
+                        clearTimeout(safetyTimeout);
+                    };
+                }
             }
         }
 
@@ -167,20 +160,14 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
             {/*<Script type="text/javascript" src="/external/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>*/}
             {/*<Script type="text/javascript" src="/external/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>*/}
             <Provider store={store}>
-                <PersistGate loading={<LoadingComponent />} persistor={persistor}>
-                    <Suspense fallback={<LoadingComponent />}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <Suspense fallback={null}>
                         <QueryClientProvider client={queryClient}>
                             <SWRConfig value={{fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false}}>
                                 <Layout>
                                     <NextTopLoader showSpinner={false} />
                                     <PageLoading isLoading={isPageLoading} />
-                                    <div style={{ 
-                                        position: 'relative', 
-                                        zIndex: isPageLoading ? 0 : 1,
-                                        minHeight: '100vh'
-                                    }}>
-                                        <Component {...pageProps} />
-                                    </div>
+                                    <Component {...pageProps} />
                                 </Layout>
                             </SWRConfig>
                         </QueryClientProvider>
