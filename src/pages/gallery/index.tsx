@@ -52,7 +52,7 @@ const GalleryPage = (props : any) => {
                         also, we provide some gallery such as ${[...galleryParent?.galleryParent]?.map(index => `${index?.theme}`)}. 
                        Let's come to our nail salon to see how deluxe salon & the unique nail art only at our salon`}/>
                 <meta property="og:image"
-                      content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                      content="/images/Nails or Never-01 (1).png"/>
                 <meta name="generator"  content={`Gallery Nail - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                 <script
                     type="application/ld+json"

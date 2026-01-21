@@ -456,7 +456,7 @@ const BookingPage = (props : any) => {
                     You can find all nail-related services, from ${[...service?.services]?.map(index => `${index?.name}`)},  We can booking with ${employee?.employees?.length} employess. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, 
                     `}/>
                     <meta property="og:image"
-                          content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                          content="/images/Nails or Never-01 (1).png"/>
                     <meta name="generator"  content={`Booking Service Nail - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
 
 

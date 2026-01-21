@@ -43,7 +43,7 @@ const DetailGalleryPage = (props : any) => {
                         also, in ${gallery}, we have ${[...gallerySub?.gallery]?.length} theme gallery collection. 
                        Let's come to our nail salon to see how deluxe salon & the unique nail art only at our salon`}/>
                 <meta property="og:image"
-                      content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                      content="/images/Nails or Never-01 (1).png"/>
                 <meta name="generator"  content={`List Theme Gallery ${gallery} - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                 <script
                     type="application/ld+json"

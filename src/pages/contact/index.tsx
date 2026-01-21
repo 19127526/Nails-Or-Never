@@ -166,7 +166,7 @@ const ContactPage = (props: any) => {
                         we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty.
                         You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
                         <meta property="og:image"
-                              content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                              content="/images/Nails or Never-01 (1).png"/>
                         <meta name="generator" content={`Contact with me - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                         <script
                             type="application/ld+json"

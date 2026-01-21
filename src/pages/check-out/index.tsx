@@ -136,7 +136,7 @@ const CheckOutPage = () => {
                     Let your sweetheart know how much you love and care for him/her by sending our love cards! Buy our gift card for your loved one.
                     `}/>
                 <meta property="og:image"
-                      content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                      content="/images/Nails or Never-01 (1).png"/>
                 <meta name="generator" content={`Checkout GiftCard - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
 
             </Head>

@@ -86,7 +86,7 @@ const PageLoading: React.FC<PageLoadingProps> = ({ isLoading }) => {
               }}
             >
               <Image
-                src="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"
+                src="/images/Nails or Never-01 (1).png"
                 alt="Nails or Never - Professional Nail Salon Logo"
                 width={200}
                 height={80}

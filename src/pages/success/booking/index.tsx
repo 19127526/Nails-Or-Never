@@ -37,7 +37,7 @@ const SuccessBookPage = (props : any) => {
                                 soothing atmosphere and more notable for its qualified and certified professionals. You
                                 will feel the difference the minute you walk through our door.`}/>
                 <meta property="og:image"
-                      content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                      content="/images/Nails or Never-01 (1).png"/>
                 <meta name="generator"  content={`Booking Success - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
             </Head>
 

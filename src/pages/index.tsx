@@ -46,7 +46,7 @@ function Item(props : any) {
     
     return (
         <Paper style={{
-            backgroundImage: "url(https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png)",
+            backgroundImage: "url(/images/Nails or Never-01 (1).png)",
             transition: "background .3s,border .3s,border-radius .3s,box-shadow .3s",
             minHeight: 'clamp(500px, 70vh, 700px)',
             display: 'flex',
@@ -200,7 +200,7 @@ const HomePage = (props : any) => {
                     <meta property="og:url" content="https://nailsornever.com/"/>
                     <meta property="og:type" content="Website"/>
                     <meta property="og:image"
-                          content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                          content="/images/Nails or Never-01 (1).png"/>
                     <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
                     <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118, 
                     ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
@@ -225,7 +225,7 @@ const HomePage = (props : any) => {
                                     "addressCountry": "US"
                                 },
                                 "url": "https://nailsornever.com",
-                                "image": "https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png",
+                                "image": "/images/Nails or Never-01 (1).png",
                                 "priceRange": "$$",
                                 "telephone": "+1-518-000-0000"
                             })

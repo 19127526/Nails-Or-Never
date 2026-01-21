@@ -47,7 +47,7 @@ const ServicesPage = (props: any) => {
                     <meta property="og:description" content={` In ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, we provide some service such as 
                     ${[...services?.services]?.map(index => `${index?.name}`)}. You can booking service in my website`}/>
                     <meta property="og:image"
-                          content="https://nails.shoedog.vn/public/images/Nails%20or%20Never-01%20(1).png"/>
+                          content="/images/Nails or Never-01 (1).png"/>
                     <meta name="generator"  content={`Services Nail - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
                     <script
                         type="application/ld+json"
