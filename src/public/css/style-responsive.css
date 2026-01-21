@@ -167,7 +167,18 @@
         justify-content: flex-start;
         margin-top: 8px;
         gap: 8px;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+    }
+
+    #header:not(.sticky) .header-main .navbar .button-group .icon-button {
+        font-size: 12px;
+        padding: 0.25rem 0.5rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    #header:not(.sticky) .header-main .navbar .button-group .icon-button span {
+        font-size: 12px;
     }
 
     #header:not(.sticky) .header-main .navbar .navbar-toggler {
@@ -189,6 +200,14 @@
     #header.sticky .header-main .navbar .button-group {
         order: 2;
         margin-right: 0;
+        flex-wrap: nowrap;
+    }
+
+    #header.sticky .header-main .navbar .button-group .icon-button {
+        font-size: 12px;
+        padding: 0.25rem 0.5rem;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
     #header.sticky .header-main .navbar .navbar-toggler {
@@ -201,7 +220,7 @@
 
     #header.sticky .header-main .navbar .button-group .icon-button span.sticky {
         display: inline-block;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     #header.sticky .header-main .navbar .button-group .icon-button span:not(.sticky) {

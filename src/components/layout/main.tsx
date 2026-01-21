@@ -7,9 +7,13 @@ const MainLayout = ({children}: { children: ReactNode }) => {
     return (
         <div data-rsssl="1" className="home page-template-default page page-id-64">
             <HeaderComponent/>
-            <main>
+            <motion.main
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+            >
                 {children}
-            </main>
+            </motion.main>
             <FooterComponent/>
         </div>
     )

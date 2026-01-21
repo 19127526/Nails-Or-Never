@@ -11,6 +11,8 @@ import NextTopLoader from 'nextjs-toploader';
 import Script from "next/script";
 import "antd/dist/reset.css";
 import "@/public/css/index.min.css"
+// Import responsive CSS directly to ensure it loads correctly in production
+import "@/public/css/style-responsive.css"
 import { PersistGate } from 'redux-persist/integration/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {persistor} from "@/app/store";
@@ -26,98 +28,37 @@ const queryClient = new QueryClient();
 
 function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache}: AppPropsWithLayout) {
     const router = useRouter();
-    const [isPageLoading, setIsPageLoading] = useState(true); // Start with true for initial load
-    const [isInitialLoad, setIsInitialLoad] = useState(true);
+    const [isPageLoading, setIsPageLoading] = useState(false);
     const Layout = Component.Layout ?? EmptyLayout
     useActiveNavLink();
 
-    // Handle initial page load - iOS OPTIMIZED
     useEffect(() => {
-        if (!isInitialLoad) return;
+        const handleStart = () => {
+            setIsPageLoading(true);
+        };
 
-        // Detect iOS specifically
-        const isIOS = typeof window !== 'undefined' && /iPhone|iPad|iPod/i.test(navigator.userAgent);
-        const isMobile = typeof window !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        
-        // AGGRESSIVE SAFETY: Very short timeout on iOS to prevent white screen
-        const safetyTimeout = setTimeout(() => {
-            console.warn('PageLoading: Safety timeout triggered - forcing hide');
-            setIsPageLoading(false);
-            setIsInitialLoad(false);
-        }, isIOS ? 800 : (isMobile ? 1000 : 1500)); // Very short on iOS
-
-        const handleInitialLoad = () => {
-            clearTimeout(safetyTimeout);
-            // Hide almost immediately on iOS
-            const delay = isIOS ? 100 : (isMobile ? 150 : 300);
+        const handleComplete = () => {
             setTimeout(() => {
                 setIsPageLoading(false);
-                setIsInitialLoad(false);
-            }, delay);
+            }, 300); // Small delay for smooth transition
         };
 
-        // iOS-specific handling
-        if (typeof window !== 'undefined') {
-            if (isIOS) {
-                // On iOS, hide very quickly to prevent white screen
-                // Don't wait for DOM events, just hide after short delay
-                handleInitialLoad();
-            } else if (isMobile) {
-                // On Android, hide quickly
-                handleInitialLoad();
-            } else {
-                // On desktop, wait for DOM
-                if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                    handleInitialLoad();
-                } else {
-                    document.addEventListener('DOMContentLoaded', handleInitialLoad, { once: true });
-                    window.addEventListener('load', handleInitialLoad, { once: true });
-                    
-                    return () => {
-                        document.removeEventListener('DOMContentLoaded', handleInitialLoad);
-                        window.removeEventListener('load', handleInitialLoad);
-                        clearTimeout(safetyTimeout);
-                    };
-                }
-            }
-        }
+        router.events.on('routeChangeStart', handleStart);
+        router.events.on('routeChangeComplete', handleComplete);
+        router.events.on('routeChangeError', handleComplete);
 
         return () => {
-            clearTimeout(safetyTimeout);
+            router.events.off('routeChangeStart', handleStart);
+            router.events.off('routeChangeComplete', handleComplete);
+            router.events.off('routeChangeError', handleComplete);
         };
-    }, [isInitialLoad]);
-
-    // Handle route changes
-    useEffect(() => {
-        if (!isInitialLoad) {
-            const handleStart = () => {
-                setIsPageLoading(true);
-            };
-
-            const handleComplete = () => {
-                setTimeout(() => {
-                    setIsPageLoading(false);
-                }, 300); // Small delay for smooth transition
-            };
-
-            router.events.on('routeChangeStart', handleStart);
-            router.events.on('routeChangeComplete', handleComplete);
-            router.events.on('routeChangeError', handleComplete);
-
-            return () => {
-                router.events.off('routeChangeStart', handleStart);
-                router.events.off('routeChangeComplete', handleComplete);
-                router.events.off('routeChangeError', handleComplete);
-            };
-        }
-    }, [router, isInitialLoad]);
+    }, [router]);
 
     return (
         <>
-            {/* InitialLoading disabled - using PageLoading instead */}
-            {/* <InitialLoading /> */}
+            <InitialLoading />
             <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+                <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="generator" content="Nails Or Never"/>
                 <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
                 <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118</title>
@@ -157,21 +98,21 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
                 <Script src="https://www.google-analytics.com/analytics.js" />
             </Head>
             {/* Load external libraries that are still needed */}
-            {/*<Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js" strategy="lazyOnload"/>*/}
-            {/*<Script type="text/javascript" src="/external/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>*/}
-            {/*<Script type="text/javascript" src="/external/aos.js" id="aos-js" strategy="lazyOnload"></Script>*/}
-            {/*<Script type="text/javascript" src="/external/flickity.pkgd.min.js" id="flickity-js" strategy="lazyOnload"></Script>*/}
-            {/*<Script type="text/javascript" src="/external/slick.min.js" id="slick-js" strategy="lazyOnload"></Script>*/}
-            {/*<Script type="text/javascript" src="/external/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>*/}
-            {/*<Script type="text/javascript" src="/external/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>*/}
+            <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js" strategy="lazyOnload"/>
+            <Script type="text/javascript" src="/external/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="/external/aos.js" id="aos-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="/external/flickity.pkgd.min.js" id="flickity-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="/external/slick.min.js" id="slick-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="/external/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>
+            <Script type="text/javascript" src="/external/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>
             <Provider store={store}>
-                <PersistGate loading={null} persistor={persistor}>
-                    <Suspense fallback={null}>
+                <PersistGate loading={<LoadingComponent />} persistor={persistor}>
+                    <Suspense fallback={<LoadingComponent />}>
                         <QueryClientProvider client={queryClient}>
                             <SWRConfig value={{fetcher: (url) => axiosClient.get(url), shouldRetryOnError: false}}>
                                 <Layout>
                                     <NextTopLoader showSpinner={false} />
-                                    <PageLoading isLoading={isPageLoading} />
+                                <PageLoading isLoading={isPageLoading} />
                                     <Component {...pageProps} />
                                 </Layout>
                             </SWRConfig>

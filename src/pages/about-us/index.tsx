@@ -1,6 +1,6 @@
 import MainLayout from "@/components/layout/main";
 import Head from "next/head";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {useDispatch} from "react-redux";
 import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
@@ -12,6 +12,7 @@ import AnimatedSection from "@/components/animated-section";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import { useRef } from "react";
+import PageLoading from "@/components/page-loading";
 
 // Parallax Background Component
 const ParallaxBackground: React.FC = () => {
@@ -53,6 +54,21 @@ const ParallaxSection: React.FC<{ children: React.ReactNode }> = ({ children }) 
 const AboutUsPage = (props : any) => {
     const {aboutUs} = props
     const dispatch = useDispatch()
+    const [isInitialLoading, setIsInitialLoading] = useState(true);
+
+    useEffect(() => {
+        // Simulate initial page load
+        const timer = setTimeout(() => {
+            setIsInitialLoading(false);
+        }, 500); // Small delay to ensure smooth transition
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (isInitialLoading) {
+        return <PageLoading isLoading={true} />;
+    }
+
     return (
         aboutUs != null ?
             <>

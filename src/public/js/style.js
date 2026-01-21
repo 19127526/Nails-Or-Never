@@ -51,6 +51,8 @@ $(document).ready(function(){
     $('html, body').animate({scrollTop:0}, 'slow');
   });
 
+  $("#loading").delay(1000).fadeOut("slow");
+
 });
 
 function isScrollTop() {

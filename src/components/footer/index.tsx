@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getDetailAboutUs} from "@/api-client/about-us/AboutUs.api";
 import {convertWorkingHourToArray, getTimeAndUnit} from "@/utils/format-working-hour";
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -45,15 +45,21 @@ const FooterComponent = () => {
         address : undefined,
         footage : undefined
     })
-    useLayoutEffect(() => {
+    const [isLoading, setIsLoading] = useState(true)
+    
+    useEffect(() => {
         const getDetailAboutUsApi = async () => {
-            await getDetailAboutUs()
-                .then(res => {
-                    setDetailAboutUs(res?.data?.aboutUs[0])
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+            try {
+                setIsLoading(true)
+                const res = await getDetailAboutUs()
+                if (res?.data?.aboutUs?.[0]) {
+                    setDetailAboutUs(res.data.aboutUs[0])
+                }
+            } catch (err) {
+                console.error('Error fetching footer data:', err)
+            } finally {
+                setIsLoading(false)
+            }
         }
         getDetailAboutUsApi()
     }, [])
@@ -232,7 +238,7 @@ const FooterComponent = () => {
                                             if (e.currentTarget) e.currentTarget.style.color = '#1a1a1a';
                                         }}
                                     >
-                                        {detailAboutUs?.address}
+                                        {detailAboutUs?.address || '2374 US-9, Malta, NY 12118'}
                                     </a>
                                 </motion.p>
                                 <motion.p
@@ -253,7 +259,7 @@ const FooterComponent = () => {
                                 >
                                     <LocalPhoneIcon sx={{ fontSize: 20, color: '#1a1a1a', flexShrink: 0 }} />
                                     <a
-                                        href={`tel:${detailAboutUs?.tel}`}
+                                        href={`tel:${detailAboutUs?.tel || '518-400-1028'}`}
                                         style={{
                                             color: '#1a1a1a',
                                             textDecoration: 'none',
@@ -266,7 +272,7 @@ const FooterComponent = () => {
                                             if (e.currentTarget) e.currentTarget.style.color = '#1a1a1a';
                                         }}
                                     >
-                                        {detailAboutUs?.tel}
+                                        {detailAboutUs?.tel || '518-400-1028'}
                                     </a>
                                 </motion.p>
                                 <motion.p
@@ -288,7 +294,7 @@ const FooterComponent = () => {
                                 >
                                     <EmailIcon sx={{ fontSize: 20, color: '#1a1a1a', flexShrink: 0 }} />
                                     <a
-                                        href={`mailto:${detailAboutUs?.email}`}
+                                        href={`mailto:${detailAboutUs?.email || 'nailsornever@gmail.com'}`}
                                         style={{
                                             color: '#1a1a1a',
                                             textDecoration: 'none',
@@ -301,7 +307,7 @@ const FooterComponent = () => {
                                             if (e.currentTarget) e.currentTarget.style.color = '#1a1a1a';
                                         }}
                                     >
-                                        {detailAboutUs?.email}
+                                        {detailAboutUs?.email || 'nailsornever@gmail.com'}
                                     </a>
                                 </motion.p>
                                 <motion.ul
