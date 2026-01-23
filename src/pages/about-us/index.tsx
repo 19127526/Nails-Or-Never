@@ -78,11 +78,11 @@ const AboutUsPage = (props : any) => {
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="index,follow"/>
                     <link rel="canonical" href="https://nailsornever.com/about-us"/>
-                    <title>About Us - {process.env.NEXT_PUBLIC_NAME_PRODUCT} | Best Nail Salon in Malta, NY</title>
+                    <title>About Us - {process.env.NEXT_PUBLIC_NAME_PRODUCT} | Best Nail Salon in Malta, NY 12118</title>
 
-                    <meta name="description" content={`Learn about ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, the premier nail salon in Malta, NY 12118. We offer professional nail care services with expert technicians, premium products, and a welcoming atmosphere. Visit us at 2374 US-9 or call 518-400-1028.`}/>
+                    <meta name="description" content={`Learn about ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, the premier nail salon in Malta, NY 12118. Expert nail technicians, premium products, and exceptional service. Serving Malta, Mechanicville, Saratoga Springs & Clifton Park since opening. Visit 2374 US-9 or call 518-400-1028.`}/>
                     <meta name="keywords"
-                          content={`about ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, nail salon Malta NY about, best nail salon Malta, professional nail salon Malta, nail salon near Mechanicville`}/>
+                          content={`about ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, nail salon Malta NY about, best nail salon Malta 12118, professional nail salon Malta, nail salon near Mechanicville, nail salon Saratoga Springs, nail technicians Malta NY, nail salon Capital Region`}/>
                     <meta property="og:url" content="https://nailsornever.com/about-us"/>
                     <meta property="og:type" content="website"/>
                     <meta property="og:title" content={`About Us - ${process.env.NEXT_PUBLIC_NAME_PRODUCT} | Nail Salon Malta, NY`}/>
@@ -156,39 +156,54 @@ const AboutUsPage = (props : any) => {
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                                     >
-                                        <motion.h3
+                                        <motion.h1
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.6, delay: 0.3 }}
-                                            className="sub-title fs-80"
-                                            style={{
-                                                marginBottom: '15px',
-                                                color: '#7fa681',
-                                                fontFamily: "'Caramello', sans-serif",
-                                                fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-                                                fontWeight: 400,
-                                                lineHeight: 1.1
-                                            }}
-                                        >
-                                            Welcome
-                                        </motion.h3>
-                                        <motion.h2
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.6, delay: 0.4 }}
                                             className="title text-uppercase"
                                             style={{
                                                 fontFamily: "'Mollie Glaston', sans-serif",
                                                 fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
                                                 fontWeight: 400,
                                                 color: '#1a1a1a',
-                                                marginBottom: '30px',
+                                                marginBottom: '20px',
                                                 lineHeight: 1.2,
                                                 letterSpacing: '2px'
                                             }}
                                         >
-                                            Why We Are The Best
+                                            About {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Best Nail Salon in Malta, NY
+                                        </motion.h1>
+                                        <motion.h2
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.6, delay: 0.4 }}
+                                            className="sub-title fs-80"
+                                            style={{
+                                                marginBottom: '20px',
+                                                color: '#7fa681',
+                                                fontFamily: "'Caramello', sans-serif",
+                                                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                                                fontWeight: 400,
+                                                lineHeight: 1.1
+                                            }}
+                                        >
+                                            Why We Are The Best Nail Salon in Malta, NY
                                         </motion.h2>
+                                        <motion.h3
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.6, delay: 0.45 }}
+                                            style={{
+                                                fontFamily: "'Jost', sans-serif",
+                                                fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
+                                                fontWeight: 500,
+                                                color: '#1a1a1a',
+                                                marginBottom: '15px',
+                                                lineHeight: 1.4
+                                            }}
+                                        >
+                                            Professional Nail Care Services in the Capital Region
+                                        </motion.h3>
                                         <motion.div
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
@@ -206,6 +221,19 @@ const AboutUsPage = (props : any) => {
                                             >
                                                 {aboutUs?.description}
                                             </p>
+                                            <h3
+                                                style={{
+                                                    fontFamily: "'Jost', sans-serif",
+                                                    fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
+                                                    fontWeight: 500,
+                                                    color: '#1a1a1a',
+                                                    marginBottom: '15px',
+                                                    marginTop: '25px',
+                                                    lineHeight: 1.4
+                                                }}
+                                            >
+                                                Serving Malta, Mechanicville, Saratoga Springs & Beyond
+                                            </h3>
                                             <p
                                                 style={{
                                                     fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
@@ -216,8 +244,21 @@ const AboutUsPage = (props : any) => {
                                                     fontWeight: 400
                                                 }}
                                             >
-                                                Located at 2374 US-9 in Malta, NY 12118, {process.env.NEXT_PUBLIC_NAME_PRODUCT} serves customers throughout the Capital Region, including nearby communities in Mechanicville, Saratoga Springs, Ballston Spa, and Clifton Park. Our convenient location makes us easily accessible for residents and visitors alike.
+                                                Located at 2374 US-9 in Malta, NY 12118, {process.env.NEXT_PUBLIC_NAME_PRODUCT} serves customers throughout the Capital Region, including nearby communities in Mechanicville, Saratoga Springs, Ballston Spa, and Clifton Park. Our convenient location on US Route 9 makes us easily accessible for residents and visitors alike, whether you're coming from downtown Saratoga Springs or the surrounding areas.
                                             </p>
+                                            <h3
+                                                style={{
+                                                    fontFamily: "'Jost', sans-serif",
+                                                    fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
+                                                    fontWeight: 500,
+                                                    color: '#1a1a1a',
+                                                    marginBottom: '15px',
+                                                    marginTop: '25px',
+                                                    lineHeight: 1.4
+                                                }}
+                                            >
+                                                Visit Our Nail Salon in Malta, NY
+                                            </h3>
                                             <p
                                                 style={{
                                                     fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
@@ -228,7 +269,7 @@ const AboutUsPage = (props : any) => {
                                                     fontWeight: 400
                                                 }}
                                             >
-                                                We're open Monday through Friday from 9:00 AM to 7:00 PM, Saturday from 9:00 AM to 6:00 PM, and Sunday from 10:00 AM to 5:00 PM. Stop by our salon or call us at 518-400-1028 to schedule your appointment. We look forward to serving you!
+                                                We're open Monday through Friday from 9:00 AM to 7:00 PM, Saturday from 9:00 AM to 6:00 PM, and Sunday from 10:00 AM to 5:00 PM. Stop by our nail salon at 2374 US-9, Malta, NY 12118, or call us at <strong>518-400-1028</strong> to schedule your appointment. Walk-ins are always welcome! We look forward to serving you and helping you achieve beautiful, healthy nails.
                                             </p>
                                         </motion.div>
                                     </motion.div>

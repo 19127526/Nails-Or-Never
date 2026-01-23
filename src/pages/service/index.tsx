@@ -36,10 +36,10 @@ const ServicesPage = (props: any) => {
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="index,follow"/>
                     <link rel="canonical" href="https://nailsornever.com/services"/>
-                    <title>Nail Services in Malta, NY - {process.env.NEXT_PUBLIC_NAME_PRODUCT} | Manicure, Pedicure & More</title>
-                    <meta name="description" content={`Professional nail services in Malta, NY at ${process.env.NEXT_PUBLIC_NAME_PRODUCT}. We offer ${[...services?.services]?.map(index => `${index?.name}`).join(', ')}. Book your appointment online or call 518-400-1028. Open Mon-Fri 9AM-7PM, Sat 9AM-6PM, Sun 10AM-5PM.`}/>
+                    <title>Nail Services in Malta, NY 12118 | {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Manicure, Pedicure, Gel & Acrylic</title>
+                    <meta name="description" content={`Complete nail services menu at ${process.env.NEXT_PUBLIC_NAME_PRODUCT} in Malta, NY. Professional ${[...services?.services]?.map(index => `${index?.name.toLowerCase()}`).join(', ')} services. Serving Malta, Mechanicville, Saratoga Springs & Clifton Park. Walk-ins welcome. Call 518-400-1028.`}/>
                     <meta name="keywords"
-                          content={`nail services Malta NY, manicure Malta, pedicure Malta, gel nails Malta, acrylic nails Malta, nail art Malta, ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, ${[...services?.services]?.map(index => `${index?.name} Malta NY`).join(', ')}`}/>
+                          content={`nail services Malta NY, manicure Malta NY 12118, pedicure Malta NY, gel nails Malta, acrylic nails Malta, dip powder nails Malta, nail art Malta, nail extensions Malta, nail salon near Mechanicville, nail salon Saratoga Springs, ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, ${[...services?.services]?.map(index => `${index?.name} Malta NY`).join(', ')}`}/>
                     <meta property="og:url" content="https://nailsornever.com/service"/>
                     <meta property="og:type" content="website"/>
                     <meta property="og:title" content={`Nail Services in Malta, NY - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
@@ -101,7 +101,7 @@ const ServicesPage = (props: any) => {
                                 style={{ marginBottom: 'clamp(40px, 5vw, 60px)' }}
                             >
                                 <div className="col-lg-10">
-                                    <motion.h2
+                                    <motion.h1
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
@@ -116,7 +116,24 @@ const ServicesPage = (props: any) => {
                                             textAlign: 'center'
                                         }}
                                     >
-                                        Professional Nail Services in Malta, NY
+                                        Professional Nail Services in Malta, NY 12118
+                                    </motion.h1>
+                                    <motion.h2
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.6, delay: 0.25 }}
+                                        style={{
+                                            fontFamily: "'Jost', sans-serif",
+                                            fontSize: 'clamp(1.3rem, 2vw, 1.6rem)',
+                                            fontWeight: 500,
+                                            color: '#7fa681',
+                                            marginBottom: '20px',
+                                            lineHeight: 1.4,
+                                            textAlign: 'center'
+                                        }}
+                                    >
+                                        Complete Nail Care Menu - Serving Malta, Mechanicville & Saratoga Springs
                                     </motion.h2>
                                     <motion.p
                                         initial={{ opacity: 0, y: 20 }}
@@ -132,7 +149,7 @@ const ServicesPage = (props: any) => {
                                             marginBottom: '20px'
                                         }}
                                     >
-                                        At {process.env.NEXT_PUBLIC_NAME_PRODUCT}, we pride ourselves on offering the finest nail care services in Malta, NY and the surrounding areas including Mechanicville, Saratoga Springs, and Clifton Park. Our experienced nail technicians use only premium products and the latest techniques to ensure your nails look beautiful and last longer.
+                                        At {process.env.NEXT_PUBLIC_NAME_PRODUCT}, we pride ourselves on offering the finest nail care services in Malta, NY and the surrounding Capital Region including Mechanicville, Saratoga Springs, Ballston Spa, and Clifton Park. Our experienced, certified nail technicians use only premium, professional-grade products and the latest techniques to ensure your nails look beautiful, healthy, and last longer.
                                     </motion.p>
                                     <motion.p
                                         initial={{ opacity: 0, y: 20 }}
@@ -144,10 +161,26 @@ const ServicesPage = (props: any) => {
                                             fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
                                             color: '#666',
                                             lineHeight: 1.8,
+                                            textAlign: 'center',
+                                            marginBottom: '20px'
+                                        }}
+                                    >
+                                        Whether you're looking for a classic manicure, relaxing spa pedicure, long-lasting gel polish, durable acrylic nail extensions, or intricate custom nail art designs, we have the perfect service for you. Our nail salon in Malta, NY offers walk-in appointments and online booking for your convenience.
+                                    </motion.p>
+                                    <motion.p
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.6, delay: 0.5 }}
+                                        style={{
+                                            fontFamily: "'Jost', sans-serif",
+                                            fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
+                                            color: '#666',
+                                            lineHeight: 1.8,
                                             textAlign: 'center'
                                         }}
                                     >
-                                        Whether you're looking for a classic manicure, relaxing pedicure, long-lasting gel polish, or intricate nail art designs, we have the perfect service for you. Visit us at 2374 US-9, Malta, NY 12118, or call 518-400-1028 to book your appointment today.
+                                        Visit us at 2374 US-9, Malta, NY 12118, or call <strong>518-400-1028</strong> to book your appointment today. We're open Monday through Friday 9AM-7PM, Saturday 9AM-6PM, and Sunday 10AM-5PM.
                                     </motion.p>
                                 </div>
                             </motion.div>

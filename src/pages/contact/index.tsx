@@ -140,16 +140,16 @@ const ContactPage = (props: any) => {
                     <Head>
                         <meta name="viewport" content="initial-scale=1, width=device-width"/>
                         <meta name="generator" content="Nails Or Never"/>
-                        <title>Contact Us - {process.env.NEXT_PUBLIC_NAME_PRODUCT} | Nail Salon in Malta, NY</title>
+                        <title>Contact Us - {process.env.NEXT_PUBLIC_NAME_PRODUCT} | Nail Salon in Malta, NY 12118</title>
                         <meta charSet="utf-8"/>
                         <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
                         <meta name="viewport" content="initial-scale=1, width=device-width"/>
                         <meta name="robots" content="index,follow"/>
                         <link rel="canonical" href="https://nailsornever.com/contact"/>
 
-                        <meta name="description" content={`Contact ${process.env.NEXT_PUBLIC_NAME_PRODUCT} nail salon in Malta, NY 12118. Located at 2374 US-9. Call 518-400-1028 or email nailsornever@gmail.com. Open Mon-Fri 9AM-7PM, Sat 9AM-6PM, Sun 10AM-5PM.`}/>
+                        <meta name="description" content={`Contact ${process.env.NEXT_PUBLIC_NAME_PRODUCT} nail salon in Malta, NY 12118. Located at 2374 US-9. Call 518-400-1028 or email nailsornever@gmail.com. Open Mon-Fri 9AM-7PM, Sat 9AM-6PM, Sun 10AM-5PM. Serving Malta, Mechanicville, Saratoga Springs & Clifton Park.`}/>
                         <meta name="keywords"
-                              content={`contact nail salon Malta NY, ${process.env.NEXT_PUBLIC_NAME_PRODUCT} contact, nail salon Malta phone number, nail salon near Mechanicville contact`}/>
+                              content={`contact nail salon Malta NY, ${process.env.NEXT_PUBLIC_NAME_PRODUCT} contact, nail salon Malta phone number, nail salon near Mechanicville contact, nail salon Saratoga Springs contact, nail salon 12118, book nail appointment Malta NY`}/>
                         <meta property="og:url" content="https://nailsornever.com/contact"/>
                         <meta property="og:type" content="website"/>
                         <meta property="og:title"
@@ -209,7 +209,7 @@ const ContactPage = (props: any) => {
                                             transition={{ duration: 0.6 }}
                                         >
                                     <div className="heading-flex mb-4">
-                                                <motion.h2
+                                                <motion.h1
                                                     initial={{ opacity: 0, y: 20 }}
                                                     whileInView={{ opacity: 1, y: 0 }}
                                                     viewport={{ once: true }}
@@ -225,9 +225,9 @@ const ContactPage = (props: any) => {
                                                         letterSpacing: '2px'
                                                     }}
                                                 >
-                                                    Contact
-                                                </motion.h2>
-                                                <motion.h3
+                                                    Contact {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Nail Salon Malta, NY
+                                                </motion.h1>
+                                                <motion.h2
                                                     initial={{ opacity: 0, y: 20 }}
                                                     whileInView={{ opacity: 1, y: 0 }}
                                                     viewport={{ once: true }}
@@ -241,8 +241,8 @@ const ContactPage = (props: any) => {
                                                         lineHeight: 1.1
                                                     }}
                                                 >
-                                                    Information
-                                                </motion.h3>
+                                                    Get In Touch
+                                                </motion.h2>
                                     </div>
                                             <div className="row g-3 g-sm-4 gx-md-5">
                                                 <div className="col-sm-6 col-md-6">

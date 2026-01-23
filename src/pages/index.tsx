@@ -85,7 +85,7 @@ function Item(props : any) {
                                         Premium Nail Services
                                     </motion.span>
                                 </motion.div>
-                                <motion.h2
+                                <motion.h1
                                     className="banner-title"
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -100,8 +100,8 @@ function Item(props : any) {
                                         letterSpacing: '1px'
                                     }}
                                 >
-                                    {item?.name}
-                                </motion.h2>
+                                    {item?.name} - Professional Nail Services in Malta, NY
+                                </motion.h1>
                                 <motion.p
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -188,10 +188,10 @@ const HomePage = (props : any) => {
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="index,follow"/>
                     <link rel="canonical" href="https://nailsornever.com"/>
-                    <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Best Nail Salon in Malta, NY | Manicure, Pedicure & Nail Art Services</title>
-                    <meta name="description" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} is the premier nail salon in Malta, NY 12118. We offer professional manicure, pedicure, gel polish, acrylic nails, nail art, and dipping powder services. Open Mon-Fri 9AM-7PM, Sat 9AM-6PM, Sun 10AM-5PM. Book your appointment today at 518-400-1028.`}/>
+                    <title>Best Nail Salon in Malta, NY | {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Manicure, Pedicure & Nail Art 12118</title>
+                    <meta name="description" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} is the #1 rated nail salon in Malta, NY 12118. Expert manicures, pedicures, gel polish, acrylic nails, and custom nail art. Serving Malta, Mechanicville, Saratoga Springs & Clifton Park. Walk-ins welcome. Call 518-400-1028 or book online.`}/>
                     <meta name="keywords"
-                          content={`nail salon Malta NY, nail salon near Mechanicville, best nail salon Malta, manicure Malta NY, pedicure Malta NY, gel nails Malta, acrylic nails Malta, nail art Malta, ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, nail salon 12118, ${[...services?.services]?.map(index => `${index?.name} Malta NY`).join(', ')}`}/>
+                          content={`nail salon Malta NY, nail salon near Mechanicville NY, best nail salon Malta 12118, manicure Malta NY, pedicure Malta NY, gel nails Malta, acrylic nails Malta, nail art Malta, dip powder nails Malta, nail extensions Malta, nail salon Saratoga Springs, nail salon Clifton Park, ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, professional nail services Malta NY, ${[...services?.services]?.map(index => `${index?.name} Malta NY`).join(', ')}`}/>
                     <meta property="og:url" content="https://nailsornever.com/"/>
                     <meta property="og:type" content="Website"/>
                     <meta property="og:image"
@@ -377,7 +377,7 @@ const HomePage = (props : any) => {
                                         viewport={{ once: true, margin: "-50px" }}
                                         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                                     >
-                                        <motion.h3
+                                        <motion.h2
                                             initial={{ opacity: 0, y: 20 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
@@ -392,9 +392,9 @@ const HomePage = (props : any) => {
                                                 lineHeight: 1.1
                                             }}
                                         >
-                                            About us
-                                        </motion.h3>
-                                        <motion.h2
+                                            About {process.env.NEXT_PUBLIC_NAME_PRODUCT}
+                                        </motion.h2>
+                                        <motion.h3
                                             initial={{ opacity: 0, y: 20 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
@@ -410,8 +410,8 @@ const HomePage = (props : any) => {
                                                 letterSpacing: '2px'
                                             }}
                                         >
-                                            Why Clients Choose Us
-                                        </motion.h2>
+                                            Why Clients Choose Our Nail Salon in Malta, NY
+                                        </motion.h3>
                                         <motion.p
                                             initial={{ opacity: 0, y: 20 }}
                                             whileInView={{ opacity: 1, y: 0 }}
@@ -428,6 +428,22 @@ const HomePage = (props : any) => {
                                             }}
                                         >
                                             {aboutUs?.description}
+                                        </motion.p>
+                                        <motion.p
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 0.6, delay: 0.6 }}
+                                            style={{
+                                                fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
+                                                color: '#666',
+                                                lineHeight: 1.8,
+                                                marginBottom: 'clamp(20px, 3vw, 30px)',
+                                                fontFamily: "'Jost', sans-serif",
+                                                fontWeight: 400
+                                            }}
+                                        >
+                                            Located in the heart of Malta, NY at 2374 US-9, {process.env.NEXT_PUBLIC_NAME_PRODUCT} has been serving the Capital Region for years. Our nail salon is easily accessible from Mechanicville, Saratoga Springs, Ballston Spa, and Clifton Park. We specialize in providing top-quality nail care services including gel manicures, spa pedicures, acrylic nail extensions, and custom nail art designs. Our experienced technicians are trained in the latest nail techniques and use only premium, professional-grade products to ensure your nails look stunning and last longer.
                                         </motion.p>
                                         <motion.div
                                             initial={{ opacity: 0, y: 20 }}
@@ -493,7 +509,7 @@ const HomePage = (props : any) => {
                                         marginBottom: '10px'
                                     }}
                                 >
-                                    Services for<br/>the best clients
+                                    Professional Nail Services<br/>in Malta, NY
                                 </motion.h2>
                                 <motion.h3
                                     initial={{ opacity: 0, y: 20 }}
@@ -509,8 +525,26 @@ const HomePage = (props : any) => {
                                         lineHeight: 1.1
                                     }}
                                 >
-                                    Our services
+                                    Our Premium Services
                                 </motion.h3>
+                                <motion.p
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: 0.4 }}
+                                    style={{
+                                        fontFamily: "'Jost', sans-serif",
+                                        fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
+                                        color: '#666',
+                                        lineHeight: 1.8,
+                                        textAlign: 'center',
+                                        marginTop: '20px',
+                                        maxWidth: '800px',
+                                        margin: '20px auto 0'
+                                    }}
+                                >
+                                    Discover our comprehensive range of nail care services at {process.env.NEXT_PUBLIC_NAME_PRODUCT}. From classic manicures and relaxing pedicures to long-lasting gel polish, acrylic extensions, and stunning nail art designs - we have everything you need for beautiful, healthy nails. Our nail salon in Malta, NY serves clients from Mechanicville, Saratoga Springs, Clifton Park, and throughout the Capital Region.
+                                </motion.p>
                             </motion.div>
                             <div className="row justify-content-center gy-4 gx-3 gx-sm-4 g-lg-5">
                                 {
@@ -598,7 +632,7 @@ const HomePage = (props : any) => {
                                         marginBottom: '10px'
                                     }}
                                 >
-                                    Collection
+                                    Nail Art Gallery<br/>Malta, NY
                                 </motion.h2>
                                 <motion.h3
                                     initial={{ opacity: 0, y: 20 }}
@@ -614,8 +648,26 @@ const HomePage = (props : any) => {
                                         lineHeight: 1.1
                                     }}
                                 >
-                                    Our gallery
+                                    Our Nail Art Portfolio
                                 </motion.h3>
+                                <motion.p
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: 0.4 }}
+                                    style={{
+                                        fontFamily: "'Jost', sans-serif",
+                                        fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
+                                        color: '#666',
+                                        lineHeight: 1.8,
+                                        textAlign: 'center',
+                                        marginTop: '20px',
+                                        maxWidth: '800px',
+                                        margin: '20px auto 0'
+                                    }}
+                                >
+                                    Browse our stunning collection of nail art designs created by our talented nail artists at {process.env.NEXT_PUBLIC_NAME_PRODUCT}. From elegant French tips to intricate hand-painted designs, our gallery showcases the creativity and skill of Malta, NY's premier nail salon. Get inspired for your next nail appointment!
+                                </motion.p>
                             </motion.div>
                             {galleryParent?.galleryParent && galleryParent.galleryParent.length > 0 ? (
                                 <div className="row justify-content-center gy-4 gx-3 gx-sm-4 g-lg-5">

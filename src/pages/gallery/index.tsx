@@ -61,6 +61,72 @@ const GalleryPage = (props : any) => {
                 />
             </Head>
             <HeaderTitle title="Our Gallery" />
+            <section className="section-page-wrap" style={{ paddingTop: 'clamp(40px, 5vw, 60px)', paddingBottom: 'clamp(20px, 3vw, 40px)' }}>
+                <div className="container-lg">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="row justify-content-center mb-4"
+                        style={{ marginBottom: 'clamp(30px, 4vw, 50px)' }}
+                    >
+                        <div className="col-lg-10">
+                            <motion.h1
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                style={{
+                                    fontFamily: "'Mollie Glaston', sans-serif",
+                                    fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+                                    fontWeight: 400,
+                                    color: '#1a1a1a',
+                                    marginBottom: '15px',
+                                    lineHeight: 1.3,
+                                    textAlign: 'center'
+                                }}
+                            >
+                                Nail Art Gallery - {process.env.NEXT_PUBLIC_NAME_PRODUCT} Malta, NY
+                            </motion.h1>
+                            <motion.h2
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.3 }}
+                                style={{
+                                    fontFamily: "'Jost', sans-serif",
+                                    fontSize: 'clamp(1.3rem, 2vw, 1.6rem)',
+                                    fontWeight: 500,
+                                    color: '#7fa681',
+                                    marginBottom: '15px',
+                                    lineHeight: 1.4,
+                                    textAlign: 'center'
+                                }}
+                            >
+                                Custom Nail Art Designs by Expert Artists
+                            </motion.h2>
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                                style={{
+                                    fontFamily: "'Jost', sans-serif",
+                                    fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
+                                    color: '#666',
+                                    lineHeight: 1.8,
+                                    textAlign: 'center',
+                                    maxWidth: '800px',
+                                    margin: '0 auto'
+                                }}
+                            >
+                                Browse our stunning collection of nail art designs created by our talented nail artists at {process.env.NEXT_PUBLIC_NAME_PRODUCT} in Malta, NY. From elegant French tips and classic designs to intricate hand-painted artwork and modern nail art trends, our gallery showcases the creativity and skill of Malta's premier nail salon. Get inspired for your next nail appointment! Visit us at 2374 US-9, Malta, NY 12118 or call 518-400-1028 to book your custom nail art service.
+                            </motion.p>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
             <section className="section-page-wrap"  style={{paddingTop: "30px", paddingBottom : "30px"}}>
                 <div className="container-lg">
                     {galleryParent?.galleryParent && galleryParent.galleryParent.length > 0 ? (
