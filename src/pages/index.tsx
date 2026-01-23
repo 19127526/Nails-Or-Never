@@ -22,7 +22,7 @@ const getServiceDescription = (serviceName: string, defaultDescription: string |
     if (defaultDescription && defaultDescription !== '' && defaultDescription !== 'null') {
         return defaultDescription;
     }
-    
+
     const descriptionMap: { [key: string]: string } = {
         'DIPPING': 'Transform your nails with our premium dipping powder services. Long-lasting, vibrant colors that protect and strengthen your natural nails.',
         'MANI & PEDI': 'Indulge in our luxurious manicure and pedicure treatments. Experience professional care that leaves your hands and feet feeling refreshed and beautiful.',
@@ -31,19 +31,19 @@ const getServiceDescription = (serviceName: string, defaultDescription: string |
         'ACRYLIC': 'Achieve the perfect length and shape with our acrylic nail services. Durable, customizable, and beautifully crafted to match your style.',
         'EXTENSIONS': 'Add length and volume to your natural nails with our premium extension services. Professional application for stunning, natural-looking results.'
     };
-    
+
     // Try to match service name (case-insensitive)
-    const matchedKey = Object.keys(descriptionMap).find(key => 
+    const matchedKey = Object.keys(descriptionMap).find(key =>
         serviceName?.toUpperCase().includes(key) || key.includes(serviceName?.toUpperCase() || '')
     );
-    
+
     return matchedKey ? descriptionMap[matchedKey] : 'Experience professional nail care services with our expert team. We provide top-quality treatments to enhance your natural beauty and refresh your day.';
 };
 
 function Item(props : any) {
     const {item} = props
     const serviceDescription = getServiceDescription(item?.name || '', item?.description);
-    
+
     return (
         <Paper style={{
             backgroundImage: "url(/images/Nails or Never-01 (1).png)",
@@ -53,7 +53,7 @@ function Item(props : any) {
             alignItems: 'center'
         }}>
             <div className="banner-content" style={{ width: '100%' }}>
-                <div className="container-lg" style={{
+                <div className="container-lg " style={{
                     paddingTop: 'clamp(60px, 8vw, 100px)',
                     paddingBottom: 'clamp(60px, 8vw, 100px)'
                 }}>
@@ -113,7 +113,7 @@ function Item(props : any) {
                                         color: '#666',
                                         lineHeight: 1.7,
                                         marginBottom: 'clamp(25px, 4vw, 35px)',
-                                        maxWidth: '90%'
+
                                     }}
                                 >
                                     {serviceDescription}
@@ -434,6 +434,7 @@ const HomePage = (props : any) => {
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true }}
                                             transition={{ duration: 0.6, delay: 0.6 }}
+                                            className="d-flex justify-content-center justify-content-md-start"
                                         >
                                             <Link href={process.env.NEXT_PUBLIC_ABOUT_US_ROUTER as string} replace>
                                                 <motion.button
