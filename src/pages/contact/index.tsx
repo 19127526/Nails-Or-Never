@@ -471,7 +471,8 @@ const ContactPage = (props: any) => {
                                                             <li>
                                                                 <motion.a 
                                                                     target="_blank" 
-                                                                    href="#"
+                                                                    rel="noopener noreferrer"
+                                                                    href="https://www.facebook.com/profile.php?id=61577140933315"
                                                                     whileHover={{ scale: 1.2, y: -3 }}
                                                                     whileTap={{ scale: 0.95 }}
                                                                     style={{
@@ -493,7 +494,8 @@ const ContactPage = (props: any) => {
                                                             <li>
                                                                 <motion.a 
                                                                     target="_blank" 
-                                                                    href="#"
+                                                                    rel="noopener noreferrer"
+                                                                    href="https://www.instagram.com/nailsorneverny"
                                                                     whileHover={{ scale: 1.2, y: -3 }}
                                                                     whileTap={{ scale: 0.95 }}
                                                                     style={{
