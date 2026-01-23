@@ -30,27 +30,19 @@ const GalleryPage = (props : any) => {
             <Head>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="generator" content="Nails Or Never"/>
-                <title>Gallery Nail - {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Malta</title>
+                <title>Nail Art Gallery - {process.env.NEXT_PUBLIC_NAME_PRODUCT} | Malta, NY Nail Salon Portfolio</title>
                 <meta charSet="utf-8"/>
                 <meta httpEquiv="X-UA-Compatible"content="IE=edge"/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="robots" content="index,follow"/>
                 <link rel="canonical" href="https://nailsornever.com/gallery"/>
-                <meta name="description" content={`Located conveniently in Malta, NewYork, 12118,
-                        ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
-                        mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials.
-                        also, we provide some gallery such as ${[...galleryParent?.galleryParent]?.map(index => `${index?.theme}`)}. 
-                       Let's come to our nail salon to see how deluxe salon & the unique nail art only at our salon`}/>
+                <meta name="description" content={`View our nail art gallery at ${process.env.NEXT_PUBLIC_NAME_PRODUCT} in Malta, NY. Featuring ${[...galleryParent?.galleryParent]?.map(index => `${index?.theme}`).join(', ')} designs. Professional nail art services available. Visit us at 2374 US-9 or call 518-400-1028.`}/>
                 <meta name="keywords"
-                      content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,Gallery extensions`}/>
-                <meta property="og:url" content="https://nailsornever.com/"/>
-                <meta property="og:type" content="Website"/>
-                <meta property="og:title" content={`Gallery Nail - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
-                <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118,
-                        ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
-                        mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials.
-                        also, we provide some gallery such as ${[...galleryParent?.galleryParent]?.map(index => `${index?.theme}`)}. 
-                       Let's come to our nail salon to see how deluxe salon & the unique nail art only at our salon`}/>
+                      content={`nail art gallery Malta NY, nail designs Malta, ${process.env.NEXT_PUBLIC_NAME_PRODUCT} gallery, nail art portfolio Malta, ${[...galleryParent?.galleryParent]?.map(index => `${index?.theme} nail art`).join(', ')}`}/>
+                <meta property="og:url" content="https://nailsornever.com/gallery"/>
+                <meta property="og:type" content="website"/>
+                <meta property="og:title" content={`Nail Art Gallery - ${process.env.NEXT_PUBLIC_NAME_PRODUCT} | Malta, NY`}/>
+                <meta property="og:description" content={`Browse our stunning nail art gallery featuring professional designs at ${process.env.NEXT_PUBLIC_NAME_PRODUCT} in Malta, NY.`}/>
                 <meta property="og:image"
                       content="/images/Nails or Never-01 (1).png"/>
                 <meta name="generator"  content={`Gallery Nail - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>

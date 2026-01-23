@@ -90,7 +90,7 @@ const HeaderComponent = () => {
                                         width={150}
                                         height={60}
                                         src="/images/Nails or Never-01 (1).png"
-                                        alt={`${mainName} - Professional Nail Salon Logo`}
+                                        alt={`${mainName} - Professional Nail Salon Logo in Malta, NY`}
                                         className="img-fluid"
                                         priority={true}
                                         quality={90}
@@ -119,7 +119,7 @@ const HeaderComponent = () => {
                                         width={150}
                                         height={60}
                                         src="/images/Nails or Never-01 (1).png"
-                                        alt={`${mainName} - Professional Nail Salon Logo`}
+                                        alt={`${mainName} - Professional Nail Salon Logo in Malta, NY`}
                                         className="img-fluid"
                                         priority={true}
                                         quality={90}

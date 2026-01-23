@@ -78,25 +78,15 @@ const AboutUsPage = (props : any) => {
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="index,follow"/>
                     <link rel="canonical" href="https://nailsornever.com/about-us"/>
-                    <title>About Us - {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Malta</title>
+                    <title>About Us - {process.env.NEXT_PUBLIC_NAME_PRODUCT} | Best Nail Salon in Malta, NY</title>
 
-                    <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
-                    ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
-                    mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials. 
-                    You can find all nail-related services. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, 
-                    we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. 
-                    You always feel friendly and welcome from our passionate staff who understand what you want.${aboutUs?.description}`}/>
+                    <meta name="description" content={`Learn about ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, the premier nail salon in Malta, NY 12118. We offer professional nail care services with expert technicians, premium products, and a welcoming atmosphere. Visit us at 2374 US-9 or call 518-400-1028.`}/>
                     <meta name="keywords"
-                          content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,About Us extensions`}/>
-                    <meta property="og:url" content="https://nailsornever.com/"/>
-                    <meta property="og:type" content="Website"/>
-                    <meta property="og:title" content={`About us - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
-                    <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118, 
-                    ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
-                    mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials. 
-                    You can find all nail-related services. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, 
-                    we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. 
-                    You always feel friendly and welcome from our passionate staff who understand what you want.${aboutUs?.description}`}/>
+                          content={`about ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, nail salon Malta NY about, best nail salon Malta, professional nail salon Malta, nail salon near Mechanicville`}/>
+                    <meta property="og:url" content="https://nailsornever.com/about-us"/>
+                    <meta property="og:type" content="website"/>
+                    <meta property="og:title" content={`About Us - ${process.env.NEXT_PUBLIC_NAME_PRODUCT} | Nail Salon Malta, NY`}/>
+                    <meta property="og:description" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} is a premier nail salon in Malta, NY offering professional nail care services with expert staff and premium products.`}/>
                     <meta property="og:image"
                           content="/images/Nails or Never-01 (1).png"/>
                     <meta name="generator"  content={`About us - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
@@ -147,7 +137,7 @@ const AboutUsPage = (props : any) => {
                                         <Image
                                             className="img-fluid"
                                             src="https://houseofpolishnailsandspa.com/wp-content/themes/woctheme/assets/images/model-4.png"
-                                            alt={`${mainName} - Professional nail salon team in Malta, NY`}
+                                            alt={`Professional nail salon team at ${mainName} in Malta, NY 12118 - Expert nail technicians and staff`}
                                             width={600}
                                             height={800}
                                             quality={90}
@@ -215,6 +205,30 @@ const AboutUsPage = (props : any) => {
                                                 }}
                                             >
                                                 {aboutUs?.description}
+                                            </p>
+                                            <p
+                                                style={{
+                                                    fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
+                                                    color: '#666',
+                                                    lineHeight: 1.8,
+                                                    marginBottom: '20px',
+                                                    fontFamily: "'Jost', sans-serif",
+                                                    fontWeight: 400
+                                                }}
+                                            >
+                                                Located at 2374 US-9 in Malta, NY 12118, {process.env.NEXT_PUBLIC_NAME_PRODUCT} serves customers throughout the Capital Region, including nearby communities in Mechanicville, Saratoga Springs, Ballston Spa, and Clifton Park. Our convenient location makes us easily accessible for residents and visitors alike.
+                                            </p>
+                                            <p
+                                                style={{
+                                                    fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
+                                                    color: '#666',
+                                                    lineHeight: 1.8,
+                                                    marginBottom: '20px',
+                                                    fontFamily: "'Jost', sans-serif",
+                                                    fontWeight: 400
+                                                }}
+                                            >
+                                                We're open Monday through Friday from 9:00 AM to 7:00 PM, Saturday from 9:00 AM to 6:00 PM, and Sunday from 10:00 AM to 5:00 PM. Stop by our salon or call us at 518-400-1028 to schedule your appointment. We look forward to serving you!
                                             </p>
                                         </motion.div>
                                     </motion.div>

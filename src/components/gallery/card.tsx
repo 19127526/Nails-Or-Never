@@ -25,8 +25,9 @@ const CardGalleryComponent = (props : any) => {
                                 objectFit: "cover"
                             }}
                             image={galleryDetail?.image}
-                            alt={`${galleryDetail?.theme} nail art gallery - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}
+                            alt={`${galleryDetail?.theme} nail art design in Malta, NY - ${process.env.NEXT_PUBLIC_NAME_PRODUCT} nail salon gallery`}
                             loading="lazy"
+                            decoding="async"
                         />
                         <CardContent className="service-list">
                             <h2 className="service-list-name">{galleryDetail?.theme}</h2>

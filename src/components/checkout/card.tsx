@@ -6,6 +6,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {addItem, addItemCheckout, removeItem} from "@/pages/gift-card/index.actions";
 import {mainName} from "@/constants/label";
+import Image from "next/image";
 
 const CardCheckOutComponent = (props:any) => {
     const {index} = props
@@ -41,7 +42,20 @@ const CardCheckOutComponent = (props:any) => {
     return (
         <div className="products" key={index?.detailCart?.id}>
             <div className="product">
-                <img src={index?.detailCart?.image} alt={`${mainName}-${index?.detailCart?.theme}`} width={40} height={40}/>
+                <div style={{ position: 'relative', width: 40, height: 40, flexShrink: 0 }}>
+                    <Image
+                        src={index?.detailCart?.image}
+                        alt={`${mainName} - ${index?.detailCart?.theme} gift card`}
+                        fill
+                        sizes="40px"
+                        quality={85}
+                        loading="lazy"
+                        style={{
+                            objectFit: 'cover',
+                            borderRadius: '4px'
+                        }}
+                    />
+                </div>
                 <span>{index?.detailCart?.theme}</span>
                 <div className="quantity">
                     <button onClick={DecNum}>

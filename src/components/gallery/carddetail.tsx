@@ -15,7 +15,7 @@ const CardGalleryDetailComponent = (props : any) => {
                         <div className="ratio-body" style={{ position: 'relative' }}>
                             <Image
                                 src={detailGallery?.image}
-                                alt={`${mainName} - Nail art gallery image`}
+                                alt={`Professional nail art design at ${mainName} nail salon in Malta, NY`}
                                 fill
                                 quality={85}
                                 loading="lazy"

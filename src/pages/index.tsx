@@ -152,7 +152,7 @@ function Item(props : any) {
                                             <div className="banner-img">
                                                 <Image
                                                     src={item.image}
-                                                    alt={`${mainName} - ${item?.name} service`}
+                                                    alt={`${item?.name} nail service in Malta, NY - ${mainName} professional nail salon`}
                                                     fill
                                                     priority={true}
                                                     quality={95}
@@ -188,26 +188,16 @@ const HomePage = (props : any) => {
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="index,follow"/>
                     <link rel="canonical" href="https://nailsornever.com"/>
-                    <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY</title>
-                    <meta name="description" content={`Located conveniently in Malta, NewYork, 12118, 
-                    ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
-                    mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials. 
-                    You can find all nail-related services, from ${[...services?.services]?.map(index => `${index?.name}`)}. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, 
-                    we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. 
-                    You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
+                    <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Best Nail Salon in Malta, NY | Manicure, Pedicure & Nail Art Services</title>
+                    <meta name="description" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} is the premier nail salon in Malta, NY 12118. We offer professional manicure, pedicure, gel polish, acrylic nails, nail art, and dipping powder services. Open Mon-Fri 9AM-7PM, Sat 9AM-6PM, Sun 10AM-5PM. Book your appointment today at 518-400-1028.`}/>
                     <meta name="keywords"
-                          content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,${[...services?.services]?.map(index => `${index?.name}`)} extensions`}/>
+                          content={`nail salon Malta NY, nail salon near Mechanicville, best nail salon Malta, manicure Malta NY, pedicure Malta NY, gel nails Malta, acrylic nails Malta, nail art Malta, ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, nail salon 12118, ${[...services?.services]?.map(index => `${index?.name} Malta NY`).join(', ')}`}/>
                     <meta property="og:url" content="https://nailsornever.com/"/>
                     <meta property="og:type" content="Website"/>
                     <meta property="og:image"
                           content="/images/Nails or Never-01 (1).png"/>
-                    <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
-                    <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118, 
-                    ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
-                    mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials. 
-                    You can find all nail-related services, from ${[...services?.services]?.map(index => `${index?.name}`)}. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, 
-                    we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty. 
-                    You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
+                    <meta property="og:title" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Best Nail Salon in Malta, NY | Professional Nail Services`}/>
+                    <meta property="og:description" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premium nail care services in Malta, NY. Professional manicures, pedicures, gel polish, acrylic nails, and nail art. Open daily. Call 518-400-1028 to book your appointment.`}/>
                     <meta name="generator"  content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}/>
                     <script
                         type="application/ld+json"
@@ -216,18 +206,75 @@ const HomePage = (props : any) => {
                                 "@context": "https://schema.org",
                                 "@type": "BeautySalon",
                                 "name": process.env.NEXT_PUBLIC_NAME_PRODUCT,
-                                "description": `Located conveniently in Malta, NewYork, 12118, ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area.`,
+                                "description": `Located conveniently in Malta, NewYork, 12118, ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. We offer premium nail care services including manicures, pedicures, gel polish, acrylic nails, nail art, and more.`,
                                 "address": {
                                     "@type": "PostalAddress",
+                                    "streetAddress": "2374 US-9",
                                     "addressLocality": "Malta",
                                     "addressRegion": "NY",
                                     "postalCode": "12118",
                                     "addressCountry": "US"
                                 },
                                 "url": "https://nailsornever.com",
-                                "image": "/images/Nails or Never-01 (1).png",
+                                "image": "https://nailsornever.com/images/Nails or Never-01 (1).png",
+                                "logo": "https://nailsornever.com/images/Nails or Never-01 (1).png",
                                 "priceRange": "$$",
-                                "telephone": "+1-518-000-0000"
+                                "telephone": "+1-518-400-1028",
+                                "email": "nailsornever@gmail.com",
+                                "openingHoursSpecification": [
+                                    {
+                                        "@type": "OpeningHoursSpecification",
+                                        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                                        "opens": "09:00",
+                                        "closes": "19:00"
+                                    },
+                                    {
+                                        "@type": "OpeningHoursSpecification",
+                                        "dayOfWeek": "Saturday",
+                                        "opens": "09:00",
+                                        "closes": "18:00"
+                                    },
+                                    {
+                                        "@type": "OpeningHoursSpecification",
+                                        "dayOfWeek": "Sunday",
+                                        "opens": "10:00",
+                                        "closes": "17:00"
+                                    }
+                                ],
+                                "geo": {
+                                    "@type": "GeoCoordinates",
+                                    "latitude": "42.9703",
+                                    "longitude": "-73.7926"
+                                },
+                                "sameAs": [
+                                    "https://www.facebook.com/profile.php?id=61577140933315",
+                                    "https://www.instagram.com/nailsorneverny",
+                                    "https://www.yelp.com/biz/nails-or-never-malta"
+                                ],
+                                "aggregateRating": {
+                                    "@type": "AggregateRating",
+                                    "ratingValue": "4.1",
+                                    "reviewCount": "10",
+                                    "bestRating": "5",
+                                    "worstRating": "1"
+                                },
+                                "areaServed": {
+                                    "@type": "City",
+                                    "name": "Malta, NY"
+                                },
+                                "hasOfferCatalog": {
+                                    "@type": "OfferCatalog",
+                                    "name": "Nail Care Services",
+                                    "itemListElement": services?.services?.map((service: any, index: number) => ({
+                                        "@type": "Offer",
+                                        "itemOffered": {
+                                            "@type": "Service",
+                                            "name": service?.name,
+                                            "description": service?.description || `Professional ${service?.name} service at ${process.env.NEXT_PUBLIC_NAME_PRODUCT} in Malta, NY`
+                                        },
+                                        "position": index + 1
+                                    })) || []
+                                }
                             })
                         }}
                     />
@@ -310,7 +357,7 @@ const HomePage = (props : any) => {
                                         <Image
                                             className="img-fluid"
                                             src="https://nails.shoedog.vn/public/images/model-1.png"
-                                            alt={`${mainName} - Professional nail salon in Malta, NY`}
+                                            alt={`Professional nail salon team at ${mainName} in Malta, NY 12118 - Expert nail technicians`}
                                             width={600}
                                             height={800}
                                             quality={90}
@@ -482,7 +529,7 @@ const HomePage = (props : any) => {
                                                         <div className="service-img">
                                                             <Image
                                                                 src={index?.image}
-                                                                alt={`${mainName} - ${index?.name} nail service`}
+                                                                alt={`${index?.name} nail service in Malta, NY - ${mainName} professional nail salon`}
                                                                 fill
                                                                 quality={90}
                                                                 loading="lazy"
@@ -592,7 +639,7 @@ const HomePage = (props : any) => {
                                                             <div className="service-img">
                                                                 <Image
                                                                     src={index?.image}
-                                                                    alt={`${mainName} - ${index?.theme} nail art gallery`}
+                                                                    alt={`${index?.theme} nail art design in Malta, NY - ${mainName} nail salon gallery`}
                                                                     fill
                                                                     quality={90}
                                                                     loading="lazy"
@@ -687,6 +734,139 @@ const HomePage = (props : any) => {
                                     </motion.p>
                                 </motion.div>
                             )}
+                        </div>
+                    </section>
+                </AnimatedSection>
+
+                {/* FAQ Section */}
+                <AnimatedSection delay={0.6}>
+                    <section className="section-wrap section-faq" style={{ paddingTop: 'clamp(80px, 10vw, 120px)', paddingBottom: 'clamp(80px, 10vw, 120px)', backgroundColor: '#f8f9fa' }}>
+                        <div className="container-lg">
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, ease: "easeOut" }}
+                                className="heading-flex mb-5"
+                                style={{ marginBottom: 'clamp(40px, 5vw, 60px)', textAlign: 'center' }}
+                            >
+                                <motion.h2
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: 0.2 }}
+                                    className="title text-uppercase"
+                                    style={{
+                                        fontFamily: "'Mollie Glaston', sans-serif",
+                                        fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                                        fontWeight: 400,
+                                        color: '#1a1a1a',
+                                        lineHeight: 1.2,
+                                        letterSpacing: '2px',
+                                        marginBottom: '10px'
+                                    }}
+                                >
+                                    Frequently Asked<br/>Questions
+                                </motion.h2>
+                                <motion.h3
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: 0.3 }}
+                                    className="sub-title"
+                                    style={{
+                                        fontFamily: "'Caramello', sans-serif",
+                                        fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+                                        fontWeight: 400,
+                                        color: '#7fa681',
+                                        lineHeight: 1.1
+                                    }}
+                                >
+                                    Common Questions
+                                </motion.h3>
+                            </motion.div>
+                            <div className="row justify-content-center">
+                                <div className="col-lg-10">
+                                    <div className="faq-list">
+                                        {[
+                                            {
+                                                question: "What are your hours of operation?",
+                                                answer: `We're open Monday through Friday from 9:00 AM to 7:00 PM, Saturday from 9:00 AM to 6:00 PM, and Sunday from 10:00 AM to 5:00 PM. We're located at 2374 US-9, Malta, NY 12118.`
+                                            },
+                                            {
+                                                question: "Do I need to make an appointment?",
+                                                answer: `While walk-ins are welcome, we highly recommend making an appointment to ensure availability, especially on weekends. You can book online through our website or call us at 518-400-1028.`
+                                            },
+                                            {
+                                                question: "What services do you offer?",
+                                                answer: `We offer a full range of nail services including manicures, pedicures, gel polish, acrylic nails, nail art, dipping powder, and nail extensions. Our experienced technicians provide professional, high-quality services using premium products.`
+                                            },
+                                            {
+                                                question: "How long does a manicure or pedicure take?",
+                                                answer: `A standard manicure typically takes 30-45 minutes, while a pedicure takes 45-60 minutes. Deluxe services and nail art may take longer. We recommend allowing 1-2 hours for a complete manicure and pedicure combination.`
+                                            },
+                                            {
+                                                question: "Do you offer gift cards?",
+                                                answer: `Yes! We offer gift cards that make perfect gifts for birthdays, holidays, or any special occasion. Gift cards can be purchased in-store or online through our website.`
+                                            },
+                                            {
+                                                question: "What is the difference between gel polish and regular polish?",
+                                                answer: `Gel polish is cured under a UV or LED lamp and typically lasts 2-3 weeks without chipping, while regular polish air-dries and usually lasts 5-7 days. Gel polish provides a longer-lasting, chip-resistant finish.`
+                                            },
+                                            {
+                                                question: "Is the salon clean and sanitized?",
+                                                answer: `Absolutely. We maintain the highest standards of cleanliness and sanitation. All tools are properly sterilized between clients, and we follow strict hygiene protocols to ensure a safe and clean environment for all our customers.`
+                                            },
+                                            {
+                                                question: "Do you offer nail art services?",
+                                                answer: `Yes! Our talented nail artists specialize in creating beautiful, custom nail art designs. From simple patterns to intricate designs, we can bring your vision to life. Check out our gallery to see examples of our work.`
+                                            }
+                                        ].map((faq, idx) => (
+                                            <AnimatedSection key={idx} delay={idx * 0.1}>
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 20 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                                    className="faq-item"
+                                                    style={{
+                                                        marginBottom: '20px',
+                                                        backgroundColor: '#fff',
+                                                        borderRadius: '12px',
+                                                        padding: '25px 30px',
+                                                        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.08)',
+                                                        border: '1px solid rgba(127, 166, 129, 0.1)'
+                                                    }}
+                                                >
+                                                    <h4
+                                                        style={{
+                                                            fontFamily: "'Mollie Glaston', sans-serif",
+                                                            fontSize: 'clamp(1.2rem, 2vw, 1.5rem)',
+                                                            fontWeight: 500,
+                                                            color: '#1a1a1a',
+                                                            marginBottom: '15px',
+                                                            lineHeight: 1.4
+                                                        }}
+                                                    >
+                                                        {faq.question}
+                                                    </h4>
+                                                    <p
+                                                        style={{
+                                                            fontFamily: "'Jost', sans-serif",
+                                                            fontSize: 'clamp(1rem, 1.5vw, 1.1rem)',
+                                                            color: '#666',
+                                                            lineHeight: 1.7,
+                                                            margin: 0
+                                                        }}
+                                                    >
+                                                        {faq.answer}
+                                                    </p>
+                                                </motion.div>
+                                            </AnimatedSection>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </section>
                 </AnimatedSection>

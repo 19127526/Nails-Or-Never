@@ -64,7 +64,9 @@ const CardGiftComponent = (props : any) => {
                                 transition: 'transform 0.3s ease'
                             }}
                             image={detail?.image}
-                            alt={`${process.env.NEXT_PUBLIC_NAME_PRODUCT}-${detail?.theme}`}
+                            alt={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - ${detail?.theme} gift card`}
+                            loading="lazy"
+                            decoding="async"
                         />
                     </motion.div>
                     <CardContent className="service-list">

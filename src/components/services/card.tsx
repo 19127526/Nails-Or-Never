@@ -41,7 +41,7 @@ const CardServiceComponent = (props : any) => {
                             <div className="service-list-thumb" style={{ position: 'relative', borderRadius: '15px', overflow: 'hidden' }}>
                                 <Image
                                     src={parentService?.image}
-                                    alt={`${mainName} - ${parentService?.name} nail service`}
+                                    alt={`${parentService?.name} nail service in Malta, NY - ${mainName} professional nail salon`}
                                     fill
                                     quality={90}
                                     loading="lazy"
@@ -128,9 +128,9 @@ const CardServiceComponent = (props : any) => {
                                                 >
                                                     {index?.name}
                                                 </div>
-                                                {index?.description == null || index?.description == '' ?
-                                                    <></>
-                                                    :
+                                                    {index?.description == null || index?.description == '' ?
+                                                        <></>
+                                                        :
                                                     <div
                                                         className="service-item-desc"
                                                         style={{
@@ -141,9 +141,9 @@ const CardServiceComponent = (props : any) => {
                                                             lineHeight: 1.5
                                                         }}
                                                     >
-                                                        {index?.description}
-                                                    </div>
-                                                }
+                                                            {index?.description}
+                                                        </div>
+                                                    }
                                             </div>
                                             <div className="box-right" style={{ flexShrink: 0 }}>
                                                 <div

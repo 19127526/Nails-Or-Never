@@ -140,31 +140,21 @@ const ContactPage = (props: any) => {
                     <Head>
                         <meta name="viewport" content="initial-scale=1, width=device-width"/>
                         <meta name="generator" content="Nails Or Never"/>
-                        <title>Contact - {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Malta</title>
+                        <title>Contact Us - {process.env.NEXT_PUBLIC_NAME_PRODUCT} | Nail Salon in Malta, NY</title>
                         <meta charSet="utf-8"/>
                         <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
                         <meta name="viewport" content="initial-scale=1, width=device-width"/>
                         <meta name="robots" content="index,follow"/>
                         <link rel="canonical" href="https://nailsornever.com/contact"/>
 
-                        <meta name="description" content={` Located conveniently in Malta, NewYork, 12118,
-                        ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
-                        mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials.
-                        You can find all nail-related services and gift-card. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT},
-                        we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty.
-                        You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
+                        <meta name="description" content={`Contact ${process.env.NEXT_PUBLIC_NAME_PRODUCT} nail salon in Malta, NY 12118. Located at 2374 US-9. Call 518-400-1028 or email nailsornever@gmail.com. Open Mon-Fri 9AM-7PM, Sat 9AM-6PM, Sun 10AM-5PM.`}/>
                         <meta name="keywords"
-                              content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,Contact extensions`}/>
-                        <meta property="og:url" content="https://nailsornever.com/"/>
-                        <meta property="og:type" content="Website"/>
+                              content={`contact nail salon Malta NY, ${process.env.NEXT_PUBLIC_NAME_PRODUCT} contact, nail salon Malta phone number, nail salon near Mechanicville contact`}/>
+                        <meta property="og:url" content="https://nailsornever.com/contact"/>
+                        <meta property="og:type" content="website"/>
                         <meta property="og:title"
-                              content={`Contact with me - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
-                        <meta property="og:description" content={`Located conveniently in Malta, NewYork, 12118,
-                        ${process.env.NEXT_PUBLIC_NAME_PRODUCT} is one of the best salons in this area. ${process.env.NEXT_PUBLIC_NAME_PRODUCT} offers premier nails care and spa treatment services to satisfy your needs of enhancing natural beauty and refreshing your day.
-                        mynewline Our salon takes pride in providing our valued customers all good services and top-high quality products as well as materials.
-                        You can find all nail-related services and gift-card. At ${process.env.NEXT_PUBLIC_NAME_PRODUCT},
-                        we take pride in providing you with all good products and qualified services to help you rejuvenate your beauty.
-                        You always feel friendly and welcome from our passionate staff who understand what you want.`}/>
+                              content={`Contact Us - ${process.env.NEXT_PUBLIC_NAME_PRODUCT} | Nail Salon Malta, NY`}/>
+                        <meta property="og:description" content={`Contact ${process.env.NEXT_PUBLIC_NAME_PRODUCT} at 2374 US-9, Malta, NY. Call 518-400-1028 or visit our salon. Open daily.`}/>
                         <meta property="og:image"
                               content="/images/Nails or Never-01 (1).png"/>
                         <meta name="generator" content={`Contact with me - ${process.env.NEXT_PUBLIC_NAME_PRODUCT}`}/>
