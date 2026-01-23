@@ -94,17 +94,63 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
                 <meta name="msapplication-TileImage" content="/images/Nails or Never-01 (1).png"/>
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin=""/>
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-                <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
-                <Script src="https://www.google-analytics.com/analytics.js" />
+                <link rel="preload" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" as="style" />
+                <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet" media="print" onLoad="this.media='all'" />
+                <noscript>
+                    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet" />
+                </noscript>
+                <Script src="https://www.google-analytics.com/analytics.js" strategy="lazyOnload" />
             </Head>
-            {/* Load external libraries that are still needed */}
-            <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript" id="jquery-3.6.0-js" strategy="lazyOnload"/>
-            <Script type="text/javascript" src="/external/bootstrap.bundle.min.js" id="bootstrap-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="/external/aos.js" id="aos-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="/external/flickity.pkgd.min.js" id="flickity-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="/external/slick.min.js" id="slick-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="/external/sweetalert2.all.min.js" id="sweetalert2-js" strategy="lazyOnload"></Script>
-            <Script type="text/javascript" src="/external/lightbox.min.js" id="lightbox-js" strategy="lazyOnload"></Script>
+            {/* Load external libraries that are still needed - optimized for performance */}
+            <Script 
+                src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
+                type="text/javascript" 
+                id="jquery-3.6.0-js" 
+                strategy="lazyOnload"
+                defer
+            />
+            <Script 
+                type="text/javascript" 
+                src="/external/bootstrap.bundle.min.js" 
+                id="bootstrap-js" 
+                strategy="lazyOnload"
+                defer
+            />
+            <Script 
+                type="text/javascript" 
+                src="/external/aos.js" 
+                id="aos-js" 
+                strategy="lazyOnload"
+                defer
+            />
+            <Script 
+                type="text/javascript" 
+                src="/external/flickity.pkgd.min.js" 
+                id="flickity-js" 
+                strategy="lazyOnload"
+                defer
+            />
+            <Script 
+                type="text/javascript" 
+                src="/external/slick.min.js" 
+                id="slick-js" 
+                strategy="lazyOnload"
+                defer
+            />
+            <Script 
+                type="text/javascript" 
+                src="/external/sweetalert2.all.min.js" 
+                id="sweetalert2-js" 
+                strategy="lazyOnload"
+                defer
+            />
+            <Script 
+                type="text/javascript" 
+                src="/external/lightbox.min.js" 
+                id="lightbox-js" 
+                strategy="lazyOnload"
+                defer
+            />
             <Provider store={store}>
                 <PersistGate loading={<LoadingComponent />} persistor={persistor}>
                     <Suspense fallback={<LoadingComponent />}>

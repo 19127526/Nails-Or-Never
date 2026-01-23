@@ -123,7 +123,12 @@ function Item(props : any) {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.6, delay: 0.4 }}
                                 >
-                                    <Link className="banner-link" href={process.env.NEXT_PUBLIC_SERVICES_ROUTER as string} replace>
+                                    <Link 
+                                        className="banner-link" 
+                                        href={process.env.NEXT_PUBLIC_SERVICES_ROUTER as string} 
+                                        replace
+                                        aria-label="View all nail services in Malta, NY"
+                                    >
                                         <motion.span
                                             whileHover={{ x: 5 }}
                                             transition={{ duration: 0.2 }}
@@ -155,6 +160,7 @@ function Item(props : any) {
                                                     alt={`${item?.name} nail service in Malta, NY - ${mainName} professional nail salon`}
                                                     fill
                                                     priority={true}
+                                                    fetchPriority="high"
                                                     quality={95}
                                                     style={{
                                                         objectFit: 'cover',
@@ -188,6 +194,10 @@ const HomePage = (props : any) => {
                     <meta name="viewport" content="initial-scale=1, width=device-width"/>
                     <meta name="robots" content="index,follow"/>
                     <link rel="canonical" href="https://nailsornever.com"/>
+                    {/* Preload LCP image for better performance */}
+                    {services?.services && services.services.length > 0 && services.services[0]?.image && (
+                        <link rel="preload" as="image" href={services.services[0].image} fetchPriority="high" />
+                    )}
                     <title>Best Nail Salon in Malta, NY | {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Manicure, Pedicure & Nail Art 12118</title>
                     <meta name="description" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} is the #1 rated nail salon in Malta, NY 12118. Expert manicures, pedicures, gel polish, acrylic nails, and custom nail art. Serving Malta, Mechanicville, Saratoga Springs & Clifton Park. Walk-ins welcome. Call 518-400-1028 or book online.`}/>
                     <meta name="keywords"
@@ -452,7 +462,11 @@ const HomePage = (props : any) => {
                                             transition={{ duration: 0.6, delay: 0.6 }}
                                             className="d-flex justify-content-center justify-content-md-start"
                                         >
-                                            <Link href={process.env.NEXT_PUBLIC_ABOUT_US_ROUTER as string} replace>
+                                            <Link 
+                                                href={process.env.NEXT_PUBLIC_ABOUT_US_ROUTER as string} 
+                                                replace
+                                                aria-label="Learn more about our nail salon in Malta, NY"
+                                            >
                                                 <motion.button
                                                     className="button button-lg"
                                                     whileHover={{ scale: 1.05, boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' }}
@@ -559,7 +573,11 @@ const HomePage = (props : any) => {
                                                     transition: 'all 0.3s ease'
                                                 }}
                                             >
-                                                <a className="service-img-link">
+                                                <Link 
+                                                    className="service-img-link" 
+                                                    href={process.env.NEXT_PUBLIC_SERVICES_ROUTER as string}
+                                                    aria-label={`View ${index?.name} nail services in Malta, NY`}
+                                                >
                                                     <div className="service-img-wrap">
                                                         <div className="service-img">
                                                             <Image
@@ -577,8 +595,12 @@ const HomePage = (props : any) => {
                                                             />
                                                         </div>
                                                     </div>
-                                                </a>
-                                                <a className="service-link">
+                                                </Link>
+                                                <Link 
+                                                    className="service-link" 
+                                                    href={process.env.NEXT_PUBLIC_SERVICES_ROUTER as string}
+                                                    aria-label={`Learn more about ${index?.name} nail services`}
+                                                >
                                                     <h4
                                                         className="service-title"
                                                         style={{
@@ -595,7 +617,7 @@ const HomePage = (props : any) => {
                                                     >
                                                         {index?.name}
                                                     </h4>
-                                                </a>
+                                                </Link>
                                             </motion.div>
                                         </AnimatedSection>
                                     )
@@ -687,7 +709,12 @@ const HomePage = (props : any) => {
                                                         cursor: 'pointer'
                                                     }}
                                                 >
-                                                    <Link className="service-img-link" href={process.env.NEXT_PUBLIC_GALLERY_ROUTER+`/detail/${index?.theme}` as string} replace>
+                                                    <Link 
+                                                        className="service-img-link" 
+                                                        href={process.env.NEXT_PUBLIC_GALLERY_ROUTER+`/detail/${index?.theme}` as string} 
+                                                        replace
+                                                        aria-label={`View ${index?.theme} nail art gallery collection`}
+                                                    >
                                                         <div className="service-img-wrap">
                                                             <div className="service-img">
                                                                 <Image

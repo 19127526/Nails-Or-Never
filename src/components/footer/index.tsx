@@ -114,7 +114,11 @@ const FooterComponent = () => {
                                         viewport={{ once: true }}
                                         transition={{ duration: 0.5, delay: 0.2 + idx * 0.08, ease: "easeOut" }}
                                     >
-                                        <Link href={link.href as string} replace>
+                                        <Link 
+                                            href={link.href as string} 
+                                            replace
+                                            aria-label={`Navigate to ${link.text} page`}
+                                        >
                                             <motion.p
                                                 whileHover={{ x: 5, color: '#7fa681' }}
                                                 whileTap={{ scale: 0.98 }}

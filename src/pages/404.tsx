@@ -84,7 +84,7 @@ const NotFound = () => {
                         You either tried some shady route or you came here by mistake.
                         Whichever it is, try using the navigation
                     </Typography>
-                    <Link href={"/"} replace>
+                    <Link href={"/"} replace aria-label="Return to home page">
                         <Button
                             startIcon={(<ArrowBackIcon fontSize="small"/>)}
                             sx={{mt: 3}}

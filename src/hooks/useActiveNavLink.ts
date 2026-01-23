@@ -8,23 +8,31 @@ export const useActiveNavLink = () => {
     if (typeof window === 'undefined') return;
 
     const updateActiveNavLinks = () => {
-      const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-      const currentPath = router.asPath.split('?')[0]; // Remove query params
+      // Use requestAnimationFrame to batch DOM reads and writes, avoiding forced reflows
+      requestAnimationFrame(() => {
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        const currentPath = router.asPath.split('?')[0]; // Remove query params
 
-      navLinks.forEach((link) => {
-        const href = link.getAttribute('href');
-        if (href) {
-          const linkPath = href.split('?')[0];
-          // Remove trailing slash for comparison
+        // Batch all DOM reads first
+        const linkData = Array.from(navLinks).map((link) => {
+          const href = link.getAttribute('href');
+          return { link, href: href ? href.split('?')[0] : null };
+        });
+
+        // Then batch all DOM writes
+        requestAnimationFrame(() => {
           const normalizedCurrent = currentPath.replace(/\/$/, '');
-          const normalizedLink = linkPath.replace(/\/$/, '');
-
-          if (normalizedCurrent === normalizedLink || normalizedCurrent === normalizedLink + '/') {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        }
+          linkData.forEach(({ link, href }) => {
+            if (href) {
+              const normalizedLink = href.replace(/\/$/, '');
+              if (normalizedCurrent === normalizedLink || normalizedCurrent === normalizedLink + '/') {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            }
+          });
+        });
       });
     };
 

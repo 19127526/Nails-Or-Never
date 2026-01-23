@@ -38,20 +38,39 @@ const HeaderComponent = () => {
     }, [router.pathname])
 
     useEffect(() => {
+        let rafId: number | null = null;
+        let lastValue = 0;
+        
         const unsubscribe = scrollY.on('change', (latest) => {
-            setIsSticky(latest > 0);
-            // Add/remove sticky class for CSS compatibility
-            const header = document.getElementById('header');
-            if (header) {
-                if (latest > 0) {
-                    header.classList.add('sticky');
-                } else {
-                    header.classList.remove('sticky');
-                }
+            // Use requestAnimationFrame to batch DOM updates and avoid forced reflows
+            if (rafId !== null) {
+                cancelAnimationFrame(rafId);
             }
+            
+            rafId = requestAnimationFrame(() => {
+                // Only update if value actually changed to reduce unnecessary DOM operations
+                if (Math.abs(latest - lastValue) > 1) {
+                    setIsSticky(latest > 0);
+                    // Add/remove sticky class for CSS compatibility
+                    const header = document.getElementById('header');
+                    if (header) {
+                        if (latest > 0) {
+                            header.classList.add('sticky');
+                        } else {
+                            header.classList.remove('sticky');
+                        }
+                    }
+                    lastValue = latest;
+                }
+            });
         });
 
-        return () => unsubscribe();
+        return () => {
+            if (rafId !== null) {
+                cancelAnimationFrame(rafId);
+            }
+            unsubscribe();
+        };
     }, [scrollY]);
     const handleClickLabel = (currentLabel: labelHeaderInterFace, status: boolean): void => {
         setActiveLabel(currentLabel);
@@ -78,7 +97,11 @@ const HeaderComponent = () => {
                 <div className="container-lg">
                     <nav className="navbar navbar-expand-xxl" aria-label="Eighth navbar example">
                         <a className="navbar-brand">
-                            <Link href={process.env.NEXT_PUBLIC_HOME_ROUTER as string} replace>
+                            <Link 
+                                href={process.env.NEXT_PUBLIC_HOME_ROUTER as string} 
+                                replace
+                                aria-label={`${mainName} - Home page`}
+                            >
                                 <motion.div
                                     style={{
                                         width: logoWidth,
@@ -114,7 +137,11 @@ const HeaderComponent = () => {
                         <div className="offcanvas offcanvas-end" id="navbarsMenu"
                              aria-modal="true" role="dialog">
                             <div className="offcanvas-header">
-                                <Link className="navbar-brand" href={process.env.NEXT_PUBLIC_HOME_ROUTER as string}>
+                                <Link 
+                                    className="navbar-brand" 
+                                    href={process.env.NEXT_PUBLIC_HOME_ROUTER as string}
+                                    aria-label={`${mainName} - Home page`}
+                                >
                                     <Image
                                         width={150}
                                         height={60}
