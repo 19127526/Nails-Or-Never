@@ -25,12 +25,38 @@
 
 import { createStore } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import rootReducer from "../reduce/reduce"
+
+// Use noop storage for SSR compatibility
+const createNoopStorage = () => {
+    return {
+        getItem(_key: string) {
+            return Promise.resolve(null)
+        },
+        setItem(_key: string, value: any) {
+            return Promise.resolve(value)
+        },
+        removeItem(_key: string) {
+            return Promise.resolve()
+        },
+    }
+}
+
+let storage: any;
+try {
+    if (typeof window !== 'undefined') {
+        storage = require('redux-persist/lib/storage').default;
+    } else {
+        storage = createNoopStorage();
+    }
+} catch (e) {
+    storage = createNoopStorage();
+}
 
 const persistConfig = {
     key: 'root',
-    storage
+    storage,
+    whitelist: ['GiftCardPage'] // Only persist specific reducers if needed
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

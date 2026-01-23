@@ -17,6 +17,9 @@ export default class MyDocument extends Document {
                     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
                     <link rel="dns-prefetch" href="https://ajax.googleapis.com" />
                     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+                    {/* Font stylesheets - moved from _app.tsx to _document.tsx */}
+                    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;700;800&display=swap" as="style" />
+                    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
                 </Head>
                 <body>
                 <Main />

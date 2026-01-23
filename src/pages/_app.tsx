@@ -61,7 +61,7 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <meta name="generator" content="Nails Or Never"/>
                 <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
-                <title>{process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118</title>
+                <title>{`${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Professional nails care services in Malta,NY 12118`}</title>
 
                 <meta name="keywords"
                       content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} &amp; SPA,MALTA,extensions`}/>
@@ -94,11 +94,6 @@ function AppContent({Component, pageProps, emotionCache = clientSideEmotionCache
                 <meta name="msapplication-TileImage" content="/images/Nails or Never-01 (1).png"/>
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin=""/>
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-                <link rel="preload" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" as="style" />
-                <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet" media="print" onLoad="this.media='all'" />
-                <noscript>
-                    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet" />
-                </noscript>
                 <Script src="https://www.google-analytics.com/analytics.js" strategy="lazyOnload" />
             </Head>
             {/* Load external libraries that are still needed - optimized for performance */}

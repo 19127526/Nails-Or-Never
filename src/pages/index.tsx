@@ -198,7 +198,7 @@ const HomePage = (props : any) => {
                     {services?.services && services.services.length > 0 && services.services[0]?.image && (
                         <link rel="preload" as="image" href={services.services[0].image} fetchPriority="high" />
                     )}
-                    <title>Best Nail Salon in Malta, NY | {process.env.NEXT_PUBLIC_NAME_PRODUCT} - Manicure, Pedicure & Nail Art 12118</title>
+                    <title>{`Best Nail Salon in Malta, NY | ${process.env.NEXT_PUBLIC_NAME_PRODUCT} - Manicure, Pedicure & Nail Art 12118`}</title>
                     <meta name="description" content={`${process.env.NEXT_PUBLIC_NAME_PRODUCT} is the #1 rated nail salon in Malta, NY 12118. Expert manicures, pedicures, gel polish, acrylic nails, and custom nail art. Serving Malta, Mechanicville, Saratoga Springs & Clifton Park. Walk-ins welcome. Call 518-400-1028 or book online.`}/>
                     <meta name="keywords"
                           content={`nail salon Malta NY, nail salon near Mechanicville NY, best nail salon Malta 12118, manicure Malta NY, pedicure Malta NY, gel nails Malta, acrylic nails Malta, nail art Malta, dip powder nails Malta, nail extensions Malta, nail salon Saratoga Springs, nail salon Clifton Park, ${process.env.NEXT_PUBLIC_NAME_PRODUCT}, professional nail services Malta NY, ${[...services?.services]?.map(index => `${index?.name} Malta NY`).join(', ')}`}/>
